@@ -40,7 +40,9 @@ namespace TrafficLightReplacer
                 Debug.Log("prefabname:" + result[i].Prefab);
                 Debug.Log("prefabsize:" + result[i].Size);
             }
-            
+
+            TrafficLightReplacePanel.instance.Show();  //initalize UI
+
             ReplaceTrafficLights();
         }
 

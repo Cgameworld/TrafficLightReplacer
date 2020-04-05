@@ -52,8 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asset.cs" />
+    <Compile Include="MainWindow.cs" />
     <Compile Include="ModInfo.cs" />
+    <Compile Include="ModThreading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UITitlebar.cs" />
+    <Compile Include="UIUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
