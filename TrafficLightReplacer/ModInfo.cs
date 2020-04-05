@@ -24,16 +24,12 @@ namespace TrafficLightReplacer
         public override void OnLevelLoaded(LoadMode mode)
         {
             Debug.Log("modloaded");
-            var newProp = PrefabCollection<PropInfo>.FindLoaded("1535107168.New Traffic Light 12_Data");
-            Debug.Log("proploaded");
-
-            foreach (var prefab1 in Resources.FindObjectsOfTypeAll<NetInfo>())
-            {
-                Debug.Log("initprefabname" + prefab1.name);
-            }
+            var newProp = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 12_Data");
+            var newPropLong = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 7_Data");  //>3 lanes
+            var newPropXL = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 11_Data");  //>5 lanes
 
 
-                foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
                 Debug.Log("prefab name: " + prefab);
                 if (prefab == null)
@@ -46,6 +42,8 @@ namespace TrafficLightReplacer
                     Debug.Log("good run");
                     //var prefab = PrefabCollection<NetInfo>.FindLoaded("Medium Road");
                     Debug.Log("roadloaded");
+
+
                     foreach (NetInfo.Lane lane in prefab.m_lanes)
                     {
                         if (lane?.m_laneProps?.m_props != null)
@@ -57,26 +55,28 @@ namespace TrafficLightReplacer
                                 {
                                     Debug.Log("1prop name" + propGroup.m_finalProp.name);
 
-                                    if (propGroup.m_finalProp.name == "Traffic Light 02")
-                                    {
-                                        propGroup.m_finalProp = newProp;
-                                        Debug.Log("2Replacement Successful");
-                                    }
-                                    if (propGroup.m_finalProp.name == "Traffic Light 02 Mirror")
-                                    {
-                                        propGroup.m_finalProp = null;
-                                        Debug.Log("2Delete Successful");
-                                    }
+                                    RegularWidth(newProp, propGroup);
                                 }
                             }
                         }
 
                     }
                 }
-
-
             }
         }
 
+        private static void RegularWidth(PropInfo newProp, NetLaneProps.Prop propGroup)
+        {
+            if (propGroup.m_finalProp.name == "Traffic Light 02")
+            {
+                propGroup.m_finalProp = newProp;
+                Debug.Log("3Replacement Successful");
+            }
+            else if (propGroup.m_finalProp.name == "Traffic Light 02 Mirror")
+            {
+                propGroup.m_finalProp = null;
+                Debug.Log("3Delete Successful");
+            }
+        }
     }
 }
