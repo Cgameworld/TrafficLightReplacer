@@ -39,23 +39,41 @@ namespace TrafficLightReplacer
 
                 else
                 {
-                    Debug.Log("good run");
+                    //Debug.Log("good run");
                     //var prefab = PrefabCollection<NetInfo>.FindLoaded("Medium Road");
-                    Debug.Log("roadloaded");
+                  //  Debug.Log("roadloaded");
+
+                    float roadwidth = 0;
+
+                    //what to do about asym roads?
+                    foreach (NetInfo.Lane lane in prefab.m_lanes)
+                    {
+                        if (lane.m_laneType.ToString() == "Parking" || lane.m_laneType.ToString() == "Vehicle")
+                        {
+                            if (lane.m_position > 0)
+                            {
+                                Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
+                                roadwidth += lane.m_width;
+                            }
+                        }
+                    }
+
+                    Debug.Log("Total road width: " + roadwidth);
+
 
 
                     foreach (NetInfo.Lane lane in prefab.m_lanes)
                     {
                         if (lane?.m_laneProps?.m_props != null)
                         {
-                            Debug.Log("Lane Type:" + lane.m_laneType);
+                         //   Debug.Log("Lane Type:" + lane.m_laneType);
                             foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
                             {
                                 if (propGroup?.m_finalProp != null)
                                 {
-                                    Debug.Log("1prop name" + propGroup.m_finalProp.name);
+                                 //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
 
-                                    RegularWidth(newProp, propGroup);
+                                    ReplaceProp(newProp, propGroup);
                                 }
                             }
                         }
@@ -65,17 +83,17 @@ namespace TrafficLightReplacer
             }
         }
 
-        private static void RegularWidth(PropInfo newProp, NetLaneProps.Prop propGroup)
+        private static void ReplaceProp(PropInfo newProp, NetLaneProps.Prop propGroup)
         {
             if (propGroup.m_finalProp.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = newProp;
-                Debug.Log("3Replacement Successful");
+               // Debug.Log("3Replacement Successful");
             }
             else if (propGroup.m_finalProp.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = null;
-                Debug.Log("3Delete Successful");
+                //Debug.Log("3Delete Successful");
             }
         }
     }
