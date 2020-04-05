@@ -25,8 +25,8 @@ namespace TrafficLightReplacer
         {
             Debug.Log("modloaded");
             var newProp = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 12_Data");
-            var newPropLong = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 7_Data");  //>3 lanes
-            var newPropXL = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 11_Data");  //>5 lanes
+            var newPropLong = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 7_Data");  //>6 width
+            var newPropXL = PrefabCollection<PropInfo>.FindLoaded("1541164608.New Traffic Light 11_Data");  //>11 width
 
 
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
@@ -44,21 +44,32 @@ namespace TrafficLightReplacer
                   //  Debug.Log("roadloaded");
 
                     float roadwidth = 0;
+                    float lanecount = 0;
 
                     //what to do about asym roads?
                     foreach (NetInfo.Lane lane in prefab.m_lanes)
                     {
                         if (lane.m_laneType.ToString() == "Parking" || lane.m_laneType.ToString() == "Vehicle")
                         {
-                            if (lane.m_position > 0)
+                            //detect one way roads - calculate width across whole road
+                            if (prefab.m_hasBackwardVehicleLanes == false || prefab.m_hasForwardVehicleLanes == false)
+                            {
+                                Debug.Log("oneway road!");
+                                Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
+                                roadwidth += lane.m_width;
+                                lanecount++;
+                            }
+                            //two way roads - add widths from positive lane positions
+                            else if (lane.m_position > 0)
                             {
                                 Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                                 roadwidth += lane.m_width;
+                                lanecount++;
                             }
                         }
                     }
 
-                    Debug.Log("Total road width: " + roadwidth);
+                    Debug.Log("Total road width: " + roadwidth + " | lane count: " + lanecount) ;
 
 
 
@@ -71,9 +82,19 @@ namespace TrafficLightReplacer
                             {
                                 if (propGroup?.m_finalProp != null)
                                 {
-                                 //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
-
-                                    ReplaceProp(newProp, propGroup);
+                                    //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
+                                    if (roadwidth >= 12 && lanecount>3)
+                                    {
+                                        ReplaceProp(newPropXL, propGroup);
+                                    }
+                                    else if (roadwidth >= 6)
+                                    {
+                                        ReplaceProp(newPropLong, propGroup);
+                                    }
+                                    else
+                                    {
+                                        ReplaceProp(newProp, propGroup);  //regular
+                                    }
                                 }
                             }
                         }
