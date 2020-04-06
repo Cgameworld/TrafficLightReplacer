@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using ColossalFramework.IO;
 using ColossalFramework.UI;
+using System.IO;
 using UnityEngine;
 
 namespace TrafficLightReplacer
@@ -67,9 +68,25 @@ namespace TrafficLightReplacer
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
             packDropdown.AddItem("Test Pack - Yellow Version");
+            packDropdown.AddItem("Test Pack - xml2");
             packDropdown.selectedIndex = 0;
             packDropdown.relativePosition = new Vector3(80, 53);
             packDropdown.tooltip = "Dummy Button - TBD";
+
+            packDropdown.eventSelectedIndexChanged += (c, p) =>
+            {
+                //for now xml file locations are hardcoded - will seach through directories later
+                if (packDropdown.selectedIndex == 0)
+                {
+                    string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
+                    ModLoading.ReplaceTrafficLights(xmlfile1);
+                }
+                else if (packDropdown.selectedIndex == 1)
+                {
+                    string xmlfile2 = Path.Combine(DataLocation.addonsPath, "test2.xml");
+                    ModLoading.ReplaceTrafficLights(xmlfile2);
+                }
+            };
 
             oppositeSideToggle = UIUtils.CreateCheckBox(this);
             oppositeSideToggle.text = "Place on opposite side of stop line";

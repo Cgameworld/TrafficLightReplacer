@@ -28,7 +28,18 @@ namespace TrafficLightReplacer
 
         public override void OnLevelLoaded(LoadMode mode)
         {
-            string path = Path.Combine(DataLocation.addonsPath,"test.xml");
+
+
+            TrafficLightReplacePanel.instance.Show();  //initalize UI
+
+            string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
+            ReplaceTrafficLights(xmlfile1);
+        }
+
+        public static void ReplaceTrafficLights(string path)
+        {
+            Debug.Log("modloaded");
+
             XmlSerializer serializer = new XmlSerializer(typeof(List<Asset>));
             StreamReader reader = new StreamReader(path);
             result = (List<Asset>)serializer.Deserialize(reader);
@@ -40,15 +51,6 @@ namespace TrafficLightReplacer
                 Debug.Log("prefabname:" + result[i].Prefab);
                 Debug.Log("prefabsize:" + result[i].Type);
             }
-
-            TrafficLightReplacePanel.instance.Show();  //initalize UI
-
-            ReplaceTrafficLights();
-        }
-
-        private static void ReplaceTrafficLights()
-        {
-            Debug.Log("modloaded");
 
             var newProp = PrefabCollection<PropInfo>.FindLoaded(result[0].Prefab); 
             var newPropLong = PrefabCollection<PropInfo>.FindLoaded(result[1].Prefab);  //>6 width
@@ -135,12 +137,14 @@ namespace TrafficLightReplacer
 
         private static void ReplaceProp(PropInfo newProp, NetLaneProps.Prop propGroup)
         {
-            if (propGroup.m_finalProp.name == "Traffic Light 02")
+            //m_prop stays the same m_finalProp changes 
+
+            if (propGroup.m_prop.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = newProp;
                // Debug.Log("3Replacement Successful");
             }
-            else if (propGroup.m_finalProp.name == "Traffic Light 02 Mirror")
+            else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = null;
                 //Debug.Log("3Delete Successful");
