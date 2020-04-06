@@ -24,6 +24,7 @@ namespace TrafficLightReplacer
         public UIDropDown smallRoadsDropdown;
         public UIDropDown mediumRoadsDropdown;
         public UIDropDown largeRoadsDropdown;
+        private UIButton getmeditems;
 
         public static TrafficLightReplacePanel instance
         {
@@ -86,6 +87,9 @@ namespace TrafficLightReplacer
                     string xmlfile2 = Path.Combine(DataLocation.addonsPath, "test2.xml");
                     ModLoading.ReplaceTrafficLights(xmlfile2);
                 }
+
+                ResetAllDropdowns();
+                AddAllItemsToDropdowns();
             };
 
             oppositeSideToggle = UIUtils.CreateCheckBox(this);
@@ -124,12 +128,17 @@ namespace TrafficLightReplacer
                         customizePanel.isVisible = false;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
                         height = 225;
+                        Debug.Log("COLLAPSIBLEMENUCLOSED");
+                        ResetAllDropdowns();
                     }
                     else
                     {
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
                         height = 525;
+
+                        ResetAllDropdowns();
+                        AddAllItemsToDropdowns();
                     }
                 }
             };
@@ -195,14 +204,33 @@ namespace TrafficLightReplacer
 
 
             confirmButton = UIUtils.CreateButton(this);
-            confirmButton.text = "Ok";
-            confirmButton.relativePosition = new Vector2(20, 999);
-            confirmButton.width = 200;
-            confirmButton.isVisible = false;
+            confirmButton.text = "deleteitems+add1";
+            confirmButton.relativePosition = new Vector2(20, 400);
+            confirmButton.width = 150;
+            //confirmButton.isVisible = false;
 
             confirmButton.eventClick += (c, p) =>
             {
+                string[] blank = new string[0];
+                mediumRoadsDropdown.items = blank;
+                mediumRoadsDropdown.AddItem("TEST1");
+            };
 
+            getmeditems = UIUtils.CreateButton(this);
+            getmeditems.text = "getmediumroaditems";
+            getmeditems.relativePosition = new Vector2(220, 400);
+            getmeditems.width = 120;
+            //getmeditems.isVisible = false;
+
+            getmeditems.eventClick += (c, p) =>
+            {
+                int count = 0;
+                foreach (var item in ModLoading.typeMediumOptions)
+                {
+                    Debug.Log("medroaditem " + count + " :" + item.Name);
+                    count++;
+                }
+               
             };
 
             openXMLFolderButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
@@ -224,6 +252,34 @@ namespace TrafficLightReplacer
                 }
             };
 
+        }
+
+        private void AddAllItemsToDropdowns()
+        {
+            AddItemsToDropdown(smallRoadsDropdown, ModLoading.typeSmallOptions);
+            AddItemsToDropdown(mediumRoadsDropdown, ModLoading.typeMediumOptions);
+            AddItemsToDropdown(largeRoadsDropdown, ModLoading.typeLargeOptions);
+        }
+
+        private void ResetAllDropdowns()
+        {
+            ResetDropdown(smallRoadsDropdown);
+            ResetDropdown(mediumRoadsDropdown);
+            ResetDropdown(largeRoadsDropdown);
+        }
+
+        private static void ResetDropdown(UIDropDown dropdown)
+        {
+            string[] blank = new string[0];
+            dropdown.items = blank;
+        }
+
+        private static void AddItemsToDropdown(UIDropDown a, System.Collections.Generic.List<Asset> b)
+        {
+            foreach (var sortedAsset in b)
+            {
+                a.AddItem(sortedAsset.Name);
+            }
         }
 
         private void LoadResources()

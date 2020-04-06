@@ -25,13 +25,16 @@ namespace TrafficLightReplacer
     public class ModLoading : LoadingExtensionBase
     {
         public static List<Asset> result;
+        public static List<Asset> typeSmallOptions = new List<Asset>();
+        public static List<Asset> typeMediumOptions = new List<Asset>();
+        public static List<Asset> typeLargeOptions = new List<Asset>();
+        public static List<Asset> typePedSignalOptions = new List<Asset>();
 
         public override void OnLevelLoaded(LoadMode mode)
         {
 
 
             TrafficLightReplacePanel.instance.Show();  //initalize UI
-
             string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
             ReplaceTrafficLights(xmlfile1);
         }
@@ -45,11 +48,6 @@ namespace TrafficLightReplacer
             result = (List<Asset>)serializer.Deserialize(reader);
             reader.Close();
 
-            List<string> typeSmallOptions = new List<string>();
-            List<string> typeMediumOptions = new List<string>();
-            List<string> typeLargeOptions = new List<string>();
-            List<string> typePedSignalOptions = new List<string>();
-
             for (int i = 0; i < result.Count; i++)
             {
                 Debug.Log("entry:" + i);
@@ -58,30 +56,30 @@ namespace TrafficLightReplacer
 
                 if (result[i].Type == "Small")
                 {
-                    typeSmallOptions.Add(result[i].Prefab);
+                    typeSmallOptions.Add(result[i]);
                 }
                 if (result[i].Type == "Medium")
                 {
-                    typeMediumOptions.Add(result[i].Prefab);
+                    typeMediumOptions.Add(result[i]);
                 }
                 if (result[i].Type == "Large")
                 {
-                    typeLargeOptions.Add(result[i].Prefab);
+                    typeLargeOptions.Add(result[i]);
+
                 }
                 if (result[i].Type == "Ped Signal")
                 {
-                    typePedSignalOptions.Add(result[i].Prefab);
+                    typePedSignalOptions.Add(result[i]);
                 }
             }
+            Debug.Log("addedallitems");
 
-            
+            //get index of ui!
 
-//get index of ui!
-
-            var typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0]); 
-            var typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0]);  //>6 width
-            var typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0]);  //>11 width
-            var typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0]);
+            var typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab); 
+            var typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
+           var typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
+           var typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0].Prefab);
 
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
