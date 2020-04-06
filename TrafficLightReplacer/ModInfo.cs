@@ -36,7 +36,7 @@ namespace TrafficLightReplacer
             ReplaceTrafficLights(xmlfile1);
         }
 
-        public static void ReplaceTrafficLights(string path)
+    public static void ReplaceTrafficLights(string path)
         {
             Debug.Log("modloaded");
 
@@ -45,17 +45,43 @@ namespace TrafficLightReplacer
             result = (List<Asset>)serializer.Deserialize(reader);
             reader.Close();
 
+            List<string> typeSmallOptions = new List<string>();
+            List<string> typeMediumOptions = new List<string>();
+            List<string> typeLargeOptions = new List<string>();
+            List<string> typePedSignalOptions = new List<string>();
+
             for (int i = 0; i < result.Count; i++)
             {
                 Debug.Log("entry:" + i);
                 Debug.Log("prefabname:" + result[i].Prefab);
                 Debug.Log("prefabsize:" + result[i].Type);
+
+                if (result[i].Type == "Small")
+                {
+                    typeSmallOptions.Add(result[i].Prefab);
+                }
+                if (result[i].Type == "Medium")
+                {
+                    typeMediumOptions.Add(result[i].Prefab);
+                }
+                if (result[i].Type == "Large")
+                {
+                    typeLargeOptions.Add(result[i].Prefab);
+                }
+                if (result[i].Type == "Ped Signal")
+                {
+                    typePedSignalOptions.Add(result[i].Prefab);
+                }
             }
 
-            var newProp = PrefabCollection<PropInfo>.FindLoaded(result[0].Prefab); 
-            var newPropLong = PrefabCollection<PropInfo>.FindLoaded(result[1].Prefab);  //>6 width
-            var newPropXL = PrefabCollection<PropInfo>.FindLoaded(result[2].Prefab);  //>11 width
-            var pedsignal = PrefabCollection<PropInfo>.FindLoaded(result[3].Prefab);
+            
+
+//get index of ui!
+
+            var typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0]); 
+            var typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0]);  //>6 width
+            var typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0]);  //>11 width
+            var typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0]);
 
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
@@ -67,10 +93,6 @@ namespace TrafficLightReplacer
 
                 else
                 {
-                    //Debug.Log("good run");
-                    //var prefab = PrefabCollection<NetInfo>.FindLoaded("Medium Road");
-                    //  Debug.Log("roadloaded");
-
                     float roadwidth = 0;
                     float lanecount = 0;
 
@@ -90,15 +112,15 @@ namespace TrafficLightReplacer
                                     //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
                                     if (roadwidth >= 12 && lanecount > 3)
                                     {
-                                        ReplaceProp(newPropXL, propGroup);
+                                        ReplaceProp(typeLarge, propGroup);
                                     }
                                     else if (roadwidth >= 6)
                                     {
-                                        ReplaceProp(newPropLong, propGroup);
+                                        ReplaceProp(typeMedium, propGroup);
                                     }
                                     else
                                     {
-                                        ReplaceProp(newProp, propGroup);  //regular
+                                        ReplaceProp(typeSmall, propGroup);  //regular
                                     }
                                 }
                             }
