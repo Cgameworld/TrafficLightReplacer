@@ -27,6 +27,23 @@ namespace TrafficLightReplacer
 
             return button;
         }
+        public static UIButton CreateButtonSpriteImage(UIComponent parent, UITextureAtlas atlas_a)
+        {
+            UIButton button = (UIButton)parent.AddUIComponent<UIButton>();
+
+            button.atlas = atlas_a;
+            button.size = new Vector2(90f, 30f);
+            button.canFocus = false;
+
+            return button;
+        }
+        public static UILabel CreateLabelSpriteImage(UIComponent parent, UITextureAtlas atlas_a)
+        {
+            UILabel label = (UILabel)parent.AddUIComponent<UILabel>();
+            label.atlas = atlas_a;
+            label.canFocus = false;
+            return label;
+        }
         public static UICheckBox CreateCheckBox(UIComponent parent)
         {
             UICheckBox checkBox = (UICheckBox)parent.AddUIComponent<UICheckBox>();

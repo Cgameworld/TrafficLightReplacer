@@ -38,7 +38,7 @@ namespace TrafficLightReplacer
             {
                 Debug.Log("entry:" + i);
                 Debug.Log("prefabname:" + result[i].Prefab);
-                Debug.Log("prefabsize:" + result[i].Size);
+                Debug.Log("prefabsize:" + result[i].Type);
             }
 
             TrafficLightReplacePanel.instance.Show();  //initalize UI
@@ -53,6 +53,7 @@ namespace TrafficLightReplacer
             var newProp = PrefabCollection<PropInfo>.FindLoaded(result[0].Prefab); 
             var newPropLong = PrefabCollection<PropInfo>.FindLoaded(result[1].Prefab);  //>6 width
             var newPropXL = PrefabCollection<PropInfo>.FindLoaded(result[2].Prefab);  //>11 width
+            var pedsignal = PrefabCollection<PropInfo>.FindLoaded(result[3].Prefab);
 
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {

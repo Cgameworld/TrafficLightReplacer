@@ -1,5 +1,6 @@
-﻿using ColossalFramework.UI;
-using ColossalFramework;
+﻿using ColossalFramework;
+using ColossalFramework.IO;
+using ColossalFramework.UI;
 using UnityEngine;
 
 namespace TrafficLightReplacer
@@ -14,6 +15,14 @@ namespace TrafficLightReplacer
         private UICheckBox oppositeSideToggle;
         private UIDropDown packDropdown;
         private UIButton confirmButton;
+        private UIButton customizeButton;
+        private UILabel customizeButtonToggle;
+        private UITextureAtlas m_atlas;
+        private UIButton openXMLFolderButton;
+        private UIPanel customizePanel;
+        private UIDropDown smallRoadsDropdown;
+        private UIDropDown mediumRoadsDropdown;
+        private UIDropDown largeRoadsDropdown;
 
         public static TrafficLightReplacePanel instance
         {
@@ -29,6 +38,8 @@ namespace TrafficLightReplacer
 
         public override void Start()
         {
+            LoadResources(); 
+
             atlas = UIUtils.GetAtlas("Ingame");
             backgroundSprite = "MenuPanel2";
             color = new Color32(255, 255, 255, 255);
@@ -54,28 +65,185 @@ namespace TrafficLightReplacer
             areaTypeLabel.text = "Pack:";
 
             packDropdown = UIUtils.CreateDropDown(this);
-            packDropdown.width = 175;
-            packDropdown.AddItem("Test Pack");
+            packDropdown.width = 270;
+            packDropdown.AddItem("Test Pack - Yellow Version");
             packDropdown.selectedIndex = 0;
-            packDropdown.relativePosition = new Vector3(80, 50);
+            packDropdown.relativePosition = new Vector3(80, 53);
+            packDropdown.tooltip = "Dummy Button - TBD";
 
             oppositeSideToggle = UIUtils.CreateCheckBox(this);
             oppositeSideToggle.text = "Place on opposite side of stop line";
             oppositeSideToggle.isChecked = false;
             oppositeSideToggle.relativePosition = new Vector2(20, 100);
-            oppositeSideToggle.tooltip = "TBD";
+            oppositeSideToggle.tooltip = "Dummy Button - TBD";
+
+
+            customizeButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
+            customizeButton.normalBgSprite = "SubBarButtonBase";
+            customizeButton.hoveredBgSprite = "SubBarButtonBaseHovered";
+            customizeButton.textHorizontalAlignment = UIHorizontalAlignment.Left;
+            customizeButton.textPadding.top = 4;
+            customizeButton.textPadding.left = 40;
+            customizeButton.text = "Customize Lights";
+            customizeButton.textScale = 0.9f;
+            customizeButton.relativePosition = new Vector2(20, 135);
+            customizeButton.height = 25;
+            customizeButton.width = 330;
+            customizeButton.tooltip = "Select Traffic Light Variations";
+
+            customizeButtonToggle = UIUtils.CreateLabelSpriteImage(this, m_atlas);
+            customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
+            customizeButtonToggle.width = 18f;
+            customizeButtonToggle.height = 18f;
+            customizeButtonToggle.relativePosition = new Vector2(32, 139);
+
+            customizeButton.eventClick += (c, p) =>
+            {
+                if (isVisible)
+                {
+
+                    if (customizeButtonToggle.backgroundSprite == "PropertyGroupOpen")
+                    {
+                        customizePanel.isVisible = false;
+                        customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
+                        height = 225;
+                    }
+                    else
+                    {
+                        customizePanel.isVisible = true;
+                        customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
+                        height = 525;
+                    }
+                }
+            };
+
+            customizePanel = AddUIComponent<UIPanel>();
+            customizePanel.relativePosition = new Vector2(0, 170);
+            customizePanel.size = new Vector2(260, 110);
+            customizePanel.isVisible = false;
+
+            UILabel smallRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
+            //"select from road panel"
+            smallRoadsDropdownLabel.autoSize = false;
+            smallRoadsDropdownLabel.width = 110;
+            smallRoadsDropdownLabel.height = 30;
+            smallRoadsDropdownLabel.relativePosition = new Vector2(20, 7);
+            smallRoadsDropdownLabel.text = "Small Roads:";
+
+            smallRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
+            smallRoadsDropdown.width = 185;
+            smallRoadsDropdown.AddItem("Light Variation A");
+            smallRoadsDropdown.AddItem("Light Variation E");
+            smallRoadsDropdown.AddItem("Light Variation F");
+            smallRoadsDropdown.selectedIndex = 0;
+            smallRoadsDropdown.relativePosition = new Vector3(135, 0);
+            smallRoadsDropdown.tooltip = "Dummy Button - TBD";
+
+            UILabel mediumRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
+            //"select from road panel"
+            mediumRoadsDropdownLabel.autoSize = false;
+            mediumRoadsDropdownLabel.width = 145;
+            mediumRoadsDropdownLabel.height = 30;
+            mediumRoadsDropdownLabel.relativePosition = new Vector2(20, 47);
+            mediumRoadsDropdownLabel.text = "Medium Roads:";
+
+            mediumRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
+            mediumRoadsDropdown.width = 185;
+            mediumRoadsDropdown.AddItem("Light Variation B");
+            mediumRoadsDropdown.selectedIndex = 0;
+            mediumRoadsDropdown.relativePosition = new Vector3(155, 40);
+            mediumRoadsDropdown.tooltip = "Dummy Button - TBD";
+
+            UILabel largeRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
+            //"select from road panel"
+            largeRoadsDropdownLabel.autoSize = false;
+            largeRoadsDropdownLabel.width = 145;
+            largeRoadsDropdownLabel.height = 30;
+            largeRoadsDropdownLabel.relativePosition = new Vector2(20, 87);
+            largeRoadsDropdownLabel.text = "Large Roads:";
+
+            largeRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
+            largeRoadsDropdown.width = 185;
+            largeRoadsDropdown.AddItem("Light Variation C");
+            largeRoadsDropdown.AddItem("Light Variation E");
+            largeRoadsDropdown.AddItem("Light Variation F");
+            largeRoadsDropdown.selectedIndex = 0;
+            largeRoadsDropdown.relativePosition = new Vector3(155, 80);
+            largeRoadsDropdown.tooltip = "Dummy Button - TBD";
+
+            UILabel changeIndividualRoadsLabel = customizePanel.AddUIComponent<UILabel>();
+            //"select from road panel"
+            changeIndividualRoadsLabel.autoSize = false;
+            changeIndividualRoadsLabel.width = 145;
+            changeIndividualRoadsLabel.height = 30;
+            changeIndividualRoadsLabel.relativePosition = new Vector2(20, 127);
+            changeIndividualRoadsLabel.text = "Change Individual Roads:";
+
 
 
             confirmButton = UIUtils.CreateButton(this);
             confirmButton.text = "Ok";
-            confirmButton.relativePosition = new Vector2(20, 180);
+            confirmButton.relativePosition = new Vector2(20, 999);
             confirmButton.width = 200;
-
+            confirmButton.isVisible = false;
 
             confirmButton.eventClick += (c, p) =>
             {
 
             };
+
+            openXMLFolderButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
+            openXMLFolderButton.normalBgSprite = "ButtonMenu";
+            openXMLFolderButton.hoveredBgSprite = "ButtonMenuHovered";
+            openXMLFolderButton.pressedBgSprite = "ButtonMenuPressed";
+            openXMLFolderButton.disabledBgSprite = "ButtonMenuDisabled";
+            openXMLFolderButton.normalFgSprite = "Folder";
+            openXMLFolderButton.relativePosition = new Vector2(10, 5);
+            openXMLFolderButton.height = 25;
+            openXMLFolderButton.width = 31;
+            openXMLFolderButton.tooltip = "Open Addons Folder";
+
+            openXMLFolderButton.eventClick += (c, p) =>
+            {
+                if (isVisible)
+                {
+                    Utils.OpenInFileBrowser(DataLocation.addonsPath);
+                }
+            };
+
+        }
+
+        private void LoadResources()
+        {
+            string[] spriteNames = new string[]
+            {
+                "Folder"
+            };
+
+            m_atlas = ResourceLoader.CreateTextureAtlas("TrafficLightReplacer", spriteNames, "TrafficLightReplacer.Icons.");
+
+            UITextureAtlas defaultAtlas = ResourceLoader.GetAtlas("Ingame");
+            Texture2D[] textures = new Texture2D[13];
+
+            textures[0] = defaultAtlas["ButtonMenu"].texture;
+            textures[1] = defaultAtlas["ButtonMenuFocused"].texture;
+            textures[2] = defaultAtlas["ButtonMenuHovered"].texture;
+            textures[3] = defaultAtlas["ButtonMenuPressed"].texture;
+            textures[4] = defaultAtlas["ButtonMenuDisabled"].texture;
+            textures[5] = defaultAtlas["EmptySprite"].texture;
+            textures[6] = defaultAtlas["ScrollbarTrack"].texture;
+            textures[7] = defaultAtlas["ScrollbarThumb"].texture;
+
+            UITextureAtlas mapAtlas = ResourceLoader.GetAtlas("InMapEditor");
+            textures[8] = mapAtlas["SubBarButtonBase"].texture;
+            textures[9] = mapAtlas["SubBarButtonBaseHovered"].texture;
+            textures[10] = mapAtlas["SubBarButtonBaseDisabled"].texture;
+            textures[11] = mapAtlas["PropertyGroupClosed"].texture;
+            textures[12] = mapAtlas["PropertyGroupOpen"].texture;
+
+
+            ResourceLoader.AddTexturesInAtlas(m_atlas, textures);
+
         }
 
     }

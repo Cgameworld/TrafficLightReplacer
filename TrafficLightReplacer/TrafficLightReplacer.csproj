@@ -52,12 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asset.cs" />
+    <Compile Include="lib\ResourceLoader.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="ModInfo.cs" />
     <Compile Include="ModThreading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UITitlebar.cs" />
-    <Compile Include="UIUtils.cs" />
+    <Compile Include="lib\UITitlebar.cs" />
+    <Compile Include="lib\UIUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\Folder.png" />
+    <Content Include="Icons\license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
