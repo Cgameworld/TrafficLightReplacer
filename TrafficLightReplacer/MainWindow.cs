@@ -21,9 +21,9 @@ namespace TrafficLightReplacer
         private UITextureAtlas m_atlas;
         private UIButton openXMLFolderButton;
         private UIPanel customizePanel;
-        private UIDropDown smallRoadsDropdown;
-        private UIDropDown mediumRoadsDropdown;
-        private UIDropDown largeRoadsDropdown;
+        public UIDropDown smallRoadsDropdown;
+        public UIDropDown mediumRoadsDropdown;
+        public UIDropDown largeRoadsDropdown;
 
         public static TrafficLightReplacePanel instance
         {
@@ -75,7 +75,7 @@ namespace TrafficLightReplacer
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                //for now xml file locations are hardcoded - will seach through directories later
+                //for now xml file locations are hardcoded - will search through directories later
                 if (packDropdown.selectedIndex == 0)
                 {
                     string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
@@ -149,9 +149,7 @@ namespace TrafficLightReplacer
 
             smallRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             smallRoadsDropdown.width = 185;
-            smallRoadsDropdown.AddItem("Light Variation A");
-            smallRoadsDropdown.AddItem("Light Variation E");
-            smallRoadsDropdown.AddItem("Light Variation F");
+            smallRoadsDropdown.AddItem("Empty A");
             smallRoadsDropdown.selectedIndex = 0;
             smallRoadsDropdown.relativePosition = new Vector3(135, 0);
             smallRoadsDropdown.tooltip = "Dummy Button - TBD";
@@ -166,7 +164,7 @@ namespace TrafficLightReplacer
 
             mediumRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             mediumRoadsDropdown.width = 185;
-            mediumRoadsDropdown.AddItem("Light Variation B");
+            mediumRoadsDropdown.AddItem("Empty B");
             mediumRoadsDropdown.selectedIndex = 0;
             mediumRoadsDropdown.relativePosition = new Vector3(155, 40);
             mediumRoadsDropdown.tooltip = "Dummy Button - TBD";
@@ -181,9 +179,7 @@ namespace TrafficLightReplacer
 
             largeRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             largeRoadsDropdown.width = 185;
-            largeRoadsDropdown.AddItem("Light Variation C");
-            largeRoadsDropdown.AddItem("Light Variation E");
-            largeRoadsDropdown.AddItem("Light Variation F");
+            largeRoadsDropdown.AddItem("Empty C");
             largeRoadsDropdown.selectedIndex = 0;
             largeRoadsDropdown.relativePosition = new Vector3(155, 80);
             largeRoadsDropdown.tooltip = "Dummy Button - TBD";
