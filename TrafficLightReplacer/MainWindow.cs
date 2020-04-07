@@ -80,12 +80,12 @@ namespace TrafficLightReplacer
                 if (packDropdown.selectedIndex == 0)
                 {
                     string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
-                    ModLoading.ReplaceTrafficLights(xmlfile1);
+                    Replacer.Start(xmlfile1);
                 }
                 else if (packDropdown.selectedIndex == 1)
                 {
                     string xmlfile2 = Path.Combine(DataLocation.addonsPath, "test2.xml");
-                    ModLoading.ReplaceTrafficLights(xmlfile2);
+                    Replacer.Start(xmlfile2);
                 }
 
                 ResetAllDropdowns();
@@ -165,8 +165,8 @@ namespace TrafficLightReplacer
 
             smallRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                ModLoading.typeSmall = GetCurrentProp(ModLoading.typeSmallOptions, smallRoadsDropdown);
-                ModLoading.UpdateLaneProps();
+                Replacer.typeSmall = GetCurrentProp(Replacer.typeSmallOptions, smallRoadsDropdown);
+                Replacer.UpdateLaneProps();
             };
 
             UILabel mediumRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
@@ -186,8 +186,8 @@ namespace TrafficLightReplacer
 
             mediumRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                ModLoading.typeMedium = GetCurrentProp(ModLoading.typeMediumOptions, mediumRoadsDropdown);
-                ModLoading.UpdateLaneProps();
+                Replacer.typeMedium = GetCurrentProp(Replacer.typeMediumOptions, mediumRoadsDropdown);
+                Replacer.UpdateLaneProps();
             };
 
             UILabel largeRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
@@ -207,8 +207,8 @@ namespace TrafficLightReplacer
 
             largeRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                ModLoading.typeLarge = GetCurrentProp(ModLoading.typeLargeOptions, largeRoadsDropdown);
-                ModLoading.UpdateLaneProps();
+                Replacer.typeLarge = GetCurrentProp(Replacer.typeLargeOptions, largeRoadsDropdown);
+                Replacer.UpdateLaneProps();
             };
 
             UILabel changeIndividualRoadsLabel = customizePanel.AddUIComponent<UILabel>();
@@ -243,7 +243,7 @@ namespace TrafficLightReplacer
             getmeditems.eventClick += (c, p) =>
             {
                 int count = 0;
-                foreach (var item in ModLoading.typeMediumOptions)
+                foreach (var item in Replacer.typeMediumOptions)
                 {
                     Debug.Log("medroaditem " + count + " :" + item.Name);
                     count++;
@@ -276,18 +276,14 @@ namespace TrafficLightReplacer
         {
             PropInfo currentProp = PrefabCollection<PropInfo>.FindLoaded(currentpropCategory[dropdown.selectedIndex].Prefab);
             Debug.Log("selectedIndex dropdown:" + dropdown.selectedIndex);
-            //Debug.Log("selectedValue dropdown:" + dropdown.selectedValue);
-           // foreach (var current in currentpropCategory) {
-           //     Debug.Log("current prefabs:" + current.Prefab + "\n" + current.Name);
-          //  }
             return currentProp;
         }
 
         private void AddAllItemsToDropdowns()
         {
-            AddItemsToDropdown(smallRoadsDropdown, ModLoading.typeSmallOptions);
-            AddItemsToDropdown(mediumRoadsDropdown, ModLoading.typeMediumOptions);
-            AddItemsToDropdown(largeRoadsDropdown, ModLoading.typeLargeOptions);
+            AddItemsToDropdown(smallRoadsDropdown, Replacer.typeSmallOptions);
+            AddItemsToDropdown(mediumRoadsDropdown, Replacer.typeMediumOptions);
+            AddItemsToDropdown(largeRoadsDropdown, Replacer.typeLargeOptions);
         }
 
         private void ResetAllDropdowns()
