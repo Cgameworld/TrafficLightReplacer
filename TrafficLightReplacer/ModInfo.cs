@@ -103,24 +103,14 @@ namespace TrafficLightReplacer
 
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
-                //Debug.Log("prefab name: " + prefab);
-                if (prefab == null)
-                {
-                    Debug.Log("bad-not run");
-                }
-
-                else
-                {
                     float roadwidth = 0;
-                    float lanecount = 0;
                     bool isHighway = false;
                     if (prefab.name.Contains("Highway"))
                     {
                         isHighway = true;
                     }
 
-
-                    GetRoadInformation(prefab, ref roadwidth, ref lanecount);
+                    GetRoadInformation(prefab, ref roadwidth);
 
                     //Debug.Log("Total road width: " + roadwidth + " | lane count: " + lanecount);
 
@@ -148,12 +138,13 @@ namespace TrafficLightReplacer
                                         ReplaceProp(typeSmall, propGroup);  //regular
                                     }
 
+
                                     if (lane.m_laneType.ToString() == "Pedestrian")
                                     {
                                         if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
                                         {
-                                            //&& propGroup.m_flagsForbidden == NetLane.Flags.JoinedJunctionInverted
                                             Debug.Log("Found ped signal!");
+
                                             propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("1548117573.New Traffic Light Grey 10_Data");
 
                                             if (lane.m_position > 0)
@@ -173,11 +164,11 @@ namespace TrafficLightReplacer
                         }
 
                     }
-                }
+                
             }
         }
 
-        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref float lanecount)
+        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
         {
             //what to do about asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)
@@ -190,14 +181,12 @@ namespace TrafficLightReplacer
                         //Debug.Log("oneway road!");
                         //Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                         roadwidth += lane.m_width;
-                        lanecount++;
                     }
                     //two way roads - add widths from positive lane positions
                     else if (lane.m_position > 0)
                     {
                         // Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                         roadwidth += lane.m_width;
-                        lanecount++;
                     }
                 }
 
