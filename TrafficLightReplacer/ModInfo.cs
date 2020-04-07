@@ -113,6 +113,12 @@ namespace TrafficLightReplacer
                 {
                     float roadwidth = 0;
                     float lanecount = 0;
+                    bool isHighway = false;
+                    if (prefab.name.Contains("Highway"))
+                    {
+                        isHighway = true;
+                    }
+
 
                     GetRoadInformation(prefab, ref roadwidth, ref lanecount);
 
@@ -128,7 +134,7 @@ namespace TrafficLightReplacer
                                 if (propGroup?.m_finalProp != null)
                                 {
                                     //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
-                                    if (roadwidth >= 12 && lanecount > 3)
+                                    if (roadwidth >= 15 || isHighway)
                                     {
                                         ReplaceProp(typeLarge, propGroup);
                                     }
