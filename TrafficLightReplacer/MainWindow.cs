@@ -163,6 +163,12 @@ namespace TrafficLightReplacer
             smallRoadsDropdown.relativePosition = new Vector3(135, 0);
             smallRoadsDropdown.tooltip = "Dummy Button - TBD";
 
+            smallRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
+            {
+                ModLoading.typeSmall = PrefabCollection<PropInfo>.FindLoaded(ModLoading.typeSmallOptions[smallRoadsDropdown.selectedIndex].Prefab);
+                ModLoading.UpdateLaneProps();
+            };
+
             UILabel mediumRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
             //"select from road panel"
             mediumRoadsDropdownLabel.autoSize = false;

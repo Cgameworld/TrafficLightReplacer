@@ -30,6 +30,11 @@ namespace TrafficLightReplacer
         public static List<Asset> typeLargeOptions = new List<Asset>();
         public static List<Asset> typePedSignalOptions = new List<Asset>();
 
+        public static PropInfo typeSmall;
+        public static PropInfo typeMedium;
+        public static PropInfo typeLarge;
+        public static PropInfo typePedSignal;
+
         public override void OnLevelLoaded(LoadMode mode)
         {
 
@@ -85,11 +90,15 @@ namespace TrafficLightReplacer
 
             //get index of ui!
 
-            var typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab); 
-            var typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
-           var typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
-           var typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0].Prefab);
+            typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
+            typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
+            typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
+            typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0].Prefab);
+            UpdateLaneProps();
+        }
 
+        public static void UpdateLaneProps()
+        {
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
                 Debug.Log("prefab name: " + prefab);
@@ -103,7 +112,7 @@ namespace TrafficLightReplacer
                     float roadwidth = 0;
                     float lanecount = 0;
 
-                    GetRoadInformation(prefab, ref roadwidth, ref lanecount);
+                    GetRoadInformation(prefab, ref roadwidth, ref lanecount); //move this optimization?
 
                     Debug.Log("Total road width: " + roadwidth + " | lane count: " + lanecount);
 
