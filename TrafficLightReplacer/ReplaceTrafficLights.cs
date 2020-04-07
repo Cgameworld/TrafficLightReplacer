@@ -1,6 +1,4 @@
-﻿using ColossalFramework.IO;
-using ICities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,36 +8,15 @@ using UnityEngine;
 
 namespace TrafficLightReplacer
 {
-    public class ModInfo : IUserMod
+    public class ReplaceTrafficLights
     {
-        public string Name
-        {
-            get { return "Traffic Light Replacer"; }
-        }
+        public List<Asset> result;
+        public List<Asset> typeSmallOptions = new List<Asset>();
+        public List<Asset> typeMediumOptions = new List<Asset>();
+        public List<Asset> typeLargeOptions = new List<Asset>();
+        public List<Asset> typePedSignalOptions = new List<Asset>();
 
-        public string Description
-        {
-            get { return "Mod Description"; }
-        }
-    }
-    public class ModLoading : LoadingExtensionBase
-    {
-        public static List<Asset> result;
-        public static List<Asset> typeSmallOptions = new List<Asset>();
-        public static List<Asset> typeMediumOptions = new List<Asset>();
-        public static List<Asset> typeLargeOptions = new List<Asset>();
-        public static List<Asset> typePedSignalOptions = new List<Asset>();
-
-        public override void OnLevelLoaded(LoadMode mode)
-        {
-
-
-            TrafficLightReplacePanel.instance.Show();  //initalize UI
-            string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
-            ReplaceTrafficLights(xmlfile1);
-        }
-
-    public static void ReplaceTrafficLights(string path)
+        public void Replace(string path)
         {
             Debug.Log("modloaded");
 
@@ -47,15 +24,6 @@ namespace TrafficLightReplacer
             StreamReader reader = new StreamReader(path);
             result = (List<Asset>)serializer.Deserialize(reader);
             reader.Close();
-
-            //clear list!
-
-            typeSmallOptions.Clear();
-            typeSmallOptions.TrimExcess();
-            typeMediumOptions.Clear();
-            typeMediumOptions.TrimExcess();
-            typeLargeOptions.Clear();
-            typeLargeOptions.TrimExcess();
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -85,10 +53,10 @@ namespace TrafficLightReplacer
 
             //get index of ui!
 
-            var typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab); 
+            var typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
             var typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
-           var typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
-           var typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0].Prefab);
+            var typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
+            var typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0].Prefab);
 
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
@@ -138,7 +106,7 @@ namespace TrafficLightReplacer
             }
         }
 
-        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref float lanecount)
+        private void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref float lanecount)
         {
             //what to do about asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)
@@ -164,14 +132,14 @@ namespace TrafficLightReplacer
             }
         }
 
-        private static void ReplaceProp(PropInfo newProp, NetLaneProps.Prop propGroup)
+        private void ReplaceProp(PropInfo newProp, NetLaneProps.Prop propGroup)
         {
             //m_prop stays the same m_finalProp changes 
 
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = newProp;
-               // Debug.Log("3Replacement Successful");
+                // Debug.Log("3Replacement Successful");
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
