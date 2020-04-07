@@ -44,7 +44,7 @@ namespace TrafficLightReplacer
             ReplaceTrafficLights(xmlfile1);
         }
 
-    public static void ReplaceTrafficLights(string path)
+        public static void ReplaceTrafficLights(string path)
         {
             Debug.Log("modloaded");
 
@@ -133,6 +133,7 @@ namespace TrafficLightReplacer
                             {
                                 if (propGroup?.m_finalProp != null)
                                 {
+
                                     //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
                                     if (roadwidth >= 15 || isHighway)
                                     {
@@ -146,6 +147,27 @@ namespace TrafficLightReplacer
                                     {
                                         ReplaceProp(typeSmall, propGroup);  //regular
                                     }
+
+                                    if (lane.m_laneType.ToString() == "Pedestrian")
+                                    {
+                                        if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                                        {
+                                            //&& propGroup.m_flagsForbidden == NetLane.Flags.JoinedJunctionInverted
+                                            Debug.Log("Found ped signal!");
+                                            propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("1548117573.New Traffic Light Grey 10_Data");
+
+                                            if (lane.m_position > 0)
+                                            {
+                                                propGroup.m_angle = -270f;
+                                            }
+                                            else
+                                            {
+                                                propGroup.m_angle = 270f;
+                                            }
+
+                                        }
+                                    }
+
                                 }
                             }
                         }
@@ -173,12 +195,15 @@ namespace TrafficLightReplacer
                     //two way roads - add widths from positive lane positions
                     else if (lane.m_position > 0)
                     {
-                       // Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
+                        // Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                         roadwidth += lane.m_width;
                         lanecount++;
                     }
                 }
+
+
             }
+
         }
 
         private static void ReplaceProp(PropInfo newProp, NetLaneProps.Prop propGroup)
@@ -188,7 +213,7 @@ namespace TrafficLightReplacer
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = newProp;
-               // Debug.Log("3Replacement Successful");
+                // Debug.Log("3Replacement Successful");
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
