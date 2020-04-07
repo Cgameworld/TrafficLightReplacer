@@ -99,9 +99,11 @@ namespace TrafficLightReplacer
 
         public static void UpdateLaneProps()
         {
+            Debug.Log(typeSmall);
+
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
-                Debug.Log("prefab name: " + prefab);
+                //Debug.Log("prefab name: " + prefab);
                 if (prefab == null)
                 {
                     Debug.Log("bad-not run");
@@ -112,9 +114,9 @@ namespace TrafficLightReplacer
                     float roadwidth = 0;
                     float lanecount = 0;
 
-                    GetRoadInformation(prefab, ref roadwidth, ref lanecount); //move this optimization?
+                    GetRoadInformation(prefab, ref roadwidth, ref lanecount);
 
-                    Debug.Log("Total road width: " + roadwidth + " | lane count: " + lanecount);
+                    //Debug.Log("Total road width: " + roadwidth + " | lane count: " + lanecount);
 
                     foreach (NetInfo.Lane lane in prefab.m_lanes)
                     {
@@ -157,15 +159,15 @@ namespace TrafficLightReplacer
                     //detect one way roads - calculate width across whole road
                     if (prefab.m_hasBackwardVehicleLanes == false || prefab.m_hasForwardVehicleLanes == false)
                     {
-                        Debug.Log("oneway road!");
-                        Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
+                        //Debug.Log("oneway road!");
+                        //Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                         roadwidth += lane.m_width;
                         lanecount++;
                     }
                     //two way roads - add widths from positive lane positions
                     else if (lane.m_position > 0)
                     {
-                        Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
+                       // Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                         roadwidth += lane.m_width;
                         lanecount++;
                     }

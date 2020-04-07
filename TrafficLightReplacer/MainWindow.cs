@@ -165,7 +165,7 @@ namespace TrafficLightReplacer
 
             smallRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                ModLoading.typeSmall = PrefabCollection<PropInfo>.FindLoaded(ModLoading.typeSmallOptions[smallRoadsDropdown.selectedIndex].Prefab);
+                ModLoading.typeSmall = GetCurrentProp(ModLoading.typeSmallOptions, smallRoadsDropdown);
                 ModLoading.UpdateLaneProps();
             };
 
@@ -184,6 +184,12 @@ namespace TrafficLightReplacer
             mediumRoadsDropdown.relativePosition = new Vector3(155, 40);
             mediumRoadsDropdown.tooltip = "Dummy Button - TBD";
 
+            mediumRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
+            {
+                ModLoading.typeMedium = GetCurrentProp(ModLoading.typeMediumOptions, mediumRoadsDropdown);
+                ModLoading.UpdateLaneProps();
+            };
+
             UILabel largeRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
             //"select from road panel"
             largeRoadsDropdownLabel.autoSize = false;
@@ -198,6 +204,12 @@ namespace TrafficLightReplacer
             largeRoadsDropdown.selectedIndex = 0;
             largeRoadsDropdown.relativePosition = new Vector3(155, 80);
             largeRoadsDropdown.tooltip = "Dummy Button - TBD";
+
+            largeRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
+            {
+                ModLoading.typeLarge = GetCurrentProp(ModLoading.typeLargeOptions, largeRoadsDropdown);
+                ModLoading.UpdateLaneProps();
+            };
 
             UILabel changeIndividualRoadsLabel = customizePanel.AddUIComponent<UILabel>();
             //"select from road panel"
@@ -260,6 +272,17 @@ namespace TrafficLightReplacer
 
         }
 
+        private static PropInfo GetCurrentProp(System.Collections.Generic.List<Asset> currentpropCategory, UIDropDown dropdown)
+        {
+            PropInfo currentProp = PrefabCollection<PropInfo>.FindLoaded(currentpropCategory[dropdown.selectedIndex].Prefab);
+            Debug.Log("selectedIndex dropdown:" + dropdown.selectedIndex);
+            //Debug.Log("selectedValue dropdown:" + dropdown.selectedValue);
+           // foreach (var current in currentpropCategory) {
+           //     Debug.Log("current prefabs:" + current.Prefab + "\n" + current.Name);
+          //  }
+            return currentProp;
+        }
+
         private void AddAllItemsToDropdowns()
         {
             AddItemsToDropdown(smallRoadsDropdown, ModLoading.typeSmallOptions);
@@ -269,6 +292,9 @@ namespace TrafficLightReplacer
 
         private void ResetAllDropdowns()
         {
+            smallRoadsDropdown.selectedIndex = 0;
+            mediumRoadsDropdown.selectedIndex = 0;
+            largeRoadsDropdown.selectedIndex = 0;
             ResetDropdown(smallRoadsDropdown);
             ResetDropdown(mediumRoadsDropdown);
             ResetDropdown(largeRoadsDropdown);
