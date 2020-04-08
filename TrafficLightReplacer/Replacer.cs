@@ -116,8 +116,20 @@ namespace TrafficLightReplacer
                                 {
                                     if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
                                     {
+                                        if (roadwidth >= 15 || isHighway)
+                                        {
+                                            ReplacePropFlipped(lane, propGroup, typeLarge);
+                                        }
+                                        else if (roadwidth >= 6)
+                                        {
+                                            ReplacePropFlipped(lane, propGroup, typeMedium);
+                                        }
+                                        else
+                                        {
+                                            ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
+                                        }
                                         //Debug.Log("opposite side checked");
-                                        ReplacePropFlipped(lane, propGroup, typeMedium);
+                                        
 
                                     }
                                     else
@@ -126,15 +138,15 @@ namespace TrafficLightReplacer
                                         //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
                                         if (roadwidth >= 15 || isHighway)
                                         {
-                                            ReplaceProp(typeLarge, propGroup);
+                                            ReplaceProp(lane, typeLarge, propGroup);
                                         }
                                         else if (roadwidth >= 6)
                                         {
-                                            ReplaceProp(typeMedium, propGroup);
+                                            ReplaceProp(lane, typeMedium, propGroup);
                                         }
                                         else
                                         {
-                                            ReplaceProp(typeSmall, propGroup);  //regular
+                                            ReplaceProp(lane, typeSmall, propGroup);  //regular
                                         }
                                     }
 
@@ -144,15 +156,15 @@ namespace TrafficLightReplacer
                                     //Debug.Log("panel is NULL");
                                     if (roadwidth >= 15 || isHighway)
                                     {
-                                        ReplaceProp(typeLarge, propGroup);
+                                        ReplaceProp(lane, typeLarge, propGroup);
                                     }
                                     else if (roadwidth >= 6)
                                     {
-                                        ReplaceProp(typeMedium, propGroup);
+                                        ReplaceProp(lane, typeMedium, propGroup);
                                     }
                                     else
                                     {
-                                        ReplaceProp(typeSmall, propGroup);  //regular
+                                        ReplaceProp(lane, typeSmall, propGroup);  //regular
                                     }
                                 }
 
@@ -194,10 +206,12 @@ namespace TrafficLightReplacer
 
                 if (lane.m_position > 0)
                 {
+                    //propGroup.m_position.x = propGroup.m_position.x + 0.5f;
                     propGroup.m_position.x = -2f;
                 }
                 else
                 {
+                    //propGroup.m_position.x = propGroup.m_position.x - 0.5f;
                     propGroup.m_position.x = 2f;
                 }
                 // Debug.Log("3Replacement Successful");
@@ -237,7 +251,7 @@ namespace TrafficLightReplacer
 
         }
 
-        private static void ReplaceProp(PropInfo newProp, NetLaneProps.Prop propGroup)
+        private static void ReplaceProp(NetInfo.Lane lane, PropInfo newProp, NetLaneProps.Prop propGroup)
         {
             //m_prop stays the same m_finalProp changes 
 
@@ -245,6 +259,7 @@ namespace TrafficLightReplacer
             {
                 propGroup.m_finalProp = newProp;
                 // Debug.Log("3Replacement Successful");
+
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
@@ -256,6 +271,15 @@ namespace TrafficLightReplacer
             {
                 
                 propGroup.m_finalProp = propGroup.m_prop;
+
+                if (lane.m_position > 0)
+                {
+                    propGroup.m_angle = -90f;
+                }
+                else
+                {
+                    propGroup.m_angle = 90f;
+                }
             }
 
 
