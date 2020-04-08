@@ -68,9 +68,10 @@ namespace TrafficLightReplacer
 
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
+            packDropdown.AddItem("None");
             packDropdown.AddItem("Test Pack - Yellow Version");
             packDropdown.AddItem("Test Pack - xml2");
-            packDropdown.selectedIndex = 0;
+            packDropdown.selectedIndex = 1;
             packDropdown.relativePosition = new Vector3(80, 53);
             packDropdown.tooltip = "Dummy Button - TBD";
 
@@ -80,9 +81,16 @@ namespace TrafficLightReplacer
                 if (packDropdown.selectedIndex == 0)
                 {
                     string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
+                    Replacer.setDefaultLights = true;
                     Replacer.Start(xmlfile1);
+                    Replacer.setDefaultLights = false;
                 }
                 else if (packDropdown.selectedIndex == 1)
+                {
+                    string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
+                    Replacer.Start(xmlfile1);
+                }
+                else if (packDropdown.selectedIndex == 2)
                 {
                     string xmlfile2 = Path.Combine(DataLocation.addonsPath, "test2.xml");
                     Replacer.Start(xmlfile2);
@@ -99,8 +107,7 @@ namespace TrafficLightReplacer
             oppositeSideToggle.tooltip = "Dummy Button - TBD";
 
             oppositeSideToggle.eventCheckChanged += (c, p) =>
-            {
-                
+            {           
                 Replacer.UpdateLaneProps();
                 Debug.Log("checkboxchecked and updatelaneprops fired");
             };
