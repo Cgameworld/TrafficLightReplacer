@@ -14,14 +14,16 @@ namespace TrafficLightReplacer
         public static List<Asset> typeSmallOptions = new List<Asset>();
         public static List<Asset> typeMediumOptions = new List<Asset>();
         public static List<Asset> typeLargeOptions = new List<Asset>();
-        public static List<Asset> typePedSignalOptions = new List<Asset>();
+        //public static List<Asset> typePedSignalOptions = new List<Asset>();
 
         public static PropInfo typeSmall;
         public static PropInfo typeMedium;
         public static PropInfo typeLarge;
         public static PropInfo typePedSignal;
+        public static PropInfo typeSignalPole;
 
         public static bool setDefaultLights = false;
+        
 
         public static void Start(string path)
         {
@@ -59,13 +61,17 @@ namespace TrafficLightReplacer
                 if (result[i].Type == "Large")
                 {
                     typeLargeOptions.Add(result[i]);
-
+                }
+                if (result[i].Type == "Signal Pole")
+                {
+                    typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
                 if (result[i].Type == "Ped Signal")
                 {
-                    typePedSignalOptions.Add(result[i]);
+                    typePedSignal = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
             }
+            Debug.Log("\ntypeSignalPole: " + typeSignalPole + "\ntypePedSignal: " + typePedSignal);
             Debug.Log("addedallitems");
 
             //get index of ui!
@@ -73,7 +79,8 @@ namespace TrafficLightReplacer
             typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
             typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
             typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
-            typePedSignal = PrefabCollection<PropInfo>.FindLoaded(typePedSignalOptions[0].Prefab);
+
+            
             UpdateLaneProps();
         }
 
@@ -181,6 +188,26 @@ namespace TrafficLightReplacer
                 }
             }
 
+            if (propGroup.m_prop.name == "Traffic Light 02")
+            {
+                propGroup.m_finalProp = typeSignalPole;
+
+                if (lane.m_position > 0)
+                {
+                    propGroup.m_position.x = -2f;
+                }
+                else
+                {
+                    propGroup.m_position.x = 2f;
+                }
+                // Debug.Log("3Replacement Successful");
+            }
+            else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
+            {
+                propGroup.m_finalProp = typePedSignal;
+                //Debug.Log("3Delete Successful");
+            }
+
         }
 
         private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
@@ -221,7 +248,7 @@ namespace TrafficLightReplacer
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
-                propGroup.m_finalProp = null;
+                propGroup.m_finalProp = typePedSignal;
                 //Debug.Log("3Delete Successful");
             }
 
@@ -230,8 +257,6 @@ namespace TrafficLightReplacer
                 
                 propGroup.m_finalProp = propGroup.m_prop;
             }
-
-
 
 
         }
