@@ -219,6 +219,12 @@ namespace TrafficLightReplacer
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = typePedSignal;
+                if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
+                {
+                    propGroup.m_angle = 270;
+                }
+                
+
             }
 
         }
@@ -259,6 +265,10 @@ namespace TrafficLightReplacer
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = typePedSignal;
+                if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
+                {
+                    propGroup.m_angle = 270;
+                }
             }
 
             if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
