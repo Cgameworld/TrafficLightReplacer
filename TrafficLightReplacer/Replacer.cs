@@ -99,13 +99,10 @@ namespace TrafficLightReplacer
 
                 GetRoadInformation(prefab, ref roadwidth);
 
-                //Debug.Log("Total road width: " + roadwidth + " | lane count: " + lanecount);
-
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
                 {
                     if (lane?.m_laneProps?.m_props != null)
                     {
-                        //   Debug.Log("Lane Type:" + lane.m_laneType);
                         foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
                         {
                             if (propGroup?.m_finalProp != null)
@@ -128,14 +125,11 @@ namespace TrafficLightReplacer
                                         {
                                             ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
                                         }
-                                        //Debug.Log("opposite side checked");
                                         
 
                                     }
                                     else
                                     {
-                                        //Debug.Log("opposite side unchecked");
-                                        //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
                                         if (roadwidth >= 15 || isHighway)
                                         {
                                             ReplaceProp(lane, typeLarge, propGroup);
@@ -153,7 +147,7 @@ namespace TrafficLightReplacer
                                 }
                                 else
                                 {
-                                    //Debug.Log("panel is NULL");
+                                    //panel is NULL
                                     if (roadwidth >= 15 || isHighway)
                                     {
                                         ReplaceProp(lane, typeLarge, propGroup);
@@ -221,19 +215,17 @@ namespace TrafficLightReplacer
                     //propGroup.m_position.x = propGroup.m_position.x - 0.5f;
                     propGroup.m_position.x = 2f;
                 }
-                // Debug.Log("3Replacement Successful");
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = typePedSignal;
-                //Debug.Log("3Delete Successful");
             }
 
         }
 
         private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
         {
-            //what to do about asym roads?
+            //to do - take into account asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)
             {
                 if (lane.m_laneType.ToString() == "Parking" || lane.m_laneType.ToString() == "Vehicle")
@@ -241,14 +233,11 @@ namespace TrafficLightReplacer
                     //detect one way roads - calculate width across whole road
                     if (prefab.m_hasBackwardVehicleLanes == false || prefab.m_hasForwardVehicleLanes == false)
                     {
-                        //Debug.Log("oneway road!");
-                        //Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                         roadwidth += lane.m_width;
                     }
                     //two way roads - add widths from positive lane positions
                     else if (lane.m_position > 0)
                     {
-                        // Debug.Log("Lane width: " + lane.m_width + "|  Lanetype:" + lane.m_laneType);
                         roadwidth += lane.m_width;
                     }
                 }
@@ -265,19 +254,17 @@ namespace TrafficLightReplacer
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = newProp;
-                // Debug.Log("3Replacement Successful");
 
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = typePedSignal;
-                //Debug.Log("3Delete Successful");
             }
 
             if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
             {
                 
-                propGroup.m_finalProp = propGroup.m_prop;
+                propGroup.m_finalProp = typePedSignal;
 
                 if (lane.m_position > 0)
                 {
@@ -288,8 +275,6 @@ namespace TrafficLightReplacer
                     propGroup.m_angle = 90f;
                 }
             }
-
-
         }
     }
 }
