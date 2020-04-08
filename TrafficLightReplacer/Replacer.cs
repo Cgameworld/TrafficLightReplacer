@@ -196,7 +196,14 @@ namespace TrafficLightReplacer
                     {
                         propGroup.m_angle = 270f;
                     }
-
+                }
+            }
+            else
+            {
+                //change road median ped signal
+                if (propGroup.m_prop.name == "Traffic Light Pedestrian")
+                {
+                    propGroup.m_finalProp = typePedSignal;
                 }
             }
 
