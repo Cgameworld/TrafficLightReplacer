@@ -81,9 +81,8 @@ namespace TrafficLightReplacer
                 if (packDropdown.selectedIndex == 0)
                 {
                     string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
-                    Replacer.setDefaultLights = true;
-                    Replacer.Start(xmlfile1);
-                    Replacer.setDefaultLights = false;
+                    //Replacer.Start(defaultlights.xml); make default lights xml - single size mode!
+
                 }
                 else if (packDropdown.selectedIndex == 1)
                 {

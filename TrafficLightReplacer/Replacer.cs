@@ -162,11 +162,7 @@ namespace TrafficLightReplacer
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
         {
-            if (setDefaultLights == true)
-            {
-                newProp = propGroup.m_prop;
-                Debug.Log("Set newprop as default prop");
-            }
+
             if (lane.m_laneType.ToString() == "Pedestrian")
             {
                 if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
@@ -217,12 +213,6 @@ namespace TrafficLightReplacer
         private static void ReplaceProp(PropInfo newProp, NetLaneProps.Prop propGroup)
         {
             //m_prop stays the same m_finalProp changes 
-
-            if (setDefaultLights == true)
-            {
-                newProp = propGroup.m_prop;
-                Debug.Log("Set newprop as default prop");
-            }
 
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
