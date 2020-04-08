@@ -102,40 +102,51 @@ namespace TrafficLightReplacer
                             {
 
 
-                                //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
-                                if (roadwidth >= 15 || isHighway)
+                                if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                                 {
-                                    ReplaceProp(typeLarge, propGroup);
-                                }
-                                else if (roadwidth >= 6)
-                                {
-                                    ReplaceProp(typeMedium, propGroup);
-                                }
-                                else
-                                {
-                                    ReplaceProp(typeSmall, propGroup);  //regular
-                                }
-
-
-                                if (lane.m_laneType.ToString() == "Pedestrian")
-                                {
-                                    if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
                                     {
-                                        Debug.Log("Found ped signal!");
+                                        //Debug.Log("opposite side checked");
+                                        ReplacePropFlipped(lane, propGroup, typeMedium);
 
-                                        propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("1548117573.New Traffic Light Grey 10_Data");
-
-                                        if (lane.m_position > 0)
+                                    }
+                                    else
+                                    {
+                                        //Debug.Log("opposite side unchecked");
+                                        //   Debug.Log("1prop name" + propGroup.m_finalProp.name);
+                                        if (roadwidth >= 15 || isHighway)
                                         {
-                                            propGroup.m_angle = -270f;
+                                            ReplaceProp(typeLarge, propGroup);
+                                        }
+                                        else if (roadwidth >= 6)
+                                        {
+                                            ReplaceProp(typeMedium, propGroup);
                                         }
                                         else
                                         {
-                                            propGroup.m_angle = 270f;
+                                            ReplaceProp(typeSmall, propGroup);  //regular
                                         }
+                                    }
 
+                                }
+                                else
+                                {
+                                    //Debug.Log("panel is NULL");
+                                    if (roadwidth >= 15 || isHighway)
+                                    {
+                                        ReplaceProp(typeLarge, propGroup);
+                                    }
+                                    else if (roadwidth >= 6)
+                                    {
+                                        ReplaceProp(typeMedium, propGroup);
+                                    }
+                                    else
+                                    {
+                                        ReplaceProp(typeSmall, propGroup);  //regular
                                     }
                                 }
+
+
 
                             }
                         }
@@ -144,6 +155,28 @@ namespace TrafficLightReplacer
                 }
 
             }
+        }
+
+        private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
+        {
+            if (lane.m_laneType.ToString() == "Pedestrian")
+            {
+                if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                {
+                    propGroup.m_finalProp = newProp;
+
+                    if (lane.m_position > 0)
+                    {
+                        propGroup.m_angle = -270f;
+                    }
+                    else
+                    {
+                        propGroup.m_angle = 270f;
+                    }
+
+                }
+            }
+
         }
 
         private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
@@ -187,6 +220,16 @@ namespace TrafficLightReplacer
                 propGroup.m_finalProp = null;
                 //Debug.Log("3Delete Successful");
             }
+
+            if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+            {
+                
+                propGroup.m_finalProp = propGroup.m_prop;
+            }
+
+
+
+
         }
     }
 }

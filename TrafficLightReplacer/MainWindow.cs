@@ -13,7 +13,7 @@ namespace TrafficLightReplacer
         private static TrafficLightReplacePanel _instance;
 
         public int segmentReplaceCount = 0;
-        private UICheckBox oppositeSideToggle;
+        public UICheckBox oppositeSideToggle;
         private UIDropDown packDropdown;
         private UIButton confirmButton;
         private UIButton customizeButton;
@@ -97,6 +97,13 @@ namespace TrafficLightReplacer
             oppositeSideToggle.isChecked = false;
             oppositeSideToggle.relativePosition = new Vector2(20, 100);
             oppositeSideToggle.tooltip = "Dummy Button - TBD";
+
+            oppositeSideToggle.eventCheckChanged += (c, p) =>
+            {
+                
+                Replacer.UpdateLaneProps();
+                Debug.Log("checkboxchecked and updatelaneprops fired");
+            };
 
 
             customizeButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
