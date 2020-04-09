@@ -50,12 +50,12 @@ namespace TrafficLightReplacer
             isInteractive = true;
             clipChildren = true;
             width = 370;
-            height = 225;
+            height = 200;
             relativePosition = new Vector3(1550, 150);
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
-            m_title.title = "Traffic Light Replacer";
+            m_title.title = "Traffic Light Replacer (Alpha 1)";
             //m_title.isModal = true;
 
             UILabel areaTypeLabel = AddUIComponent<UILabel>();
@@ -68,21 +68,18 @@ namespace TrafficLightReplacer
 
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
-            packDropdown.AddItem("None");
-            packDropdown.AddItem("Test Pack - Yellow Version");
-            packDropdown.AddItem("Test Pack - xml2");
+            packDropdown.AddItem("None (Nonfunctional for now)");
+            packDropdown.AddItem("Test Pack - test.xml");
+            packDropdown.AddItem("Test Pack - test2.xml");
             packDropdown.selectedIndex = 1;
             packDropdown.relativePosition = new Vector3(80, 53);
-            packDropdown.tooltip = "Dummy Button - TBD";
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
                 //for now xml file locations are hardcoded - will search through directories later
                 if (packDropdown.selectedIndex == 0)
                 {
-                    string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
-                    //Replacer.Start(defaultlights.xml); make default lights xml - single size mode!
-
+                    //to do make default lights pack
                 }
                 else if (packDropdown.selectedIndex == 1)
                 {
@@ -140,16 +137,13 @@ namespace TrafficLightReplacer
                     {
                         customizePanel.isVisible = false;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
-                        height = 225;
-                        Debug.Log("COLLAPSIBLEMENUCLOSED");
-                        ResetAllDropdowns();
+                        height = 200;
                     }
                     else
                     {
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
-                        height = 525;
-
+                        height = 320;
                         ResetAllDropdowns();
                         AddAllItemsToDropdowns();
                     }
@@ -224,21 +218,11 @@ namespace TrafficLightReplacer
                 Replacer.UpdateLaneProps();
             };
 
-            UILabel changeIndividualRoadsLabel = customizePanel.AddUIComponent<UILabel>();
-            //"select from road panel"
-            changeIndividualRoadsLabel.autoSize = false;
-            changeIndividualRoadsLabel.width = 145;
-            changeIndividualRoadsLabel.height = 30;
-            changeIndividualRoadsLabel.relativePosition = new Vector2(20, 127);
-            changeIndividualRoadsLabel.text = "Change Individual Roads:";
-
-
-
             confirmButton = UIUtils.CreateButton(this);
             confirmButton.text = "deleteitems+add1";
             confirmButton.relativePosition = new Vector2(20, 400);
             confirmButton.width = 150;
-            //confirmButton.isVisible = false;
+            confirmButton.isVisible = false;
 
             confirmButton.eventClick += (c, p) =>
             {
@@ -251,7 +235,7 @@ namespace TrafficLightReplacer
             getmeditems.text = "getmediumroaditems";
             getmeditems.relativePosition = new Vector2(220, 400);
             getmeditems.width = 120;
-            //getmeditems.isVisible = false;
+            getmeditems.isVisible = false;
 
             getmeditems.eventClick += (c, p) =>
             {
@@ -262,25 +246,6 @@ namespace TrafficLightReplacer
                     count++;
                 }
                
-            };
-
-            openXMLFolderButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
-            openXMLFolderButton.normalBgSprite = "ButtonMenu";
-            openXMLFolderButton.hoveredBgSprite = "ButtonMenuHovered";
-            openXMLFolderButton.pressedBgSprite = "ButtonMenuPressed";
-            openXMLFolderButton.disabledBgSprite = "ButtonMenuDisabled";
-            openXMLFolderButton.normalFgSprite = "Folder";
-            openXMLFolderButton.relativePosition = new Vector2(10, 5);
-            openXMLFolderButton.height = 25;
-            openXMLFolderButton.width = 31;
-            openXMLFolderButton.tooltip = "Open Addons Folder";
-
-            openXMLFolderButton.eventClick += (c, p) =>
-            {
-                if (isVisible)
-                {
-                    Utils.OpenInFileBrowser(DataLocation.addonsPath);
-                }
             };
 
         }

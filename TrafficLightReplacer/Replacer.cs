@@ -14,7 +14,6 @@ namespace TrafficLightReplacer
         public static List<Asset> typeSmallOptions = new List<Asset>();
         public static List<Asset> typeMediumOptions = new List<Asset>();
         public static List<Asset> typeLargeOptions = new List<Asset>();
-        //public static List<Asset> typePedSignalOptions = new List<Asset>();
 
         public static PropInfo typeSmall;
         public static PropInfo typeMedium;
@@ -66,22 +65,17 @@ namespace TrafficLightReplacer
                 {
                     typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
-                if (result[i].Type == "Ped Signal")
-                {
-                    typePedSignal = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
-                }
             }
             Debug.Log("\ntypeSignalPole: " + typeSignalPole + "\ntypePedSignal: " + typePedSignal);
             Debug.Log("addedallitems");
-
-            //get index of ui!
 
             typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
             typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
             typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
 
+            //set to blank asset
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded("1535107168.New Blank Traffic Light_Data");
-                //test with blank asset
+
             UpdateLaneProps();
         }
 
@@ -108,8 +102,6 @@ namespace TrafficLightReplacer
                         {
                             if (propGroup?.m_finalProp != null)
                             {
-
-
                                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                                 {
                                     if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
@@ -162,8 +154,6 @@ namespace TrafficLightReplacer
                                         ReplaceProp(lane, typeSmall, propGroup);  //regular
                                     }
                                 }
-
-
 
                             }
                         }
