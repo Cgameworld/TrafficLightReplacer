@@ -80,7 +80,8 @@ namespace TrafficLightReplacer
             typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
             typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
 
-            
+            typePedSignal = PrefabCollection<PropInfo>.FindLoaded("1535107168.New Blank Traffic Light_Data");
+                //test with blank asset
             UpdateLaneProps();
         }
 
