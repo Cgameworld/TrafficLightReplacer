@@ -168,12 +168,14 @@ namespace TrafficLightReplacer
             smallRoadsDropdown.AddItem("Empty A");
             smallRoadsDropdown.selectedIndex = 0;
             smallRoadsDropdown.relativePosition = new Vector3(135, 0);
-            smallRoadsDropdown.tooltip = "Dummy Button - TBD";
+            smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[0].Description;
 
             smallRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
                 Replacer.typeSmall = GetCurrentProp(Replacer.typeSmallOptions, smallRoadsDropdown);
+                smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[smallRoadsDropdown.selectedIndex].Description;
                 Replacer.UpdateLaneProps();
+
             };
 
             UILabel mediumRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
@@ -189,11 +191,12 @@ namespace TrafficLightReplacer
             mediumRoadsDropdown.AddItem("Empty B");
             mediumRoadsDropdown.selectedIndex = 0;
             mediumRoadsDropdown.relativePosition = new Vector3(155, 40);
-            mediumRoadsDropdown.tooltip = "Dummy Button - TBD";
+            mediumRoadsDropdown.tooltip = Replacer.typeMediumOptions[0].Description;
 
             mediumRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
                 Replacer.typeMedium = GetCurrentProp(Replacer.typeMediumOptions, mediumRoadsDropdown);
+                mediumRoadsDropdown.tooltip = Replacer.typeMediumOptions[mediumRoadsDropdown.selectedIndex].Description;
                 Replacer.UpdateLaneProps();
             };
 
@@ -210,11 +213,12 @@ namespace TrafficLightReplacer
             largeRoadsDropdown.AddItem("Empty C");
             largeRoadsDropdown.selectedIndex = 0;
             largeRoadsDropdown.relativePosition = new Vector3(155, 80);
-            largeRoadsDropdown.tooltip = "Dummy Button - TBD";
+            largeRoadsDropdown.tooltip = Replacer.typeLargeOptions[0].Description;
 
             largeRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
                 Replacer.typeLarge = GetCurrentProp(Replacer.typeLargeOptions, largeRoadsDropdown);
+                largeRoadsDropdown.tooltip = Replacer.typeLargeOptions[largeRoadsDropdown.selectedIndex].Description;
                 Replacer.UpdateLaneProps();
             };
 
@@ -244,10 +248,8 @@ namespace TrafficLightReplacer
                 {
                     Debug.Log("medroaditem " + count + " :" + item.Name);
                     count++;
-                }
-               
+                }               
             };
-
         }
 
         private static PropInfo GetCurrentProp(System.Collections.Generic.List<Asset> currentpropCategory, UIDropDown dropdown)
