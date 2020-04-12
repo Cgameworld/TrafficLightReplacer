@@ -104,6 +104,8 @@ namespace TrafficLightReplacer
 
             clearButton.eventClick += (c, p) =>
             {
+                UpdateTransformSettings();
+
                 for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
                 {
                     if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")

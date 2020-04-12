@@ -218,9 +218,21 @@ namespace TrafficLightReplacer
                 {
                     propGroup.m_angle = 270;
                 }
-
-
             }
+
+           /* //transform settings
+            if (propGroup.m_prop.name == "Traffic Light Pedestrian" ||
+                propGroup.m_prop.name == "Traffic Light 01" ||
+                propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
+                propGroup.m_prop.name == "Traffic Light 02")
+            {
+                var cpos = propGroup.m_position;
+                for (int i = 0; i < transformSettings.Length; i++)
+                {
+                    //think??
+                    propGroup.m_position = new Vector3(cpos.x, cpos.y, cpos.z);
+                }
+            } */
 
         }
 
