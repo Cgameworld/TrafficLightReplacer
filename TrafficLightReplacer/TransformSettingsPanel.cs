@@ -65,6 +65,13 @@ namespace TrafficLightReplacer
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
+                Debug.Log("packDropdown.selectedIndex: " + packDropdown.selectedIndex);
+
+                for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex].Count; i++)
+                {
+                    GetComponentsInChildren<UIPanel>()[i+2].GetComponentsInChildren<UITextField>()[0].text = Replacer.transformSettings[packDropdown.selectedIndex][i].ToString();
+                    GetComponentsInChildren<UIPanel>()[i+2].GetComponentsInChildren<UISlider>()[0].value = Replacer.transformSettings[packDropdown.selectedIndex][i];
+                }
 
             };
 
@@ -87,6 +94,7 @@ namespace TrafficLightReplacer
                 {
                     if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
                     {
+                        Debug.Log("index of UIPANELS" + i);
                         GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
                         GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 0f;
                     }
