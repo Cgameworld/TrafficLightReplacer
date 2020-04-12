@@ -105,8 +105,6 @@ namespace TrafficLightReplacer
 
                 for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
                 {
-
-
                     if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
                     {
                         items.Add(float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text));
@@ -119,7 +117,7 @@ namespace TrafficLightReplacer
                     Debug.Log(item);
                 }
 
-               
+                Replacer.transformSettings[packDropdown.selectedIndex] = items;
             };
         }
 

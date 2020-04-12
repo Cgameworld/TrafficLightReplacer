@@ -232,19 +232,24 @@ namespace TrafficLightReplacer
             };
 
             getmeditems = UIUtils.CreateButton(this);
-            getmeditems.text = "getmediumroaditems";
+            getmeditems.text = "gettransformsettings";
             getmeditems.relativePosition = new Vector2(220, 400);
             getmeditems.width = 120;
-            getmeditems.isVisible = false;
+            //getmeditems.isVisible = false;
 
             getmeditems.eventClick += (c, p) =>
             {
-                int count = 0;
-                foreach (var item in Replacer.typeMediumOptions)
+                for (int i = 0; i<Replacer.transformSettings.Length; i++)
                 {
-                    Debug.Log("medroaditem " + count + " :" + item.Name);
-                    count++;
-                }               
+                    string total = "";
+                    foreach (var settings in Replacer.transformSettings[i])
+                    {
+                        total = total + " | " + settings;
+                    }
+
+                    Debug.Log("Settings for " + i + ": " + total);
+                }
+
             };
         }
 

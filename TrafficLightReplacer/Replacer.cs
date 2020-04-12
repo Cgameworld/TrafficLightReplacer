@@ -21,8 +21,12 @@ namespace TrafficLightReplacer
         public static PropInfo typePedSignal;
         public static PropInfo typeSignalPole;
 
+        public static List<float> defaultTSettings = new List<float>() { 0, 0, 0, 0, 0 };
+        public static List<float>[] transformSettings = new List<float>[4] { defaultTSettings, defaultTSettings, defaultTSettings, defaultTSettings };
+
+
         public static bool setDefaultLights = false;
-        
+
 
         public static void Start(string path)
         {
@@ -118,7 +122,7 @@ namespace TrafficLightReplacer
                                         {
                                             ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
                                         }
-                                        
+
 
                                     }
                                     else
@@ -214,7 +218,7 @@ namespace TrafficLightReplacer
                 {
                     propGroup.m_angle = 270;
                 }
-                
+
 
             }
 
@@ -264,7 +268,7 @@ namespace TrafficLightReplacer
 
             if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
             {
-                
+
                 propGroup.m_finalProp = typePedSignal;
 
                 if (lane.m_position > 0)
@@ -277,5 +281,16 @@ namespace TrafficLightReplacer
                 }
             }
         }
+
+        public enum TransformDropDown
+        {
+            SmallRoads,
+            MediumRoads,
+            LargeRoads,
+            SignalPole
+        }
+
     }
+
+
 }
