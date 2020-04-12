@@ -45,7 +45,7 @@ namespace TrafficLightReplacer
             isInteractive = true;
             clipChildren = true;
             width = 330;
-            height = 350;
+            height = 355;
             relativePosition = new Vector3(1205, 150);
 
             // Title Bar
@@ -58,6 +58,7 @@ namespace TrafficLightReplacer
             packDropdown.AddItem("Small Roads");
             packDropdown.AddItem("Medium Roads");
             packDropdown.AddItem("Large Roads");
+            packDropdown.AddItem("Signal Pole");
             packDropdown.relativePosition = new Vector3(20, 50);
             packDropdown.selectedIndex = 0;
 
@@ -76,8 +77,8 @@ namespace TrafficLightReplacer
 
             clearButton = UIUtils.CreateButton(this);
             clearButton.text = "Reset";
-            clearButton.relativePosition = new Vector2(20, 300);
-            clearButton.width = 120;
+            clearButton.relativePosition = new Vector2(20, 305);
+            clearButton.width = 115;
 
             clearButton.eventClick += (c, p) =>
             {
@@ -95,9 +96,10 @@ namespace TrafficLightReplacer
             };
 
             saveButton = UIUtils.CreateButton(this);
+            //saveButton.text = "Save and Apply";
             saveButton.text = "Save Settings";
-            saveButton.relativePosition = new Vector2(160, 300);
-            saveButton.width = 150;
+            saveButton.relativePosition = new Vector2(155, 305);
+            saveButton.width = 155;
 
             saveButton.eventClick += (c, p) =>
             {
