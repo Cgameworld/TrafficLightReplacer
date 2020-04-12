@@ -15,16 +15,15 @@ namespace TrafficLightReplacer
         public int segmentReplaceCount = 0;
         public UICheckBox oppositeSideToggle;
         private UIDropDown packDropdown;
-        private UIButton confirmButton;
         private UIButton customizeButton;
         private UILabel customizeButtonToggle;
         private UITextureAtlas m_atlas;
-        private UIButton openXMLFolderButton;
         private UIPanel customizePanel;
         public UIDropDown smallRoadsDropdown;
         public UIDropDown mediumRoadsDropdown;
         public UIDropDown largeRoadsDropdown;
         private UIButton getmeditems;
+        private UIButton transformButton;
 
         public static TrafficLightReplacePanel instance
         {
@@ -143,7 +142,7 @@ namespace TrafficLightReplacer
                     {
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
-                        height = 320;
+                        height = 520;
                         ResetAllDropdowns();
                         AddAllItemsToDropdowns();
                     }
@@ -222,17 +221,14 @@ namespace TrafficLightReplacer
                 Replacer.UpdateLaneProps();
             };
 
-            confirmButton = UIUtils.CreateButton(this);
-            confirmButton.text = "deleteitems+add1";
-            confirmButton.relativePosition = new Vector2(20, 400);
-            confirmButton.width = 150;
-            confirmButton.isVisible = false;
+            transformButton = UIUtils.CreateButton(this);
+            transformButton.text = "Transform Settings";
+            transformButton.relativePosition = new Vector2(20, 290);
+            transformButton.width = 220;
 
-            confirmButton.eventClick += (c, p) =>
+            transformButton.eventClick += (c, p) =>
             {
-                string[] blank = new string[0];
-                mediumRoadsDropdown.items = blank;
-                mediumRoadsDropdown.AddItem("TEST1");
+                TransformSettingsPanel.instance.Show();
             };
 
             getmeditems = UIUtils.CreateButton(this);

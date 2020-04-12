@@ -60,6 +60,7 @@
     <Compile Include="lib\UITitlebar.cs" />
     <Compile Include="lib\UIUtils.cs" />
     <Compile Include="Replacer.cs" />
+    <Compile Include="TransformSettingsPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\Folder.png" />

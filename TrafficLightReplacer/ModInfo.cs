@@ -27,6 +27,7 @@ namespace TrafficLightReplacer
         public override void OnLevelLoaded(LoadMode mode)
         {
             TrafficLightReplacePanel.instance.Show();  //initalize UI
+            TransformSettingsPanel.instance.Show();
             string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
             Replacer.Start(xmlfile1);
             Debug.Log("STARTED LOADED");
