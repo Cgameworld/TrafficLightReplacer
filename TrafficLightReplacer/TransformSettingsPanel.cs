@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using ColossalFramework.IO;
 using ColossalFramework.UI;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -82,11 +83,8 @@ namespace TrafficLightReplacer
 
             clearButton.eventClick += (c, p) =>
             {
-
                 for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
                 {
-                    Debug.Log("clicked" + GetComponentsInChildren<UIPanel>()[i].name + "\niter " + i);
-
                     if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
                     {
                         GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
@@ -97,13 +95,31 @@ namespace TrafficLightReplacer
 
             saveButton = UIUtils.CreateButton(this);
             //saveButton.text = "Save and Apply";
-            saveButton.text = "Save Settings";
+            saveButton.text = "Read Settings";
             saveButton.relativePosition = new Vector2(155, 305);
             saveButton.width = 155;
-
+            
             saveButton.eventClick += (c, p) =>
             {
+                List<float> items = new List<float>();
 
+                for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
+                {
+
+
+                    if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
+                    {
+                        items.Add(float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text));
+                    }
+                }
+
+                Debug.Log("values!");
+                foreach (var item in items)
+                {
+                    Debug.Log(item);
+                }
+
+               
             };
         }
 
