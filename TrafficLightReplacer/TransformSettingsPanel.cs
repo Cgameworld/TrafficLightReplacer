@@ -58,24 +58,31 @@ namespace TrafficLightReplacer
 
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 290;
+            packDropdown.AddItem("All Types");
             packDropdown.AddItem("Small Roads");
             packDropdown.AddItem("Medium Roads");
             packDropdown.AddItem("Large Roads");
             packDropdown.AddItem("Signal Pole");
             packDropdown.relativePosition = new Vector3(20, 50);
-            packDropdown.selectedIndex = 0;
+            packDropdown.selectedIndex = 1;
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
                 Debug.Log("packDropdown.selectedIndex: " + packDropdown.selectedIndex);
                 changingDropdown = true;
-                for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex].Count; i++)
+                if (packDropdown.selectedIndex != 0)
                 {
-                    GetComponentsInChildren<UIPanel>()[i+2].GetComponentsInChildren<UITextField>()[0].text = Replacer.transformSettings[packDropdown.selectedIndex][i].ToString();
-                    GetComponentsInChildren<UIPanel>()[i+2].GetComponentsInChildren<UISlider>()[0].value = Replacer.transformSettings[packDropdown.selectedIndex][i];
+                    for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex-1].Count; i++)
+                    {
+                        Debug.Log("loopstarted");
+                       // Debug.Log("GetComponentsInChildren<UIPanel>()[i + 2]" + GetComponentsInChildren<UIPanel>()[i + 2].name);
+                       // Debug.Log("GetComponentsInChildren<UITextField>()[0].text " + GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text);
+
+                        GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = Replacer.transformSettings[packDropdown.selectedIndex - 1][i].ToString();
+                        GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = Replacer.transformSettings[packDropdown.selectedIndex - 1][i];
+                    }
                 }
                 changingDropdown = false;
-
             };
 
             CreateSliderRow("Offset X:", 9f,0,"u", UpdateTransformSettings);
@@ -125,7 +132,19 @@ namespace TrafficLightReplacer
                     items.Add(float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text));
                 }
             }
-            Replacer.transformSettings[packDropdown.selectedIndex] = items;
+
+            if (packDropdown.selectedIndex == 0) //updates all
+            {
+                for (int k = 0; k < Replacer.transformSettings.Length; k++)
+                {
+                    Replacer.transformSettings[k] = items;
+                }
+            }
+            else
+            {
+                Replacer.transformSettings[packDropdown.selectedIndex - 1] = items;
+            }
+
         }
 
         private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit, Action Update)
