@@ -70,15 +70,21 @@ namespace TrafficLightReplacer
             {
                 Debug.Log("packDropdown.selectedIndex: " + packDropdown.selectedIndex);
                 changingDropdown = true;
-                if (packDropdown.selectedIndex != 0)
+                if (packDropdown.selectedIndex == 0)
                 {
+                    clearButton.text = "Reset All";
+                    for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex].Count; i++)
+                    {
+                        GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = "0";
+                        GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = 0;
+                    }
+                }
+                else {
+                    clearButton.text = "Reset";
                     for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex-1].Count; i++)
                     {
-                        Debug.Log("loopstarted");
-                       // Debug.Log("GetComponentsInChildren<UIPanel>()[i + 2]" + GetComponentsInChildren<UIPanel>()[i + 2].name);
-                       // Debug.Log("GetComponentsInChildren<UITextField>()[0].text " + GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text);
-
                         GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = Replacer.transformSettings[packDropdown.selectedIndex - 1][i].ToString();
+                        GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 255, 255, 255);
                         GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = Replacer.transformSettings[packDropdown.selectedIndex - 1][i];
                     }
                 }
@@ -102,6 +108,15 @@ namespace TrafficLightReplacer
                 {
                     if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
                     {
+                        if (packDropdown.selectedIndex == 0)
+                        {
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 175, 175, 255);
+                        }
+                        else
+                        {
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 255, 255, 255);
+                        }
+
                         Debug.Log("index of UIPANELS" + i);
                         GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
                         GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 0f;
@@ -178,6 +193,14 @@ namespace TrafficLightReplacer
             {
                 if (!changingDropdown)
                 {
+                    if (packDropdown.selectedIndex == 0)
+                    {
+                        sliderOffsetField.color = new Color32(255, 175, 175, 255);
+                    }
+                    else
+                    {
+                        sliderOffsetField.color = new Color32(255, 255, 255, 255);
+                    }
                     sliderOffsetField.text = sliderOffsetSlider.value.ToString();
                     Update();
                 }
@@ -198,6 +221,7 @@ namespace TrafficLightReplacer
             sliderUnitsLabel.width = 125f;
             sliderUnitsLabel.height = 20f;
             sliderUnitsLabel.relativePosition = new Vector2(300, 5);
+
         }
 
         private void LoadResources()
