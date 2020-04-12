@@ -18,8 +18,8 @@ namespace TrafficLightReplacer
         public UIDropDown smallRoadsDropdown;
         public UIDropDown mediumRoadsDropdown;
         public UIDropDown largeRoadsDropdown;
-        private UISlider curbOffsetSlider;
-        private UITextField curbOffsetField;
+        private UIButton clearButton;
+        private UIButton saveButton;
 
         public static TransformSettingsPanel instance
         {
@@ -45,7 +45,7 @@ namespace TrafficLightReplacer
             isInteractive = true;
             clipChildren = true;
             width = 330;
-            height = 270;
+            height = 350;
             relativePosition = new Vector3(1205, 150);
 
             // Title Bar
@@ -58,7 +58,7 @@ namespace TrafficLightReplacer
             packDropdown.AddItem("Small Roads");
             packDropdown.AddItem("Medium Roads");
             packDropdown.AddItem("Large Roads");
-            packDropdown.relativePosition = new Vector3(20, 40);
+            packDropdown.relativePosition = new Vector3(20, 50);
             packDropdown.selectedIndex = 0;
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
@@ -66,43 +66,89 @@ namespace TrafficLightReplacer
 
             };
 
-            UILabel curbOffsetLabel = AddUIComponent<UILabel>();
-            curbOffsetLabel.text = "Offset X:";
-            curbOffsetLabel.autoSize = false;
-            curbOffsetLabel.width = 125f;
-            curbOffsetLabel.height = 20f;
-            curbOffsetLabel.relativePosition = new Vector2(15, 82);
 
-            curbOffsetSlider = UIUtils.CreateSlider(this, "curboffsetslider", -9f, 9f, 0.05f, 0f);
-            curbOffsetSlider.width = 105f;
-            curbOffsetSlider.relativePosition = new Vector3(125, 85);
+            CreateSliderRow("Offset X:", 9f,0,"u");
+            CreateSliderRow("Offset Y:", 9f,1, "u");
+            CreateSliderRow("Offset Z:", 9f,2, "u");
+            CreateSliderRow("Rotate X:", 180f, 3, "\x00B0");
+            CreateSliderRow("Rotate Y:", 180f, 4, "\x00B0");
+            //CreateSliderRow("Scale:", 100f, 5, "%");
 
-            curbOffsetSlider.eventValueChanged += (c, p) =>
+            clearButton = UIUtils.CreateButton(this);
+            clearButton.text = "Reset";
+            clearButton.relativePosition = new Vector2(20, 300);
+            clearButton.width = 120;
+
+            clearButton.eventClick += (c, p) =>
             {
-                curbOffsetField.text = curbOffsetSlider.value.ToString();
+
+                for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
+                {
+                    Debug.Log("clicked" + GetComponentsInChildren<UIPanel>()[i].name + "\niter " + i);
+
+                    if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
+                    {
+                        GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
+                        GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 0f;
+                    }
+                }
             };
 
-            curbOffsetField = UIUtils.CreateTextField(this);
-            curbOffsetField.text = curbOffsetSlider.value.ToString();
-            curbOffsetField.width = 55f;
-            curbOffsetField.height = 25f;
-            curbOffsetField.padding = new RectOffset(0, 0, 6, 0);
-            curbOffsetField.relativePosition = new Vector3(240, 80);
+            saveButton = UIUtils.CreateButton(this);
+            saveButton.text = "Save Settings";
+            saveButton.relativePosition = new Vector2(160, 300);
+            saveButton.width = 150;
 
-            curbOffsetField.eventTextSubmitted += (c, p) =>
+            saveButton.eventClick += (c, p) =>
             {
-                curbOffsetSlider.value = float.Parse(curbOffsetField.text);
+
             };
-
-            UILabel curbUnitsLabel = AddUIComponent<UILabel>();
-            curbUnitsLabel.text = "u";
-            curbUnitsLabel.autoSize = false;
-            curbUnitsLabel.width = 125f;
-            curbUnitsLabel.height = 20f;
-            curbUnitsLabel.relativePosition = new Vector2(300, 85);
-
         }
 
+        private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit)
+        {
+            int spaceamount = rownum * 40;
+
+            UIPanel sliderRowUIPanel = AddUIComponent<UIPanel>();
+            sliderRowUIPanel.relativePosition = new Vector2(0, 100+spaceamount);
+            sliderRowUIPanel.size = new Vector2(width, 0);
+            sliderRowUIPanel.name = "sliderrow";
+
+            UILabel sliderOffsetLabel = sliderRowUIPanel.AddUIComponent<UILabel>();
+            sliderOffsetLabel.text = rowLabel;
+            sliderOffsetLabel.autoSize = false;
+            sliderOffsetLabel.width = 125f;
+            sliderOffsetLabel.height = 20f;
+            sliderOffsetLabel.relativePosition = new Vector2(15, 2);
+
+            UISlider sliderOffsetSlider = UIUtils.CreateSlider(sliderRowUIPanel, "slideroffsetslider", -bound, bound, 0.05f, 0f);
+            sliderOffsetSlider.width = 105f;
+            sliderOffsetSlider.relativePosition = new Vector3(125, 5);
+
+            UITextField sliderOffsetField = UIUtils.CreateTextField(sliderRowUIPanel);
+            sliderOffsetField.text = sliderOffsetSlider.value.ToString();
+            sliderOffsetField.width = 55f;
+            sliderOffsetField.height = 25f;
+            sliderOffsetField.padding = new RectOffset(0, 0, 6, 0);
+            sliderOffsetField.relativePosition = new Vector3(240, 0);
+
+            sliderOffsetSlider.eventValueChanged += (c, p) =>
+            {
+                sliderOffsetField.text = sliderOffsetSlider.value.ToString();
+            };
+
+            sliderOffsetField.eventTextSubmitted += (c, p) =>
+            {
+                sliderOffsetSlider.value = float.Parse(sliderOffsetField.text);
+            };
+
+            UILabel sliderUnitsLabel = sliderRowUIPanel.AddUIComponent<UILabel>();
+            sliderUnitsLabel.text = unit;
+            sliderUnitsLabel.autoSize = false;
+            sliderUnitsLabel.width = 125f;
+            sliderUnitsLabel.height = 20f;
+            sliderUnitsLabel.relativePosition = new Vector2(300, 5);
+        }
 
         private static void ResetDropdown(UIDropDown dropdown)
         {
