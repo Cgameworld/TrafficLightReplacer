@@ -195,7 +195,15 @@ namespace TrafficLightReplacer
                 {
                     if (packDropdown.selectedIndex == 0)
                     {
-                        sliderOffsetField.color = new Color32(255, 175, 175, 255);
+                        //to do check for individual field when updating setting list?
+                        for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
+                        {
+                            if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
+                            {
+                                GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 175, 175, 255);
+
+                            }
+                        }
                     }
                     else
                     {
