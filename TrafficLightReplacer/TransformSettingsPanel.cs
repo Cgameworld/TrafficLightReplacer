@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using ColossalFramework.IO;
 using ColossalFramework.UI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace TrafficLightReplacer
         public UIDropDown largeRoadsDropdown;
         private UIButton clearButton;
         private UIButton saveButton;
+        private bool changingDropdown = false;
 
         public static TransformSettingsPanel instance
         {
@@ -66,22 +68,21 @@ namespace TrafficLightReplacer
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
                 Debug.Log("packDropdown.selectedIndex: " + packDropdown.selectedIndex);
-
+                changingDropdown = true;
                 for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex].Count; i++)
                 {
                     GetComponentsInChildren<UIPanel>()[i+2].GetComponentsInChildren<UITextField>()[0].text = Replacer.transformSettings[packDropdown.selectedIndex][i].ToString();
                     GetComponentsInChildren<UIPanel>()[i+2].GetComponentsInChildren<UISlider>()[0].value = Replacer.transformSettings[packDropdown.selectedIndex][i];
                 }
+                changingDropdown = false;
 
             };
 
-
-            CreateSliderRow("Offset X:", 9f,0,"u");
-            CreateSliderRow("Offset Y:", 9f,1, "u");
-            CreateSliderRow("Offset Z:", 9f,2, "u");
-            CreateSliderRow("Rotate X:", 180f, 3, "\x00B0");
-            CreateSliderRow("Rotate Y:", 180f, 4, "\x00B0");
-            //CreateSliderRow("Scale:", 100f, 5, "%");
+            CreateSliderRow("Offset X:", 9f,0,"u", UpdateTransformSettings);
+            CreateSliderRow("Offset Y:", 9f,1, "u", UpdateTransformSettings);
+            CreateSliderRow("Offset Z:", 9f,2, "u", UpdateTransformSettings);
+            CreateSliderRow("Rotate X:", 180f, 3, "\x00B0", UpdateTransformSettings);
+            CreateSliderRow("Rotate Y:", 180f, 4, "\x00B0", UpdateTransformSettings);
 
             clearButton = UIUtils.CreateButton(this);
             clearButton.text = "Reset";
@@ -106,30 +107,28 @@ namespace TrafficLightReplacer
             saveButton.text = "Read Settings";
             saveButton.relativePosition = new Vector2(155, 305);
             saveButton.width = 155;
-            
+
             saveButton.eventClick += (c, p) =>
             {
-                List<float> items = new List<float>();
-
-                for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
-                {
-                    if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
-                    {
-                        items.Add(float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text));
-                    }
-                }
-
-                Debug.Log("values!");
-                foreach (var item in items)
-                {
-                    Debug.Log(item);
-                }
-
-                Replacer.transformSettings[packDropdown.selectedIndex] = items;
+                UpdateTransformSettings();
             };
         }
 
-        private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit)
+        private void UpdateTransformSettings()
+        {
+            List<float> items = new List<float>();
+
+            for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
+            {
+                if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
+                {
+                    items.Add(float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text));
+                }
+            }
+            Replacer.transformSettings[packDropdown.selectedIndex] = items;
+        }
+
+        private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit, Action Update)
         {
             int spaceamount = rownum * 40;
 
@@ -158,12 +157,20 @@ namespace TrafficLightReplacer
 
             sliderOffsetSlider.eventValueChanged += (c, p) =>
             {
-                sliderOffsetField.text = sliderOffsetSlider.value.ToString();
+                if (!changingDropdown)
+                {
+                    sliderOffsetField.text = sliderOffsetSlider.value.ToString();
+                    Update();
+                }
             };
 
             sliderOffsetField.eventTextSubmitted += (c, p) =>
             {
-                sliderOffsetSlider.value = float.Parse(sliderOffsetField.text);
+                if (!changingDropdown)
+                {
+                    sliderOffsetSlider.value = float.Parse(sliderOffsetField.text);
+                    Update();
+                }
             };
 
             UILabel sliderUnitsLabel = sliderRowUIPanel.AddUIComponent<UILabel>();
@@ -173,13 +180,6 @@ namespace TrafficLightReplacer
             sliderUnitsLabel.height = 20f;
             sliderUnitsLabel.relativePosition = new Vector2(300, 5);
         }
-
-        private static void ResetDropdown(UIDropDown dropdown)
-        {
-            string[] blank = new string[0];
-            dropdown.items = blank;
-        }
-
 
         private void LoadResources()
         {
