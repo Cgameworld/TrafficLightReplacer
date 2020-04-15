@@ -24,7 +24,8 @@ namespace TrafficLightReplacer
         public static List<float> defaultTSettings = new List<float>() { 0, 0, 0, 0, 0 };
         public static List<float>[] transformSettings = new List<float>[4] { defaultTSettings, defaultTSettings, defaultTSettings, defaultTSettings };
 
-        public static List<float[]> b = new List<float[]>();
+        public static List<float[]> propPositionProperties = new List<float[]>();
+        public static List<float>[] networkWidthCategories = new List<float>[3];
 
         public static bool setDefaultLights = false;
 
@@ -283,8 +284,18 @@ namespace TrafficLightReplacer
         {
             //hotloading will mess this up!
             //get initial prop positions
+
+            int roadnum = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
+                float rdwidth = 0;
+                bool isHighway = false;
+                if (prefab.name.Contains("Highway"))
+                {
+                    isHighway = true;
+                }
+                GetRoadInformation(prefab, ref rdwidth);
+
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
                 {
                     if (lane?.m_laneProps?.m_props != null)
@@ -293,6 +304,7 @@ namespace TrafficLightReplacer
                         {
                             if (propGroup?.m_finalProp != null)
                             {
+
                                 if (propGroup.m_prop.name == "Traffic Light Pedestrian" ||
                                 propGroup.m_prop.name == "Traffic Light 01" ||
                                 propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
@@ -305,14 +317,34 @@ namespace TrafficLightReplacer
                                     a[3] = propGroup.m_angle;
                                     a[4] = propGroup.m_finalProp.m_maxScale;
 
-                                    Debug.Log("------------------------------\nNetwork Name:" + prefab);
-                                    foreach (var item in a)
+                                    propPositionProperties.Add(a);
+
+                                   // foreach (var item in a)
+                                   // {
+                                   //     Debug.Log(item);
+                                  //  }
+
+                                    //figures out which roads are what width - adds index to list
+
+                                    if (rdwidth >= 15 || isHighway)
                                     {
-                                        Debug.Log(item);
+                                        Debug.Log("------------------------------\nNetwork Name (Lroad):" + roadnum + " " + prefab);
+                                        networkWidthCategories[0].Add(roadnum);
+                                    }
+                                    else if (rdwidth >= 6)
+                                    {
+                                        networkWidthCategories[1].Add(roadnum);
+                                    }
+                                    else
+                                    {
+                                        networkWidthCategories[2].Add(roadnum);
                                     }
 
-                                    b.Add(a);
+
+                                    roadnum++;
                                 }
+
+
                             }
                         }
                     }
@@ -321,6 +353,13 @@ namespace TrafficLightReplacer
                 //think?? - make set of statements offseting additon with -
                 //propGroup.m_position = new Vector3(cachePropGroup.m_position.x + tcurrent[0], cachePropGroup.m_position.y + tcurrent[1], cachePropGroup.m_position.z + tcurrent[2]);
                 // propGroup.m_angle = cachePropGroup.m_angle + tcurrent[3];
+            }
+
+
+            Debug.Log("largeroads");
+            foreach (var itemS in networkWidthCategories[0])
+            {
+                Debug.Log(itemS);
             }
         }
 
