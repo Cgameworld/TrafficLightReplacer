@@ -24,6 +24,7 @@ namespace TrafficLightReplacer
         public static List<float> defaultTSettings = new List<float>() { 0, 0, 0, 0, 0 };
         public static List<float>[] transformSettings = new List<float>[4] { defaultTSettings, defaultTSettings, defaultTSettings, defaultTSettings };
 
+        public static List<float[]> b = new List<float[]>();
 
         public static bool setDefaultLights = false;
 
@@ -106,6 +107,7 @@ namespace TrafficLightReplacer
                         {
                             if (propGroup?.m_finalProp != null)
                             {
+
                                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                                 {
                                     if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
@@ -219,21 +221,6 @@ namespace TrafficLightReplacer
                     propGroup.m_angle = 270;
                 }
             }
-
-           /* //transform settings
-            if (propGroup.m_prop.name == "Traffic Light Pedestrian" ||
-                propGroup.m_prop.name == "Traffic Light 01" ||
-                propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
-                propGroup.m_prop.name == "Traffic Light 02")
-            {
-                var cpos = propGroup.m_position;
-                for (int i = 0; i < transformSettings.Length; i++)
-                {
-                    //think??
-                    propGroup.m_position = new Vector3(cpos.x, cpos.y, cpos.z);
-                }
-            } */
-
         }
 
         private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
@@ -254,8 +241,6 @@ namespace TrafficLightReplacer
                         roadwidth += lane.m_width;
                     }
                 }
-
-
             }
 
         }
@@ -291,6 +276,51 @@ namespace TrafficLightReplacer
                 {
                     propGroup.m_angle = 90f;
                 }
+            }
+        }
+
+        public static void GetRoadPropPostions()
+        {
+            //hotloading will mess this up!
+            //get initial prop positions
+            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            {
+                foreach (NetInfo.Lane lane in prefab.m_lanes)
+                {
+                    if (lane?.m_laneProps?.m_props != null)
+                    {
+                        foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+                        {
+                            if (propGroup?.m_finalProp != null)
+                            {
+                                if (propGroup.m_prop.name == "Traffic Light Pedestrian" ||
+                                propGroup.m_prop.name == "Traffic Light 01" ||
+                                propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
+                                propGroup.m_prop.name == "Traffic Light 02")
+                                {
+                                    float[] a = new float[5];
+                                    a[0] = propGroup.m_position.x;
+                                    a[1] = propGroup.m_position.y;
+                                    a[2] = propGroup.m_position.z;
+                                    a[3] = propGroup.m_angle;
+                                    a[4] = propGroup.m_finalProp.m_maxScale;
+
+                                    Debug.Log("------------------------------\nNetwork Name:" + prefab);
+                                    foreach (var item in a)
+                                    {
+                                        Debug.Log(item);
+                                    }
+
+                                    b.Add(a);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //think?? - make set of statements offseting additon with -
+                //propGroup.m_position = new Vector3(cachePropGroup.m_position.x + tcurrent[0], cachePropGroup.m_position.y + tcurrent[1], cachePropGroup.m_position.z + tcurrent[2]);
+                // propGroup.m_angle = cachePropGroup.m_angle + tcurrent[3];
             }
         }
 

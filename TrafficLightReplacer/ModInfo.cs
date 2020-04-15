@@ -30,7 +30,9 @@ namespace TrafficLightReplacer
             TransformSettingsPanel.instance.Show();
             string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
             Replacer.Start(xmlfile1);
+            Replacer.GetRoadPropPostions();
             Debug.Log("STARTED LOADED");
+
         }
     }
 }

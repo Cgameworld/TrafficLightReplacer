@@ -95,7 +95,7 @@ namespace TrafficLightReplacer
             CreateSliderRow("Offset Y:", 9f,1, "u", UpdateTransformSettings);
             CreateSliderRow("Offset Z:", 9f,2, "u", UpdateTransformSettings);
             CreateSliderRow("Rotate X:", 180f, 3, "\x00B0", UpdateTransformSettings);
-            CreateSliderRow("Rotate Y:", 180f, 4, "\x00B0", UpdateTransformSettings);
+            CreateSliderRow("Scale:", 180f, 4, "%", UpdateTransformSettings);
 
             clearButton = UIUtils.CreateButton(this);
             clearButton.text = "Reset";
@@ -181,8 +181,8 @@ namespace TrafficLightReplacer
             sliderOffsetLabel.relativePosition = new Vector2(15, 2);
 
             UISlider sliderOffsetSlider = UIUtils.CreateSlider(sliderRowUIPanel, "slideroffsetslider", -bound, bound, 0.05f, 0f);
-            sliderOffsetSlider.width = 105f;
-            sliderOffsetSlider.relativePosition = new Vector3(125, 5);
+            sliderOffsetSlider.width = 110f;
+            sliderOffsetSlider.relativePosition = new Vector3(120, 5);
 
             UITextField sliderOffsetField = UIUtils.CreateTextField(sliderRowUIPanel);
             sliderOffsetField.text = sliderOffsetSlider.value.ToString();
