@@ -75,17 +75,11 @@ namespace TrafficLightReplacer
                     clearButton.text = "Reset All";
                     for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex].Count; i++)
                     {
-                        if (i == 8) //doesnt work fix all dropdown - 100 reset! - maybe grab default array?
-                        {
-                            GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = "100";
-                            GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = 100f;
-                        }
-                        else
-                        {
                             GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = "0";
                             GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = 0f;
-                        }
                     }
+                    GetComponentsInChildren<UIPanel>()[6].GetComponentsInChildren<UITextField>()[0].text = "100";
+                    GetComponentsInChildren<UIPanel>()[6].GetComponentsInChildren<UISlider>()[0].value = 100f;
                 }
                 else {
                     clearButton.text = "Reset";
@@ -102,7 +96,7 @@ namespace TrafficLightReplacer
             CreateSliderRow("Offset X:", 9f,0,"u", UpdateTransformSettings);
             CreateSliderRow("Offset Y:", 9f,1, "u", UpdateTransformSettings);
             CreateSliderRow("Offset Z:", 9f,2, "u", UpdateTransformSettings);
-            CreateSliderRow("Rotate X:", 180f, 3, "\x00B0", UpdateTransformSettings);
+            CreateSliderRow("Angle:", 180f, 3, "\x00B0", UpdateTransformSettings);
             CreateSliderRow("Scale:", 180f, 4, "%", UpdateTransformSettings, 1, 200, 100);
 
             clearButton = UIUtils.CreateButton(this);

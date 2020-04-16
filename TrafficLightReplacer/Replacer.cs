@@ -112,7 +112,7 @@ namespace TrafficLightReplacer
                                 propGroup.m_prop.name == "Traffic Light 02")
                                 {
                                     ReplacePropFlipped(lane, propGroup, typeMedium);
-                                    TransformPropPostions(propGroup, roadindexa);
+                                    TransformPropPostions(lane, propGroup, roadindexa);
                                     roadindexa++;
                                 }
                             }
@@ -232,17 +232,26 @@ namespace TrafficLightReplacer
                 }
             }
         }
-        public static void TransformPropPostions(NetLaneProps.Prop propGroup, int roadindex)
+        public static void TransformPropPostions(NetInfo.Lane lane, NetLaneProps.Prop propGroup, int roadindex)
         {
             var tcurrent = transformSettings[1];
 
             //Debug.Log(propPositionProperties[roadindex][0]);
             //Debug.Log(tcurrent[0]);
             //think?? - make set of statements offseting additon with -
-            propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] + tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] + tcurrent[2]);
-            propGroup.m_angle = propPositionProperties[roadindex][3] + tcurrent[3];
-            propGroup.m_finalProp.m_minScale = (tcurrent[4]/100);
-            propGroup.m_finalProp.m_maxScale = (tcurrent[4]/100);
+            if (lane.m_position > 0)
+            {
+                propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] + tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] + tcurrent[2]);
+                propGroup.m_angle = propPositionProperties[roadindex][3] + tcurrent[3];
+            }
+            else
+            {
+                propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] - tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] - tcurrent[2]);
+                propGroup.m_angle = propPositionProperties[roadindex][3] - tcurrent[3];
+            }
+
+            propGroup.m_finalProp.m_minScale = (tcurrent[4] / 100);
+            propGroup.m_finalProp.m_maxScale = (tcurrent[4] / 100);
         }
         public static void GetRoadPropPostions()
         {
