@@ -162,6 +162,7 @@ namespace TrafficLightReplacer
                 Replacer.transformSettings[packDropdown.selectedIndex - 1] = items;
             }
 
+            Replacer.UpdateLaneProps();
         }
 
         private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit, Action Update)

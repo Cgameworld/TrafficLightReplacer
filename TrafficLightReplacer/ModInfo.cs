@@ -28,8 +28,6 @@ namespace TrafficLightReplacer
         {
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             TransformSettingsPanel.instance.Show();
-            string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
-            Replacer.Start(xmlfile1);
 
             //intialize networkWidthCategories lists!
             for (int i = 0; i < Replacer.networkWidthCategories.Length; i++)
@@ -38,6 +36,10 @@ namespace TrafficLightReplacer
             }
 
             Replacer.GetRoadPropPostions();
+
+            string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
+            Replacer.Start(xmlfile1);
+
             Debug.Log("STARTED LOADED");
         }
     }

@@ -87,18 +87,16 @@ namespace TrafficLightReplacer
 
         public static void UpdateLaneProps()
         {
-            Debug.Log(typeSmall);
-
+            int roadindexa = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
-                float roadwidth = 0;
+                float rdwidth = 0;
                 bool isHighway = false;
                 if (prefab.name.Contains("Highway"))
                 {
                     isHighway = true;
                 }
-
-                GetRoadInformation(prefab, ref roadwidth);
+                GetRoadInformation(prefab, ref rdwidth);
 
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
                 {
@@ -108,67 +106,22 @@ namespace TrafficLightReplacer
                         {
                             if (propGroup?.m_finalProp != null)
                             {
-
-                                if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
+                                if (propGroup.m_prop.name == "Traffic Light Pedestrian" ||
+                                propGroup.m_prop.name == "Traffic Light 01" ||
+                                propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
+                                propGroup.m_prop.name == "Traffic Light 02")
                                 {
-                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
-                                    {
-                                        if (roadwidth >= 15 || isHighway)
-                                        {
-                                            ReplacePropFlipped(lane, propGroup, typeLarge);
-                                        }
-                                        else if (roadwidth >= 6)
-                                        {
-                                            ReplacePropFlipped(lane, propGroup, typeMedium);
-                                        }
-                                        else
-                                        {
-                                            ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
-                                        }
-
-
-                                    }
-                                    else
-                                    {
-                                        if (roadwidth >= 15 || isHighway)
-                                        {
-                                            ReplaceProp(lane, typeLarge, propGroup);
-                                        }
-                                        else if (roadwidth >= 6)
-                                        {
-                                            ReplaceProp(lane, typeMedium, propGroup);
-                                        }
-                                        else
-                                        {
-                                            ReplaceProp(lane, typeSmall, propGroup);  //regular
-                                        }
-                                    }
-
+                                    ReplacePropFlipped(lane, propGroup, typeMedium);
+                                    TransformPropPostions(propGroup, roadindexa);
+                                    roadindexa++;
                                 }
-                                else
-                                {
-                                    //panel is NULL
-                                    if (roadwidth >= 15 || isHighway)
-                                    {
-                                        ReplaceProp(lane, typeLarge, propGroup);
-                                    }
-                                    else if (roadwidth >= 6)
-                                    {
-                                        ReplaceProp(lane, typeMedium, propGroup);
-                                    }
-                                    else
-                                    {
-                                        ReplaceProp(lane, typeSmall, propGroup);  //regular
-                                    }
-                                }
-
                             }
                         }
                     }
-
                 }
-
             }
+
+            Debug.Log("roadindexA total:" + roadindexa);
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
@@ -279,13 +232,22 @@ namespace TrafficLightReplacer
                 }
             }
         }
+        public static void TransformPropPostions(NetLaneProps.Prop propGroup, int roadindex)
+        {
+            var tcurrent = transformSettings[1];
 
+            //Debug.Log(propPositionProperties[roadindex][0]);
+            //Debug.Log(tcurrent[0]);
+            //think?? - make set of statements offseting additon with -
+            propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] + tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] + tcurrent[2]);
+            propGroup.m_angle = propPositionProperties[roadindex][3] + tcurrent[3];
+        }
         public static void GetRoadPropPostions()
         {
             //hotloading will mess this up!
             //get initial prop positions
 
-            int roadnum = 0;
+            int roadindex = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
                 float rdwidth = 0;
@@ -319,47 +281,33 @@ namespace TrafficLightReplacer
 
                                     propPositionProperties.Add(a);
 
-                                   // foreach (var item in a)
-                                   // {
-                                   //     Debug.Log(item);
-                                  //  }
+                                    // foreach (var item in a)
+                                    // {
+                                    //     Debug.Log(item);
+                                    //  }
 
                                     //figures out which roads are what width - adds index to list
 
                                     if (rdwidth >= 15 || isHighway)
                                     {
-                                        Debug.Log("------------------------------\nNetwork Name (Lroad):" + roadnum + " " + prefab);
-                                        networkWidthCategories[0].Add(roadnum);
+                                        networkWidthCategories[0].Add(roadindex);
                                     }
                                     else if (rdwidth >= 6)
                                     {
-                                        networkWidthCategories[1].Add(roadnum);
+                                        networkWidthCategories[1].Add(roadindex);
                                     }
                                     else
                                     {
-                                        networkWidthCategories[2].Add(roadnum);
+                                        networkWidthCategories[2].Add(roadindex);
                                     }
 
 
-                                    roadnum++;
+                                    roadindex++;
                                 }
-
-
                             }
                         }
                     }
                 }
-
-                //think?? - make set of statements offseting additon with -
-                //propGroup.m_position = new Vector3(cachePropGroup.m_position.x + tcurrent[0], cachePropGroup.m_position.y + tcurrent[1], cachePropGroup.m_position.z + tcurrent[2]);
-                // propGroup.m_angle = cachePropGroup.m_angle + tcurrent[3];
-            }
-
-
-            Debug.Log("largeroads");
-            foreach (var itemS in networkWidthCategories[0])
-            {
-                Debug.Log(itemS);
             }
         }
 

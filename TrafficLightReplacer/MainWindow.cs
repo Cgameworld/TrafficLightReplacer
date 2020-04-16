@@ -24,6 +24,7 @@ namespace TrafficLightReplacer
         public UIDropDown largeRoadsDropdown;
         private UIButton getmeditems;
         private UIButton transformButton;
+        private UIButton getTest2;
 
         public static TrafficLightReplacePanel instance
         {
@@ -250,6 +251,17 @@ namespace TrafficLightReplacer
                     Debug.Log("Settings for " + i + ": " + total);
                 }
 
+            };
+
+            getTest2 = UIUtils.CreateButton(this);
+            getTest2.text = "triggergetindexs";
+            getTest2.relativePosition = new Vector2(80, 400);
+            getTest2.width = 120;
+            //getTest2.isVisible = false;
+
+            getTest2.eventClick += (c, p) =>
+            {
+                Replacer.GetRoadPropPostions();
             };
         }
 
