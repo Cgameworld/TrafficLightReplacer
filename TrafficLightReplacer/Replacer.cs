@@ -21,7 +21,7 @@ namespace TrafficLightReplacer
         public static PropInfo typePedSignal;
         public static PropInfo typeSignalPole;
 
-        public static List<float> defaultTSettings = new List<float>() { 0, 0, 0, 0, 0 };
+        public static List<float> defaultTSettings = new List<float>() { 0, 0, 0, 0, 100 };
         public static List<float>[] transformSettings = new List<float>[4] { defaultTSettings, defaultTSettings, defaultTSettings, defaultTSettings };
 
         public static List<float[]> propPositionProperties = new List<float[]>();
@@ -241,6 +241,8 @@ namespace TrafficLightReplacer
             //think?? - make set of statements offseting additon with -
             propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] + tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] + tcurrent[2]);
             propGroup.m_angle = propPositionProperties[roadindex][3] + tcurrent[3];
+            propGroup.m_finalProp.m_minScale = (tcurrent[4]/100);
+            propGroup.m_finalProp.m_maxScale = (tcurrent[4]/100);
         }
         public static void GetRoadPropPostions()
         {

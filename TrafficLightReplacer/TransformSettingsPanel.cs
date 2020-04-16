@@ -75,8 +75,16 @@ namespace TrafficLightReplacer
                     clearButton.text = "Reset All";
                     for (int i = 0; i < Replacer.transformSettings[packDropdown.selectedIndex].Count; i++)
                     {
-                        GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = "0";
-                        GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = 0;
+                        if (i == 8) //doesnt work fix all dropdown - 100 reset! - maybe grab default array?
+                        {
+                            GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = "100";
+                            GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = 100f;
+                        }
+                        else
+                        {
+                            GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UITextField>()[0].text = "0";
+                            GetComponentsInChildren<UIPanel>()[i + 2].GetComponentsInChildren<UISlider>()[0].value = 0f;
+                        }
                     }
                 }
                 else {
@@ -95,7 +103,7 @@ namespace TrafficLightReplacer
             CreateSliderRow("Offset Y:", 9f,1, "u", UpdateTransformSettings);
             CreateSliderRow("Offset Z:", 9f,2, "u", UpdateTransformSettings);
             CreateSliderRow("Rotate X:", 180f, 3, "\x00B0", UpdateTransformSettings);
-            CreateSliderRow("Scale:", 180f, 4, "%", UpdateTransformSettings);
+            CreateSliderRow("Scale:", 180f, 4, "%", UpdateTransformSettings, 1, 200, 100);
 
             clearButton = UIUtils.CreateButton(this);
             clearButton.text = "Reset";
@@ -120,8 +128,16 @@ namespace TrafficLightReplacer
                         }
 
                         Debug.Log("index of UIPANELS" + i);
-                        GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
-                        GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 0f;
+                        if (i == 6)
+                        {
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "100";
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 100f;
+                        }
+                        else
+                        {
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 0f;
+                        }
                     }
                 }
             };
@@ -165,8 +181,13 @@ namespace TrafficLightReplacer
             Replacer.UpdateLaneProps();
         }
 
-        private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit, Action Update)
+        private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit, Action Update, float lower = -1, float upper = -1, float defaultValue =0)
         {
+            if (upper == -1 && lower == -1)
+            {
+                upper = bound;
+                lower = -bound;
+            }
             int spaceamount = rownum * 40;
 
             UIPanel sliderRowUIPanel = AddUIComponent<UIPanel>();
@@ -181,7 +202,7 @@ namespace TrafficLightReplacer
             sliderOffsetLabel.height = 20f;
             sliderOffsetLabel.relativePosition = new Vector2(15, 2);
 
-            UISlider sliderOffsetSlider = UIUtils.CreateSlider(sliderRowUIPanel, "slideroffsetslider", -bound, bound, 0.05f, 0f);
+            UISlider sliderOffsetSlider = UIUtils.CreateSlider(sliderRowUIPanel, "slideroffsetslider", lower, upper, 0.05f, defaultValue);
             sliderOffsetSlider.width = 110f;
             sliderOffsetSlider.relativePosition = new Vector3(120, 5);
 
