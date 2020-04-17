@@ -111,8 +111,23 @@ namespace TrafficLightReplacer
                                 propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
                                 propGroup.m_prop.name == "Traffic Light 02")
                                 {
-                                    ReplaceProp(lane, typeMedium, propGroup);
-                                    TransformPropPostions(lane, propGroup, roadindexa);
+                                    if (rdwidth >= 15 || isHighway)
+                                    {
+                                        ReplaceProp(lane, typeLarge, propGroup);
+                                        TransformPropPostions(lane, propGroup, roadindexa);
+                                    }
+                                    else if (rdwidth >= 6)
+                                    {
+                                        ReplaceProp(lane, typeMedium, propGroup);
+                                        TransformPropPostions(lane, propGroup, roadindexa);
+                                    }
+                                    else
+                                    {
+                                        ReplaceProp(lane, typeSmall, propGroup);  //regular
+                                        TransformPropPostions(lane, propGroup, roadindexa);
+                                    }
+
+
                                     roadindexa++;
                                 }
                             }
@@ -321,10 +336,12 @@ namespace TrafficLightReplacer
                                     //  }
 
                                     //figures out which roads are what width - adds index to list
+                                    //very strange bug - small medium move at the same time !!!! when small is selected
+                                    //scale not affected
 
                                     if (rdwidth >= 15 || isHighway)
                                     {
-                                        networkWidthCategories[0][roadindex] = true;
+                                        networkWidthCategories[2][roadindex] = true;
                                     }
                                     else if (rdwidth >= 6)
                                     {
@@ -332,7 +349,7 @@ namespace TrafficLightReplacer
                                     }
                                     else
                                     {
-                                        networkWidthCategories[2][roadindex] = true;
+                                        networkWidthCategories[0][roadindex] = true;
                                     }
 
 
