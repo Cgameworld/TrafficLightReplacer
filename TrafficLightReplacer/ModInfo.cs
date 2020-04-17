@@ -29,10 +29,38 @@ namespace TrafficLightReplacer
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             TransformSettingsPanel.instance.Show();
 
+            NetInfo[] array = Resources.FindObjectsOfTypeAll<NetInfo>();
             //intialize networkWidthCategories lists!
             for (int i = 0; i < Replacer.networkWidthCategories.Length; i++)
             {
-                Replacer.networkWidthCategories[i] = new List<float>();
+                Replacer.networkWidthCategories[i] = new List<bool>();
+
+                foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+                {
+
+                    foreach (NetInfo.Lane lane in prefab.m_lanes)
+                    {
+                        if (lane?.m_laneProps?.m_props != null)
+                        {
+                            foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+                            {
+                                if (propGroup?.m_finalProp != null)
+                                {
+
+                                    if (propGroup.m_prop.name == "Traffic Light Pedestrian" ||
+                                    propGroup.m_prop.name == "Traffic Light 01" ||
+                                    propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
+                                    propGroup.m_prop.name == "Traffic Light 02")
+                                    {
+
+                                        Replacer.networkWidthCategories[i].Add(false);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
             }
 
             Replacer.GetRoadPropPostions();

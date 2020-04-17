@@ -261,7 +261,12 @@ namespace TrafficLightReplacer
 
             getTest2.eventClick += (c, p) =>
             {
-                Replacer.GetRoadPropPostions();
+                //Replacer.GetRoadPropPostions();
+                Debug.Log("largeroads t/f");
+                for (int i = 0; i < Replacer.networkWidthCategories[2].Count; i++)
+                {
+                    Debug.Log("pR" + i + " : " + Replacer.networkWidthCategories[2][i]);
+                }
             };
         }
 

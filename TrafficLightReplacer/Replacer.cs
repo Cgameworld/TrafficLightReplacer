@@ -25,7 +25,7 @@ namespace TrafficLightReplacer
         public static List<float>[] transformSettings = new List<float>[4] { defaultTSettings, defaultTSettings, defaultTSettings, defaultTSettings };
 
         public static List<float[]> propPositionProperties = new List<float[]>();
-        public static List<float>[] networkWidthCategories = new List<float>[3];
+        public static List<bool>[] networkWidthCategories = new List<bool>[3];
 
         public static bool setDefaultLights = false;
 
@@ -111,7 +111,7 @@ namespace TrafficLightReplacer
                                 propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
                                 propGroup.m_prop.name == "Traffic Light 02")
                                 {
-                                    ReplacePropFlipped(lane, propGroup, typeMedium);
+                                    ReplaceProp(lane, typeMedium, propGroup);
                                     TransformPropPostions(lane, propGroup, roadindexa);
                                     roadindexa++;
                                 }
@@ -234,24 +234,47 @@ namespace TrafficLightReplacer
         }
         public static void TransformPropPostions(NetInfo.Lane lane, NetLaneProps.Prop propGroup, int roadindex)
         {
-            var tcurrent = transformSettings[1];
-
-            //Debug.Log(propPositionProperties[roadindex][0]);
-            //Debug.Log(tcurrent[0]);
-            //think?? - make set of statements offseting additon with -
-            if (lane.m_position > 0)
+            if (TransformSettingsPanel.instance.packDropdown != null)
             {
-                propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] + tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] + tcurrent[2]);
-                propGroup.m_angle = propPositionProperties[roadindex][3] + tcurrent[3];
+                var packdropdownindex = TransformSettingsPanel.instance.packDropdown.selectedIndex-1; 
+
+
+                //maybe better idea just to do by props!
+
+                var tcurrent = transformSettings[packdropdownindex];
+
+                if (TransformSettingsPanel.instance.packDropdown.selectedIndex == -1)
+                {
+                    tcurrent = transformSettings[1];
+                }
+
+                //Debug.Log(roadindex);
+                //doesnt work!
+                if (networkWidthCategories[packdropdownindex][roadindex] == true) //not (best pratice) how array works - make networkWidthCategories t/f array instead?
+                {
+                    Debug.Log("roadpropsmoved ri:" + roadindex + " | pckdropind: " + packdropdownindex);
+                    Debug.Log("propPositionProperties[roadindex][0]" + propPositionProperties[roadindex][0]);
+                    Debug.Log("tcurrent[0]: " + tcurrent[0]);
+                    if (lane.m_position > 0)
+                    {
+                        propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] + tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] + tcurrent[2]);
+                        propGroup.m_angle = propPositionProperties[roadindex][3] + tcurrent[3];
+                    }
+                    else
+                    {
+                        propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] - tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] - tcurrent[2]);
+                        propGroup.m_angle = propPositionProperties[roadindex][3] - tcurrent[3];
+                    }
+
+                    propGroup.m_finalProp.m_minScale = (tcurrent[4] / 100);
+                    propGroup.m_finalProp.m_maxScale = (tcurrent[4] / 100);
+                }
+
             }
             else
             {
-                propGroup.m_position = new Vector3(propPositionProperties[roadindex][0] - tcurrent[0], propPositionProperties[roadindex][1] + tcurrent[1], propPositionProperties[roadindex][2] - tcurrent[2]);
-                propGroup.m_angle = propPositionProperties[roadindex][3] - tcurrent[3];
+                Debug.Log("transformPropPostions Skipped");
             }
-
-            propGroup.m_finalProp.m_minScale = (tcurrent[4] / 100);
-            propGroup.m_finalProp.m_maxScale = (tcurrent[4] / 100);
         }
         public static void GetRoadPropPostions()
         {
@@ -301,15 +324,15 @@ namespace TrafficLightReplacer
 
                                     if (rdwidth >= 15 || isHighway)
                                     {
-                                        networkWidthCategories[0].Add(roadindex);
+                                        networkWidthCategories[0][roadindex] = true;
                                     }
                                     else if (rdwidth >= 6)
                                     {
-                                        networkWidthCategories[1].Add(roadindex);
+                                        networkWidthCategories[1][roadindex] = true;
                                     }
                                     else
                                     {
-                                        networkWidthCategories[2].Add(roadindex);
+                                        networkWidthCategories[2][roadindex] = true;
                                     }
 
 

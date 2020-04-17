@@ -15,7 +15,7 @@ namespace TrafficLightReplacer
         private static TransformSettingsPanel _instance;
 
         public UICheckBox oppositeSideToggle;
-        private UIDropDown packDropdown;
+        public UIDropDown packDropdown;
         private UITextureAtlas m_atlas;
         public UIDropDown smallRoadsDropdown;
         public UIDropDown mediumRoadsDropdown;
