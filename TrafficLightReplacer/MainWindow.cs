@@ -265,7 +265,11 @@ namespace TrafficLightReplacer
                 Debug.Log("largeroads t/f");
                 for (int i = 0; i < Replacer.networkWidthCategories[2].Count; i++)
                 {
-                    Debug.Log("pR" + i + " : " + Replacer.networkWidthCategories[2][i]);
+                    if ((Replacer.networkWidthCategories[0][i] && Replacer.networkWidthCategories[1][i]) || (Replacer.networkWidthCategories[2][i] && Replacer.networkWidthCategories[0][i]))
+                    {
+                        Debug.Log("*******************#################*************\nT/F Duplicate");
+                    }
+                    Debug.Log("i: " + i + "  " + Replacer.networkWidthCategories[0][i] + "   "  + Replacer.networkWidthCategories[1][i] + "   " + Replacer.networkWidthCategories[2][i] + "   ");
                 }
             };
         }

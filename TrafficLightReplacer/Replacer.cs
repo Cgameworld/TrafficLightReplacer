@@ -96,7 +96,9 @@ namespace TrafficLightReplacer
                 {
                     isHighway = true;
                 }
-                GetRoadInformation(prefab, ref rdwidth);
+                // GetRoadInformation(prefab, ref rdwidth); //this is messed up! - circular reference?
+
+                rdwidth = CalculateRoadWidth(prefab, rdwidth);
 
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
                 {
@@ -111,6 +113,7 @@ namespace TrafficLightReplacer
                                 propGroup.m_prop.name == "Traffic Light 02 Mirror" ||
                                 propGroup.m_prop.name == "Traffic Light 02")
                                 {
+                                    Debug.Log("netname " + prefab.name);
                                     if (rdwidth >= 15 || isHighway)
                                     {
                                         ReplaceProp(lane, typeLarge, propGroup);
@@ -137,6 +140,28 @@ namespace TrafficLightReplacer
             }
 
             Debug.Log("roadindexA total:" + roadindexa);
+        }
+
+        private static float CalculateRoadWidth(NetInfo prefab, float rdwidth)
+        {
+            foreach (NetInfo.Lane lane in prefab.m_lanes)
+            {
+                if (lane.m_laneType.ToString() == "Parking" || lane.m_laneType.ToString() == "Vehicle")
+                {
+                    //detect one way roads - calculate width across whole road
+                    if (prefab.m_hasBackwardVehicleLanes == false || prefab.m_hasForwardVehicleLanes == false)
+                    {
+                        rdwidth += lane.m_width;
+                    }
+                    //two way roads - add widths from positive lane positions
+                    else if (lane.m_position > 0)
+                    {
+                        rdwidth += lane.m_width;
+                    }
+                }
+            }
+
+            return rdwidth;
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
@@ -192,7 +217,7 @@ namespace TrafficLightReplacer
             }
         }
 
-        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
+        private static void OLDGetRoadInformation(NetInfo prefab, ref float roadwidth)
         {
             //to do - take into account asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)
@@ -253,7 +278,6 @@ namespace TrafficLightReplacer
             {
                 var packdropdownindex = TransformSettingsPanel.instance.packDropdown.selectedIndex-1;
 
-                Debug.Log("2ran1!");
                 List<float> tcurrent;
 
                 if (TransformSettingsPanel.instance.packDropdown.selectedIndex == 0)
@@ -264,12 +288,22 @@ namespace TrafficLightReplacer
                 else
                 {
                     tcurrent = transformSettings[packdropdownindex];
-                    if (networkWidthCategories[packdropdownindex][roadindex] == true) //not (best pratice) how array works - make networkWidthCategories t/f array instead?
+                    if (networkWidthCategories[packdropdownindex][roadindex] == true) 
                     {
-                        RunTransformProps(lane, propGroup, roadindex, packdropdownindex, tcurrent);
+                        if (networkWidthCategories[0][roadindex]) //sad hack - this doesn't even work :(
+                        {
+                            if (propGroup.m_finalProp == typeSmall)
+                            {
+                                RunTransformProps(lane, propGroup, roadindex, packdropdownindex, tcurrent);
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("8roadindex" + roadindex + "  " + networkWidthCategories[packdropdownindex][roadindex]);
+                            RunTransformProps(lane, propGroup, roadindex, packdropdownindex, tcurrent);
+                        }
                     }
                 }
-                Debug.Log("2ran2!");
 
             }
             else
@@ -312,7 +346,8 @@ namespace TrafficLightReplacer
                 {
                     isHighway = true;
                 }
-                GetRoadInformation(prefab, ref rdwidth);
+                //GetRoadInformation(prefab, ref rdwidth);
+                rdwidth = CalculateRoadWidth(prefab, rdwidth);
 
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
                 {
@@ -346,6 +381,7 @@ namespace TrafficLightReplacer
                                     //very strange bug - small medium move at the same time !!!! when small is selected
                                     //scale not affected
 
+                                    //probably problem is her
                                     if (rdwidth >= 15 || isHighway)
                                     {
                                         networkWidthCategories[2][roadindex] = true;
@@ -354,7 +390,7 @@ namespace TrafficLightReplacer
                                     {
                                         networkWidthCategories[1][roadindex] = true;
                                     }
-                                    else
+                                    else if (rdwidth < 6) // changing this effects it 
                                     {
                                         networkWidthCategories[0][roadindex] = true;
                                     }
