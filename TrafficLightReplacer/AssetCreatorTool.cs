@@ -66,9 +66,9 @@ namespace TrafficLightReplacer
             netNameField.relativePosition = new Vector3(80, 55);
 
             updateButton = UIUtils.CreateButton(this);
-            updateButton.text = "Grab Prop Name";
+            updateButton.text = "Update";
             updateButton.relativePosition = new Vector2(20, 100);
-            updateButton.tooltip = "Select a prop using roads panel/find it and click update"; 
+            updateButton.tooltip = "Select a prop using Find It! and click update"; 
             updateButton.width = 100;
 
             updateButton.eventClick += (c, p) =>

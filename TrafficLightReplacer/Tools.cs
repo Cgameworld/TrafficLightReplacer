@@ -21,15 +21,15 @@ namespace TrafficLightReplacer
         //modfied from https://stackoverflow.com/questions/13031778/how-can-i-extract-a-file-from-an-embedded-resource-and-save-it-to-disk
         public static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
         {
-            System.IO.Directory.CreateDirectory(outputDir);
+            Directory.CreateDirectory(outputDir);
 
             foreach (string file in files)
             {
-                using (System.IO.Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceLocation + @"." + file))
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceLocation + @"." + file))
                 {
                     if (!File.Exists(Path.Combine(outputDir, file)))
                     {
-                        using (System.IO.FileStream fileStream = new System.IO.FileStream(System.IO.Path.Combine(outputDir, file), System.IO.FileMode.Create))
+                        using (FileStream fileStream = new FileStream(Path.Combine(outputDir, file), FileMode.Create))
                         {
                             for (int i = 0; i < stream.Length; i++)
                             {

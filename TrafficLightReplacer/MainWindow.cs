@@ -55,7 +55,7 @@ namespace TrafficLightReplacer
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
-            m_title.title = "Traffic Light Replacer (Alpha 1)";
+            m_title.title = "Traffic Light Replacer (DevA 2)";
             //m_title.isModal = true;
 
             UILabel areaTypeLabel = AddUIComponent<UILabel>();
@@ -72,7 +72,7 @@ namespace TrafficLightReplacer
             packDropdown.AddItem("Default Traffic Lights");
             packDropdown.AddItem("Test Pack - test.xml");
             packDropdown.AddItem("Test Pack - test2.xml");
-            packDropdown.selectedIndex = 1;
+            packDropdown.selectedIndex = 0;
             packDropdown.relativePosition = new Vector3(80, 53);
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
