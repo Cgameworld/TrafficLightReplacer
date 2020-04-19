@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
 using UnityEngine;
@@ -21,6 +22,14 @@ namespace TrafficLightReplacer
         {
             get { return "Mod Description"; }
         }
+
+        public void OnEnabled()
+        {
+            //File.WriteAllBytes(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), );
+            var a = new List<string>();
+            a.Add("default.xml");
+            Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", a);
+        }
     }
     public class ModLoading : LoadingExtensionBase
     {
@@ -30,7 +39,8 @@ namespace TrafficLightReplacer
             CreatorToolPanel.instance.Show();
             string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
             Replacer.Start(xmlfile1);
-            Debug.Log("STARTED LOADED");
+            Debug.Log("2STARTED LOADED");
+
         }
     }
 }

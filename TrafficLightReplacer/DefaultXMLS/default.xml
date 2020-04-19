@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAsset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Asset>
+		<Prefab>Traffic Light 02</Prefab>
+		<Name>S Option 1</Name>
+		<Description>Traffic Light 02</Description>
+		<Type>Small</Type>
+	</Asset>
+	<Asset>
+		<Prefab>Traffic Light 02</Prefab>
+		<Name>M Option 1</Name>
+		<Description>Traffic Light 02</Description>
+		<Type>Medium</Type>
+	</Asset>
+	<Asset>
+		<Prefab>Traffic Light 02</Prefab>
+		<Name>L Option 1</Name>
+		<Description>Traffic Light 02</Description>
+		<Type>Large</Type>
+	</Asset>
+	<Asset>
+		<Prefab>Traffic Light 01</Prefab>
+		<Name>Traffic Light 01</Name>
+		<Description>TBA</Description>
+		<Type>Signal Pole</Type>
+	</Asset>
+</ArrayOfAsset>

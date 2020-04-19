@@ -17,6 +17,7 @@ namespace TrafficLightReplacer
         private UITextField netNameField;
         private UIButton updateButton;
         private UIButton copyButton;
+        private UIButton openXMLFolderButton;
 
         public static CreatorToolPanel instance
         {
@@ -42,7 +43,7 @@ namespace TrafficLightReplacer
             isInteractive = true;
             clipChildren = true;
             width = 370;
-            height = 180;
+            height = 140;
             relativePosition = new Vector3(1550, 550);
 
             // Title Bar
@@ -50,30 +51,24 @@ namespace TrafficLightReplacer
             m_title.title = "Pack Creator Helper";
             //m_title.isModal = true;
 
-            UILabel curbOffsetLabel = AddUIComponent<UILabel>();
-            curbOffsetLabel.text = "Select a Network (using roads panel/find it/elektrix's road picker)";
-            curbOffsetLabel.autoSize = false;
-            curbOffsetLabel.width = 350f;
-            curbOffsetLabel.height = 20f;
-            curbOffsetLabel.relativePosition = new Vector2(15, 60);
-
             UILabel netNameLabel = AddUIComponent<UILabel>();
             netNameLabel.text = "Name:";
             netNameLabel.autoSize = false;
             netNameLabel.width = 125f;
             netNameLabel.height = 20f;
-            netNameLabel.relativePosition = new Vector2(15, 100);
+            netNameLabel.relativePosition = new Vector2(15, 60);
 
             netNameField = UIUtils.CreateTextField(this);
-            netNameField.text = "";
+            netNameField.text = "Press update to grab prop name";
             netNameField.width = 270f;
             netNameField.height = 25f;
             netNameField.padding = new RectOffset(0, 0, 6, 0);
-            netNameField.relativePosition = new Vector3(80, 95);
+            netNameField.relativePosition = new Vector3(80, 55);
 
             updateButton = UIUtils.CreateButton(this);
-            updateButton.text = "Update";
-            updateButton.relativePosition = new Vector2(20, 140);
+            updateButton.text = "Grab Prop Name";
+            updateButton.relativePosition = new Vector2(20, 100);
+            updateButton.tooltip = "Select a prop using roads panel/find it and click update"; 
             updateButton.width = 100;
 
             updateButton.eventClick += (c, p) =>
@@ -90,7 +85,7 @@ namespace TrafficLightReplacer
 
             copyButton = UIUtils.CreateButton(this);
             copyButton.text = "Copy";
-            copyButton.relativePosition = new Vector2(150, 140);
+            copyButton.relativePosition = new Vector2(140, 100);
             copyButton.width = 100;
 
             copyButton.eventClick += (c, p) =>
@@ -98,6 +93,24 @@ namespace TrafficLightReplacer
                 GUIUtility.systemCopyBuffer = netNameField.text;
             };
 
+            openXMLFolderButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
+            openXMLFolderButton.normalBgSprite = "ButtonMenu";
+            openXMLFolderButton.hoveredBgSprite = "ButtonMenuHovered";
+            openXMLFolderButton.pressedBgSprite = "ButtonMenuPressed";
+            openXMLFolderButton.disabledBgSprite = "ButtonMenuDisabled";
+            openXMLFolderButton.normalFgSprite = "Folder";
+            openXMLFolderButton.relativePosition = new Vector2(310, 100);
+            openXMLFolderButton.height = 25;
+            openXMLFolderButton.width = 31;
+            openXMLFolderButton.tooltip = "Open local XML config folder";
+
+            openXMLFolderButton.eventClick += (c, p) =>
+            {
+                if (isVisible)
+                {
+                    Utils.OpenInFileBrowser(Path.Combine(DataLocation.localApplicationData, "TLRLocal"));
+                }
+            };
         }
 
         private void LoadResources()
