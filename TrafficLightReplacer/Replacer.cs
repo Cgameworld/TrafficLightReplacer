@@ -22,8 +22,7 @@ namespace TrafficLightReplacer
         public static PropInfo typeSignalPole;
 
         public static bool setDefaultLights = false;
-        
-
+       
         public static void Start(string path)
         {
             Debug.Log("modloaded");

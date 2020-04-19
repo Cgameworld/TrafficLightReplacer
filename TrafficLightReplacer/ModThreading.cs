@@ -17,7 +17,6 @@ namespace TrafficLightReplacer
             {
                 if (processed == false)
                 {
-
                     Debug.Log("F3 Pressed TLR");
                     if (TrafficLightReplacePanel.instance.isVisible == false)
                     {
