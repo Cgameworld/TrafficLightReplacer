@@ -21,15 +21,18 @@ namespace TrafficLightReplacer
                     if (TrafficLightReplacePanel.instance.isVisible == false)
                     {
                         TrafficLightReplacePanel.instance.Show();
+                        CreatorToolPanel.instance.Show();
                     }
                     else
                     {
                         TrafficLightReplacePanel.instance.Hide();
+                        CreatorToolPanel.instance.Hide();
                     }
                     processed = true;
                     Debug.Log("is visible? " + TrafficLightReplacePanel.instance.isVisible);
                 }
             }
+
             else
             {
                 processed = false;

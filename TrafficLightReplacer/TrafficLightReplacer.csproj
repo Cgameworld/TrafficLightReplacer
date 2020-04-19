@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asset.cs" />
+    <Compile Include="AssetCreatorTool.cs" />
     <Compile Include="lib\ResourceLoader.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="ModInfo.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="lib\UITitlebar.cs" />
     <Compile Include="lib\UIUtils.cs" />
     <Compile Include="Replacer.cs" />
+    <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\Folder.png" />

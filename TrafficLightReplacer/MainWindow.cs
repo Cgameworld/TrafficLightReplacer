@@ -68,7 +68,8 @@ namespace TrafficLightReplacer
 
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
-            packDropdown.AddItem("None (Nonfunctional for now)");
+            //add option to toggle between euro and generic vanilla!!!
+            packDropdown.AddItem("Default Traffic Lights");
             packDropdown.AddItem("Test Pack - test.xml");
             packDropdown.AddItem("Test Pack - test2.xml");
             packDropdown.selectedIndex = 1;
@@ -79,7 +80,8 @@ namespace TrafficLightReplacer
                 //for now xml file locations are hardcoded - will search through directories later
                 if (packDropdown.selectedIndex == 0)
                 {
-                    //to do make default lights pack
+                    string xmlfile1 = Path.Combine(DataLocation.addonsPath, "default.xml");
+                    Replacer.Start(xmlfile1);
                 }
                 else if (packDropdown.selectedIndex == 1)
                 {
