@@ -10,7 +10,7 @@ namespace TrafficLightReplacer
 {
     public static class Replacer
     {
-        public static List<Asset> result;
+        public static List<Asset> result = new List<Asset>();
         public static List<Asset> typeSmallOptions = new List<Asset>();
         public static List<Asset> typeMediumOptions = new List<Asset>();
         public static List<Asset> typeLargeOptions = new List<Asset>();
@@ -27,10 +27,15 @@ namespace TrafficLightReplacer
         {
             Debug.Log("modloaded");
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Asset>));
+            XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
             StreamReader reader = new StreamReader(path);
-            result = (List<Asset>)serializer.Deserialize(reader);
+            TLRConfig XMLinput = (TLRConfig)serializer.Deserialize(reader);
             reader.Close();
+
+            foreach (var item in XMLinput.Assets)
+            {
+                result.Add(item);
+            }
 
             //clear list!
             //take care of setDefaultLights?
@@ -44,6 +49,7 @@ namespace TrafficLightReplacer
 
             for (int i = 0; i < result.Count; i++)
             {
+                Debug.Log("Pack NAME! " + XMLinput.PackName);
                 Debug.Log("entry:" + i);
                 Debug.Log("prefabname:" + result[i].Prefab);
                 Debug.Log("prefabsize:" + result[i].Type);

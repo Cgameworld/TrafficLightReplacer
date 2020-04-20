@@ -5,6 +5,15 @@ using System.Text;
 
 namespace TrafficLightReplacer
 {
+    public class TLRConfig
+    {
+        public string PackName { get; set; }
+        public bool RemoveMirrorLights { get; set; }
+        public bool OneSize { get; set; }
+        // public bool SignalPole { get; set; }
+        public List<Asset> Assets { get; set; }
+
+    }
     public class Asset
     {
         public string Prefab { get; set; }
@@ -12,4 +21,5 @@ namespace TrafficLightReplacer
         public string Description { get; set; }
         public string Type { get; set; }
     }
+
 }

@@ -51,7 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asset.cs" />
+    <Compile Include="TLRAsset.cs" />
     <Compile Include="AssetCreatorTool.cs" />
     <Compile Include="lib\ResourceLoader.cs" />
     <Compile Include="MainWindow.cs" />

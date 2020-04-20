@@ -37,10 +37,8 @@ namespace TrafficLightReplacer
         {
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             CreatorToolPanel.instance.Show();
-            string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
+            string xmlfile1 = Path.Combine(DataLocation.addonsPath, "default.xml");
             Replacer.Start(xmlfile1);
-            Debug.Log("2STARTED LOADED");
-
         }
     }
 }
