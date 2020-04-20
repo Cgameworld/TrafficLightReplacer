@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfAsset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PackName>Default Traffic Lights</PackName>
+  <RemoveMirrorLights>true</RemoveMirrorLights>
+  <OneSize>false</OneSize>
+  <Assets>
 	<Asset>
 		<Prefab>Traffic Light 02</Prefab>
 		<Name>S Option 1</Name>
@@ -24,4 +28,5 @@
 		<Description>TBA</Description>
 		<Type>Signal Pole</Type>
 	</Asset>
-</ArrayOfAsset>
+  </Assets>
+</TLRConfig>

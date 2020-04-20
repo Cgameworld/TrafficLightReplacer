@@ -11,6 +11,7 @@ namespace TrafficLightReplacer
     public static class Replacer
     {
         public static List<Asset> result = new List<Asset>();
+        public static List<string> packnames = new List<string>();
         public static List<Asset> typeSmallOptions = new List<Asset>();
         public static List<Asset> typeMediumOptions = new List<Asset>();
         public static List<Asset> typeLargeOptions = new List<Asset>();

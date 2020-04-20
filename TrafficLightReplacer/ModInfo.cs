@@ -25,7 +25,6 @@ namespace TrafficLightReplacer
 
         public void OnEnabled()
         {
-            //File.WriteAllBytes(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), );
             var a = new List<string>();
             a.Add("default.xml");
             Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", a);

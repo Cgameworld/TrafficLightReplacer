@@ -14,7 +14,7 @@ namespace TrafficLightReplacer
 
         public int segmentReplaceCount = 0;
         public UICheckBox oppositeSideToggle;
-        private UIDropDown packDropdown;
+        public UIDropDown packDropdown;
         private UIButton confirmButton;
         private UIButton customizeButton;
         private UILabel customizeButtonToggle;
@@ -69,9 +69,7 @@ namespace TrafficLightReplacer
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
             //add option to toggle between euro and generic vanilla!!!
-            packDropdown.AddItem("Default Traffic Lights");
-            packDropdown.AddItem("Test Pack - test.xml");
-            packDropdown.AddItem("Test Pack - test2.xml");
+            packDropdown.AddItem("None");
             packDropdown.selectedIndex = 0;
             packDropdown.relativePosition = new Vector3(80, 53);
 

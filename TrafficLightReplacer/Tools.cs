@@ -1,10 +1,12 @@
-﻿using ColossalFramework.UI;
+﻿using ColossalFramework.IO;
+using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Xml.Serialization;
 using UnityEngine;
 
 namespace TrafficLightReplacer
@@ -17,8 +19,24 @@ namespace TrafficLightReplacer
             panel.SetMessage(header, message, false);
             panel.GetComponentInChildren<UISprite>().spriteName = "IconError";
         }
+        public static List<string> GetXMLPackNames()
+        {
+            string[] files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml");
+            List<string> packnames = new List<string>();
 
-        //modfied from https://stackoverflow.com/questions/13031778/how-can-i-extract-a-file-from-an-embedded-resource-and-save-it-to-disk
+            foreach (var xmlFilePath in files)
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
+                StreamReader reader = new StreamReader(xmlFilePath);
+                TLRConfig XMLinput = (TLRConfig)serializer.Deserialize(reader);
+                reader.Close();
+                Debug.Log("packname: " + XMLinput.PackName);
+                packnames.Add(XMLinput.PackName);
+            }
+
+           return packnames;
+
+        }
         public static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
         {
             Directory.CreateDirectory(outputDir);
