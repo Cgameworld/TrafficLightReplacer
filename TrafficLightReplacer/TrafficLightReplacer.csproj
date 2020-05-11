@@ -62,7 +62,7 @@
     <Compile Include="lib\UIUtils.cs" />
     <Compile Include="Replacer.cs" />
     <Compile Include="Tools.cs" />
-    <Compile Include="UIMainButton.cs" />
+    <Compile Include="MainButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\tlr-button.png" />

@@ -69,6 +69,8 @@ namespace TrafficLightReplacer
             packDropdown.width = 270;
             //add option to toggle between euro and generic vanilla!!!
             packDropdown.relativePosition = new Vector3(80, 53);
+            packDropdown.AddItem("Empty");
+            packDropdown.selectedIndex = 0;
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {

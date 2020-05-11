@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace TrafficLightReplacer
 {
-    public class UIMainButton : UIButton
+    public class MainButton : UIButton
     {
-        public static UIMainButton instance;
+        public static MainButton instance;
         private bool dragging = false;
         private UITextureAtlas toggleButtonAtlas;
 
@@ -34,21 +34,27 @@ namespace TrafficLightReplacer
             size = new Vector2(36f, 36f);
             playAudioEvents = true;
             tooltip = "TLR test";
-            //  Apply custom sprite:
             atlas = toggleButtonAtlas;
             normalFgSprite = "tlr-button";
             hoveredBgSprite = "OptionBasePressed";
             pressedBgSprite = "OptionBasePressed";
-            //normalBgSprite = null;
         }
 
         protected override void OnClick(UIMouseEventParameter p)
         {
             if (p.buttons.IsFlagSet(UIMouseButton.Left))
             {
-                TrafficLightReplacePanel.instance.Show();
-                CreatorToolPanel.instance.Show();
-                Tools.RefreshXMLPacks();
+                if (TrafficLightReplacePanel.instance.isVisible == false)
+                {
+                    TrafficLightReplacePanel.instance.Show();
+                    CreatorToolPanel.instance.Show();
+                    Tools.RefreshXMLPacks();
+                }
+                else
+                {
+                    TrafficLightReplacePanel.instance.Hide();
+                    CreatorToolPanel.instance.Hide();
+                }
             }
 
             base.OnClick(p);

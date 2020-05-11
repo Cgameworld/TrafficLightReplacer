@@ -23,7 +23,7 @@ namespace TrafficLightReplacer
                     {
                         TrafficLightReplacePanel.instance.Show();
                         CreatorToolPanel.instance.Show();
-                        //Tools.RefreshXMLPacks();
+                        Tools.RefreshXMLPacks();
                     }
                     else
                     {

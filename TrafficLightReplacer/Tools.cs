@@ -37,18 +37,15 @@ namespace TrafficLightReplacer
                 packnames.Add(XMLinput.PackName);
             }
 
-            Debug.Log("1");
-
             TrafficLightReplacePanel.ResetDropdown(TrafficLightReplacePanel.instance.packDropdown);
+
             foreach (var xmlNameItem in packnames)
             {
                 TrafficLightReplacePanel.instance.packDropdown.AddItem(xmlNameItem);
             }
+            Debug.Log("2-aa");
             TrafficLightReplacePanel.instance.packDropdown.selectedIndex = 0;
-
             Replacer.xmlNames = packnames;
-
-            Debug.Log("2");
             Replacer.xmlFileNames = files.ToList();
         }
         public static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)

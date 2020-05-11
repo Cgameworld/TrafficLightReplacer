@@ -33,14 +33,14 @@ namespace TrafficLightReplacer
     }
     public class ModLoading : LoadingExtensionBase
     {
-        private static UIMainButton m_mainbutton;
+        private static MainButton m_mainbutton;
 
         public override void OnLevelLoaded(LoadMode mode)
         {
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             CreatorToolPanel.instance.Show();
 
-            m_mainbutton = UIView.GetAView().AddUIComponent(typeof(UIMainButton)) as UIMainButton;
+            m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
 
             string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
             Replacer.Start(xmlfile1);
