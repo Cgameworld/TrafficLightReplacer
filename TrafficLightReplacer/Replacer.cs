@@ -10,8 +10,10 @@ namespace TrafficLightReplacer
 {
     public static class Replacer
     {
+
         public static List<Asset> result = new List<Asset>();
-        public static List<string> packnames = new List<string>();
+        public static List<string> xmlNames = new List<string>();
+        public static List<string> xmlFileNames = new List<string>();
         public static List<Asset> typeSmallOptions = new List<Asset>();
         public static List<Asset> typeMediumOptions = new List<Asset>();
         public static List<Asset> typeLargeOptions = new List<Asset>();
@@ -26,27 +28,27 @@ namespace TrafficLightReplacer
        
         public static void Start(string path)
         {
-            Debug.Log("modloaded");
-
-            XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
-            StreamReader reader = new StreamReader(path);
-            TLRConfig XMLinput = (TLRConfig)serializer.Deserialize(reader);
-            reader.Close();
-
-            foreach (var item in XMLinput.Assets)
-            {
-                result.Add(item);
-            }
-
             //clear list!
             //take care of setDefaultLights?
-
+            result.Clear();
+            result.TrimExcess();
             typeSmallOptions.Clear();
             typeSmallOptions.TrimExcess();
             typeMediumOptions.Clear();
             typeMediumOptions.TrimExcess();
             typeLargeOptions.Clear();
             typeLargeOptions.TrimExcess();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
+            StreamReader reader = new StreamReader(path);
+            TLRConfig XMLinput = (TLRConfig)serializer.Deserialize(reader);
+            
+            reader.Close();
+
+            foreach (var item in XMLinput.Assets)
+            {
+                result.Add(item);
+            }
 
             for (int i = 0; i < result.Count; i++)
             {

@@ -19,8 +19,11 @@ namespace TrafficLightReplacer
             panel.SetMessage(header, message, false);
             panel.GetComponentInChildren<UISprite>().spriteName = "IconError";
         }
-        public static List<string> GetXMLPackNames()
+        public static void RefreshXMLPacks()
         {
+           // Replacer.xmlNames.Clear();
+           // Replacer.xmlFileNames.Clear();
+
             string[] files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml");
             List<string> packnames = new List<string>();
 
@@ -34,8 +37,19 @@ namespace TrafficLightReplacer
                 packnames.Add(XMLinput.PackName);
             }
 
-           return packnames;
+            Debug.Log("1");
 
+            TrafficLightReplacePanel.ResetDropdown(TrafficLightReplacePanel.instance.packDropdown);
+            foreach (var xmlNameItem in packnames)
+            {
+                TrafficLightReplacePanel.instance.packDropdown.AddItem(xmlNameItem);
+            }
+            TrafficLightReplacePanel.instance.packDropdown.selectedIndex = 0;
+
+            Replacer.xmlNames = packnames;
+
+            Debug.Log("2");
+            Replacer.xmlFileNames = files.ToList();
         }
         public static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
         {

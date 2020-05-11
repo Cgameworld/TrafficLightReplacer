@@ -13,6 +13,7 @@ namespace TrafficLightReplacer
 
         public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
         {
+
             if (Input.GetKey(KeyCode.F3))
             {
                 if (processed == false)
@@ -22,9 +23,7 @@ namespace TrafficLightReplacer
                     {
                         TrafficLightReplacePanel.instance.Show();
                         CreatorToolPanel.instance.Show();
-
-
-                        Tools.GetXMLPackNames();
+                        //Tools.RefreshXMLPacks();
                     }
                     else
                     {

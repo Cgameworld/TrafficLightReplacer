@@ -19,7 +19,6 @@ namespace TrafficLightReplacer
         private UIButton customizeButton;
         private UILabel customizeButtonToggle;
         private UITextureAtlas m_atlas;
-        private UIButton openXMLFolderButton;
         private UIPanel customizePanel;
         public UIDropDown smallRoadsDropdown;
         public UIDropDown mediumRoadsDropdown;
@@ -48,7 +47,7 @@ namespace TrafficLightReplacer
             isVisible = false;
             canFocus = true;
             isInteractive = true;
-            clipChildren = true;
+            //clipChildren = true;
             width = 370;
             height = 200;
             relativePosition = new Vector3(1550, 150);
@@ -69,29 +68,12 @@ namespace TrafficLightReplacer
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
             //add option to toggle between euro and generic vanilla!!!
-            packDropdown.AddItem("None");
-            packDropdown.selectedIndex = 0;
             packDropdown.relativePosition = new Vector3(80, 53);
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                //for now xml file locations are hardcoded - will search through directories later
-                if (packDropdown.selectedIndex == 0)
-                {
-                    string xmlfile1 = Path.Combine(DataLocation.addonsPath, "default.xml");
-                    Replacer.Start(xmlfile1);
-                }
-                else if (packDropdown.selectedIndex == 1)
-                {
-                    string xmlfile1 = Path.Combine(DataLocation.addonsPath, "test.xml");
-                    Replacer.Start(xmlfile1);
-                }
-                else if (packDropdown.selectedIndex == 2)
-                {
-                    string xmlfile2 = Path.Combine(DataLocation.addonsPath, "test2.xml");
-                    Replacer.Start(xmlfile2);
-                }
-
+                Debug.Log("2dropdown change to: " + Replacer.xmlFileNames[packDropdown.selectedIndex]);
+                Replacer.Start(Replacer.xmlFileNames[packDropdown.selectedIndex]);
                 ResetAllDropdowns();
                 AddAllItemsToDropdowns();
             };
@@ -276,7 +258,7 @@ namespace TrafficLightReplacer
             ResetDropdown(largeRoadsDropdown);
         }
 
-        private static void ResetDropdown(UIDropDown dropdown)
+        public static void ResetDropdown(UIDropDown dropdown)
         {
             string[] blank = new string[0];
             dropdown.items = blank;

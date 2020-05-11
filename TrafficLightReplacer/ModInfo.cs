@@ -1,4 +1,5 @@
 ﻿using ColossalFramework.IO;
+using ColossalFramework.UI;
 using ICities;
 using System;
 using System.Collections.Generic;
@@ -25,18 +26,23 @@ namespace TrafficLightReplacer
 
         public void OnEnabled()
         {
-            var a = new List<string>();
-            a.Add("default.xml");
-            Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", a);
+            var embedList = new List<string>();
+            embedList.Add("default.xml");
+            Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", embedList);
         }
     }
     public class ModLoading : LoadingExtensionBase
     {
+        private static UIMainButton m_mainbutton;
+
         public override void OnLevelLoaded(LoadMode mode)
         {
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             CreatorToolPanel.instance.Show();
-            string xmlfile1 = Path.Combine(DataLocation.addonsPath, "default.xml");
+
+            m_mainbutton = UIView.GetAView().AddUIComponent(typeof(UIMainButton)) as UIMainButton;
+
+            string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
             Replacer.Start(xmlfile1);
         }
     }
