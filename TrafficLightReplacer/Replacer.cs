@@ -22,9 +22,13 @@ namespace TrafficLightReplacer
         public static PropInfo typeMedium;
         public static PropInfo typeLarge;
         public static PropInfo typePedSignal;
+
+        public static PropInfo typeMain;
+        public static PropInfo typeMirror;
+
         public static PropInfo typeSignalPole;
 
-        public static bool setDefaultLights = false;
+        public static bool oneSizeMode = false;
        
         public static void Start(string path)
         {
@@ -56,7 +60,7 @@ namespace TrafficLightReplacer
                 Debug.Log("entry:" + i);
                 Debug.Log("prefabname:" + result[i].Prefab);
                 Debug.Log("prefabsize:" + result[i].Type);
-
+                //custom sizes config
                 if (result[i].Type == "Small")
                 {
                     typeSmallOptions.Add(result[i]);
@@ -69,21 +73,33 @@ namespace TrafficLightReplacer
                 {
                     typeLargeOptions.Add(result[i]);
                 }
+                //option 2 - vanilla config
+                if (result[i].Type == "Main")
+                {
+                    typeMain = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                }
+                if (result[i].Type == "Mirror")
+                {
+                    typeMirror = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                }
+                //all
                 if (result[i].Type == "Signal Pole")
                 {
                     typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
             }
-            Debug.Log("\ntypeSignalPole: " + typeSignalPole + "\ntypePedSignal: " + typePedSignal);
-            Debug.Log("addedallitems");
+            //Debug.Log("\ntypeSignalPole: " + typeSignalPole + "\ntypePedSignal: " + typePedSignal);
+            oneSizeMode = XMLinput.OneSize;
+            Debug.Log("oneSizeMode: " + oneSizeMode);
 
-            typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
-            typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
-            typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
-
+            if (!oneSizeMode)
+            {
+                typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
+                typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
+                typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
+            }
             //set to blank asset
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded("1535107168.New Blank Traffic Light_Data");
-
             UpdateLaneProps();
         }
 
@@ -110,27 +126,71 @@ namespace TrafficLightReplacer
                         {
                             if (propGroup?.m_finalProp != null)
                             {
-                                if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
+                                if (oneSizeMode)
                                 {
-                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
+                                    Debug.Log("onesize mode on!");
+
+
+                                    if (propGroup.m_prop.name == "Traffic Light 02")
                                     {
-                                        if (roadwidth >= 15 || isHighway)
+                                        propGroup.m_finalProp = typeMain;
+
+                                    }
+                                    else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
+                                    {
+                                        propGroup.m_finalProp = typeMirror;
+                                    }
+
+                                    if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                                    {
+                                        propGroup.m_finalProp = typeMirror;
+                                        propGroup.m_angle = 45;
+                                    }
+                                }
+
+
+                                else
+                                {
+                                    Debug.Log("onesize mode off!");
+                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
+                                    {
+                                        if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
                                         {
-                                            ReplacePropFlipped(lane, propGroup, typeLarge);
-                                        }
-                                        else if (roadwidth >= 6)
-                                        {
-                                            ReplacePropFlipped(lane, propGroup, typeMedium);
+                                            if (roadwidth >= 15 || isHighway)
+                                            {
+                                                ReplacePropFlipped(lane, propGroup, typeLarge);
+                                            }
+                                            else if (roadwidth >= 6)
+                                            {
+                                                ReplacePropFlipped(lane, propGroup, typeMedium);
+                                            }
+                                            else
+                                            {
+                                                ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
+                                            }
+
+
                                         }
                                         else
                                         {
-                                            ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
+                                            if (roadwidth >= 15 || isHighway)
+                                            {
+                                                ReplaceProp(lane, typeLarge, propGroup);
+                                            }
+                                            else if (roadwidth >= 6)
+                                            {
+                                                ReplaceProp(lane, typeMedium, propGroup);
+                                            }
+                                            else
+                                            {
+                                                ReplaceProp(lane, typeSmall, propGroup);  //regular
+                                            }
                                         }
-                                        
 
                                     }
                                     else
                                     {
+                                        //panel is NULL
                                         if (roadwidth >= 15 || isHighway)
                                         {
                                             ReplaceProp(lane, typeLarge, propGroup);
@@ -146,23 +206,6 @@ namespace TrafficLightReplacer
                                     }
 
                                 }
-                                else
-                                {
-                                    //panel is NULL
-                                    if (roadwidth >= 15 || isHighway)
-                                    {
-                                        ReplaceProp(lane, typeLarge, propGroup);
-                                    }
-                                    else if (roadwidth >= 6)
-                                    {
-                                        ReplaceProp(lane, typeMedium, propGroup);
-                                    }
-                                    else
-                                    {
-                                        ReplaceProp(lane, typeSmall, propGroup);  //regular
-                                    }
-                                }
-
                             }
                         }
                     }

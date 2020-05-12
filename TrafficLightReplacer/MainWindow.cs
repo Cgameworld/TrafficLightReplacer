@@ -252,9 +252,15 @@ namespace TrafficLightReplacer
 
         private void ResetAllDropdowns()
         {
+            //add blank item before resetting index in case dropdown is null
+            smallRoadsDropdown.AddItem("");
+            mediumRoadsDropdown.AddItem("");
+            largeRoadsDropdown.AddItem("");
+
             smallRoadsDropdown.selectedIndex = 0;
             mediumRoadsDropdown.selectedIndex = 0;
             largeRoadsDropdown.selectedIndex = 0;
+
             ResetDropdown(smallRoadsDropdown);
             ResetDropdown(mediumRoadsDropdown);
             ResetDropdown(largeRoadsDropdown);

@@ -10,7 +10,6 @@ namespace TrafficLightReplacer
         public string PackName { get; set; }
         public bool RemoveMirrorLights { get; set; }
         public bool OneSize { get; set; }
-        // public bool SignalPole { get; set; }
         public List<Asset> Assets { get; set; }
 
     }
