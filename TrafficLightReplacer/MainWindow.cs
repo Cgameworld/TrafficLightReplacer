@@ -16,10 +16,10 @@ namespace TrafficLightReplacer
         public UICheckBox oppositeSideToggle;
         public UIDropDown packDropdown;
         private UIButton confirmButton;
-        private UIButton customizeButton;
-        private UILabel customizeButtonToggle;
+        public UIButton customizeButton;
+        public UILabel customizeButtonToggle;
         private UITextureAtlas m_atlas;
-        private UIPanel customizePanel;
+        public UIPanel customizePanel;
         public UIDropDown smallRoadsDropdown;
         public UIDropDown mediumRoadsDropdown;
         public UIDropDown largeRoadsDropdown;
@@ -49,7 +49,7 @@ namespace TrafficLightReplacer
             isInteractive = true;
             //clipChildren = true;
             width = 370;
-            height = 200;
+            height = 180;
             relativePosition = new Vector3(1550, 150);
 
             // Title Bar
@@ -121,7 +121,7 @@ namespace TrafficLightReplacer
                     {
                         customizePanel.isVisible = false;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
-                        height = 200;
+                        height = 180;
                     }
                     else
                     {

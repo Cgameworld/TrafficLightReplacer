@@ -21,7 +21,9 @@ namespace TrafficLightReplacer
         public static PropInfo typeSmall;
         public static PropInfo typeMedium;
         public static PropInfo typeLarge;
+
         public static PropInfo typePedSignal;
+        public static PropInfo typePedSignalMirror;
 
         public static PropInfo typeMain;
         public static PropInfo typeMirror;
@@ -54,12 +56,17 @@ namespace TrafficLightReplacer
                 result.Add(item);
             }
 
+
+            //set to blank asset on default?
+            typePedSignal = PrefabCollection<PropInfo>.FindLoaded("1535107168.New Blank Traffic Light_Data");
+
             for (int i = 0; i < result.Count; i++)
             {
                 Debug.Log("Pack NAME! " + XMLinput.PackName);
                 Debug.Log("entry:" + i);
                 Debug.Log("prefabname:" + result[i].Prefab);
                 Debug.Log("prefabsize:" + result[i].Type);
+
                 //custom sizes config
                 if (result[i].Type == "Small")
                 {
@@ -82,6 +89,10 @@ namespace TrafficLightReplacer
                 {
                     typeMirror = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
+                if (result[i].Type == "Ped Signal")
+                {
+                    typePedSignal = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                }
                 //all
                 if (result[i].Type == "Signal Pole")
                 {
@@ -92,14 +103,31 @@ namespace TrafficLightReplacer
             oneSizeMode = XMLinput.OneSize;
             Debug.Log("oneSizeMode: " + oneSizeMode);
 
-            if (!oneSizeMode)
+            if (oneSizeMode)
+            {
+                if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
+                {
+                    //TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = false;
+                    TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
+                    TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = false;
+                    TrafficLightReplacePanel.instance.height = 140;
+                }
+            }
+            else
             {
                 typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
                 typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
                 typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
+
+                if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
+                {
+                    //TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
+                    TrafficLightReplacePanel.instance.customizeButton.isVisible = true;
+                    TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = true;
+                    TrafficLightReplacePanel.instance.height = 180;
+                }
             }
-            //set to blank asset
-            typePedSignal = PrefabCollection<PropInfo>.FindLoaded("1535107168.New Blank Traffic Light_Data");
+
             UpdateLaneProps();
         }
 
@@ -136,15 +164,25 @@ namespace TrafficLightReplacer
                                         propGroup.m_finalProp = typeMain;
 
                                     }
-                                    else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
+                                    if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
                                     {
                                         propGroup.m_finalProp = typeMirror;
+                                        if (propGroup.m_position.x > 0) //revert back to default position
+                                        {
+                                            propGroup.m_angle = 90f;
+                                        }
                                     }
 
-                                    if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                                    if (propGroup.m_prop.name == "Traffic Light Pedestrian")
                                     {
-                                        propGroup.m_finalProp = typeMirror;
-                                        propGroup.m_angle = 45;
+                                        propGroup.m_finalProp = typePedSignal;
+                                        //fix flipped ped light issue?
+                                    }
+
+                                    if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
+                                    {
+                                        propGroup.m_finalProp = typeSignalPole;
+
                                     }
                                 }
 
