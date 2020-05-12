@@ -1,14 +1,13 @@
-﻿using ColossalFramework.IO;
+﻿using ColossalFramework;
+using ColossalFramework.IO;
+using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using ICities;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Xml.Serialization;
 using UnityEngine;
+using static ColossalFramework.Plugins.PluginManager;
 
 namespace TrafficLightReplacer
 {
@@ -29,6 +28,39 @@ namespace TrafficLightReplacer
             var embedList = new List<string>();
             embedList.Add("default.xml");
             Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", embedList);
+
+            /* 
+           foreach (PluginInfo mod in Singleton<PluginManager>.instance.GetPluginsInfo())
+           {
+               if (mod.GetInstances<IUserMod>().Length != 0)
+               {
+                   Debug.Log("modname s: " + mod.name);
+
+                   Debug.Log("bfenabled: " + mod.name + " | " + mod.isEnabled);
+
+                   if (mod.name == "UnlimitedSoil")
+                   {
+                       mod.isEnabled = true;
+                   }
+
+                   Debug.Log("afenabled: " + mod.name + " | " + mod.isEnabled);
+
+               }
+           }
+
+
+                  //doesnt work this early in loading - use harmony to inject slightly later..
+                   if (PluginManager.instance.GetPluginsInfo().Any(mod => (
+       mod.publishedFileID.AsUInt64 == 1812157090uL ||
+       mod.name.Contains("1812157090"))
+       && mod.isEnabled)
+           )
+                   {
+                       Debug.Log("Dutch Traffic Lights Subscribed!");
+                       //figure out how to turn mod off!
+
+                   }
+                   */
         }
     }
     public class ModLoading : LoadingExtensionBase
