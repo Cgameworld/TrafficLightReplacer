@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachePropItem.cs" />
     <Compile Include="TLRAsset.cs" />
     <Compile Include="AssetCreatorTool.cs" />
     <Compile Include="lib\ResourceLoader.cs" />

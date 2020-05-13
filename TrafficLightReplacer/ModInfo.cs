@@ -72,6 +72,30 @@ namespace TrafficLightReplacer
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             CreatorToolPanel.instance.Show();
 
+
+            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            {
+                foreach (NetInfo.Lane lane in prefab.m_lanes)
+                {
+                    if (lane?.m_laneProps?.m_props != null)
+                    {
+                        foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+                        {
+                            if (propGroup?.m_finalProp != null)
+                            {
+                                CachePropItem propGroupProperties = new CachePropItem();
+                                propGroupProperties.Angle = propGroup.m_angle;
+                                Replacer.propCache.Add(propGroupProperties);
+                            }
+                        }
+                    }
+                }
+            }
+
+            Debug.Log("Replacer.propCache.Count: " + Replacer.propCache.Count);
+            //add propgroup counter!
+
+
             m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
 
             string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");

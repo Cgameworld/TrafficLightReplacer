@@ -30,6 +30,8 @@ namespace TrafficLightReplacer
 
         public static PropInfo typeSignalPole;
 
+        public static List<CachePropItem> propCache = new List<CachePropItem>();
+
         public static bool oneSizeMode = false;
        
         public static void Start(string path)
@@ -135,6 +137,7 @@ namespace TrafficLightReplacer
         {
             Debug.Log(typeSmall);
 
+            int propGroupCounter = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
                 float roadwidth = 0;
@@ -176,7 +179,11 @@ namespace TrafficLightReplacer
                                     if (propGroup.m_prop.name == "Traffic Light Pedestrian")
                                     {
                                         propGroup.m_finalProp = typePedSignal;
-                                        //fix flipped ped light issue?
+                                        //fix flipped ped light issue? - maybe load default values on load - like in adjustment panel form
+                                        Debug.Log("Traffic Light Pedestrian-num" + propGroupCounter);
+                                        Debug.Log("propGroup.m_angle" + propGroup.m_angle);
+                                        Debug.Log("propCache[propGroupCounter].Angle" + propCache[propGroupCounter].Angle);
+                                        propGroup.m_angle = propCache[propGroupCounter].Angle;
                                     }
 
                                     if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
@@ -244,6 +251,9 @@ namespace TrafficLightReplacer
                                     }
 
                                 }
+
+                                propGroupCounter++;
+
                             }
                         }
                     }
@@ -251,6 +261,8 @@ namespace TrafficLightReplacer
                 }
 
             }
+
+            Debug.Log("propGroupCounterTotal" + propGroupCounter);
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
