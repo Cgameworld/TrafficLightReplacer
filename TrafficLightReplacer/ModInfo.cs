@@ -25,11 +25,6 @@ namespace TrafficLightReplacer
 
         public void OnEnabled()
         {
-            var embedList = new List<string>();
-            embedList.Add("default.xml");
-            Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", embedList);
-
-
             if (UIView.GetAView() != null)
             {
                 // when enabled in content manager
@@ -45,19 +40,40 @@ namespace TrafficLightReplacer
 
         private static void CheckMods()
         {
+            var embedList = new List<string>();
+            embedList.Add("default.xml");
+
+            string changedMods = "";
+            string copiedxmls = "";
+
             foreach (PluginInfo mod in Singleton<PluginManager>.instance.GetPluginsInfo())
             {
                 if (mod.GetInstances<IUserMod>().Length != 0)
                 {
-                    if (mod.name == "1812157090" && mod.isEnabled)
+                    if (mod.name == "1812157090")
                     {
-                        mod.isEnabled = false;
-                        Tools.ShowErrorWindow("Disabled Mod", ((IUserMod)mod.userModInstance).Name);
+                        if (mod.isEnabled)
+                        {
+                            mod.isEnabled = false;
+                            changedMods += ((IUserMod)mod.userModInstance).Name + "\n";
+                        }
+                       
+                        embedList.Add("NL_Lights.xml");
                     }
-
 
                 }
             }
+
+
+            Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", embedList);
+           
+
+            foreach (var str in embedList)
+            {
+                copiedxmls += str + "\n";
+            }
+            //add xml injected message to dialog
+            Tools.ShowErrorWindow("Mod Detected!", "DisabledMods:\n" + changedMods + "\nCopied XMLs:\n" + copiedxmls);
 
         }
     }

@@ -69,6 +69,7 @@
     <EmbeddedResource Include="Icons\tlr-button.png" />
     <EmbeddedResource Include="Icons\Folder.png" />
     <EmbeddedResource Include="DefaultXMLS\default.xml" />
+    <EmbeddedResource Include="DefaultXMLS\NL_Lights.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
