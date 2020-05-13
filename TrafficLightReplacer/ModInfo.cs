@@ -72,7 +72,16 @@ namespace TrafficLightReplacer
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             CreatorToolPanel.instance.Show();
 
+            FillPropGroupCache();
 
+            m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
+
+            string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
+            Replacer.Start(xmlfile1);
+        }
+
+        private static void FillPropGroupCache()
+        {
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
@@ -85,21 +94,14 @@ namespace TrafficLightReplacer
                             {
                                 CachePropItem propGroupProperties = new CachePropItem();
                                 propGroupProperties.Angle = propGroup.m_angle;
-                                Replacer.propCache.Add(propGroupProperties);
+                                Replacer.propGroupCache.Add(propGroupProperties);
                             }
                         }
                     }
                 }
             }
 
-            Debug.Log("Replacer.propCache.Count: " + Replacer.propCache.Count);
-            //add propgroup counter!
-
-
-            m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
-
-            string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
-            Replacer.Start(xmlfile1);
+            //Debug.Log("Replacer.propCache.Count: " + Replacer.propGroupCache.Count);
         }
     }
 }

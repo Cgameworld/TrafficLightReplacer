@@ -30,7 +30,7 @@ namespace TrafficLightReplacer
 
         public static PropInfo typeSignalPole;
 
-        public static List<CachePropItem> propCache = new List<CachePropItem>();
+        public static List<CachePropItem> propGroupCache = new List<CachePropItem>();
 
         public static bool oneSizeMode = false;
        
@@ -161,35 +161,27 @@ namespace TrafficLightReplacer
                                 {
                                     Debug.Log("onesize mode on!");
 
-
                                     if (propGroup.m_prop.name == "Traffic Light 02")
                                     {
                                         propGroup.m_finalProp = typeMain;
-
+                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
                                     }
                                     if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
                                     {
                                         propGroup.m_finalProp = typeMirror;
-                                        if (propGroup.m_position.x > 0) //revert back to default position
-                                        {
-                                            propGroup.m_angle = 90f;
-                                        }
+                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
                                     }
 
                                     if (propGroup.m_prop.name == "Traffic Light Pedestrian")
                                     {
                                         propGroup.m_finalProp = typePedSignal;
-                                        //fix flipped ped light issue? - maybe load default values on load - like in adjustment panel form
-                                        Debug.Log("Traffic Light Pedestrian-num" + propGroupCounter);
-                                        Debug.Log("propGroup.m_angle" + propGroup.m_angle);
-                                        Debug.Log("propCache[propGroupCounter].Angle" + propCache[propGroupCounter].Angle);
-                                        propGroup.m_angle = propCache[propGroupCounter].Angle;
+                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
                                     }
 
                                     if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
                                     {
                                         propGroup.m_finalProp = typeSignalPole;
-
+                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
                                     }
                                 }
 
@@ -259,10 +251,8 @@ namespace TrafficLightReplacer
                     }
 
                 }
-
             }
-
-            Debug.Log("propGroupCounterTotal" + propGroupCounter);
+            //Debug.Log("propGroupCounterTotal" + propGroupCounter);
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
