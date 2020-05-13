@@ -29,38 +29,36 @@ namespace TrafficLightReplacer
             embedList.Add("default.xml");
             Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", embedList);
 
-            /* 
-           foreach (PluginInfo mod in Singleton<PluginManager>.instance.GetPluginsInfo())
-           {
-               if (mod.GetInstances<IUserMod>().Length != 0)
-               {
-                   Debug.Log("modname s: " + mod.name);
 
-                   Debug.Log("bfenabled: " + mod.name + " | " + mod.isEnabled);
+            if (UIView.GetAView() != null)
+            {
+                // when enabled in content manager
+                Debug.Log("TLR Enabled!");
+                CheckMods();
+            }
+            else
+            {
+                // when game first loads if already enabled
+                LoadingManager.instance.m_introLoaded += CheckMods;
+            }
+        }
 
-                   if (mod.name == "UnlimitedSoil")
-                   {
-                       mod.isEnabled = true;
-                   }
+        private static void CheckMods()
+        {
+            foreach (PluginInfo mod in Singleton<PluginManager>.instance.GetPluginsInfo())
+            {
+                if (mod.GetInstances<IUserMod>().Length != 0)
+                {
+                    if (mod.name == "1812157090" && mod.isEnabled)
+                    {
+                        mod.isEnabled = false;
+                        Tools.ShowErrorWindow("Disabled Mod", ((IUserMod)mod.userModInstance).Name);
+                    }
 
-                   Debug.Log("afenabled: " + mod.name + " | " + mod.isEnabled);
 
-               }
-           }
+                }
+            }
 
-
-                  //doesnt work this early in loading - use harmony to inject slightly later..
-                   if (PluginManager.instance.GetPluginsInfo().Any(mod => (
-       mod.publishedFileID.AsUInt64 == 1812157090uL ||
-       mod.name.Contains("1812157090"))
-       && mod.isEnabled)
-           )
-                   {
-                       Debug.Log("Dutch Traffic Lights Subscribed!");
-                       //figure out how to turn mod off!
-
-                   }
-                   */
         }
     }
     public class ModLoading : LoadingExtensionBase
