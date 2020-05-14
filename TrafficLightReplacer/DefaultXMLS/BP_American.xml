@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>American Traffic Lights (BP)</PackName>
+	<RemoveMirrorLights>false</RemoveMirrorLights>
+	<OneSize>true</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>694123443.AmericanTrafficLightMain_Data</Prefab>
+			<Name>Main</Name>
+			<Description>Main</Description>
+			<Type>Main</Type>
+		</Asset>
+		<Asset>
+			<Prefab>694123443.AmericanTrafficLightWalk_Data</Prefab>
+			<Name>Walk</Name>
+			<Description>Walk</Description>
+			<Type>Mirror</Type>
+		</Asset>
+		<Asset>
+			<Prefab>694123443.AmericanTrafficLightWalk_Data</Prefab>
+			<Name>Walk</Name>
+			<Description>Walk</Description>
+			<Type>Ped Signal</Type>
+		</Asset>
+		<Asset>
+			<Prefab>694123443.AmericanTrafficLightWalk_Data</Prefab>
+			<Name>Walk</Name>
+			<Description>Walk</Description>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+</TLRConfig>

@@ -50,15 +50,15 @@ namespace TrafficLightReplacer
             {
                 if (mod.GetInstances<IUserMod>().Length != 0)
                 {
-                    if (mod.name == "1812157090")
+                    if (mod.name == "1812157090") //dutch traffic lights
                     {
-                        if (mod.isEnabled)
-                        {
-                            mod.isEnabled = false;
-                            changedMods += ((IUserMod)mod.userModInstance).Name + "\n";
-                        }
-                       
+                        changedMods = CheckIfEnabled(changedMods, mod);
                         embedList.Add("NL_Lights.xml");
+                    }
+                    if (mod.name == "694123443") // BloodyPenguin american traffic lights
+                    {
+                        changedMods = CheckIfEnabled(changedMods, mod);
+                        embedList.Add("BP_American.xml");
                     }
 
                 }
@@ -75,6 +75,17 @@ namespace TrafficLightReplacer
             //add xml injected message to dialog
             Tools.ShowErrorWindow("Mod Detected!", "DisabledMods:\n" + changedMods + "\nCopied XMLs:\n" + copiedxmls);
 
+        }
+
+        private static string CheckIfEnabled(string changedMods, PluginInfo mod)
+        {
+            if (mod.isEnabled)
+            {
+                mod.isEnabled = false;
+                changedMods += ((IUserMod)mod.userModInstance).Name + "\n";
+            }
+
+            return changedMods;
         }
     }
     public class ModLoading : LoadingExtensionBase
