@@ -40,7 +40,6 @@ namespace TrafficLightReplacer
             {
                 TrafficLightReplacePanel.instance.packDropdown.AddItem(xmlNameItem);
             }
-            Debug.Log("2-aa");
             TrafficLightReplacePanel.instance.packDropdown.selectedIndex = 0;
             Replacer.xmlNames = packnames;
             Replacer.xmlFileNames = files.ToList();

@@ -245,13 +245,7 @@ namespace TrafficLightReplacer
 
         private void AddAllItemsToDropdowns()
         {
-            if (Replacer.oneSizeMode)
-            {
-                smallRoadsDropdown.AddItem("n");
-                mediumRoadsDropdown.AddItem("m");
-                largeRoadsDropdown.AddItem("o");
-            }
-            else
+            if (!Replacer.oneSizeMode)
             {
                 AddItemsToDropdown(smallRoadsDropdown, Replacer.typeSmallOptions);
                 AddItemsToDropdown(mediumRoadsDropdown, Replacer.typeMediumOptions);

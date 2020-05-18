@@ -23,6 +23,26 @@ namespace TrafficLightReplacer
             get { return "Mod Description"; }
         }
 
+        public void OnSettingsUI(UIHelperBase helper)
+        {
+            UIHelperBase featuresGroup = helper.AddGroup("Mod Features");
+
+            featuresGroup.AddCheckbox("Pack Creator Helper", TLRModSettings.instance.ShowCreatorTool, sel =>
+            {
+                TLRModSettings.instance.ShowCreatorTool = sel;
+                TLRModSettings.instance.Save();
+                TrafficLightReplacePanel.instance.isVisible = true;
+                CreatorToolPanel.instance.isVisible = sel;
+
+            });
+
+            //helper.AddSpace(15);
+
+            UIHelperBase resetGroup = helper.AddGroup("Reset");
+            resetGroup.AddButton("Reset Icon Position", () => { Debug.Log("Reset Pos Button clicked!"); });
+
+        }
+
         public void OnEnabled()
         {
             if (UIView.GetAView() != null)
@@ -76,7 +96,10 @@ namespace TrafficLightReplacer
             Tools.ShowErrorWindow("Mod Detected!", "DisabledMods:\n" + changedMods + "\nCopied XMLs:\n" + copiedxmls);
 
         }
+
     }
+
+
     public class ModLoading : LoadingExtensionBase
     {
         private static MainButton m_mainbutton;

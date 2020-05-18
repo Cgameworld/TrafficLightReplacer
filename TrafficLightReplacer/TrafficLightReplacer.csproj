@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachePropItem.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="TLRAsset.cs" />
     <Compile Include="AssetCreatorTool.cs" />
     <Compile Include="lib\ResourceLoader.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="lib\UITitlebar.cs" />
     <Compile Include="lib\UIUtils.cs" />
     <Compile Include="Replacer.cs" />
+    <Compile Include="TLRModSettings.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="MainButton.cs" />
   </ItemGroup>
