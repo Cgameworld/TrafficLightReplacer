@@ -21,8 +21,6 @@ namespace TrafficLightReplacer
         }
         public static void RefreshXMLPacks()
         {
-           // Replacer.xmlNames.Clear();
-           // Replacer.xmlFileNames.Clear();
 
             string[] files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml");
             List<string> packnames = new List<string>();
