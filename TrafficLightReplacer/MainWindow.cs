@@ -49,7 +49,7 @@ namespace TrafficLightReplacer
             isInteractive = true;
             //clipChildren = true;
             width = 370;
-            height = 180;
+            height = 100;
             relativePosition = new Vector3(1550, 150);
 
             // Title Bar
@@ -85,6 +85,7 @@ namespace TrafficLightReplacer
             oppositeSideToggle.isChecked = false;
             oppositeSideToggle.relativePosition = new Vector2(20, 100);
             oppositeSideToggle.tooltip = "Dummy Button - TBD";
+            oppositeSideToggle.isVisible = false;
 
             oppositeSideToggle.eventCheckChanged += (c, p) =>
             {           
@@ -105,12 +106,14 @@ namespace TrafficLightReplacer
             customizeButton.height = 25;
             customizeButton.width = 330;
             customizeButton.tooltip = "Select Traffic Light Variations";
+            customizeButton.isVisible = false;
 
             customizeButtonToggle = UIUtils.CreateLabelSpriteImage(this, m_atlas);
             customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
             customizeButtonToggle.width = 18f;
             customizeButtonToggle.height = 18f;
             customizeButtonToggle.relativePosition = new Vector2(32, 139);
+            customizeButtonToggle.isVisible = false;
 
             customizeButton.eventClick += (c, p) =>
             {

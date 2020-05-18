@@ -31,9 +31,9 @@ namespace TrafficLightReplacer
             {
                 TLRModSettings.instance.ShowCreatorTool = sel;
                 TLRModSettings.instance.Save();
+
                 TrafficLightReplacePanel.instance.isVisible = true;
                 CreatorToolPanel.instance.isVisible = sel;
-
             });
 
             //helper.AddSpace(15);
