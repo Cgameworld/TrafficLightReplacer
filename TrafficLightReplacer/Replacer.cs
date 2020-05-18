@@ -109,9 +109,8 @@ namespace TrafficLightReplacer
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {
-                    //TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = false;
-                    TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
-                    TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = false;
+                    //TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
+                    //TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = false;
                     TrafficLightReplacePanel.instance.height = 140;
                 }
             }
@@ -123,7 +122,6 @@ namespace TrafficLightReplacer
 
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {
-                    //TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.height = 180;
@@ -135,8 +133,6 @@ namespace TrafficLightReplacer
 
         public static void UpdateLaneProps()
         {
-            Debug.Log(typeSmall);
-
             int propGroupCounter = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {

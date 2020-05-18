@@ -152,14 +152,14 @@ namespace TrafficLightReplacer
             smallRoadsDropdown.AddItem("Empty A");
             smallRoadsDropdown.selectedIndex = 0;
             smallRoadsDropdown.relativePosition = new Vector3(135, 0);
-            smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[0].Description;
+            smallRoadsDropdown.tooltip = "";
 
             smallRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
+                Debug.Log("smallroadsdropdown eventselectedindex called");
                 Replacer.typeSmall = GetCurrentProp(Replacer.typeSmallOptions, smallRoadsDropdown);
                 smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[smallRoadsDropdown.selectedIndex].Description;
                 Replacer.UpdateLaneProps();
-
             };
 
             UILabel mediumRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
@@ -175,7 +175,7 @@ namespace TrafficLightReplacer
             mediumRoadsDropdown.AddItem("Empty B");
             mediumRoadsDropdown.selectedIndex = 0;
             mediumRoadsDropdown.relativePosition = new Vector3(155, 40);
-            mediumRoadsDropdown.tooltip = Replacer.typeMediumOptions[0].Description;
+            mediumRoadsDropdown.tooltip = "";
 
             mediumRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
@@ -197,7 +197,7 @@ namespace TrafficLightReplacer
             largeRoadsDropdown.AddItem("Empty C");
             largeRoadsDropdown.selectedIndex = 0;
             largeRoadsDropdown.relativePosition = new Vector3(155, 80);
-            largeRoadsDropdown.tooltip = Replacer.typeLargeOptions[0].Description;
+            largeRoadsDropdown.tooltip = "";
 
             largeRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
@@ -245,9 +245,22 @@ namespace TrafficLightReplacer
 
         private void AddAllItemsToDropdowns()
         {
-            AddItemsToDropdown(smallRoadsDropdown, Replacer.typeSmallOptions);
-            AddItemsToDropdown(mediumRoadsDropdown, Replacer.typeMediumOptions);
-            AddItemsToDropdown(largeRoadsDropdown, Replacer.typeLargeOptions);
+            if (Replacer.oneSizeMode)
+            {
+                smallRoadsDropdown.AddItem("n");
+                mediumRoadsDropdown.AddItem("m");
+                largeRoadsDropdown.AddItem("o");
+            }
+            else
+            {
+                AddItemsToDropdown(smallRoadsDropdown, Replacer.typeSmallOptions);
+                AddItemsToDropdown(mediumRoadsDropdown, Replacer.typeMediumOptions);
+                AddItemsToDropdown(largeRoadsDropdown, Replacer.typeLargeOptions);
+            }
+
+            smallRoadsDropdown.tooltip = !Replacer.oneSizeMode ? Replacer.typeSmallOptions[0].Description : "OneSize Mode On! No Small Variations Loaded";
+            mediumRoadsDropdown.tooltip = !Replacer.oneSizeMode ? Replacer.typeMediumOptions[0].Description : "OneSize Mode On! No Medium Variations Loaded";
+            largeRoadsDropdown.tooltip = !Replacer.oneSizeMode ? Replacer.typeLargeOptions[0].Description : "OneSize Mode On! No Large Variations Loaded";
         }
 
         private void ResetAllDropdowns()
@@ -256,11 +269,11 @@ namespace TrafficLightReplacer
             smallRoadsDropdown.AddItem("");
             mediumRoadsDropdown.AddItem("");
             largeRoadsDropdown.AddItem("");
-
+            Debug.Log("bf sel0");
             smallRoadsDropdown.selectedIndex = 0;
             mediumRoadsDropdown.selectedIndex = 0;
             largeRoadsDropdown.selectedIndex = 0;
-
+            Debug.Log("af sel0");
             ResetDropdown(smallRoadsDropdown);
             ResetDropdown(mediumRoadsDropdown);
             ResetDropdown(largeRoadsDropdown);

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <PackName>Default Traffic Lights</PackName>
-  <RemoveMirrorLights>true</RemoveMirrorLights>
-  <OneSize>false</OneSize>
-  <Assets>
-	<Asset>
-		<Prefab>Traffic Light 02</Prefab>
-		<Name>S Option 1</Name>
-		<Description>Traffic Light 02</Description>
-		<Type>Small</Type>
-	</Asset>
-	<Asset>
-		<Prefab>Traffic Light 02</Prefab>
-		<Name>M Option 1</Name>
-		<Description>Traffic Light 02</Description>
-		<Type>Medium</Type>
-	</Asset>
-	<Asset>
-		<Prefab>Traffic Light 02</Prefab>
-		<Name>L Option 1</Name>
-		<Description>Traffic Light 02</Description>
-		<Type>Large</Type>
-	</Asset>
-	<Asset>
-		<Prefab>Traffic Light 01</Prefab>
-		<Name>Traffic Light 01</Name>
-		<Description>TBA</Description>
-		<Type>Signal Pole</Type>
-	</Asset>
-  </Assets>
+	<PackName>Vanilla Traffic Lights</PackName>
+	<RemoveMirrorLights>false</RemoveMirrorLights>
+	<OneSize>true</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>Traffic Light 02</Prefab>
+			<Name></Name>
+			<Description>Traffic Light 02</Description>
+			<Type>Main</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Traffic Light 02 Mirror</Prefab>
+			<Name></Name>
+			<Description>Traffic Light 02</Description>
+			<Type>Mirror</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Traffic Light Pedestrian</Prefab>
+			<Name></Name>
+			<Description>Traffic Light Pedestrian</Description>
+			<Type>Ped Signal</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Traffic Light 01</Prefab>
+			<Name></Name>
+			<Description>Tradffic Light 02</Description>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
 </TLRConfig>
