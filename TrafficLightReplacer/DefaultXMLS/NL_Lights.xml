@@ -6,26 +6,18 @@
 	<Assets>
 		<Asset>
 			<Prefab>1812157090.NL_TrafficLightMain_Data</Prefab>
-			<Name>Main</Name>
-			<Description>Main</Description>
 			<Type>Main</Type>
 		</Asset>
 		<Asset>
 			<Prefab>1812157090.NL_TrafficLightWalk_Data</Prefab>
-			<Name>Walk</Name>
-			<Description>Walk</Description>
 			<Type>Mirror</Type>
 		</Asset>
 		<Asset>
 			<Prefab>1812157090.NL_TrafficLightWalk_Data</Prefab>
-			<Name>Walk</Name>
-			<Description>Walk</Description>
 			<Type>Ped Signal</Type>
 		</Asset>
 		<Asset>
 			<Prefab>1812157090.NL_TrafficLightWalk_Data</Prefab>
-			<Name>Walk</Name>
-			<Description>Walk</Description>
 			<Type>Signal Pole</Type>
 		</Asset>
 	</Assets>
