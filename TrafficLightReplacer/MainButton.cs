@@ -8,8 +8,10 @@ namespace TrafficLightReplacer
     {
         public static MainButton instance;
         private bool dragging = false;
-        private UITextureAtlas toggleButtonAtlas;
 
+        private UITextureAtlas toggleButtonAtlas;
+        public const int buttonSize = 36;
+        private UIButton freeCameraButton = UIView.GetAView().FindUIComponent<UIButton>("Freecamera");
         //from American Road Signs
         public override void Start()
         {
@@ -17,14 +19,12 @@ namespace TrafficLightReplacer
             instance = this;
             LoadResources();
 
-            const int buttonSize = 36;
-
-            var freeCameraButton = UIView.GetAView().FindUIComponent<UIButton>("Freecamera");
+            
             verticalAlignment = UIVerticalAlignment.Middle;
 
             if (TLRModSettings.instance.ButtonPosition.y == -9999)
             {
-            absolutePosition = new Vector2(freeCameraButton.absolutePosition.x - (6 * buttonSize) - 5, freeCameraButton.absolutePosition.y);
+                SetDefaultPosition();
            }
            else
            {
@@ -44,6 +44,12 @@ namespace TrafficLightReplacer
                 normalBgSprite = "OptionBase";
                 normalFgSprite = "tlr-button-padding";
             }
+        }
+
+        public void SetDefaultPosition()
+        {
+
+            absolutePosition = new Vector2(freeCameraButton.absolutePosition.x - (6 * buttonSize) - 5, freeCameraButton.absolutePosition.y);
         }
 
         protected override void OnClick(UIMouseEventParameter p)

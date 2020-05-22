@@ -47,7 +47,10 @@ namespace TrafficLightReplacer
 
             //helper.AddSpace(15);
             UIHelperBase resetGroup = helper.AddGroup("Reset");
-            resetGroup.AddButton("Reset Icon Position", () => { Debug.Log("Reset Pos Button clicked!"); });
+            resetGroup.AddButton("Reset Icon Position", () => {
+                MainButton.instance.SetDefaultPosition();
+                Debug.Log("Reset Pos Button clicked!");
+            });
 
         }
 
