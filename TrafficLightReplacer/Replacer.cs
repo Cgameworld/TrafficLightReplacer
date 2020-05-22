@@ -12,8 +12,7 @@ namespace TrafficLightReplacer
     {
 
         public static List<Asset> result = new List<Asset>();
-        public static List<string> xmlNames = new List<string>();
-        public static List<string> xmlFileNames = new List<string>();
+        public static List<Pack> packList = new List<Pack>();
         public static List<Asset> typeSmallOptions = new List<Asset>();
         public static List<Asset> typeMediumOptions = new List<Asset>();
         public static List<Asset> typeLargeOptions = new List<Asset>();

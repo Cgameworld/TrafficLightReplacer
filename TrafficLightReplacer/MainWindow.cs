@@ -74,8 +74,10 @@ namespace TrafficLightReplacer
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                Debug.Log("2dropdown change to: " + Replacer.xmlFileNames[packDropdown.selectedIndex]);
-                Replacer.Start(Replacer.xmlFileNames[packDropdown.selectedIndex]);
+                Debug.Log("2dropdown change to: " + Replacer.packList[packDropdown.selectedIndex].PackPath);
+                Replacer.Start(Replacer.packList[packDropdown.selectedIndex].PackPath);
+               // Debug.Log("2dropdown change to: " + Replacer.xmlFileNames[packDropdown.selectedIndex]);
+                //Replacer.Start(Replacer.xmlFileNames[packDropdown.selectedIndex]);
                 ResetAllDropdowns();
                 AddAllItemsToDropdowns();
             };
