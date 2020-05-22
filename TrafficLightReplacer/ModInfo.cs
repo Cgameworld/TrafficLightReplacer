@@ -27,7 +27,7 @@ namespace TrafficLightReplacer
         {
             UIHelperBase featuresGroup = helper.AddGroup("Mod Features");
 
-            featuresGroup.AddCheckbox("Pack Creator Helper", TLRModSettings.instance.ShowCreatorTool, sel =>
+            featuresGroup.AddCheckbox("Show Pack Creator Helper", TLRModSettings.instance.ShowCreatorTool, sel =>
             {
                 TLRModSettings.instance.ShowCreatorTool = sel;
                 TLRModSettings.instance.Save();
@@ -36,8 +36,16 @@ namespace TrafficLightReplacer
                 CreatorToolPanel.instance.isVisible = sel;
             });
 
-            //helper.AddSpace(15);
+            featuresGroup.AddCheckbox("Main Button Background", TLRModSettings.instance.EnableButtonBackground, sel =>
+            {
+                TLRModSettings.instance.EnableButtonBackground = sel;
+                TLRModSettings.instance.Save();
+                MainButton.instance.size = sel ? new Vector2(46f, 46f) : new Vector2(36f, 36f);
+                MainButton.instance.normalBgSprite = sel ? "OptionBase" : null;
+                MainButton.instance.normalFgSprite= sel ? "tlr-button-padding" : "tlr-button";
+            });
 
+            //helper.AddSpace(15);
             UIHelperBase resetGroup = helper.AddGroup("Reset");
             resetGroup.AddButton("Reset Icon Position", () => { Debug.Log("Reset Pos Button clicked!"); });
 

@@ -69,6 +69,7 @@
     <Compile Include="MainButton.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Icons\tlr-button-padding.png" />
     <EmbeddedResource Include="Icons\tlr-button.png" />
     <EmbeddedResource Include="Icons\Folder.png" />
     <EmbeddedResource Include="DefaultXMLS\default.xml" />

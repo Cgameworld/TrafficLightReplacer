@@ -19,25 +19,31 @@ namespace TrafficLightReplacer
 
             const int buttonSize = 36;
 
-            //  Positioned relative to Freecamera Button:
             var freeCameraButton = UIView.GetAView().FindUIComponent<UIButton>("Freecamera");
             verticalAlignment = UIVerticalAlignment.Middle;
-            //  
-            //if (AmericanRoadsignsTool.config.buttonposition.y == -9999)
-           // {
-                absolutePosition = new Vector2(freeCameraButton.absolutePosition.x - (6 * buttonSize) - 5, freeCameraButton.absolutePosition.y);
-           // }
-           // else
-           // {
-           //     absolutePosition = AmericanRoadsignsTool.config.buttonposition;
-           //}            
+
+            if (TLRModSettings.instance.ButtonPosition.y == -9999)
+            {
+            absolutePosition = new Vector2(freeCameraButton.absolutePosition.x - (6 * buttonSize) - 5, freeCameraButton.absolutePosition.y);
+           }
+           else
+           {
+               absolutePosition = TLRModSettings.instance.ButtonPosition;
+           }            
             size = new Vector2(36f, 36f);
             playAudioEvents = true;
-            tooltip = "TLR test";
             atlas = toggleButtonAtlas;
+            tooltip = "Traffic Light Replacer\nRight Click to Move";
             normalFgSprite = "tlr-button";
             hoveredBgSprite = "OptionBasePressed";
             pressedBgSprite = "OptionBasePressed";
+
+            if (TLRModSettings.instance.EnableButtonBackground)
+            {
+                size = new Vector2(46f, 46f);
+                normalBgSprite = "OptionBase";
+                normalFgSprite = "tlr-button-padding";
+            }
         }
 
         protected override void OnClick(UIMouseEventParameter p)
@@ -77,6 +83,8 @@ namespace TrafficLightReplacer
             if (p.buttons.IsFlagSet(UIMouseButton.Right))
             {
                 dragging = false;
+                TLRModSettings.instance.ButtonPosition = absolutePosition;
+                TLRModSettings.instance.Save();
             }
             base.OnMouseUp(p);
         }
@@ -87,10 +95,7 @@ namespace TrafficLightReplacer
             {
                 var ratio = UIView.GetAView().ratio;
                 position = new Vector3(position.x + (p.moveDelta.x * ratio), position.y + (p.moveDelta.y * ratio), position.z);
-                //  
-               // AmericanRoadsignsTool.config.buttonposition = absolutePosition;
-               // AmericanRoadsignsTool.SaveConfig();
-                //  
+                
             }
             base.OnMouseMove(p);
         }
@@ -100,7 +105,8 @@ namespace TrafficLightReplacer
         {
             string[] spriteNames = new string[]
             {
-                "tlr-button"
+                "tlr-button",
+                "tlr-button-padding"
             };
 
             toggleButtonAtlas = ResourceLoader.CreateTextureAtlas("TrafficLightReplacer", spriteNames, "TrafficLightReplacer.Icons.");
