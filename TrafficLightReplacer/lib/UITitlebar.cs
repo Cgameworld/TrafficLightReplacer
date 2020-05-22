@@ -10,6 +10,9 @@ namespace TrafficLightReplacer
         private UIDragHandle m_drag;
 
         public bool isModal = false;
+        private UITextureAtlas tlrAtlas;
+        private UIButton tlrIcon;
+
         public UIButton closeButton
         {
             get { return m_close; }
@@ -33,6 +36,14 @@ namespace TrafficLightReplacer
             canFocus = true;
             isInteractive = true;
             relativePosition = Vector3.zero;
+
+
+            tlrAtlas = ResourceLoader.CreateTextureAtlas("TLRIcon", new string[] { "tlr-button" }, "TrafficLightReplacer.Icons.");
+            tlrIcon = AddUIComponent<UIButton>();
+            tlrIcon.atlas = tlrAtlas;
+            tlrIcon.normalBgSprite = "tlr-button";
+            tlrIcon.relativePosition = new Vector3(3, 3);
+            tlrIcon.size = new Vector2(34f, 34f);
 
             m_title = AddUIComponent<UILabel>();
             m_title.autoSize = false;
