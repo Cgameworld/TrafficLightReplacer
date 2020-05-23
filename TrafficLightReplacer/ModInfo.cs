@@ -2,10 +2,12 @@
 using ColossalFramework.IO;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
+using Harmony;
 using ICities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using UnityEngine;
 using static ColossalFramework.Plugins.PluginManager;
 
@@ -13,6 +15,9 @@ namespace TrafficLightReplacer
 {
     public class ModInfo : IUserMod
     {
+        private readonly string harmonyId = "cgameworld.trafficlightreplacer";
+        private HarmonyInstance harmony;
+
         public string Name
         {
             get { return "Traffic Light Replacer"; }
@@ -23,6 +28,29 @@ namespace TrafficLightReplacer
             get { return "Mod Description"; }
         }
 
+        public void OnEnabled()
+        {
+            harmony = HarmonyInstance.Create(harmonyId);
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+
+            if (UIView.GetAView() != null)
+            {
+                // when enabled in content manager
+                Debug.Log("TLR Enabled!");
+                CheckMods();
+            }
+            else
+            {
+                // when game first loads if already enabled
+                LoadingManager.instance.m_introLoaded += CheckMods;
+            }
+        }
+
+        public void OnDisabled()
+        {
+            harmony.UnpatchAll(harmonyId);
+            harmony = null;
+        }
         public void OnSettingsUI(UIHelperBase helper)
         {
             UIHelperBase featuresGroup = helper.AddGroup("Mod Features");
@@ -42,7 +70,7 @@ namespace TrafficLightReplacer
                 TLRModSettings.instance.Save();
                 MainButton.instance.size = sel ? new Vector2(46f, 46f) : new Vector2(36f, 36f);
                 MainButton.instance.normalBgSprite = sel ? "OptionBase" : null;
-                MainButton.instance.normalFgSprite= sel ? "tlr-button-padding" : "tlr-button";
+                MainButton.instance.normalFgSprite = sel ? "tlr-button-padding" : "tlr-button";
             });
 
             //helper.AddSpace(15);
@@ -53,22 +81,6 @@ namespace TrafficLightReplacer
             });
 
         }
-
-        public void OnEnabled()
-        {
-            if (UIView.GetAView() != null)
-            {
-                // when enabled in content manager
-                Debug.Log("TLR Enabled!");
-                CheckMods();
-            }
-            else
-            {
-                // when game first loads if already enabled
-                LoadingManager.instance.m_introLoaded += CheckMods;
-            }
-        }
-
         private static void CheckMods()
         {
             var embedList = new List<string>();
@@ -119,41 +131,8 @@ namespace TrafficLightReplacer
         {
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             CreatorToolPanel.instance.Show();
-
-            FillPropGroupCache();
-
             m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
-
-            string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
-            Replacer.Start(xmlfile1);
         }
-
-        private static void FillPropGroupCache()
-        {
-            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
-            {
-                if (prefab.m_vehicleTypes == VehicleInfo.VehicleType.Car)
-                {
-                    foreach (NetInfo.Lane lane in prefab.m_lanes)
-                    {
-                        if (lane?.m_laneProps?.m_props != null)
-                        {
-                            foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
-                            {
-                                if (propGroup?.m_finalProp != null)
-                                {
-                                    CachePropItem propGroupProperties = new CachePropItem();
-                                    propGroupProperties.Angle = propGroup.m_angle;
-                                    propGroupProperties.Position = propGroup.m_position;
-                                    Replacer.propGroupCache.Add(propGroupProperties);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            //Debug.Log("Replacer.propCache.Count: " + Replacer.propGroupCache.Count);
-        }
+       
     }
 }
