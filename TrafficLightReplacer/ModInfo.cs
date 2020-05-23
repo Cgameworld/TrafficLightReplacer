@@ -132,18 +132,21 @@ namespace TrafficLightReplacer
         {
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
-                foreach (NetInfo.Lane lane in prefab.m_lanes)
+                if (prefab.m_vehicleTypes == VehicleInfo.VehicleType.Car)
                 {
-                    if (lane?.m_laneProps?.m_props != null)
+                    foreach (NetInfo.Lane lane in prefab.m_lanes)
                     {
-                        foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+                        if (lane?.m_laneProps?.m_props != null)
                         {
-                            if (propGroup?.m_finalProp != null)
+                            foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
                             {
-                                CachePropItem propGroupProperties = new CachePropItem();
-                                propGroupProperties.Angle = propGroup.m_angle;
-                                propGroupProperties.Position = propGroup.m_position;
-                                Replacer.propGroupCache.Add(propGroupProperties);
+                                if (propGroup?.m_finalProp != null)
+                                {
+                                    CachePropItem propGroupProperties = new CachePropItem();
+                                    propGroupProperties.Angle = propGroup.m_angle;
+                                    propGroupProperties.Position = propGroup.m_position;
+                                    Replacer.propGroupCache.Add(propGroupProperties);
+                                }
                             }
                         }
                     }

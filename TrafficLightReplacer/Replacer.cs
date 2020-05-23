@@ -138,34 +138,38 @@ namespace TrafficLightReplacer
             int propGroupCounter = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
-                float roadwidth = 0;
-                bool isOneWay = false;
-                bool isHighway = false;
-                if (prefab.name.Contains("Highway"))
+                if (prefab.m_vehicleTypes == VehicleInfo.VehicleType.Car)
                 {
-                    isHighway = true;
-                }
+                    //Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
 
-                GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
-
-                foreach (NetInfo.Lane lane in prefab.m_lanes)
-                {
-                    if (lane?.m_laneProps?.m_props != null)
+                    float roadwidth = 0;
+                    bool isOneWay = false;
+                    bool isHighway = false;
+                    if (prefab.name.Contains("Highway"))
                     {
-                        foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
-                        {
-                            if (propGroup?.m_finalProp != null)
-                            {
-                                if (oneSizeMode)
-                                {
-                                    OneSizeReplace(propGroupCounter, propGroup);
-                                }
+                        isHighway = true;
+                    }
 
-                                else
+                    GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
+
+                    foreach (NetInfo.Lane lane in prefab.m_lanes)
+                    {
+                        if (lane?.m_laneProps?.m_props != null)
+                        {
+                            foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+                            {
+                                if (propGroup?.m_finalProp != null)
                                 {
-                                    Debug.Log("onesize mode off!");
-                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
+                                    if (oneSizeMode)
                                     {
+                                        OneSizeReplace(propGroupCounter, propGroup);
+                                    }
+
+                                    else
+                                    {
+                                        Debug.Log("onesize mode off!");
+                                        if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
+                                        {
                                             if (roadwidth >= 15 || isHighway)
                                             {
                                                 ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
@@ -178,35 +182,37 @@ namespace TrafficLightReplacer
                                             {
                                                 ReplacePropFlipped(lane, propGroup, typeSmall, isOneWay, propGroupCounter);  //regular
                                             }
-                                    }
-                                    else
-                                    {
-                                        //panel is NULL
-                                        if (roadwidth >= 15 || isHighway)
-                                        {
-                                            ReplaceProp(lane, typeLarge, propGroup);
-                                        }
-                                        else if (roadwidth >= 6)
-                                        {
-                                            ReplaceProp(lane, typeMedium, propGroup);
                                         }
                                         else
                                         {
-                                            ReplaceProp(lane, typeSmall, propGroup);  //regular
+                                            //panel is NULL
+                                            if (roadwidth >= 15 || isHighway)
+                                            {
+                                                ReplaceProp(lane, typeLarge, propGroup);
+                                            }
+                                            else if (roadwidth >= 6)
+                                            {
+                                                ReplaceProp(lane, typeMedium, propGroup);
+                                            }
+                                            else
+                                            {
+                                                ReplaceProp(lane, typeSmall, propGroup);  //regular
+                                            }
                                         }
+
                                     }
 
+                                    propGroupCounter++;
+
                                 }
-
-                                propGroupCounter++;
-
                             }
                         }
-                    }
 
+                    }
                 }
+
             }
-            //Debug.Log("propGroupCounterTotal" + propGroupCounter);
+            Debug.Log("propGroupCounterTotal" + propGroupCounter);
         }
 
         private static void OneSizeReplace(int propGroupCounter, NetLaneProps.Prop propGroup)
