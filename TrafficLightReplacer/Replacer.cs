@@ -157,40 +157,14 @@ namespace TrafficLightReplacer
                             {
                                 if (oneSizeMode)
                                 {
-                                    Debug.Log("onesize mode on!");
-
-                                    if (propGroup.m_prop.name == "Traffic Light 02")
-                                    {
-                                        propGroup.m_finalProp = typeMain;
-                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                                    }
-                                    if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
-                                    {
-                                        propGroup.m_finalProp = typeMirror;
-                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                                    }
-
-                                    if (propGroup.m_prop.name == "Traffic Light Pedestrian")
-                                    {
-                                        propGroup.m_finalProp = typePedSignal;
-                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                                    }
-
-                                    if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
-                                    {
-                                        propGroup.m_finalProp = typeSignalPole;
-                                        propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                                    }
+                                    OneSizeReplace(propGroupCounter, propGroup);
                                 }
-
 
                                 else
                                 {
                                     Debug.Log("onesize mode off!");
-                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
+                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
                                     {
-                                        if (TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
-                                        {
                                             if (roadwidth >= 15 || isHighway)
                                             {
                                                 ReplacePropFlipped(lane, propGroup, typeLarge);
@@ -203,25 +177,6 @@ namespace TrafficLightReplacer
                                             {
                                                 ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
                                             }
-
-
-                                        }
-                                        else
-                                        {
-                                            if (roadwidth >= 15 || isHighway)
-                                            {
-                                                ReplaceProp(lane, typeLarge, propGroup);
-                                            }
-                                            else if (roadwidth >= 6)
-                                            {
-                                                ReplaceProp(lane, typeMedium, propGroup);
-                                            }
-                                            else
-                                            {
-                                                ReplaceProp(lane, typeSmall, propGroup);  //regular
-                                            }
-                                        }
-
                                     }
                                     else
                                     {
@@ -251,6 +206,34 @@ namespace TrafficLightReplacer
                 }
             }
             //Debug.Log("propGroupCounterTotal" + propGroupCounter);
+        }
+
+        private static void OneSizeReplace(int propGroupCounter, NetLaneProps.Prop propGroup)
+        {
+            Debug.Log("onesize mode on!");
+
+            if (propGroup.m_prop.name == "Traffic Light 02")
+            {
+                propGroup.m_finalProp = typeMain;
+                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+            }
+            if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
+            {
+                propGroup.m_finalProp = typeMirror;
+                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+            }
+
+            if (propGroup.m_prop.name == "Traffic Light Pedestrian")
+            {
+                propGroup.m_finalProp = typePedSignal;
+                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+            }
+
+            if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
+            {
+                propGroup.m_finalProp = typeSignalPole;
+                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+            }
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
@@ -302,33 +285,7 @@ namespace TrafficLightReplacer
                 if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
                 {
                     propGroup.m_angle = 270;
-                }
-                
-
-            }
-
-        }
-
-        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
-        {
-            //to do - take into account asym roads?
-            foreach (NetInfo.Lane lane in prefab.m_lanes)
-            {
-                if (lane.m_laneType.ToString() == "Parking" || lane.m_laneType.ToString() == "Vehicle")
-                {
-                    //detect one way roads - calculate width across whole road
-                    if (prefab.m_hasBackwardVehicleLanes == false || prefab.m_hasForwardVehicleLanes == false)
-                    {
-                        roadwidth += lane.m_width;
-                    }
-                    //two way roads - add widths from positive lane positions
-                    else if (lane.m_position > 0)
-                    {
-                        roadwidth += lane.m_width;
-                    }
-                }
-
-
+                }   
             }
 
         }
@@ -366,5 +323,30 @@ namespace TrafficLightReplacer
                 }
             }
         }
+
+        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
+        {
+            //to do - take into account asym roads?
+            foreach (NetInfo.Lane lane in prefab.m_lanes)
+            {
+                if (lane.m_laneType.ToString() == "Parking" || lane.m_laneType.ToString() == "Vehicle")
+                {
+                    //detect one way roads - calculate width across whole road
+                    if (prefab.m_hasBackwardVehicleLanes == false || prefab.m_hasForwardVehicleLanes == false)
+                    {
+                        roadwidth += lane.m_width;
+                    }
+                    //two way roads - add widths from positive lane positions
+                    else if (lane.m_position > 0)
+                    {
+                        roadwidth += lane.m_width;
+                    }
+                }
+
+
+            }
+
+        }
+
     }
 }
