@@ -139,13 +139,14 @@ namespace TrafficLightReplacer
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
                 float roadwidth = 0;
+                bool isOneWay = false;
                 bool isHighway = false;
                 if (prefab.name.Contains("Highway"))
                 {
                     isHighway = true;
                 }
 
-                GetRoadInformation(prefab, ref roadwidth);
+                GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
 
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
                 {
@@ -167,15 +168,15 @@ namespace TrafficLightReplacer
                                     {
                                             if (roadwidth >= 15 || isHighway)
                                             {
-                                                ReplacePropFlipped(lane, propGroup, typeLarge);
+                                                ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
                                             }
                                             else if (roadwidth >= 6)
                                             {
-                                                ReplacePropFlipped(lane, propGroup, typeMedium);
+                                                ReplacePropFlipped(lane, propGroup, typeMedium, isOneWay, propGroupCounter);
                                             }
                                             else
                                             {
-                                                ReplacePropFlipped(lane, propGroup, typeSmall);  //regular
+                                                ReplacePropFlipped(lane, propGroup, typeSmall, isOneWay, propGroupCounter);  //regular
                                             }
                                     }
                                     else
@@ -216,29 +217,32 @@ namespace TrafficLightReplacer
             {
                 propGroup.m_finalProp = typeMain;
                 propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+                propGroup.m_position = propGroupCache[propGroupCounter].Position;
             }
             if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = typeMirror;
                 propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+                propGroup.m_position = propGroupCache[propGroupCounter].Position;
             }
 
             if (propGroup.m_prop.name == "Traffic Light Pedestrian")
             {
                 propGroup.m_finalProp = typePedSignal;
                 propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+                propGroup.m_position = propGroupCache[propGroupCounter].Position;
             }
 
             if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
             {
                 propGroup.m_finalProp = typeSignalPole;
                 propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
+                propGroup.m_position = propGroupCache[propGroupCounter].Position;
             }
         }
 
-        private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp)
+        private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp, bool isOneWay, int propGroupCounter)
         {
-
             if (lane.m_laneType.ToString() == "Pedestrian")
             {
                 if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
@@ -270,13 +274,11 @@ namespace TrafficLightReplacer
 
                 if (lane.m_position > 0)
                 {
-                    //propGroup.m_position.x = propGroup.m_position.x + 0.5f;
-                    propGroup.m_position.x = -2f;
+                    propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x + 1f;
                 }
                 else
                 {
-                    //propGroup.m_position.x = propGroup.m_position.x - 0.5f;
-                    propGroup.m_position.x = 2f;
+                    propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x - 1f;
                 }
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
@@ -285,9 +287,18 @@ namespace TrafficLightReplacer
                 if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
                 {
                     propGroup.m_angle = 270;
-                }   
+                }
             }
 
+            //fix for one way roads with two ped lights!
+            if (propGroup.m_prop.name == "Traffic Light Pedestrian" && isOneWay == true)
+            {
+                if (lane.m_position < 0)
+                {
+                    propGroup.m_finalProp = typePedSignal;
+                }
+
+            }
         }
 
         private static void ReplaceProp(NetInfo.Lane lane, PropInfo newProp, NetLaneProps.Prop propGroup)
@@ -324,7 +335,7 @@ namespace TrafficLightReplacer
             }
         }
 
-        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth)
+        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
         {
             //to do - take into account asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)
@@ -334,11 +345,13 @@ namespace TrafficLightReplacer
                     //detect one way roads - calculate width across whole road
                     if (prefab.m_hasBackwardVehicleLanes == false || prefab.m_hasForwardVehicleLanes == false)
                     {
+                        isOneWay = true;
                         roadwidth += lane.m_width;
                     }
                     //two way roads - add widths from positive lane positions
                     else if (lane.m_position > 0)
                     {
+                        isOneWay = false;
                         roadwidth += lane.m_width;
                     }
                 }

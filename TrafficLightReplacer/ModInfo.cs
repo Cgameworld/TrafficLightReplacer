@@ -142,6 +142,7 @@ namespace TrafficLightReplacer
                             {
                                 CachePropItem propGroupProperties = new CachePropItem();
                                 propGroupProperties.Angle = propGroup.m_angle;
+                                propGroupProperties.Position = propGroup.m_position;
                                 Replacer.propGroupCache.Add(propGroupProperties);
                             }
                         }
