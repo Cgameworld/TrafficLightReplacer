@@ -63,7 +63,7 @@ namespace TrafficLightReplacer
             }
             packList = tempPackList;
 
-
+           
             TrafficLightReplacePanel.ResetDropdown(TrafficLightReplacePanel.instance.packDropdown);
 
             foreach (var xmlItem in packList)
@@ -71,8 +71,12 @@ namespace TrafficLightReplacer
                 TrafficLightReplacePanel.instance.packDropdown.AddItem(xmlItem.PackName);
             }
 
-            TrafficLightReplacePanel.instance.packDropdown.selectedIndex = 0;
             Replacer.packList = packList;
+
+            Debug.Log("TLRModSettings.instance.CurrentPackIndex: " + TLRModSettings.instance.CurrentPackIndex);
+            //add check that current pack index matches name or something?
+            TrafficLightReplacePanel.instance.packDropdown.selectedIndex = TLRModSettings.instance.CurrentPackIndex;
+
         }
         public static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
         {

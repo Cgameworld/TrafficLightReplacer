@@ -80,6 +80,8 @@ namespace TrafficLightReplacer
                 //Replacer.Start(Replacer.xmlFileNames[packDropdown.selectedIndex]);
                 ResetAllDropdowns();
                 AddAllItemsToDropdowns();
+                TLRModSettings.instance.CurrentPackIndex = packDropdown.selectedIndex;
+                TLRModSettings.instance.Save();
             };
 
             oppositeSideToggle = UIUtils.CreateCheckBox(this);
@@ -165,6 +167,7 @@ namespace TrafficLightReplacer
                 Replacer.typeSmall = GetCurrentProp(Replacer.typeSmallOptions, smallRoadsDropdown);
                 smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[smallRoadsDropdown.selectedIndex].Description;
                 Replacer.UpdateLaneProps();
+
             };
 
             UILabel mediumRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();

@@ -48,8 +48,9 @@ namespace TrafficLightReplacer
 
         public void SetDefaultPosition()
         {
-
             absolutePosition = new Vector2(freeCameraButton.absolutePosition.x - (6 * buttonSize) - 5, freeCameraButton.absolutePosition.y);
+            TLRModSettings.instance.ButtonPosition = absolutePosition;
+            TLRModSettings.instance.Save();
         }
 
         protected override void OnClick(UIMouseEventParameter p)
