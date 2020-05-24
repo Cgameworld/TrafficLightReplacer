@@ -83,6 +83,7 @@ namespace TrafficLightReplacer
                 ResetAllDropdowns();
                 AddAllItemsToDropdowns();
                 TLRModSettings.instance.CurrentPackIndex = packDropdown.selectedIndex;
+                TLRModSettings.instance.LastLoadedXML = Replacer.packList[packDropdown.selectedIndex].PackPath;
                 TLRModSettings.instance.Save();
             };
 
