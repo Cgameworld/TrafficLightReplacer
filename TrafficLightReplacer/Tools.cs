@@ -22,6 +22,25 @@ namespace TrafficLightReplacer
         }
         public static void RefreshXMLPacks()
         {
+            List<Pack> packList = GetPackList();
+
+            TrafficLightReplacePanel.ResetDropdown(TrafficLightReplacePanel.instance.packDropdown);
+
+            foreach (var xmlItem in packList)
+            {
+                TrafficLightReplacePanel.instance.packDropdown.AddItem(xmlItem.PackName);
+            }
+
+            Replacer.packList = packList;
+
+            Debug.Log("TLRModSettings.instance.CurrentPackIndex: " + TLRModSettings.instance.CurrentPackIndex);
+            //add check that current pack index matches name or something?
+            TrafficLightReplacePanel.instance.packDropdown.selectedIndex = TLRModSettings.instance.CurrentPackIndex;
+
+        }
+
+        public static List<Pack> GetPackList()
+        {
             string[] files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml");
             List<string> xmlPackNames = new List<string>();
             List<Pack> packList = new List<Pack>();
@@ -62,22 +81,9 @@ namespace TrafficLightReplacer
                 }
             }
             packList = tempPackList;
-
-           
-            TrafficLightReplacePanel.ResetDropdown(TrafficLightReplacePanel.instance.packDropdown);
-
-            foreach (var xmlItem in packList)
-            {
-                TrafficLightReplacePanel.instance.packDropdown.AddItem(xmlItem.PackName);
-            }
-
-            Replacer.packList = packList;
-
-            Debug.Log("TLRModSettings.instance.CurrentPackIndex: " + TLRModSettings.instance.CurrentPackIndex);
-            //add check that current pack index matches name or something?
-            TrafficLightReplacePanel.instance.packDropdown.selectedIndex = TLRModSettings.instance.CurrentPackIndex;
-
+            return packList;
         }
+
         public static void ExtractEmbeddedResource(string outputDir, string resourceLocation, List<string> files)
         {
             Directory.CreateDirectory(outputDir);

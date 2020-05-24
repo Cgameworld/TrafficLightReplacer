@@ -49,8 +49,24 @@ namespace TrafficLightReplacer
         {
             InitReplace.CachePropFill();
 
-            string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
-            Replacer.Start(xmlfile1);
+            string xmlfile = TLRModSettings.instance.LastLoadedXML;
+
+            //change dropdown index based on xml 
+
+            List<Pack> packList = Tools.GetPackList();
+            for (int i = 0; i < packList.Count; i++)
+            {
+                if (packList[i].PackPath == xmlfile)
+                {
+                    Debug.Log("i is packindex " + i);
+                    TLRModSettings.instance.CurrentPackIndex = i;                    
+                }
+            }
+
+            //make if statement if xml doesnt exist anymore!
+
+            //string xmlfile1 = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
+            Replacer.Start(xmlfile);
         }
     }
 }
