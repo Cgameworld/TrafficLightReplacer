@@ -57,6 +57,7 @@
     <Compile Include="InitReplace.cs" />
     <Compile Include="CachePropItem.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Locale\TranslationID.cs" />
     <Compile Include="Pack.cs" />
     <Compile Include="TLRAsset.cs" />
     <Compile Include="AssetCreatorTool.cs" />
@@ -71,8 +72,14 @@
     <Compile Include="TLRModSettings.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="MainButton.cs" />
+    <Compile Include="TranslationFramework\Language.cs" />
+    <Compile Include="TranslationFramework\TranslatableAttribute.cs" />
+    <Compile Include="TranslationFramework\Translation.cs" />
+    <Compile Include="TranslationFramework\TranslationUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Locale\english.xml" />
+    <EmbeddedResource Include="Locale\german.xml" />
     <EmbeddedResource Include="Icons\tlr-button-padding.png" />
     <EmbeddedResource Include="Icons\tlr-button.png" />
     <EmbeddedResource Include="Icons\Folder.png" />

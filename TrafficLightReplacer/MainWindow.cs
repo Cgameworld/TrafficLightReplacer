@@ -2,6 +2,8 @@
 using ColossalFramework.IO;
 using ColossalFramework.UI;
 using System.IO;
+using TrafficLightReplacer.Locale;
+using TrafficLightReplacer.TranslationFramework;
 using UnityEngine;
 
 namespace TrafficLightReplacer
@@ -54,7 +56,7 @@ namespace TrafficLightReplacer
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
-            m_title.title = "Traffic Light Replacer (dA 2)";
+            m_title.title = Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE);
             //m_title.isModal = true;
 
             UILabel areaTypeLabel = AddUIComponent<UILabel>();

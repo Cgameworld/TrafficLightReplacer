@@ -4,10 +4,11 @@ using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using Harmony;
 using ICities;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using TrafficLightReplacer.Locale;
+using TrafficLightReplacer.TranslationFramework;
 using UnityEngine;
 using static ColossalFramework.Plugins.PluginManager;
 
@@ -18,15 +19,9 @@ namespace TrafficLightReplacer
         private readonly string harmonyId = "cgameworld.trafficlightreplacer";
         private HarmonyInstance harmony;
 
-        public string Name
-        {
-            get { return "Traffic Light Replacer"; }
-        }
+        public string Name => "Traffic Light Replacer";
 
-        public string Description
-        {
-            get { return "Mod Description"; }
-        }
+        public string Description => Translation.Instance.GetTranslation(TranslationID.MOD_DESCRIPTION);
 
         public void OnEnabled()
         {
