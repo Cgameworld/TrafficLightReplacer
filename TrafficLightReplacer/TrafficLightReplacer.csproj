@@ -85,9 +85,13 @@
     <EmbeddedResource Include="Icons\Folder.png" />
     <EmbeddedResource Include="DefaultXMLS\default.xml" />
     <EmbeddedResource Include="DefaultXMLS\NL_Lights.xml" />
+    <EmbeddedResource Include="DefaultXMLS\none.xml" />
+    <EmbeddedResource Include="Templates\multisize-template.xml" />
+    <EmbeddedResource Include="Templates\onesize-template.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="blankprop.crp" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

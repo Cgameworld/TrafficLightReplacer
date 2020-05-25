@@ -80,6 +80,7 @@ namespace TrafficLightReplacer
         {
             var embedList = new List<string>();
             embedList.Add("default.xml");
+            embedList.Add("none.xml");
 
             string changedMods = "";
             string copiedxmls = "";

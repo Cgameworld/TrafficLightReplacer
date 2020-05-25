@@ -59,7 +59,7 @@ namespace TrafficLightReplacer
 
 
             //set to blank asset on default?
-            typePedSignal = PrefabCollection<PropInfo>.FindLoaded("1535107168.New Blank Traffic Light_Data");
+            typePedSignal = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
 
             for (int i = 0; i < result.Count; i++)
             {

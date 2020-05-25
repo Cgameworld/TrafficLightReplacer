@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>One-Size Template</PackName>
+	<RemoveMirrorLights>false</RemoveMirrorLights>
+	<OneSize>true</OneSize>
+	<Assets>
+    <!--Be sure to replace "Placeholder" with the Prop Prefab Name for each Asset!
+    use the Pack Creator Helper window to easily copy prop names-->
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Type>Main</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Type>Mirror</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Type>Ped Signal</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+</TLRConfig>

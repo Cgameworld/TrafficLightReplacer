@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>Multi-Size Template</PackName>
+	<RemoveMirrorLights>true</RemoveMirrorLights>
+	<OneSize>false</OneSize>
+	<Assets>
+    <!--Be sure to replace "Placeholder" with the Prop Prefab Name for each Asset!
+    use the Pack Creator Helper window to easily copy prop names-->
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Name>S Option 1</Name>
+			<Description>Small Traffic Light Option 1</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Name>M Option 1</Name>
+			<Description>Medium Traffic Light Option 1</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Name>M Option 2</Name>
+			<Description>Medium Traffic Light Option 2</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Name>L Option 1</Name>
+			<Description>Large Traffic Light Option 1</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Placeholder</Prefab>
+			<Name>Signal Pole</Name>
+			<Description>TBA</Description>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+</TLRConfig>
