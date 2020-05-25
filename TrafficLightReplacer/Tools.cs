@@ -1,4 +1,5 @@
 ﻿using ColossalFramework.IO;
+using ColossalFramework.Packaging;
 using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,46 @@ namespace TrafficLightReplacer
 
         public static List<Pack> GetPackList()
         {
-            string[] files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml");
+            List<string> files = new List<string>();
+            files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml").ToList();
             List<string> xmlPackNames = new List<string>();
             List<Pack> packList = new List<Pack>();
+
+            //get xmls from ws asset folder
+            for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+            {
+                var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
+
+                if (prefab == null)
+                    continue;
+
+                var asset = PackageManager.FindAssetByName(prefab.name);
+                if (asset == null || asset.package == null)
+                    continue;
+
+                var crpPath = asset.package.packagePath;
+                if (crpPath == null)
+                    continue;
+
+                var propDirectory = Directory.GetParent(crpPath);
+
+                if (propDirectory.ToString() != DataLocation.assetsPath)
+                {
+                    var folderFiles = propDirectory.GetFiles();
+
+                    foreach (var filePath in folderFiles)
+                    {
+                        var filename = Path.GetFileName(filePath.ToString());
+                        if (filename == "TLRConfig.xml")
+                        {
+                            Debug.Log("Found TLRConfig at: " + filePath);
+                            files.Add(filePath.ToString());
+                        }
+                    }
+                }
+            }
+
+            //////////
 
             foreach (var xmlFilePath in files)
             {
@@ -54,6 +92,7 @@ namespace TrafficLightReplacer
                 Debug.Log("packname: " + XMLinput.PackName);
                 xmlPackNames.Add(XMLinput.PackName);
             }
+
 
             //adding xml file path and name to pack object
             for (int i = 0; i < xmlPackNames.Count; i++)

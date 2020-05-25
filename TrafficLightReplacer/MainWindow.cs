@@ -236,47 +236,10 @@ namespace TrafficLightReplacer
             getmeditems.text = "getpaths-d";
             getmeditems.relativePosition = new Vector2(220, 200);
             getmeditems.width = 120;
-            getmeditems.isVisible = true;
+            getmeditems.isVisible = false;
 
             getmeditems.eventClick += (c, p) =>
             {
-                Debug.Log("\nassetdirpaths:");
-
-                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
-                {
-                    var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
-
-                    if (prefab == null)
-                        continue;
-
-                    var asset = PackageManager.FindAssetByName(prefab.name);
-                    if (asset == null || asset.package == null)
-                        continue;
-
-                    var crpPath = asset.package.packagePath;
-                    if (crpPath == null)
-                        continue;
-
-                    var propDirectory = Directory.GetParent(crpPath);
-
-                    if (propDirectory.ToString() != DataLocation.assetsPath)
-                    {
-                       // Debug.Log("assetdirectory:\n" + propDirectory);
-
-                        var folderFiles = propDirectory.GetFiles();
-
-                        foreach (var filePath in folderFiles)
-                        {
-                            //Debug.Log("filename " + Path.GetFileName(filePath.ToString()));
-                            var filename = Path.GetFileName(filePath.ToString());
-                            if (filename == "TLRConfig.xml")
-                            {
-                                Debug.Log("Found TLRConfig at: " + filePath);
-                            }
-                        }
-                    }
-
-                }
 
             };
         }
