@@ -1,5 +1,7 @@
 ﻿using ColossalFramework;
 using ColossalFramework.IO;
+using ColossalFramework.Packaging;
+using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using System.IO;
 using TrafficLightReplacer.Locale;
@@ -231,19 +233,51 @@ namespace TrafficLightReplacer
             };
 
             getmeditems = UIUtils.CreateButton(this);
-            getmeditems.text = "getmediumroaditems";
-            getmeditems.relativePosition = new Vector2(220, 400);
+            getmeditems.text = "getpaths-d";
+            getmeditems.relativePosition = new Vector2(220, 200);
             getmeditems.width = 120;
-            getmeditems.isVisible = false;
+            getmeditems.isVisible = true;
 
             getmeditems.eventClick += (c, p) =>
             {
-                int count = 0;
-                foreach (var item in Replacer.typeMediumOptions)
+                Debug.Log("\nassetdirpaths:");
+
+                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
                 {
-                    Debug.Log("medroaditem " + count + " :" + item.Name);
-                    count++;
-                }               
+                    var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
+
+                    if (prefab == null)
+                        continue;
+
+                    var asset = PackageManager.FindAssetByName(prefab.name);
+                    if (asset == null || asset.package == null)
+                        continue;
+
+                    var crpPath = asset.package.packagePath;
+                    if (crpPath == null)
+                        continue;
+
+                    var propDirectory = Directory.GetParent(crpPath);
+
+                    if (propDirectory.ToString() != DataLocation.assetsPath)
+                    {
+                       // Debug.Log("assetdirectory:\n" + propDirectory);
+
+                        var folderFiles = propDirectory.GetFiles();
+
+                        foreach (var filePath in folderFiles)
+                        {
+                            //Debug.Log("filename " + Path.GetFileName(filePath.ToString()));
+                            var filename = Path.GetFileName(filePath.ToString());
+                            if (filename == "TLRConfig.xml")
+                            {
+                                Debug.Log("Found TLRConfig at: " + filePath);
+                            }
+                        }
+                    }
+
+                }
+
             };
         }
 
