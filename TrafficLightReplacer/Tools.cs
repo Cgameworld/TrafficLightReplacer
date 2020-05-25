@@ -22,6 +22,11 @@ namespace TrafficLightReplacer
             panel.SetMessage(header, message, false);
             panel.GetComponentInChildren<UISprite>().spriteName = "IconError";
         }
+        public static void ShowAlertWindow(string header, string message)
+        {
+            ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
+            panel.SetMessage(header, message, false);
+        }
         public static void RefreshXMLPacks()
         {
             List<Pack> packList = GetPackList();

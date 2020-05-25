@@ -2,6 +2,7 @@
 using ColossalFramework.IO;
 using ColossalFramework.UI;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace TrafficLightReplacer
         private UIButton updateButton;
         private UIButton copyButton;
         private UIButton openXMLFolderButton;
+        private UIButton gentempXML;
 
         public static CreatorToolPanel instance
         {
@@ -43,8 +45,8 @@ namespace TrafficLightReplacer
             isInteractive = true;
             clipChildren = true;
             width = 370;
-            height = 140;
-            relativePosition = new Vector3(1550, 550);
+            height = 185;
+            relativePosition = new Vector3(1520, 550);
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
@@ -69,7 +71,7 @@ namespace TrafficLightReplacer
             updateButton.text = "Update";
             updateButton.relativePosition = new Vector2(20, 100);
             updateButton.tooltip = "Select a prop using Find It! and click update"; 
-            updateButton.width = 100;
+            updateButton.width = 146;
 
             updateButton.eventClick += (c, p) =>
             {
@@ -85,7 +87,7 @@ namespace TrafficLightReplacer
 
             copyButton = UIUtils.CreateButton(this);
             copyButton.text = "Copy";
-            copyButton.relativePosition = new Vector2(140, 100);
+            copyButton.relativePosition = new Vector2(188, 100);
             copyButton.width = 100;
 
             copyButton.eventClick += (c, p) =>
@@ -110,6 +112,21 @@ namespace TrafficLightReplacer
                 {
                     Utils.OpenInFileBrowser(Path.Combine(DataLocation.localApplicationData, "TLRLocal"));
                 }
+            };
+
+            gentempXML = UIUtils.CreateButton(this);
+            gentempXML.text = "Generate Template Pack XMLs";
+            gentempXML.relativePosition = new Vector2(20, 140);
+            gentempXML.width = 325;
+
+            gentempXML.eventClick += (c, p) =>
+            {
+                List<string> xmltemplates = new List<string>();
+                xmltemplates.Add("onesize-template.xml");
+                xmltemplates.Add("multisize-template.xml");
+                var tlrlocal = Path.Combine(DataLocation.localApplicationData, "TLRLocal");
+                Tools.ExtractEmbeddedResource(tlrlocal, "TrafficLightReplacer.Templates", xmltemplates);
+                Tools.ShowAlertWindow("Template XML Files Exported", "Template XML files exported to " + tlrlocal + "\n\nClick on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder");
             };
         }
 
