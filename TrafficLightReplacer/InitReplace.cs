@@ -70,7 +70,7 @@ namespace TrafficLightReplacer
             catch
             {
                 TLRModSettings.instance.CurrentPackIndex = 0;
-                string defaultfile = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "default.xml");
+                string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
                 Replacer.Start(defaultfile);
             }
         }

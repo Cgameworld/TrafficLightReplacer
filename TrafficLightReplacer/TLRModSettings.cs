@@ -14,7 +14,7 @@ namespace TrafficLightReplacer
         public bool ShowCreatorTool { get; set; } = false;
         public bool EnableButtonBackground { get; set; } = false;
         public int CurrentPackIndex { get; set; } = 0;
-        public string LastLoadedXML { get; set; } = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "test.xml");
+        public string LastLoadedXML { get; set; } = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
         public Vector3 ButtonPosition { get; set; } = new Vector3(-9999, -9999, 0);
         public bool LoadTLRLocalFolder { get; set; } = false;
         public List<string> EmbeddedXMLActive { get; set; }
