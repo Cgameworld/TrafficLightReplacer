@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>Clus Traffic Lights (Vanilla)</PackName>
+	<RemoveMirrorLights>false</RemoveMirrorLights>
+	<OneSize>true</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>2032407437.Traffic Light - TLD_D5_Data</Prefab>
+			<Type>Main</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2032407437.Traffic Light - TLD_D5M_Data</Prefab>
+			<Type>Mirror</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2032407437.Traffic Light - TLPedDBL_L_Data</Prefab>
+			<Type>Ped Signal</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2032407437.Traffic Light - TLS_S1M_Data</Prefab>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+</TLRConfig>

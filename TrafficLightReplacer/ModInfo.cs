@@ -1,5 +1,6 @@
 ﻿using ColossalFramework;
 using ColossalFramework.IO;
+using ColossalFramework.Packaging;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using Harmony;
@@ -96,8 +97,41 @@ namespace TrafficLightReplacer
                         embedList.Add("NL_Lights.xml");
                     }
 
+                    if (mod.name == "694123443")
+                    {
+                        if (mod.isEnabled)
+                        {
+                            mod.isEnabled = false;
+                        }
+
+                        embedList.Add("BP_American.xml");
+                    }
+
                 }
             }
+
+            for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+            {
+                var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
+
+                if (prefab == null)
+                    continue;
+
+                var asset = PackageManager.FindAssetByName(prefab.name);
+                if (asset == null || asset.package == null)
+                    continue;
+
+                var crpPath = asset.package.packageName;
+
+                if (crpPath == "2032407437")
+                {
+                    Debug.Log("CLUS traffic Lights!");
+                    embedList.Add("clus_lights.xml");
+                    
+                }
+            }
+
+
 
             TLRModSettings.instance.EmbeddedXMLActive = embedList;
         }

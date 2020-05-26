@@ -88,6 +88,8 @@
     <EmbeddedResource Include="DefaultXMLS\none.xml" />
     <EmbeddedResource Include="Templates\multisize-template.xml" />
     <EmbeddedResource Include="Templates\onesize-template.xml" />
+    <EmbeddedResource Include="DefaultXMLS\clus_lights.xml" />
+    <EmbeddedResource Include="DefaultXMLS\BP_American.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>

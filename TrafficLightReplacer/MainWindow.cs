@@ -241,18 +241,29 @@ namespace TrafficLightReplacer
 
             getmeditems.eventClick += (c, p) =>
             {
-                //add xml files from embedded resources
-                var embeddedxmlnames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-                //.Where(r => r.StartsWith("DefaultXMLS"))
+                Debug.Log("\nassetdirpaths:");
 
-                Debug.LogWarning("embedxmlnames!");
-
-                foreach (var item in embeddedxmlnames)
+                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
                 {
-                    Debug.Log(item);
-                }
+                    var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
 
+                    if (prefab == null)
+                        continue;
+
+                    var asset = PackageManager.FindAssetByName(prefab.name);
+                    if (asset == null || asset.package == null)
+                        continue;
+
+                    var crpPath = asset.package.packageName;
+
+                    if (crpPath == "2032407437")
+                    {
+                        Debug.Log("CLUS tRafficLights!");
+                    }
+                    Debug.Log("crppath " + crpPath);
+                }
             };
+
         }
 
         private static PropInfo GetCurrentProp(System.Collections.Generic.List<Asset> currentpropCategory, UIDropDown dropdown)

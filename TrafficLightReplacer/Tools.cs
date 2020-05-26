@@ -13,7 +13,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using UnityEngine;
-using static ColossalFramework.Plugins.PluginManager;
 
 namespace TrafficLightReplacer
 {
