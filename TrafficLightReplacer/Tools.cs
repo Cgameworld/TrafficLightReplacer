@@ -141,22 +141,28 @@ namespace TrafficLightReplacer
             }
 
 
-            //sorts and removes square brackets from packname for sorter
+            //sorts alphabetically and removes square brackets from packname for sorter
             packList = packList.OrderBy(o => Regex.Replace(o.PackName, @"\[.*\] ", "")).ToList();
 
-            //places vanilla lights xml to top
+            //places vanilla lights xml to top and none xml to the bottom
             var vanillatrafficindex = packList.FindIndex(a => a.PackName == "Vanilla Traffic Lights");
+            var nonetrafficindex = packList.FindIndex(a => a.PackName == "None");
+
+            //add vanilla first
             List<Pack> tempPackList = new List<Pack>
             {
                 packList[vanillatrafficindex]
             };
             for (int j = 0; j < xmlPackNames.Count; j++)
             {
-                if (j != vanillatrafficindex)
+                if (j != vanillatrafficindex && j !=nonetrafficindex)
                 {
                     tempPackList.Add(packList[j]);
                 }
             }
+            //add none last
+            tempPackList.Add(packList[nonetrafficindex]);
+
             packList = tempPackList;
             return packList;
         }
