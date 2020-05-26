@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
 using UnityEngine;
@@ -47,10 +48,21 @@ namespace TrafficLightReplacer
             typeLargeOptions.TrimExcess();
 
             XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
-            StreamReader reader = new StreamReader(path);
-            TLRConfig XMLinput = (TLRConfig)serializer.Deserialize(reader);
-            
-            reader.Close();
+            TLRConfig XMLinput;
+
+            if (path.Contains("RESOURCE."))
+            {
+                var resourcePath = path.Replace("RESOURCE.", string.Empty);
+                Stream reader = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
+                XMLinput = (TLRConfig)serializer.Deserialize(reader);
+                reader.Close();
+            }
+            else
+            {
+                StreamReader reader = new StreamReader(path);
+                XMLinput = (TLRConfig)serializer.Deserialize(reader);
+                reader.Close();
+            }
 
             foreach (var item in XMLinput.Assets)
             {

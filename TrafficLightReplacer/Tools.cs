@@ -61,6 +61,17 @@ namespace TrafficLightReplacer
             List<string> xmlPackNames = new List<string>();
             List<Pack> packList = new List<Pack>();
 
+            //gets embedded resource xml files
+            var embeddedxmlnames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+
+            foreach (string file in embeddedxmlnames)
+            {
+                if (file.Contains("TrafficLightReplacer.DefaultXMLS"))
+                {
+                    files.Add("RESOURCE." + file);
+                }
+            }
+
             //get XMLs from ws asset folder
             for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
             {
@@ -95,17 +106,30 @@ namespace TrafficLightReplacer
                 }
             }
 
-            //add xml files from ws and local folders
+            //add xml files from ws/local/embedded folders
 
             foreach (var xmlFilePath in files)
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
-                StreamReader reader = new StreamReader(xmlFilePath);
-                TLRConfig XMLinput = (TLRConfig)serializer.Deserialize(reader);
-                reader.Close();
-                Debug.Log("packname: " + XMLinput.PackName);
+                TLRConfig XMLinput;
+
+                if (xmlFilePath.Contains("RESOURCE."))
+                {
+                    var resourcePath = xmlFilePath.Replace("RESOURCE.", string.Empty);
+                    Stream reader = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
+                    XMLinput = (TLRConfig)serializer.Deserialize(reader);
+                    reader.Close();
+                }
+                else
+                {
+                    StreamReader reader = new StreamReader(xmlFilePath);
+                    XMLinput = (TLRConfig)serializer.Deserialize(reader);
+                    reader.Close();
+                }
+                Console.WriteLine("packname: " + XMLinput.PackName);
                 xmlPackNames.Add(XMLinput.PackName);
             }
+
 
             //adding xml file path and name to pack object
             for (int i = 0; i < xmlPackNames.Count; i++)
@@ -115,12 +139,6 @@ namespace TrafficLightReplacer
                 item.PackPath = files[i];
                 packList.Add(item);
             }
-
-            //gets embedded resource xml names for
-            var embeddedxmlnames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-
-
-
 
 
             //sorts and removes square brackets from packname for sorter
