@@ -1,6 +1,9 @@
-﻿using ColossalFramework.IO;
+﻿using ColossalFramework;
+using ColossalFramework.IO;
 using ColossalFramework.Packaging;
+using ColossalFramework.Plugins;
 using ColossalFramework.UI;
+using ICities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using UnityEngine;
+using static ColossalFramework.Plugins.PluginManager;
 
 namespace TrafficLightReplacer
 {
@@ -112,7 +116,10 @@ namespace TrafficLightReplacer
                 packList.Add(item);
             }
 
-            //add xml files from embedded resources
+            //gets embedded resource xml names for
+            var embeddedxmlnames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+
+
 
 
 

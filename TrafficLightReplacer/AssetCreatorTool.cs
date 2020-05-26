@@ -134,13 +134,14 @@ namespace TrafficLightReplacer
 
             TLRLocalLoad = UIUtils.CreateCheckBox(this);
             TLRLocalLoad.text = "Load TLRLocal Folder";
-            TLRLocalLoad.isChecked = true;
+            TLRLocalLoad.isChecked = false;
             TLRLocalLoad.relativePosition = new Vector2(20, 185);
             TLRLocalLoad.tooltip = "";
 
             TLRLocalLoad.eventCheckChanged += (c, p) =>
             {
-                
+                TLRModSettings.instance.LoadTLRLocalFolder = p;
+                TLRModSettings.instance.Save();
             };
 
             refreshPack = UIUtils.CreateButton(this);

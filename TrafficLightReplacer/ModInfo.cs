@@ -82,9 +82,6 @@ namespace TrafficLightReplacer
             embedList.Add("default.xml");
             embedList.Add("none.xml");
 
-            string changedMods = "";
-            string copiedxmls = "";
-
             foreach (PluginInfo mod in Singleton<PluginManager>.instance.GetPluginsInfo())
             {
                 if (mod.GetInstances<IUserMod>().Length != 0)
@@ -94,7 +91,6 @@ namespace TrafficLightReplacer
                         if (mod.isEnabled)
                         {
                             mod.isEnabled = false;
-                            changedMods += ((IUserMod)mod.userModInstance).Name + "\n";
                         }
                        
                         embedList.Add("NL_Lights.xml");
@@ -103,17 +99,7 @@ namespace TrafficLightReplacer
                 }
             }
 
-
-            Tools.ExtractEmbeddedResource(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "TrafficLightReplacer.DefaultXMLS", embedList);
-           
-
-            foreach (var str in embedList)
-            {
-                copiedxmls += str + "\n";
-            }
-            //add xml injected message to dialog
-            Tools.ShowErrorWindow("Mod Detected!", "DisabledMods:\n" + changedMods + "\nCopied XMLs:\n" + copiedxmls);
-
+            TLRModSettings.instance.EmbeddedXMLActive = embedList;
         }
 
     }

@@ -4,6 +4,7 @@ using ColossalFramework.Packaging;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using System.IO;
+using System.Reflection;
 using TrafficLightReplacer.Locale;
 using TrafficLightReplacer.TranslationFramework;
 using UnityEngine;
@@ -236,10 +237,20 @@ namespace TrafficLightReplacer
             getmeditems.text = "getpaths-d";
             getmeditems.relativePosition = new Vector2(220, 200);
             getmeditems.width = 120;
-            getmeditems.isVisible = false;
+            //getmeditems.isVisible = false;
 
             getmeditems.eventClick += (c, p) =>
             {
+                //add xml files from embedded resources
+                var embeddedxmlnames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+                //.Where(r => r.StartsWith("DefaultXMLS"))
+
+                Debug.LogWarning("embedxmlnames!");
+
+                foreach (var item in embeddedxmlnames)
+                {
+                    Debug.Log(item);
+                }
 
             };
         }
