@@ -65,8 +65,9 @@ namespace TrafficLightReplacer
 
             foreach (string file in embeddedxmlnames)
             {
-                if (file.Contains("TrafficLightReplacer.DefaultXMLS"))
+                if (file.Contains("TrafficLightReplacer.DefaultXMLS") && TLRModSettings.instance.EmbeddedXMLActive.Contains(file))
                 {
+                    Debug.Log("resource file added: " + file);
                     files.Add("RESOURCE." + file);
                 }
             }

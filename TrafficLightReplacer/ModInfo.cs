@@ -131,7 +131,13 @@ namespace TrafficLightReplacer
                 }
             }
 
+            var tempEmbedList = new List<string>();
+            foreach (var item in embedList)
+            {
+                tempEmbedList.Add("TrafficLightReplacer.DefaultXMLS." + item);
+            }
 
+            embedList = tempEmbedList;
 
             TLRModSettings.instance.EmbeddedXMLActive = embedList;
         }

@@ -237,31 +237,11 @@ namespace TrafficLightReplacer
             getmeditems.text = "getpaths-d";
             getmeditems.relativePosition = new Vector2(220, 200);
             getmeditems.width = 120;
-            //getmeditems.isVisible = false;
+            getmeditems.isVisible = false;
 
             getmeditems.eventClick += (c, p) =>
             {
-                Debug.Log("\nassetdirpaths:");
-
-                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
-                {
-                    var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
-
-                    if (prefab == null)
-                        continue;
-
-                    var asset = PackageManager.FindAssetByName(prefab.name);
-                    if (asset == null || asset.package == null)
-                        continue;
-
-                    var crpPath = asset.package.packageName;
-
-                    if (crpPath == "2032407437")
-                    {
-                        Debug.Log("CLUS tRafficLights!");
-                    }
-                    Debug.Log("crppath " + crpPath);
-                }
+               
             };
 
         }
