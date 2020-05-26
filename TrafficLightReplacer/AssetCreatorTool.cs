@@ -20,6 +20,7 @@ namespace TrafficLightReplacer
         private UIButton copyButton;
         private UIButton openXMLFolderButton;
         private UIButton gentempXML;
+        private UIButton refreshPack;
 
         public static CreatorToolPanel instance
         {
@@ -33,6 +34,8 @@ namespace TrafficLightReplacer
             }
         }
 
+        public UICheckBox TLRLocalLoad { get; private set; }
+
         public override void Start()
         {
             LoadResources();
@@ -45,8 +48,8 @@ namespace TrafficLightReplacer
             isInteractive = true;
             clipChildren = true;
             width = 370;
-            height = 185;
-            relativePosition = new Vector3(1520, 550);
+            height = 225;
+            relativePosition = new Vector3(1550, 530);
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
@@ -128,6 +131,31 @@ namespace TrafficLightReplacer
                 Tools.ExtractEmbeddedResource(tlrlocal, "TrafficLightReplacer.Templates", xmltemplates);
                 Tools.ShowAlertWindow("Template XML Files Exported", "Template XML files exported to " + tlrlocal + "\n\nClick on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder");
             };
+
+            TLRLocalLoad = UIUtils.CreateCheckBox(this);
+            TLRLocalLoad.text = "Load TLRLocal Folder";
+            TLRLocalLoad.isChecked = true;
+            TLRLocalLoad.relativePosition = new Vector2(20, 185);
+            TLRLocalLoad.tooltip = "";
+
+            TLRLocalLoad.eventCheckChanged += (c, p) =>
+            {
+                
+            };
+
+            refreshPack = UIUtils.CreateButton(this);
+            refreshPack.text = "Refresh Packs";
+            refreshPack.relativePosition = new Vector2(210, 180);
+            refreshPack.width = 135;
+
+            refreshPack.eventClick += (c, p) =>
+            {
+                if (isVisible)
+                {
+                    Tools.RefreshXMLPacks();
+                }
+            };
+
         }
 
         private void LoadResources()

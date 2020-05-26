@@ -16,6 +16,7 @@ namespace TrafficLightReplacer
         public int CurrentPackIndex { get; set; } = 0;
         public string LastLoadedXML { get; set; } = Path.Combine(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "test.xml");
         public Vector3 ButtonPosition { get; set; } = new Vector3(-9999, -9999, 0);
+        public bool LoadTLRLocalFolder { get; set; } = false;
 
         //implementation from keallu's mods
         private static TLRModSettings _instance;

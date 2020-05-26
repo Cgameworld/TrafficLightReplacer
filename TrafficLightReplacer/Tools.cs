@@ -49,11 +49,15 @@ namespace TrafficLightReplacer
         public static List<Pack> GetPackList()
         {
             List<string> files = new List<string>();
-            files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml").ToList();
+            //get XMLs from TLR Local Folder
+            if (TLRModSettings.instance.LoadTLRLocalFolder)
+            {
+                files = Directory.GetFiles(Path.Combine(DataLocation.localApplicationData, "TLRLocal"), "*.xml").ToList();
+            }
             List<string> xmlPackNames = new List<string>();
             List<Pack> packList = new List<Pack>();
 
-            //get xmls from ws asset folder
+            //get XMLs from ws asset folder
             for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
             {
                 var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
@@ -87,7 +91,7 @@ namespace TrafficLightReplacer
                 }
             }
 
-            //////////
+            //add xml files from ws and local folders
 
             foreach (var xmlFilePath in files)
             {
@@ -99,7 +103,6 @@ namespace TrafficLightReplacer
                 xmlPackNames.Add(XMLinput.PackName);
             }
 
-
             //adding xml file path and name to pack object
             for (int i = 0; i < xmlPackNames.Count; i++)
             {
@@ -108,6 +111,10 @@ namespace TrafficLightReplacer
                 item.PackPath = files[i];
                 packList.Add(item);
             }
+
+            //add xml files from embedded resources
+
+
 
             //sorts and removes square brackets from packname for sorter
             packList = packList.OrderBy(o => Regex.Replace(o.PackName, @"\[.*\] ", "")).ToList();
