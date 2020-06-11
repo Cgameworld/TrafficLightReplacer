@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Locale\english.xml" />
-    <EmbeddedResource Include="Locale\german.xml" />
     <EmbeddedResource Include="Icons\tlr-button-padding.png" />
     <EmbeddedResource Include="Icons\tlr-button.png" />
     <EmbeddedResource Include="Icons\Folder.png" />

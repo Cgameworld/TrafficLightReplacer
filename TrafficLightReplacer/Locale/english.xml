@@ -3,5 +3,16 @@
   <Translations>
     <Translation ID="MOD_DESCRIPTION" String="Customize your city's traffic lights" />
     <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer (dvA 2)" />
+    <Translation ID="MAINWINDOW_PACKLABEL" String="Pack" />
+    <Translation ID="NULLDROPDOWN" String="Empty" />
+    <Translation ID="OPPOSITESIDETOGGLE" String="Place on opposite side of stop line" />
+    <Translation ID="OPPOSITESIDETOOLTIP" String="Places traffic lights to the opposite side of the stop line" />
+    <Translation ID="CUSTOMIZEBUTTONTEXT" String="Customize Lights" />
+    <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Select Traffic Light Variations" />
+    <Translation ID="SMALLROADSDROPDOWNLABEL" String="Small Roads:" />
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Medium Roads:" />
+    <Translation ID="LARGEROADSDROPDOWNLABEL" String="Large Roads:" />
+
+
   </Translations>
 </Language>

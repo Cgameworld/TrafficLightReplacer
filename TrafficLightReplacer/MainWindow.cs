@@ -68,21 +68,19 @@ namespace TrafficLightReplacer
             areaTypeLabel.width = 60;
             areaTypeLabel.height = 30;
             areaTypeLabel.relativePosition = new Vector2(20, 60);
-            areaTypeLabel.text = "Pack:";
+            areaTypeLabel.text = Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_PACKLABEL);
 
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
             //add option to toggle between euro and generic vanilla!!!
             packDropdown.relativePosition = new Vector3(80, 53);
-            packDropdown.AddItem("Empty");
+            packDropdown.AddItem(Translation.Instance.GetTranslation(TranslationID.NULLDROPDOWN));
             packDropdown.selectedIndex = 0;
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
-                Debug.Log("2dropdown change to: " + Replacer.packList[packDropdown.selectedIndex].PackPath);
+                Debug.Log("TLR: Dropdown Changed To: " + Replacer.packList[packDropdown.selectedIndex].PackPath);
                 Replacer.Start(Replacer.packList[packDropdown.selectedIndex].PackPath);
-               // Debug.Log("2dropdown change to: " + Replacer.xmlFileNames[packDropdown.selectedIndex]);
-                //Replacer.Start(Replacer.xmlFileNames[packDropdown.selectedIndex]);
                 ResetAllDropdowns();
                 AddAllItemsToDropdowns();
                 TLRModSettings.instance.CurrentPackIndex = packDropdown.selectedIndex;
@@ -91,16 +89,15 @@ namespace TrafficLightReplacer
             };
 
             oppositeSideToggle = UIUtils.CreateCheckBox(this);
-            oppositeSideToggle.text = "Place on opposite side of stop line";
+            oppositeSideToggle.text = Translation.Instance.GetTranslation(TranslationID.OPPOSITESIDETOGGLE);
             oppositeSideToggle.isChecked = false;
             oppositeSideToggle.relativePosition = new Vector2(20, 100);
-            oppositeSideToggle.tooltip = "Dummy Button - TBD";
+            oppositeSideToggle.tooltip = Translation.Instance.GetTranslation(TranslationID.OPPOSITESIDETOOLTIP);
             oppositeSideToggle.isVisible = false;
 
             oppositeSideToggle.eventCheckChanged += (c, p) =>
             {           
                 Replacer.UpdateLaneProps();
-                Debug.Log("checkboxchecked and updatelaneprops fired");
             };
 
 
@@ -110,12 +107,12 @@ namespace TrafficLightReplacer
             customizeButton.textHorizontalAlignment = UIHorizontalAlignment.Left;
             customizeButton.textPadding.top = 4;
             customizeButton.textPadding.left = 40;
-            customizeButton.text = "Customize Lights";
+            customizeButton.text = Translation.Instance.GetTranslation(TranslationID.CUSTOMIZEBUTTONTEXT);
             customizeButton.textScale = 0.9f;
             customizeButton.relativePosition = new Vector2(20, 135);
             customizeButton.height = 25;
             customizeButton.width = 330;
-            customizeButton.tooltip = "Select Traffic Light Variations";
+            customizeButton.tooltip = Translation.Instance.GetTranslation(TranslationID.CUSTOMIZEBUTTONTEXTTOOLTIP);
             customizeButton.isVisible = false;
 
             customizeButtonToggle = UIUtils.CreateLabelSpriteImage(this, m_atlas);
@@ -158,7 +155,7 @@ namespace TrafficLightReplacer
             smallRoadsDropdownLabel.width = 110;
             smallRoadsDropdownLabel.height = 30;
             smallRoadsDropdownLabel.relativePosition = new Vector2(20, 7);
-            smallRoadsDropdownLabel.text = "Small Roads:";
+            smallRoadsDropdownLabel.text = Translation.Instance.GetTranslation(TranslationID.SMALLROADSDROPDOWNLABEL);
 
             smallRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             smallRoadsDropdown.width = 185;
@@ -182,7 +179,7 @@ namespace TrafficLightReplacer
             mediumRoadsDropdownLabel.width = 145;
             mediumRoadsDropdownLabel.height = 30;
             mediumRoadsDropdownLabel.relativePosition = new Vector2(20, 47);
-            mediumRoadsDropdownLabel.text = "Medium Roads:";
+            mediumRoadsDropdownLabel.text = Translation.Instance.GetTranslation(TranslationID.MEDIUMROADSDROPDOWNLABEL);
 
             mediumRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             mediumRoadsDropdown.width = 185;
@@ -204,7 +201,7 @@ namespace TrafficLightReplacer
             largeRoadsDropdownLabel.width = 145;
             largeRoadsDropdownLabel.height = 30;
             largeRoadsDropdownLabel.relativePosition = new Vector2(20, 87);
-            largeRoadsDropdownLabel.text = "Large Roads:";
+            largeRoadsDropdownLabel.text = Translation.Instance.GetTranslation(TranslationID.LARGEROADSDROPDOWNLABEL);
 
             largeRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             largeRoadsDropdown.width = 185;
