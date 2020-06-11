@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
 using ColossalFramework.Globalization;
+using UnityEngine;
 
 //using BloodyPenguin's Translation Framework with TPB's Theme Mixer 2 implementation
 namespace TrafficLightReplacer.TranslationFramework
@@ -58,34 +59,32 @@ namespace TrafficLightReplacer.TranslationFramework
         public void RefreshLanguages()
         {
             Languages.Clear();
-            string basePath = TranslationUtil.AssemblyPath;
 
-            if (basePath != "")
-            {              
-                string languagePath = Path.Combine(basePath, "Locale");
+            //grabs locale xml via embedded resource
+            var embeddedxmlnames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            List<string> localeFiles = new List<string>();
 
-                if (Directory.Exists(languagePath))
+            foreach (string file in embeddedxmlnames)
+            {
+                if (file.Contains("TrafficLightReplacer.Locale"))
                 {
-                    string[] languageFiles = Directory.GetFiles(languagePath);
 
-                    foreach (string languageFile in languageFiles)
-                    {
-                        using (StreamReader reader = new StreamReader(languageFile))
-                        {
-                            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Language));
-                            if (xmlSerializer.Deserialize(reader) is Language loadedLanguage)
-                                Languages.Add(loadedLanguage);
-
-                            else UnityEngine.Debug.LogWarning($"Failed to Deserialize {languageFile}!");
-                        }
-                    }
-                }
-                else
-                {
-                    UnityEngine.Debug.LogWarning("Locale Directory not found!");
+                    localeFiles.Add(file);
                 }
             }
-            else UnityEngine.Debug.LogWarning("Mod Path was empty!");
+
+            foreach (var xmlFilePath in localeFiles)
+            {
+                Debug.Log("xmlfile lang" + xmlFilePath);
+                Stream reader = Assembly.GetExecutingAssembly().GetManifestResourceStream(xmlFilePath);
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Language));
+                if (xmlSerializer.Deserialize(reader) is Language loadedLanguage)
+                    Languages.Add(loadedLanguage);
+
+                else UnityEngine.Debug.LogWarning($"Failed to Deserialize {xmlFilePath}!");
+
+            }
+
         }
 
         /// <summary>
