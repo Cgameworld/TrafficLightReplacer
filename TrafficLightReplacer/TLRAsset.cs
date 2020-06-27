@@ -8,9 +8,10 @@ namespace TrafficLightReplacer
     public class TLRConfig
     {
         public string PackName { get; set; }
-        public bool RemoveMirrorLights { get; set; }
         public bool OneSize { get; set; }
         public List<Asset> Assets { get; set; }
+        public TransformValues Transform { get; set; }
+        public DSelectionIndex DropdownSelectionIndex { get; set; }
 
     }
     public class Asset
@@ -19,6 +20,21 @@ namespace TrafficLightReplacer
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
+    }
+
+    public class TransformValues
+    {
+        public float OffsetX { get; set; }
+        public float OffsetY { get; set; }
+        public float OffsetZ { get; set; }
+        public float Angle { get; set; }
+        public float Scale { get; set; }
+    }
+    public class DSelectionIndex
+    {
+        public int SmallRoads { get; set; }
+        public int MediumRoads { get; set; }
+        public int LargeRoads { get; set; }
     }
 
 }
