@@ -71,6 +71,12 @@ namespace TrafficLightReplacer
 
         private static void AssignValues(string path, TLRConfig XMLinput)
         {
+            //pack name is grabbed in in tools.getpacklist - refreshed only on every window open
+
+            oneSizeMode = XMLinput.OneSize;
+            Debug.Log("oneSizeMode: " + oneSizeMode);
+
+            //start of asset pack reading
             //fill list with prop assets from XML
             foreach (var item in XMLinput.Assets)
             {
@@ -87,7 +93,7 @@ namespace TrafficLightReplacer
                 Debug.Log("prefabname:" + result[i].Prefab);
                 Debug.Log("prefabsize:" + result[i].Type);
 
-                //custom sizes config
+                //mutlisize config
                 if (result[i].Type == "Small")
                 {
                     typeSmallOptions.Add(result[i]);
@@ -100,7 +106,7 @@ namespace TrafficLightReplacer
                 {
                     typeLargeOptions.Add(result[i]);
                 }
-                //option 2 - vanilla config
+                //vanilla config
                 if (result[i].Type == "Main")
                 {
                     typeMain = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
@@ -113,15 +119,14 @@ namespace TrafficLightReplacer
                 {
                     typePedSignal = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
-
+                //all
                 if (result[i].Type == "Signal Pole")
                 {
                     typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
             }
-            //Debug.Log("\ntypeSignalPole: " + typeSignalPole + "\ntypePedSignal: " + typePedSignal);
-            oneSizeMode = XMLinput.OneSize;
-            Debug.Log("oneSizeMode: " + oneSizeMode);
+
+
         }
 
         private static void ModifyMainUI()
