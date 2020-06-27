@@ -35,7 +35,6 @@ namespace TrafficLightReplacer
             if (TrafficLightReplacePanel.instance.isVisible == false)
             {
                 TrafficLightReplacePanel.instance.Show();
-                TransformSettingsPanel.instance.Show();
                 if (TLRModSettings.instance.ShowCreatorTool)
                 {
                     CreatorToolPanel.instance.Show();
@@ -46,7 +45,6 @@ namespace TrafficLightReplacer
             {
                 TrafficLightReplacePanel.instance.Hide();
                 CreatorToolPanel.instance.Hide();
-                TransformSettingsPanel.instance.Hide();
             }
         }
         public static void RefreshXMLPacks()

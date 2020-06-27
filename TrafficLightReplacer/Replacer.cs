@@ -125,7 +125,11 @@ namespace TrafficLightReplacer
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
                     TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = false;
                     TrafficLightReplacePanel.instance.customizePanel.isVisible = false;
-                    TrafficLightReplacePanel.instance.height = 100;
+
+                    TrafficLightReplacePanel.instance.dropdown2.relativePosition = new Vector2(0, 100);
+                    TrafficLightReplacePanel.instance.vanillaConfigOffset = -75;
+                    TrafficLightReplacePanel.instance.dropdown2_init = TrafficLightReplacePanel.instance.dropdown2.relativePosition;
+                    TrafficLightReplacePanel.instance.height = 140;
                 }
             }
             else
@@ -139,6 +143,10 @@ namespace TrafficLightReplacer
                     TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = true;
+
+                    TrafficLightReplacePanel.instance.dropdown2.relativePosition = new Vector2(0, 175);
+                    TrafficLightReplacePanel.instance.vanillaConfigOffset = 0;
+                    TrafficLightReplacePanel.instance.dropdown2_init = TrafficLightReplacePanel.instance.dropdown2.relativePosition;
                     TrafficLightReplacePanel.instance.height = 220;
                 }
             }

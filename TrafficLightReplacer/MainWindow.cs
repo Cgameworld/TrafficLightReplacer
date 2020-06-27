@@ -31,7 +31,7 @@ namespace TrafficLightReplacer
         public UIDropDown mediumRoadsDropdown;
         public UIDropDown largeRoadsDropdown;
         private UIButton getmeditems;
-        private Vector3 dropdown2_init;
+        public Vector3 dropdown2_init;
         private UIButton transformButton;
         private UILabel transformButtonToggle;
         private UIPanel transformPanel;
@@ -43,6 +43,8 @@ namespace TrafficLightReplacer
 
         int dropdownOffset = 0;
         int transformOffset = 0;
+
+        public int vanillaConfigOffset = 0;
 
         public static TrafficLightReplacePanel instance
         {
@@ -237,7 +239,7 @@ namespace TrafficLightReplacer
             #region transformDropdown 
 
             dropdown2 = AddUIComponent<UIPanel>();
-            dropdown2.relativePosition = new Vector2(0, 175);
+            dropdown2.relativePosition = new Vector2(0, 0); //placeholder
             dropdown2.size = new Vector2(260, 10);
             dropdown2.isVisible = true;
             dropdown2_init = dropdown2.relativePosition;
@@ -353,7 +355,7 @@ namespace TrafficLightReplacer
         public void RefreshFooterItems()
         {
             dropdown2.relativePosition = dropdown2_init + new Vector3(0, dropdownOffset);
-            height = 220 + dropdownOffset + transformOffset;
+            height = 220 + dropdownOffset + transformOffset + vanillaConfigOffset;
 
         }
             private static PropInfo GetCurrentProp(System.Collections.Generic.List<Asset> currentpropCategory, UIDropDown dropdown)
