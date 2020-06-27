@@ -159,9 +159,7 @@ namespace TrafficLightReplacer
             int propGroupCounter = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
-                if (prefab.m_vehicleTypes == VehicleInfo.VehicleType.Car)
-                {
-                    //Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
+                    Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
 
                     float roadwidth = 0;
                     bool isOneWay = false;
@@ -228,8 +226,6 @@ namespace TrafficLightReplacer
                                 }
                             }
                         }
-
-                    }
                 }
 
             }
