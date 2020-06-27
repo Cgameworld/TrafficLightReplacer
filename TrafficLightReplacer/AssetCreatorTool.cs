@@ -49,7 +49,7 @@ namespace TrafficLightReplacer
             clipChildren = true;
             width = 370;
             height = 225;
-            relativePosition = new Vector3(1550, 530);
+            relativePosition = new Vector3(1550, 720);
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();

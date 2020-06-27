@@ -31,11 +31,18 @@ namespace TrafficLightReplacer
         public UIDropDown mediumRoadsDropdown;
         public UIDropDown largeRoadsDropdown;
         private UIButton getmeditems;
+        private Vector3 dropdown2_init;
         private UIButton transformButton;
         private UILabel transformButtonToggle;
         private UIPanel transformPanel;
         private bool changingDropdown = false;
         private UIButton clearButton;
+
+        public UIPanel dropdown1;
+        public UIPanel dropdown2;
+
+        int dropdownOffset = 0;
+        int transformOffset = 0;
 
         public static TrafficLightReplacePanel instance
         {
@@ -61,8 +68,8 @@ namespace TrafficLightReplacer
             isInteractive = true;
             //clipChildren = true;
             width = 370;
-            height = 100;
-            relativePosition = new Vector3(1550, 150);
+            height = 220;
+            relativePosition = new Vector3(1550, 115);
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
@@ -138,17 +145,18 @@ namespace TrafficLightReplacer
                     {
                         customizePanel.isVisible = false;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
-                        height = 180;
+                        dropdownOffset = 0;                       
                     }
                     else
                     {
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
-                        height = 320;
+                        dropdownOffset = 120;
                         ResetAllDropdowns();
                         AddAllItemsToDropdowns();
                     }
                 }
+                RefreshFooterItems();
             };
 
             customizePanel = AddUIComponent<UIPanel>();
@@ -227,7 +235,14 @@ namespace TrafficLightReplacer
             #endregion
 
             #region transformDropdown 
-            transformButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
+
+            dropdown2 = AddUIComponent<UIPanel>();
+            dropdown2.relativePosition = new Vector2(0, 175);
+            dropdown2.size = new Vector2(260, 10);
+            dropdown2.isVisible = true;
+            dropdown2_init = dropdown2.relativePosition;
+
+            transformButton = UIUtils.CreateButtonSpriteImage(dropdown2, m_atlas);
             transformButton.normalBgSprite = "SubBarButtonBase";
             transformButton.hoveredBgSprite = "SubBarButtonBaseHovered";
             transformButton.textHorizontalAlignment = UIHorizontalAlignment.Left;
@@ -235,18 +250,16 @@ namespace TrafficLightReplacer
             transformButton.textPadding.left = 40;
             transformButton.text = Translation.Instance.GetTranslation(TranslationID.TRANSFORMBUTTONTEXT);
             transformButton.textScale = 0.9f;
-            transformButton.relativePosition = new Vector2(20, 175);
+            transformButton.relativePosition = new Vector2(20, 0);
             transformButton.height = 25;
             transformButton.width = 330;
             transformButton.tooltip = Translation.Instance.GetTranslation(TranslationID.TRANSFORMBUTTONTEXTTOOLTIP);
-            transformButton.isVisible = true;
 
-            transformButtonToggle = UIUtils.CreateLabelSpriteImage(this, m_atlas);
+            transformButtonToggle = UIUtils.CreateLabelSpriteImage(dropdown2, m_atlas);
             transformButtonToggle.backgroundSprite = "PropertyGroupClosed";
             transformButtonToggle.width = 18f;
             transformButtonToggle.height = 18f;
-            transformButtonToggle.relativePosition = new Vector2(32, 179);
-            transformButtonToggle.isVisible = true;
+            transformButtonToggle.relativePosition = new Vector2(32, 0);
 
             transformButton.eventClick += (c, p) =>
             {
@@ -257,22 +270,22 @@ namespace TrafficLightReplacer
                     {
                         transformPanel.isVisible = false;
                         transformButtonToggle.backgroundSprite = "PropertyGroupClosed";
-                        height = 380;
+                        transformOffset = 0;
                     }
                     else
                     {
                         transformPanel.isVisible = true;
                         transformButtonToggle.backgroundSprite = "PropertyGroupOpen";
-                        height = 320;
+                        transformOffset = 240;
                     }
                 }
+                RefreshFooterItems();
             };
 
-            transformPanel = AddUIComponent<UIPanel>();
-            transformPanel.relativePosition = new Vector2(0, 210);
+            transformPanel = dropdown2.AddUIComponent<UIPanel>();
+            transformPanel.relativePosition = new Vector2(0, 30);
             transformPanel.size = new Vector2(260, 110);
             transformPanel.isVisible = false;
-
 
             CreateSliderRow("Offset X:", 9f, 0, "u", UpdateTransformSettings);
             CreateSliderRow("Offset Y:", 9f, 1, "u", UpdateTransformSettings);
@@ -337,8 +350,13 @@ namespace TrafficLightReplacer
             };
 
         }
+        public void RefreshFooterItems()
+        {
+            dropdown2.relativePosition = dropdown2_init + new Vector3(0, dropdownOffset);
+            height = 220 + dropdownOffset + transformOffset;
 
-        private static PropInfo GetCurrentProp(System.Collections.Generic.List<Asset> currentpropCategory, UIDropDown dropdown)
+        }
+            private static PropInfo GetCurrentProp(System.Collections.Generic.List<Asset> currentpropCategory, UIDropDown dropdown)
         {
             PropInfo currentProp = PrefabCollection<PropInfo>.FindLoaded(currentpropCategory[dropdown.selectedIndex].Prefab);
             Debug.Log("selectedIndex dropdown:" + dropdown.selectedIndex);

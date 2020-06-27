@@ -138,7 +138,7 @@ namespace TrafficLightReplacer
                     TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = true;
-                    TrafficLightReplacePanel.instance.height = 180;
+                    TrafficLightReplacePanel.instance.height = 220;
                 }
             }
 
