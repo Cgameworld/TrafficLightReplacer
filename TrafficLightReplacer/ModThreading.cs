@@ -19,20 +19,7 @@ namespace TrafficLightReplacer
                 if (processed == false)
                 {
                     Debug.Log("F3 Pressed TLR");
-                    if (TrafficLightReplacePanel.instance.isVisible == false)
-                    {
-                        TrafficLightReplacePanel.instance.Show();
-                        if (TLRModSettings.instance.ShowCreatorTool)
-                        {
-                            CreatorToolPanel.instance.Show();
-                        }                       
-                        Tools.RefreshXMLPacks();
-                    }
-                    else
-                    {
-                        TrafficLightReplacePanel.instance.Hide();
-                        CreatorToolPanel.instance.Hide();
-                    }
+                    Tools.CheckPanels();
                     processed = true;
                     Debug.Log("is visible? " + TrafficLightReplacePanel.instance.isVisible);
                 }
@@ -43,6 +30,5 @@ namespace TrafficLightReplacer
                 processed = false;
             }
         }
-
     }
 }

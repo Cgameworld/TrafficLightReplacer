@@ -56,23 +56,38 @@ namespace TrafficLightReplacer
             m_title.title = "Pack Creator Helper";
             //m_title.isModal = true;
 
+            gentempXML = UIUtils.CreateButton(this);
+            gentempXML.text = "Generate Template Pack XMLs";
+            gentempXML.relativePosition = new Vector2(20, 50);
+            gentempXML.width = 325;
+
+            gentempXML.eventClick += (c, p) =>
+            {
+                List<string> xmltemplates = new List<string>();
+                xmltemplates.Add("onesize-template.xml");
+                xmltemplates.Add("multisize-template.xml");
+                var tlrlocal = Path.Combine(DataLocation.localApplicationData, "TLRLocal");
+                Tools.ExtractEmbeddedResource(tlrlocal, "TrafficLightReplacer.Templates", xmltemplates);
+                Tools.ShowAlertWindow("Template XML Files Exported", "Template XML files exported to " + tlrlocal + "\n\nClick on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder");
+            };
+
             UILabel netNameLabel = AddUIComponent<UILabel>();
             netNameLabel.text = "Name:";
             netNameLabel.autoSize = false;
             netNameLabel.width = 125f;
             netNameLabel.height = 20f;
-            netNameLabel.relativePosition = new Vector2(15, 60);
+            netNameLabel.relativePosition = new Vector2(15, 100);
 
             netNameField = UIUtils.CreateTextField(this);
             netNameField.text = "Press update to grab prop name";
             netNameField.width = 270f;
             netNameField.height = 25f;
             netNameField.padding = new RectOffset(0, 0, 6, 0);
-            netNameField.relativePosition = new Vector3(80, 55);
+            netNameField.relativePosition = new Vector3(80, 95);
 
             updateButton = UIUtils.CreateButton(this);
             updateButton.text = "Update";
-            updateButton.relativePosition = new Vector2(20, 100);
+            updateButton.relativePosition = new Vector2(20, 135);
             updateButton.tooltip = "Select a prop using Find It! and click update"; 
             updateButton.width = 146;
 
@@ -90,7 +105,7 @@ namespace TrafficLightReplacer
 
             copyButton = UIUtils.CreateButton(this);
             copyButton.text = "Copy";
-            copyButton.relativePosition = new Vector2(188, 100);
+            copyButton.relativePosition = new Vector2(188, 135);
             copyButton.width = 100;
 
             copyButton.eventClick += (c, p) =>
@@ -104,7 +119,7 @@ namespace TrafficLightReplacer
             openXMLFolderButton.pressedBgSprite = "ButtonMenuPressed";
             openXMLFolderButton.disabledBgSprite = "ButtonMenuDisabled";
             openXMLFolderButton.normalFgSprite = "Folder";
-            openXMLFolderButton.relativePosition = new Vector2(310, 100);
+            openXMLFolderButton.relativePosition = new Vector2(310, 135);
             openXMLFolderButton.height = 25;
             openXMLFolderButton.width = 31;
             openXMLFolderButton.tooltip = "Open local XML config folder";
@@ -115,21 +130,6 @@ namespace TrafficLightReplacer
                 {
                     Utils.OpenInFileBrowser(Path.Combine(DataLocation.localApplicationData, "TLRLocal"));
                 }
-            };
-
-            gentempXML = UIUtils.CreateButton(this);
-            gentempXML.text = "Generate Template Pack XMLs";
-            gentempXML.relativePosition = new Vector2(20, 140);
-            gentempXML.width = 325;
-
-            gentempXML.eventClick += (c, p) =>
-            {
-                List<string> xmltemplates = new List<string>();
-                xmltemplates.Add("onesize-template.xml");
-                xmltemplates.Add("multisize-template.xml");
-                var tlrlocal = Path.Combine(DataLocation.localApplicationData, "TLRLocal");
-                Tools.ExtractEmbeddedResource(tlrlocal, "TrafficLightReplacer.Templates", xmltemplates);
-                Tools.ShowAlertWindow("Template XML Files Exported", "Template XML files exported to " + tlrlocal + "\n\nClick on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder");
             };
 
             TLRLocalLoad = UIUtils.CreateCheckBox(this);

@@ -72,6 +72,7 @@
     <Compile Include="TLRModSettings.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="MainButton.cs" />
+    <Compile Include="TransformSettingsPanel.cs" />
     <Compile Include="TranslationFramework\Language.cs" />
     <Compile Include="TranslationFramework\TranslatableAttribute.cs" />
     <Compile Include="TranslationFramework\Translation.cs" />

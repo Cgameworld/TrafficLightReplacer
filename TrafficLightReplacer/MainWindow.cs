@@ -29,6 +29,7 @@ namespace TrafficLightReplacer
         public UIDropDown mediumRoadsDropdown;
         public UIDropDown largeRoadsDropdown;
         private UIButton getmeditems;
+        private UIButton transformButton;
 
         public static TrafficLightReplacePanel instance
         {
@@ -100,6 +101,15 @@ namespace TrafficLightReplacer
                 Replacer.UpdateLaneProps();
             };
 
+            transformButton = UIUtils.CreateButton(this);
+            transformButton.text = "Transform Settings";
+            transformButton.relativePosition = new Vector2(20, 140);
+            transformButton.width = 220;
+
+            transformButton.eventClick += (c, p) =>
+            {
+                TransformSettingsPanel.instance.Show();
+            };
 
             customizeButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
             customizeButton.normalBgSprite = "SubBarButtonBase";
@@ -109,7 +119,7 @@ namespace TrafficLightReplacer
             customizeButton.textPadding.left = 40;
             customizeButton.text = Translation.Instance.GetTranslation(TranslationID.CUSTOMIZEBUTTONTEXT);
             customizeButton.textScale = 0.9f;
-            customizeButton.relativePosition = new Vector2(20, 135);
+            customizeButton.relativePosition = new Vector2(20, 175);
             customizeButton.height = 25;
             customizeButton.width = 330;
             customizeButton.tooltip = Translation.Instance.GetTranslation(TranslationID.CUSTOMIZEBUTTONTEXTTOOLTIP);
@@ -119,7 +129,7 @@ namespace TrafficLightReplacer
             customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
             customizeButtonToggle.width = 18f;
             customizeButtonToggle.height = 18f;
-            customizeButtonToggle.relativePosition = new Vector2(32, 139);
+            customizeButtonToggle.relativePosition = new Vector2(32, 179);
             customizeButtonToggle.isVisible = false;
 
             customizeButton.eventClick += (c, p) =>
@@ -145,7 +155,7 @@ namespace TrafficLightReplacer
             };
 
             customizePanel = AddUIComponent<UIPanel>();
-            customizePanel.relativePosition = new Vector2(0, 170);
+            customizePanel.relativePosition = new Vector2(0, 210);
             customizePanel.size = new Vector2(260, 110);
             customizePanel.isVisible = false;
 

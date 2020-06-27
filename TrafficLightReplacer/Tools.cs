@@ -30,6 +30,25 @@ namespace TrafficLightReplacer
             ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
             panel.SetMessage(header, message, false);
         }
+        public static void CheckPanels()
+        {
+            if (TrafficLightReplacePanel.instance.isVisible == false)
+            {
+                TrafficLightReplacePanel.instance.Show();
+                TransformSettingsPanel.instance.Show();
+                if (TLRModSettings.instance.ShowCreatorTool)
+                {
+                    CreatorToolPanel.instance.Show();
+                }
+                Tools.RefreshXMLPacks();
+            }
+            else
+            {
+                TrafficLightReplacePanel.instance.Hide();
+                CreatorToolPanel.instance.Hide();
+                TransformSettingsPanel.instance.Hide();
+            }
+        }
         public static void RefreshXMLPacks()
         {
             List<Pack> packList = GetPackList();

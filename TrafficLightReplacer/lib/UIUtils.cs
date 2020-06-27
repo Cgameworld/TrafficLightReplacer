@@ -175,6 +175,43 @@ namespace TrafficLightReplacer
             return colorField;
         }
 
+        //from Render It! by Keallu
+        public static UISlider CreateSlider(UIComponent parent, string name, float min, float max, float step, float defaultValue)
+        {
+            UISlider slider = parent.AddUIComponent<UISlider>();
+            slider.name = name;
+
+            slider.height = 12f;
+            slider.width = parent.width - 10f;
+            slider.relativePosition = new Vector3(0f, 30f);
+
+            slider.maxValue = max;
+            slider.minValue = min;
+            slider.stepSize = step;
+
+            UISlicedSprite slicedSprite = slider.AddUIComponent<UISlicedSprite>();
+            slicedSprite.spriteName = "ScrollbarTrack";
+            slicedSprite.height = slider.height;
+            slicedSprite.width = slider.width;
+            slicedSprite.relativePosition = new Vector3(0f, 0f);
+
+            UISprite thumbSprite = slider.AddUIComponent<UISprite>();
+            thumbSprite.spriteName = "ScrollbarThumb";
+            thumbSprite.height = 20f;
+            thumbSprite.width = 10f;
+            thumbSprite.relativePosition = new Vector3(0f, -4f);
+            slider.thumbObject = thumbSprite;
+
+            slider.value = defaultValue;
+
+            slider.eventSizeChanged += (component, value) =>
+            {
+                slicedSprite.width = slicedSprite.parent.width;
+            };
+
+            return slider;
+        }
+
         public static void ResizeIcon(UISprite icon, Vector2 maxSize)
         {
             icon.width = icon.spriteInfo.width;
