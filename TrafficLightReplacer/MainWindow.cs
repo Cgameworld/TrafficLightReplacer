@@ -283,7 +283,7 @@ namespace TrafficLightReplacer
             };
 
             transformPanel = dropdown2.AddUIComponent<UIPanel>();
-            transformPanel.relativePosition = new Vector2(0, 30);
+            transformPanel.relativePosition = new Vector2(5, 30);
             transformPanel.size = new Vector2(260, 110);
             transformPanel.isVisible = false;
 
@@ -309,7 +309,7 @@ namespace TrafficLightReplacer
                         GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 255, 255, 255);
 
                         Debug.Log("index of UIPANELS" + i);
-                        if (i == 8)
+                        if (i == 9)
                         {
                             GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "100";
                             GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 100f;

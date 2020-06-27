@@ -120,6 +120,7 @@ namespace TrafficLightReplacer
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {
+                    //add code here to move dropdown2 up and change height
                     TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = false;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
                     TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = false;
@@ -179,7 +180,7 @@ namespace TrafficLightReplacer
 
                                     else
                                     {
-                                        Debug.Log("onesize mode off!");
+                                        //Debug.Log("onesize mode off!");
                                         if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
                                         {
                                             if (roadwidth >= 15 || isHighway)
