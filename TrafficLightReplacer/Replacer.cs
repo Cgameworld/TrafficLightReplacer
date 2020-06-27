@@ -64,13 +64,20 @@ namespace TrafficLightReplacer
                 reader.Close();
             }
 
+            AssignValues(path, XMLinput);
+            ModifyMainUI();
+            UpdateLaneProps();
+        }
+
+        private static void AssignValues(string path, TLRConfig XMLinput)
+        {
+            //fill list with prop assets from XML
             foreach (var item in XMLinput.Assets)
             {
                 result.Add(item);
             }
 
-
-            //set to blank asset on default?
+            //set to blank asset on default
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
 
             for (int i = 0; i < result.Count; i++)
@@ -106,7 +113,7 @@ namespace TrafficLightReplacer
                 {
                     typePedSignal = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
-                //all
+
                 if (result[i].Type == "Signal Pole")
                 {
                     typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
@@ -115,7 +122,10 @@ namespace TrafficLightReplacer
             //Debug.Log("\ntypeSignalPole: " + typeSignalPole + "\ntypePedSignal: " + typePedSignal);
             oneSizeMode = XMLinput.OneSize;
             Debug.Log("oneSizeMode: " + oneSizeMode);
+        }
 
+        private static void ModifyMainUI()
+        {
             if (oneSizeMode)
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
@@ -150,10 +160,7 @@ namespace TrafficLightReplacer
                     TrafficLightReplacePanel.instance.height = 220;
                 }
             }
-
-            UpdateLaneProps();
         }
-
         public static void UpdateLaneProps()
         {
             int propGroupCounter = 0;
