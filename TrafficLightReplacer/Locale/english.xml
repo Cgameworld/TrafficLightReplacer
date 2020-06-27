@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Language UniqueName="en" ReadableName="English" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
-  <Translations>
+  <Translations>  
     <Translation ID="MOD_DESCRIPTION" String="Customize your city's traffic lights" />
+    <!--Main Window-->
     <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer (dvA 2)" />
     <Translation ID="MAINWINDOW_PACKLABEL" String="Pack:" />
     <Translation ID="NULLDROPDOWN" String="Empty" />
@@ -12,7 +13,7 @@
     <Translation ID="SMALLROADSDROPDOWNLABEL" String="Small Roads:" />
     <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Medium Roads:" />
     <Translation ID="LARGEROADSDROPDOWNLABEL" String="Large Roads:" />
-
+    <!--Asset Creator Tool Window-->
 
   </Translations>
 </Language>
