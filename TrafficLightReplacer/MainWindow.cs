@@ -3,6 +3,8 @@ using ColossalFramework.IO;
 using ColossalFramework.Packaging;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using TrafficLightReplacer.Locale;
@@ -30,6 +32,10 @@ namespace TrafficLightReplacer
         public UIDropDown largeRoadsDropdown;
         private UIButton getmeditems;
         private UIButton transformButton;
+        private UILabel transformButtonToggle;
+        private UIPanel transformPanel;
+        private bool changingDropdown = false;
+        private UIButton clearButton;
 
         public static TrafficLightReplacePanel instance
         {
@@ -101,7 +107,7 @@ namespace TrafficLightReplacer
                 Replacer.UpdateLaneProps();
             };
 
-
+            #region customizeDropdown
             customizeButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
             customizeButton.normalBgSprite = "SubBarButtonBase";
             customizeButton.hoveredBgSprite = "SubBarButtonBaseHovered";
@@ -218,6 +224,94 @@ namespace TrafficLightReplacer
                 Replacer.UpdateLaneProps();
             };
 
+            #endregion
+
+            #region transformDropdown 
+            transformButton = UIUtils.CreateButtonSpriteImage(this, m_atlas);
+            transformButton.normalBgSprite = "SubBarButtonBase";
+            transformButton.hoveredBgSprite = "SubBarButtonBaseHovered";
+            transformButton.textHorizontalAlignment = UIHorizontalAlignment.Left;
+            transformButton.textPadding.top = 4;
+            transformButton.textPadding.left = 40;
+            transformButton.text = Translation.Instance.GetTranslation(TranslationID.TRANSFORMBUTTONTEXT);
+            transformButton.textScale = 0.9f;
+            transformButton.relativePosition = new Vector2(20, 175);
+            transformButton.height = 25;
+            transformButton.width = 330;
+            transformButton.tooltip = Translation.Instance.GetTranslation(TranslationID.TRANSFORMBUTTONTEXTTOOLTIP);
+            transformButton.isVisible = true;
+
+            transformButtonToggle = UIUtils.CreateLabelSpriteImage(this, m_atlas);
+            transformButtonToggle.backgroundSprite = "PropertyGroupClosed";
+            transformButtonToggle.width = 18f;
+            transformButtonToggle.height = 18f;
+            transformButtonToggle.relativePosition = new Vector2(32, 179);
+            transformButtonToggle.isVisible = true;
+
+            transformButton.eventClick += (c, p) =>
+            {
+                if (isVisible)
+                {
+
+                    if (transformButtonToggle.backgroundSprite == "PropertyGroupOpen")
+                    {
+                        transformPanel.isVisible = false;
+                        transformButtonToggle.backgroundSprite = "PropertyGroupClosed";
+                        height = 380;
+                    }
+                    else
+                    {
+                        transformPanel.isVisible = true;
+                        transformButtonToggle.backgroundSprite = "PropertyGroupOpen";
+                        height = 320;
+                    }
+                }
+            };
+
+            transformPanel = AddUIComponent<UIPanel>();
+            transformPanel.relativePosition = new Vector2(0, 210);
+            transformPanel.size = new Vector2(260, 110);
+            transformPanel.isVisible = false;
+
+
+            CreateSliderRow("Offset X:", 9f, 0, "u", UpdateTransformSettings);
+            CreateSliderRow("Offset Y:", 9f, 1, "u", UpdateTransformSettings);
+            CreateSliderRow("Offset Z:", 9f, 2, "u", UpdateTransformSettings);
+            CreateSliderRow("Angle:", 180f, 3, "\x00B0", UpdateTransformSettings);
+            CreateSliderRow("Scale:", 180f, 4, "%", UpdateTransformSettings, 1, 200, 100);
+
+            clearButton = UIUtils.CreateButton(transformPanel);
+            clearButton.text = "Reset";
+            clearButton.relativePosition = new Vector2(20, 205);
+            clearButton.width = 115;
+
+            clearButton.eventClick += (c, p) =>
+            {
+                UpdateTransformSettings();
+
+                for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
+                {
+                    if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
+                    {
+                        GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 255, 255, 255);
+
+                        Debug.Log("index of UIPANELS" + i);
+                        if (i == 8)
+                        {
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "100";
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 100f;
+                        }
+                        else
+                        {
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
+                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 0f;
+                        }
+                    }
+                }
+            };
+
+            #endregion
+
             confirmButton = UIUtils.CreateButton(this);
             confirmButton.text = "deleteitems+add1";
             confirmButton.relativePosition = new Vector2(20, 400);
@@ -293,6 +387,79 @@ namespace TrafficLightReplacer
             {
                 a.AddItem(sortedAsset.Name);
             }
+        }
+
+        private void UpdateTransformSettings()
+        {
+            List<float> items = new List<float>();
+
+            for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
+            {
+                if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
+                {
+                    items.Add(float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text));
+                }
+            }
+
+            Replacer.UpdateLaneProps();
+        }
+        private void CreateSliderRow(string rowLabel, float bound, int rownum, string unit, Action Update, float lower = -1, float upper = -1, float defaultValue = 0)
+        {
+            if (upper == -1 && lower == -1)
+            {
+                upper = bound;
+                lower = -bound;
+            }
+            int spaceamount = rownum * 40;
+
+            UIPanel sliderRowUIPanel = transformPanel.AddUIComponent<UIPanel>();
+            sliderRowUIPanel.relativePosition = new Vector2(0, 10 + spaceamount);
+            sliderRowUIPanel.size = new Vector2(width, 0);
+            sliderRowUIPanel.name = "sliderrow";
+
+            UILabel sliderOffsetLabel = sliderRowUIPanel.AddUIComponent<UILabel>();
+            sliderOffsetLabel.text = rowLabel;
+            sliderOffsetLabel.autoSize = false;
+            sliderOffsetLabel.width = 125f;
+            sliderOffsetLabel.height = 20f;
+            sliderOffsetLabel.relativePosition = new Vector2(15, 2);
+
+            UISlider sliderOffsetSlider = UIUtils.CreateSlider(sliderRowUIPanel, "slideroffsetslider", lower, upper, 0.05f, defaultValue);
+            sliderOffsetSlider.width = 110f;
+            sliderOffsetSlider.relativePosition = new Vector3(120, 5);
+
+            UITextField sliderOffsetField = UIUtils.CreateTextField(sliderRowUIPanel);
+            sliderOffsetField.text = sliderOffsetSlider.value.ToString();
+            sliderOffsetField.width = 55f;
+            sliderOffsetField.height = 25f;
+            sliderOffsetField.padding = new RectOffset(0, 0, 6, 0);
+            sliderOffsetField.relativePosition = new Vector3(240, 0);
+
+            sliderOffsetSlider.eventValueChanged += (c, p) =>
+            {
+                if (!changingDropdown)
+                {
+                    sliderOffsetField.text = sliderOffsetSlider.value.ToString();
+                    Update();
+                }
+            };
+
+            sliderOffsetField.eventTextSubmitted += (c, p) =>
+            {
+                if (!changingDropdown)
+                {
+                    sliderOffsetSlider.value = float.Parse(sliderOffsetField.text);
+                    Update();
+                }
+            };
+
+            UILabel sliderUnitsLabel = sliderRowUIPanel.AddUIComponent<UILabel>();
+            sliderUnitsLabel.text = unit;
+            sliderUnitsLabel.autoSize = false;
+            sliderUnitsLabel.width = 125f;
+            sliderUnitsLabel.height = 20f;
+            sliderUnitsLabel.relativePosition = new Vector2(300, 5);
+
         }
 
         private void LoadResources()

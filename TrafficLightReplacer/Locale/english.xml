@@ -13,6 +13,8 @@
     <Translation ID="SMALLROADSDROPDOWNLABEL" String="Small Roads:" />
     <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Medium Roads:" />
     <Translation ID="LARGEROADSDROPDOWNLABEL" String="Large Roads:" />
+    <Translation ID="TRANSFORMBUTTONTEXT" String="Transform Settings" />
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Change traffic prop curb positioning" />
     <!--Asset Creator Tool Window-->
 
   </Translations>
