@@ -3,7 +3,7 @@
   <Translations>  
     <Translation ID="MOD_DESCRIPTION" String="Customize your city's traffic lights" />
     <!--Main Window-->
-    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer (dvA 2)" />
+    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer" />
     <Translation ID="MAINWINDOW_PACKLABEL" String="Pack:" />
     <Translation ID="NULLDROPDOWN" String="Empty" />
     <Translation ID="OPPOSITESIDETOGGLE" String="Place on opposite side of stop line" />

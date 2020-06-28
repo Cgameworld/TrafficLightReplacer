@@ -380,7 +380,7 @@ namespace TrafficLightReplacer
             largeRoadsDropdown.tooltip = !Replacer.oneSizeMode ? Replacer.typeLargeOptions[0].Description : "OneSize Mode On! No Large Variations Loaded";
         }
 
-        private void CloseDropdowns()
+        public void CloseDropdowns()
         {
             //close all collapsible menus
             customizePanel.isVisible = false;

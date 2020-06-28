@@ -40,6 +40,7 @@ namespace TrafficLightReplacer
                     CreatorToolPanel.instance.Show();
                 }
                 Tools.RefreshXMLPacks();
+                TrafficLightReplacePanel.instance.CloseDropdowns();
                 Replacer.ModifyMainUI();
             }
             else
