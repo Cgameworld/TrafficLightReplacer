@@ -23,9 +23,12 @@ namespace TrafficLightReplacer
                         {
                             if (propGroup?.m_finalProp != null)
                             {
-                                CachePropItem propGroupProperties = new CachePropItem();
-                                propGroupProperties.Angle = propGroup.m_angle;
-                                propGroupProperties.Position = propGroup.m_position;
+                                CachePropItem propGroupProperties = new CachePropItem()
+                                {
+                                    Angle = propGroup.m_angle,
+                                    Position = propGroup.m_position,
+                                };
+
                                 Replacer.propGroupCache.Add(propGroupProperties);
                             }
                         }

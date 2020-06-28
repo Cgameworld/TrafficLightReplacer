@@ -31,6 +31,7 @@ namespace TrafficLightReplacer
         public static PropInfo typeSignalPole;
 
         public static List<CachePropItem> propGroupCache = new List<CachePropItem>();
+        public static TransformValues transformOffset = new TransformValues();
 
         public static bool oneSizeMode = false;
        
@@ -125,8 +126,6 @@ namespace TrafficLightReplacer
                     typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
             }
-
-
         }
 
         private static void ModifyMainUI()
@@ -171,7 +170,7 @@ namespace TrafficLightReplacer
             int propGroupCounter = 0;
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
-                    Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
+                    //Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
 
                     float roadwidth = 0;
                     bool isOneWay = false;
@@ -193,7 +192,7 @@ namespace TrafficLightReplacer
                                 {
                                     if (oneSizeMode)
                                     {
-                                        OneSizeReplace(propGroupCounter, propGroup);
+                                        OneSizeReplace(propGroupCounter, propGroup, lane);
                                     }
 
                                     else
@@ -233,7 +232,7 @@ namespace TrafficLightReplacer
 
                                     }
 
-                                    propGroupCounter++;
+                                propGroupCounter++;
 
                                 }
                             }
@@ -244,35 +243,59 @@ namespace TrafficLightReplacer
             Debug.Log("propGroupCounterTotal" + propGroupCounter);
         }
 
-        private static void OneSizeReplace(int propGroupCounter, NetLaneProps.Prop propGroup)
+        private static void OneSizeReplace(int propGroupCounter, NetLaneProps.Prop propGroup, NetInfo.Lane lane)
         {
-            Debug.Log("onesize mode on!");
+            //Debug.Log("onesize mode on!");
 
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = typeMain;
-                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                propGroup.m_position = propGroupCache[propGroupCounter].Position;
+                OneSizeApplyProperties(propGroupCounter, propGroup, lane);
             }
             if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
                 propGroup.m_finalProp = typeMirror;
-                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                propGroup.m_position = propGroupCache[propGroupCounter].Position;
+                OneSizeApplyProperties(propGroupCounter, propGroup, lane, true);
             }
 
             if (propGroup.m_prop.name == "Traffic Light Pedestrian")
             {
                 propGroup.m_finalProp = typePedSignal;
-                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                propGroup.m_position = propGroupCache[propGroupCounter].Position;
+                OneSizeApplyProperties(propGroupCounter, propGroup, lane);
+
             }
 
             if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
             {
                 propGroup.m_finalProp = typeSignalPole;
-                propGroup.m_angle = propGroupCache[propGroupCounter].Angle;
-                propGroup.m_position = propGroupCache[propGroupCounter].Position;
+                OneSizeApplyProperties(propGroupCounter, propGroup, lane);
+            }
+        }
+
+        private static void OneSizeApplyProperties(int propGroupCounter, NetLaneProps.Prop propGroup, NetInfo.Lane lane, bool isMirror = false)
+        {
+            propGroup.m_position.y = propGroupCache[propGroupCounter].Position.y + transformOffset.Position.y;
+
+            propGroup.m_angle = isMirror
+                ? propGroupCache[propGroupCounter].Angle - transformOffset.Angle
+                : propGroupCache[propGroupCounter].Angle + transformOffset.Angle;
+
+            if (lane.m_position > 0)
+            {
+                propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x;
+            }
+            else
+            {
+                propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x;
+            }
+
+            if (propGroup.m_segmentOffset < 0)
+            {
+                propGroup.m_position.z = propGroupCache[propGroupCounter].Position.z + transformOffset.Position.z;
+            }
+            else
+            {
+                propGroup.m_position.z = propGroupCache[propGroupCounter].Position.z - transformOffset.Position.z;
             }
         }
 

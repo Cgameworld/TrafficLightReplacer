@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace TrafficLightReplacer
 {
@@ -24,9 +25,7 @@ namespace TrafficLightReplacer
 
     public class TransformValues
     {
-        public float OffsetX { get; set; }
-        public float OffsetY { get; set; }
-        public float OffsetZ { get; set; }
+        public Vector3 Position { get; set; }
         public float Angle { get; set; }
         public float Scale { get; set; }
     }

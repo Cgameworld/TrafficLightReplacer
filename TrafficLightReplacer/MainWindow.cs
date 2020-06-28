@@ -417,9 +417,19 @@ namespace TrafficLightReplacer
             {
                 if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
                 {
-                    items.Add(float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text));
+                    var item = float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text);
+                    items.Add(item);                   
+                    Debug.Log("i: " + i + "  |  item: " + item);
                 }
             }
+
+            TransformValues offset = new TransformValues()
+            {
+                Position = new Vector3(items[0],items[1],items[2]),
+                Angle = items[3],
+                Scale = items[4]
+            };
+            Replacer.transformOffset = offset;
 
             Replacer.UpdateLaneProps();
         }
