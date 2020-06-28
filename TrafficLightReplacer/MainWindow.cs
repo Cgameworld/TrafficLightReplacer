@@ -310,7 +310,7 @@ namespace TrafficLightReplacer
                     {
                         GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 255, 255, 255);
 
-                        Debug.Log("index of UIPANELS" + i);
+                        //Debug.Log("index of UIPANELS" + i);
                         if (i == 9)
                         {
                             GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "100";

@@ -31,7 +31,12 @@ namespace TrafficLightReplacer
         public static PropInfo typeSignalPole;
 
         public static List<CachePropItem> propGroupCache = new List<CachePropItem>();
-        public static TransformValues transformOffset = new TransformValues();
+        public static TransformValues transformOffset = new TransformValues()
+        {
+            Position = new Vector3(0,0,0),
+            Angle = 0,
+            Scale = 100
+        };
 
         public static bool oneSizeMode = false;
        
@@ -274,29 +279,25 @@ namespace TrafficLightReplacer
 
         private static void OneSizeApplyProperties(int propGroupCounter, NetLaneProps.Prop propGroup, NetInfo.Lane lane, bool isMirror = false)
         {
-            propGroup.m_position.y = propGroupCache[propGroupCounter].Position.y + transformOffset.Position.y;
-
             propGroup.m_angle = isMirror
                 ? propGroupCache[propGroupCounter].Angle - transformOffset.Angle
                 : propGroupCache[propGroupCounter].Angle + transformOffset.Angle;
 
-            if (lane.m_position > 0)
-            {
-                propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x;
-            }
-            else
-            {
-                propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x;
-            }
+            propGroup.m_position.x = lane.m_position > 0
+                ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x
+                : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x;
 
-            if (propGroup.m_segmentOffset < 0)
-            {
-                propGroup.m_position.z = propGroupCache[propGroupCounter].Position.z + transformOffset.Position.z;
-            }
-            else
-            {
-                propGroup.m_position.z = propGroupCache[propGroupCounter].Position.z - transformOffset.Position.z;
-            }
+            propGroup.m_position.y = propGroupCache[propGroupCounter].Position.y + transformOffset.Position.y;
+
+            propGroup.m_position.z = propGroup.m_segmentOffset < 0
+                ? propGroupCache[propGroupCounter].Position.z + transformOffset.Position.z
+                : propGroupCache[propGroupCounter].Position.z - transformOffset.Position.z;
+
+            var scale = 1 + ((transformOffset.Scale - 100) / 100);
+            //Debug.Log("OSAP scale: " + scale);
+
+            propGroup.m_finalProp.m_minScale = scale;
+            propGroup.m_finalProp.m_maxScale = scale;
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp, bool isOneWay, int propGroupCounter)
