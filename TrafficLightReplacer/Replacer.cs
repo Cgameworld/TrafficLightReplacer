@@ -72,6 +72,13 @@ namespace TrafficLightReplacer
 
             AssignValues(path, XMLinput);
             ModifyMainUI();
+
+            if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && !oneSizeMode)
+            {
+                typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
+                typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
+                typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
+            }
             UpdateLaneProps();
         }
 
@@ -133,12 +140,13 @@ namespace TrafficLightReplacer
             }
         }
 
-        private static void ModifyMainUI()
+        public static void ModifyMainUI()
         {
             if (oneSizeMode)
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {
+                    //Debug.Log("ran! OSM1");
                     //add code here to move dropdown2 up and change height
                     TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = false;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
@@ -153,9 +161,6 @@ namespace TrafficLightReplacer
             }
             else
             {
-                typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
-                typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
-                typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
 
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {

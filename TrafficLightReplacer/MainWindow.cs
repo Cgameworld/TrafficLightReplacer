@@ -76,7 +76,6 @@ namespace TrafficLightReplacer
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
             m_title.title = Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE);
-            //m_title.isModal = true;
 
             UILabel areaTypeLabel = AddUIComponent<UILabel>();
             //"select from road panel"
@@ -102,6 +101,8 @@ namespace TrafficLightReplacer
                 TLRModSettings.instance.CurrentPackIndex = packDropdown.selectedIndex;
                 TLRModSettings.instance.LastLoadedXML = Replacer.packList[packDropdown.selectedIndex].PackPath;
                 TLRModSettings.instance.Save();
+
+                CloseDropdowns();
             };
 
             oppositeSideToggle = UIUtils.CreateCheckBox(this);
@@ -379,6 +380,18 @@ namespace TrafficLightReplacer
             largeRoadsDropdown.tooltip = !Replacer.oneSizeMode ? Replacer.typeLargeOptions[0].Description : "OneSize Mode On! No Large Variations Loaded";
         }
 
+        private void CloseDropdowns()
+        {
+            //close all collapsible menus
+            customizePanel.isVisible = false;
+            customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
+            dropdownOffset = 0;
+
+            transformPanel.isVisible = false;
+            transformButtonToggle.backgroundSprite = "PropertyGroupClosed";
+            transformOffset = 0;
+            RefreshFooterItems();
+        }
         private void ResetAllDropdowns()
         {
             //add blank item before resetting index in case dropdown is null
