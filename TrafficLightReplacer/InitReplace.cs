@@ -95,16 +95,16 @@ namespace TrafficLightReplacer
             }
    
 
-            try
-            {
-                Replacer.Start(xmlfile);
-            }
-            catch
-            {
-                TLRModSettings.instance.CurrentPackIndex = 0;
-                string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
-                Replacer.Start(defaultfile);
-            }
+            //try
+           // {
+               Replacer.Start(xmlfile);
+            //}
+           // catch
+          //  {
+          //      TLRModSettings.instance.CurrentPackIndex = 0;
+          //      string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
+           //     Replacer.Start(defaultfile);
+         //   }
         }
     }
 }

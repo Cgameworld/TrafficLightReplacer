@@ -73,7 +73,7 @@ namespace TrafficLightReplacer
             AssignValues(path, XMLinput);
             ModifyMainUI();
 
-            if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && !oneSizeMode)
+            if (!oneSizeMode)
             {
                 typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
                 typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
