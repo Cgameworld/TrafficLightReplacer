@@ -14,6 +14,8 @@ namespace TrafficLightReplacer
     {
         public static void CachePropFill()
         {
+            int cachepropfillcounter = 0;
+
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
@@ -31,12 +33,16 @@ namespace TrafficLightReplacer
                                 };
 
                                 Replacer.propGroupCache.Add(propGroupProperties);
+                                Debug.Log("Cachepropitem:" + cachepropfillcounter);
+                                cachepropfillcounter++;
                             }
                         }
                     }
                 }
 
             }
+
+            Debug.Log("Cachepropfilltotal:" + cachepropfillcounter);
         }
     }
 
@@ -49,11 +55,44 @@ namespace TrafficLightReplacer
 
         static void Postfix()
         {
+            //read props!
+            Debug.Log("PrefabCollection<PropInfo>.LoadedCount() " + PrefabCollection<PropInfo>.LoadedCount());
+
+            FindActiveEmeddedPropXMLs();
+
+
             InitReplace.CachePropFill();
 
-            //read props!
-            Debug.Log("PrefabCollection<PropInfo>.LoadedCount() "  + PrefabCollection<PropInfo>.LoadedCount());
 
+
+            string xmlfile = TLRModSettings.instance.LastLoadedXML;
+
+            //change dropdown index based on xml 
+            List<Pack> packList = Tools.GetPackList();
+            for (int i = 0; i < packList.Count; i++)
+            {
+                if (packList[i].PackPath == xmlfile)
+                {
+                    Debug.Log("i is packindex " + i);
+                    TLRModSettings.instance.CurrentPackIndex = i;
+                }
+            }
+
+
+            try
+            {
+                Replacer.Start(xmlfile);
+            }
+            catch
+            {
+                TLRModSettings.instance.CurrentPackIndex = 0;
+                string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
+                Replacer.Start(defaultfile);
+            }
+        }
+
+        private static void FindActiveEmeddedPropXMLs()
+        {
             var propEmbedList = new List<string>();
             for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
             {
@@ -72,39 +111,14 @@ namespace TrafficLightReplacer
                 if (crpPath == "2032407437")
                 {
                     Debug.Log("CLUS traffic Lights!");
-                    propEmbedList.Add("clus_lights.xml");                  
+                    propEmbedList.Add("clus_lights.xml");
                 }
 
-                propEmbedList = Tools.AddResourcePrefix(propEmbedList);
-
-                TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
-
             }
 
-            string xmlfile = TLRModSettings.instance.LastLoadedXML;
+            propEmbedList = Tools.AddResourcePrefix(propEmbedList);
 
-            //change dropdown index based on xml 
-            List<Pack> packList = Tools.GetPackList();
-            for (int i = 0; i < packList.Count; i++)
-            {
-                if (packList[i].PackPath == xmlfile)
-                {
-                    Debug.Log("i is packindex " + i);
-                    TLRModSettings.instance.CurrentPackIndex = i;                    
-                }
-            }
-   
-
-            try
-            {
-                Replacer.Start(xmlfile);
-            }
-            catch
-            {
-                TLRModSettings.instance.CurrentPackIndex = 0;
-                string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
-                Replacer.Start(defaultfile);
-            }
+            TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
         }
     }
 }

@@ -178,8 +178,10 @@ namespace TrafficLightReplacer
         public static void UpdateLaneProps()
         {
             int propGroupCounter = 0;
-            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            if (oneSizeMode)
             {
+                foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+                {
                     //Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
 
                     float roadwidth = 0;
@@ -191,7 +193,6 @@ namespace TrafficLightReplacer
                     }
 
                     GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
-
                     foreach (NetInfo.Lane lane in prefab.m_lanes)
                     {
                         if (lane?.m_laneProps?.m_props != null)
@@ -200,55 +201,46 @@ namespace TrafficLightReplacer
                             {
                                 if (propGroup?.m_finalProp != null)
                                 {
-                                    if (oneSizeMode)
-                                    {
-                                        OneSizeReplace(propGroupCounter, propGroup, lane);
-                                    }
 
-                                    else
-                                    {
-                                        //Debug.Log("onesize mode off!");
-                                        if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
-                                        {
-                                            if (roadwidth >= 15 || isHighway)
-                                            {
-                                                ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
-                                            }
-                                            else if (roadwidth >= 6)
-                                            {
-                                                ReplacePropFlipped(lane, propGroup, typeMedium, isOneWay, propGroupCounter);
-                                            }
-                                            else
-                                            {
-                                                ReplacePropFlipped(lane, propGroup, typeSmall, isOneWay, propGroupCounter);  //regular
-                                            }
-                                        }
-                                        else
-                                        {
-                                            //panel is NULL
-                                            if (roadwidth >= 15 || isHighway)
-                                            {
-                                                ReplaceProp(lane, typeLarge, propGroup);
-                                            }
-                                            else if (roadwidth >= 6)
-                                            {
-                                                ReplaceProp(lane, typeMedium, propGroup);
-                                            }
-                                            else
-                                            {
-                                                ReplaceProp(lane, typeSmall, propGroup);  //regular
-                                            }
-                                        }
-
-                                    }
-
-                                propGroupCounter++;
-
+                                    OneSizeReplace(propGroupCounter, propGroup, lane);
+                                    propGroupCounter++;
                                 }
                             }
                         }
+                    }
                 }
 
+            }
+            else if (oneSizeMode == false)
+            {
+                Debug.Log("onesizemode false!");
+                foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+                {
+                    float roadwidth = 0;
+                    bool isOneWay = false;
+                    bool isHighway = false;
+                    if (prefab.name.Contains("Highway"))
+                    {
+                        isHighway = true;
+                    }
+
+                    GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
+                    foreach (NetInfo.Lane lane in prefab.m_lanes)
+                    {
+                        if (lane?.m_laneProps?.m_props != null)
+                        {
+                            foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+                            {
+                                if (propGroup?.m_finalProp != null)
+                                {
+
+                                    ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
+                                    propGroupCounter++;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             Debug.Log("propGroupCounterTotal" + propGroupCounter);
         }
@@ -307,76 +299,42 @@ namespace TrafficLightReplacer
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp, bool isOneWay, int propGroupCounter)
         {
-            if (lane.m_laneType.ToString() == "Pedestrian")
-            {
-                if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
-                {
-                    propGroup.m_finalProp = newProp;
-
-                    if (lane.m_position > 0)
-                    {
-                        propGroup.m_angle = -270f;
-                    }
-                    else
-                    {
-                        propGroup.m_angle = 270f;
-                    }
-                }
-            }
-            else
-            {
-                //change road median ped signal
-                if (propGroup.m_prop.name == "Traffic Light Pedestrian")
-                {
-                    propGroup.m_finalProp = typePedSignal;
-                }
-            }
-
+            Debug.Log("nononesize!");
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
-                propGroup.m_finalProp = typeSignalPole;
+                propGroup.m_finalProp = newProp;
 
-                if (lane.m_position > 0)
-                {
-                    propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x + 1f;
-                }
-                else
-                {
-                    propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x - 1f;
-                }
-            }
-            else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
-            {
-                propGroup.m_finalProp = typePedSignal;
-                if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
-                {
-                    propGroup.m_angle = 270;
-                }
-            }
+                propGroup.m_position.x = lane.m_position > 0
+                    ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x
+                    : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x;
 
-            //fix for one way roads with two ped lights!
-            if (propGroup.m_prop.name == "Traffic Light Pedestrian" && isOneWay == true)
-            {
-                if (lane.m_position < 0)
-                {
-                    propGroup.m_finalProp = typePedSignal;
-                }
+                propGroup.m_position.y = propGroupCache[propGroupCounter].Position.y + transformOffset.Position.y;
 
+                propGroup.m_position.z = propGroup.m_segmentOffset < 0
+                    ? propGroupCache[propGroupCounter].Position.z + transformOffset.Position.z
+                    : propGroupCache[propGroupCounter].Position.z - transformOffset.Position.z;
+
+                var scale = 1 + ((transformOffset.Scale - 100) / 100);
+
+                propGroup.m_finalProp.m_minScale = scale;
+                propGroup.m_finalProp.m_maxScale = scale;
             }
         }
 
-        private static void ReplaceProp(NetInfo.Lane lane, PropInfo newProp, NetLaneProps.Prop propGroup)
+        private static void ReplaceProp(NetInfo.Lane lane, PropInfo newProp, NetLaneProps.Prop propGroup, int propGroupCounter)
         {
             //m_prop stays the same m_finalProp changes 
 
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
+                DebugA("tr02", propGroup, propGroupCounter);
                 propGroup.m_finalProp = newProp;
-
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
+                DebugA("tr02m", propGroup, propGroupCounter);
                 propGroup.m_finalProp = typePedSignal;
+                
                 if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
                 {
                     propGroup.m_angle = 270;
@@ -385,7 +343,7 @@ namespace TrafficLightReplacer
 
             if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
             {
-                
+                DebugA("tr02p", propGroup, propGroupCounter);
                 propGroup.m_finalProp = typePedSignal;
 
                 if (lane.m_position > 0)
@@ -397,6 +355,13 @@ namespace TrafficLightReplacer
                     propGroup.m_angle = 90f;
                 }
             }
+        }
+
+        private static void DebugA(string header, NetLaneProps.Prop propGroup, int propGroupCounter)
+        {
+            Debug.Log("propreplace" + propGroupCounter + "  " +  header);
+            Debug.Log("origpos " + propGroup.m_position);
+            Debug.Log("cachepos " + propGroupCache[propGroupCounter].Position);
         }
 
         private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
