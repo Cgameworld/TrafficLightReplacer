@@ -209,5 +209,17 @@ namespace TrafficLightReplacer
                 }
             }
         }
+
+        public static List<string> AddResourcePrefix(List<string> embedList)
+        {
+            var tempEmbedList = new List<string>();
+            foreach (var item in embedList)
+            {
+                tempEmbedList.Add("TrafficLightReplacer.DefaultXMLS." + item);
+            }
+
+            embedList = tempEmbedList;
+            return embedList;
+        }
     }
 }

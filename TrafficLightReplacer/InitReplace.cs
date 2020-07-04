@@ -1,4 +1,5 @@
 ﻿using ColossalFramework.IO;
+using ColossalFramework.Packaging;
 using Harmony;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,36 @@ namespace TrafficLightReplacer
         static void Postfix()
         {
             InitReplace.CachePropFill();
+
+            //read props!
+            Debug.Log("PrefabCollection<PropInfo>.LoadedCount() "  + PrefabCollection<PropInfo>.LoadedCount());
+
+            var propEmbedList = new List<string>();
+            for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+            {
+                var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
+
+                if (prefab == null)
+                    continue;
+
+                var asset = PackageManager.FindAssetByName(prefab.name);
+                if (asset == null || asset.package == null)
+                    continue;
+
+                var crpPath = asset.package.packageName;
+
+                Debug.Log("crppath: " + crpPath);
+                if (crpPath == "2032407437")
+                {
+                    Debug.Log("CLUS traffic Lights!");
+                    propEmbedList.Add("clus_lights.xml");                  
+                }
+
+                propEmbedList = Tools.AddResourcePrefix(propEmbedList);
+
+                TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
+
+            }
 
             string xmlfile = TLRModSettings.instance.LastLoadedXML;
 

@@ -93,7 +93,7 @@ namespace TrafficLightReplacer
                         {
                             mod.isEnabled = false;
                         }
-                       
+
                         embedList.Add("NL_Lights.xml");
                     }
 
@@ -110,38 +110,10 @@ namespace TrafficLightReplacer
                 }
             }
 
-            for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
-            {
-                var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
-
-                if (prefab == null)
-                    continue;
-
-                var asset = PackageManager.FindAssetByName(prefab.name);
-                if (asset == null || asset.package == null)
-                    continue;
-
-                var crpPath = asset.package.packageName;
-
-                if (crpPath == "2032407437")
-                {
-                    Debug.Log("CLUS traffic Lights!");
-                    embedList.Add("clus_lights.xml");
-                    
-                }
-            }
-
-            var tempEmbedList = new List<string>();
-            foreach (var item in embedList)
-            {
-                tempEmbedList.Add("TrafficLightReplacer.DefaultXMLS." + item);
-            }
-
-            embedList = tempEmbedList;
+            embedList = Tools.AddResourcePrefix(embedList);
 
             TLRModSettings.instance.EmbeddedXMLActive = embedList;
         }
-
     }
 
 
