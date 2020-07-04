@@ -69,11 +69,11 @@ namespace TrafficLightReplacer
                 XMLinput = (TLRConfig)serializer.Deserialize(reader);
                 reader.Close();
             }
-
+            Debug.Log("assignv1");
             AssignValues(path, XMLinput);
             ModifyMainUI();
 
-            if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && !oneSizeMode)
+            if (!oneSizeMode)
             {
                 typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
                 typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
@@ -235,6 +235,7 @@ namespace TrafficLightReplacer
                                 {
 
                                     ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
+                                    Debug.Log("propcount-non-ones" + propGroupCounter);
                                     propGroupCounter++;
                                 }
                             }
@@ -299,10 +300,11 @@ namespace TrafficLightReplacer
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp, bool isOneWay, int propGroupCounter)
         {
-            Debug.Log("nononesize!");
+            //Debug.Log("nononesize!");
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = newProp;
+                Debug.Log("afternewprop");
 
                 propGroup.m_position.x = lane.m_position > 0
                     ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x
@@ -313,11 +315,10 @@ namespace TrafficLightReplacer
                 propGroup.m_position.z = propGroup.m_segmentOffset < 0
                     ? propGroupCache[propGroupCounter].Position.z + transformOffset.Position.z
                     : propGroupCache[propGroupCounter].Position.z - transformOffset.Position.z;
-
                 var scale = 1 + ((transformOffset.Scale - 100) / 100);
 
                 propGroup.m_finalProp.m_minScale = scale;
-                propGroup.m_finalProp.m_maxScale = scale;
+               propGroup.m_finalProp.m_maxScale = scale;
             }
         }
 
