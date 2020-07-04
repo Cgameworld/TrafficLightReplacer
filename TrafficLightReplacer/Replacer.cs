@@ -228,16 +228,16 @@ namespace TrafficLightReplacer
                                             //panel is NULL
                                             if (roadwidth >= 15 || isHighway)
                                             {
-                                                ReplaceProp(lane, typeLarge, propGroup);
+                                                ReplaceProp(lane, typeLarge, propGroup, propGroupCounter);
                                             }
                                             else if (roadwidth >= 6)
                                             {
-                                                ReplaceProp(lane, typeMedium, propGroup);
-                                            }
+                                                ReplaceProp(lane, typeMedium, propGroup, propGroupCounter);
+                                        }
                                             else
                                             {
-                                                ReplaceProp(lane, typeSmall, propGroup);  //regular
-                                            }
+                                                ReplaceProp(lane, typeSmall, propGroup, propGroupCounter);
+                                        }
                                         }
 
                                     }
@@ -313,14 +313,14 @@ namespace TrafficLightReplacer
                 {
                     propGroup.m_finalProp = newProp;
 
-                    if (lane.m_position > 0)
-                    {
-                        propGroup.m_angle = -270f;
-                    }
-                    else
-                    {
-                        propGroup.m_angle = 270f;
-                    }
+                    //check mirroring rotating?
+                    propGroup.m_angle = -(propGroupCache[propGroupCounter].Angle - transformOffset.Angle);
+                    propGroup.m_position.x = lane.m_position > 0
+                    ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x
+                    : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x;
+
+                    MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter);
+
                 }
             }
             else
@@ -336,14 +336,13 @@ namespace TrafficLightReplacer
             {
                 propGroup.m_finalProp = typeSignalPole;
 
-                if (lane.m_position > 0)
-                {
-                    propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x + 1f;
-                }
-                else
-                {
-                    propGroup.m_position.x = propGroupCache[propGroupCounter].Position.x - 1f;
-                }
+
+                propGroup.m_angle = propGroupCache[propGroupCounter].Angle + transformOffset.Angle;
+                propGroup.m_position.x = lane.m_position > 0
+                ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x + 1f
+                : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x + -1f;
+                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter);
+
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
@@ -365,13 +364,41 @@ namespace TrafficLightReplacer
             }
         }
 
-        private static void ReplaceProp(NetInfo.Lane lane, PropInfo newProp, NetLaneProps.Prop propGroup)
+        private static void MultiSizeFlippedApplyProperties(NetInfo.Lane lane, NetLaneProps.Prop propGroup, int propGroupCounter, bool includeX = false, bool includeAngle = false)
+        {
+            if (includeAngle)
+            {
+                propGroup.m_angle = propGroupCache[propGroupCounter].Angle + transformOffset.Angle;
+            }
+
+            if (includeX)
+            {
+                propGroup.m_position.x = lane.m_position > 0
+    ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x
+    : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x;
+            }
+
+            propGroup.m_position.y = propGroupCache[propGroupCounter].Position.y + transformOffset.Position.y;
+
+            propGroup.m_position.z = propGroup.m_segmentOffset < 0
+                ? propGroupCache[propGroupCounter].Position.z + transformOffset.Position.z
+                : propGroupCache[propGroupCounter].Position.z - transformOffset.Position.z;
+
+            var scale = 1 + ((transformOffset.Scale - 100) / 100);
+            //Debug.Log("OSAP scale: " + scale);
+
+            propGroup.m_finalProp.m_minScale = scale;
+            propGroup.m_finalProp.m_maxScale = scale;
+        }
+
+        private static void ReplaceProp(NetInfo.Lane lane, PropInfo newProp, NetLaneProps.Prop propGroup, int propGroupCounter)
         {
             //m_prop stays the same m_finalProp changes 
 
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
                 propGroup.m_finalProp = newProp;
+                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
 
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
@@ -398,6 +425,7 @@ namespace TrafficLightReplacer
                 }
             }
         }
+
 
         private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
         {
