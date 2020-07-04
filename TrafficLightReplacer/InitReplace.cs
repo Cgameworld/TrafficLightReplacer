@@ -49,11 +49,37 @@ namespace TrafficLightReplacer
 
         static void Postfix()
         {
+            //look for prop packs to add
+            FindActiveEmbeddedPropXMLs();
+
+            //grab initial prop postions
             InitReplace.CachePropFill();
 
-            //read props!
-            Debug.Log("PrefabCollection<PropInfo>.LoadedCount() "  + PrefabCollection<PropInfo>.LoadedCount());
+            string xmlfile = TLRModSettings.instance.LastLoadedXML;
 
+            //change dropdown index based on xml 
+            List<Pack> packList = Tools.GetPackList();
+            for (int i = 0; i < packList.Count; i++)
+            {
+                if (packList[i].PackPath == xmlfile)
+                {
+                    Debug.Log("i is packindex " + i);
+                    TLRModSettings.instance.CurrentPackIndex = i;
+                }
+            }
+
+            Replacer.Start(xmlfile);
+
+            // catch
+            //  {
+            //      TLRModSettings.instance.CurrentPackIndex = 0;
+            //      string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
+            //     Replacer.Start(defaultfile);
+            //   }
+        }
+
+        private static void FindActiveEmbeddedPropXMLs()
+        {
             var propEmbedList = new List<string>();
             for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
             {
@@ -72,7 +98,7 @@ namespace TrafficLightReplacer
                 if (crpPath == "2032407437")
                 {
                     Debug.Log("CLUS traffic Lights!");
-                    propEmbedList.Add("clus_lights.xml");                  
+                    propEmbedList.Add("clus_lights.xml");
                 }
 
                 propEmbedList = Tools.AddResourcePrefix(propEmbedList);
@@ -80,31 +106,6 @@ namespace TrafficLightReplacer
                 TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
 
             }
-
-            string xmlfile = TLRModSettings.instance.LastLoadedXML;
-
-            //change dropdown index based on xml 
-            List<Pack> packList = Tools.GetPackList();
-            for (int i = 0; i < packList.Count; i++)
-            {
-                if (packList[i].PackPath == xmlfile)
-                {
-                    Debug.Log("i is packindex " + i);
-                    TLRModSettings.instance.CurrentPackIndex = i;                    
-                }
-            }
-   
-
-            //try
-           // {
-               Replacer.Start(xmlfile);
-            //}
-           // catch
-          //  {
-          //      TLRModSettings.instance.CurrentPackIndex = 0;
-          //      string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
-           //     Replacer.Start(defaultfile);
-         //   }
         }
     }
 }
