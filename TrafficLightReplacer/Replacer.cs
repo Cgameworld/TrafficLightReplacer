@@ -337,11 +337,10 @@ namespace TrafficLightReplacer
                 propGroup.m_finalProp = typeSignalPole;
 
 
-                propGroup.m_angle = propGroupCache[propGroupCounter].Angle + transformOffset.Angle;
                 propGroup.m_position.x = lane.m_position > 0
                 ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x + 1f
                 : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x + -1f;
-                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter);
+                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter,false,true);
 
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
