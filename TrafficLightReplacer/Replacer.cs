@@ -29,6 +29,7 @@ namespace TrafficLightReplacer
         public static PropInfo typeMirror;
 
         public static PropInfo typeSignalPole;
+        public static PropInfo typeSignalPoleMirror;
 
         public static List<CachePropItem> propGroupCache = new List<CachePropItem>();
         public static TransformValues transformOffset = new TransformValues()
@@ -98,6 +99,7 @@ namespace TrafficLightReplacer
 
             //set to blank asset on default
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
+            typeSignalPoleMirror = null;
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -136,6 +138,10 @@ namespace TrafficLightReplacer
                 if (result[i].Type == "Signal Pole")
                 {
                     typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                }
+                if (result[i].Type == "Signal Pole Mirror")
+                {
+                    typeSignalPoleMirror = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
             }
         }
@@ -336,15 +342,24 @@ namespace TrafficLightReplacer
                 if (propGroup.m_prop.name == "Traffic Light Pedestrian")
                 {
 
-                    //propGroup.m_finalProp = typePedSignal;
-                    propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight1.pedlight1_Data");
+                    propGroup.m_finalProp = typePedSignal;
+                    //propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight1.pedlight1_Data");
                     MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
                 }
             }
 
             if (propGroup.m_prop.name == "Traffic Light 02")
             {
-                propGroup.m_finalProp = typeSignalPole;
+                if (typeSignalPoleMirror != null)
+                {
+                    Debug.Log("signalpole mirror selected!");
+                    propGroup.m_finalProp = typeSignalPoleMirror;
+                }
+                else
+                {
+                    Debug.Log("signalpole selected!");
+                    propGroup.m_finalProp = typeSignalPole;
+                }
 
 
                 propGroup.m_position.x = lane.m_position > 0
@@ -355,13 +370,9 @@ namespace TrafficLightReplacer
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
-                //propGroup.m_finalProp = typePedSignal;
-                propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight2.pedlight2_Data");
-                //if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
-                //{
+                propGroup.m_finalProp = typePedSignal;
+                //propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight2.pedlight2_Data");
                 MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
-                    //propGroup.m_angle = 270;
-               // }
             }
 
             //fix for one way roads with two ped lights!
@@ -369,8 +380,8 @@ namespace TrafficLightReplacer
             {
                 if (lane.m_position < 0)
                 {
-                    //propGroup.m_finalProp = typePedSignal;
-                    propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight3.pedlight3_Data");
+                    propGroup.m_finalProp = typePedSignal;
+                    //propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight3.pedlight3_Data");
                     MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
                 }
 
