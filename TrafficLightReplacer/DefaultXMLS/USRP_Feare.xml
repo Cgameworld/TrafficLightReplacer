@@ -143,9 +143,11 @@
 		</Asset>
 	</Assets>
 	<Transform>
-		<OffsetX>0</OffsetX>
-		<OffsetY>0</OffsetY>
-		<OffsetZ>0</OffsetZ>
+    <Position>
+      <x>0.5</x>
+      <y>2</y>
+      <z>0</z>
+    </Position>
 		<Angle>-90</Angle>
 		<Scale>100</Scale>
 	</Transform>

@@ -33,7 +33,12 @@ namespace TrafficLightReplacer
         public static PropInfo typeSignalPoleMirror;
 
         public static List<CachePropItem> propGroupCache = new List<CachePropItem>();
-        public static TransformValues transformOffset = new TransformValues();
+        public static TransformValues transformOffset = new TransformValues()
+        {
+            Position = new Vector3(0, 0, 0),
+            Angle = 0,
+            Scale = 100
+        };
 
         public static bool oneSizeMode = false;
        
@@ -149,50 +154,21 @@ namespace TrafficLightReplacer
                 }
             }
 
-            //read optional transform settings
+            //read optional transform settings TRANsFORM BROKEN !
             if (XMLinput.Transform != null)
             {
-                Debug.Log("transform not null!");
+                Debug.Log("1transform before! + XMLinput:");
+                Debug.Log(transformOffset.Position);
+                Debug.Log(transformOffset.Angle);
+                Debug.Log(transformOffset.Scale);
+
                 transformOffset = XMLinput.Transform;
-                SetTransformSliders(XMLinput, false);
-            }
-            else
-            {
-                SetTransformSliders(XMLinput, true);
-            }
-        }
-        public static void SetTransformSliders(TLRConfig XMLinput, bool isReset)
-        {
-            //check if panel items exist
-            if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
-            {
-                if (!isReset)
-                {
-                    //slider ui is at index 5-9
-                    SetTransformSlider(5, XMLinput.Transform.Position.x);
-                    SetTransformSlider(6, XMLinput.Transform.Position.y);
-                    SetTransformSlider(7, XMLinput.Transform.Position.z);
-                    SetTransformSlider(8, XMLinput.Transform.Angle);
-                    SetTransformSlider(9, XMLinput.Transform.Scale);
-                }
-                else
-                {
-                    //slider ui is at index 5-9
-                    SetTransformSlider(5, 0f);
-                    SetTransformSlider(6, 0f);
-                    SetTransformSlider(7, 0f);
-                    SetTransformSlider(8, 0f);
-                    SetTransformSlider(9, 100f);
-                }
+                Debug.Log("2transform af not wnull! + XMLinput:");
+                Debug.Log(transformOffset.Position);
+                Debug.Log(transformOffset.Angle);
+                Debug.Log(transformOffset.Scale);
             }
         }
-
-        private static void SetTransformSlider(int slidernum, float replaceto)
-        {
-            TrafficLightReplacePanel.instance.GetComponentsInChildren<UIPanel>()[slidernum].GetComponentsInChildren<UITextField>()[0].text = replaceto.ToString();
-            TrafficLightReplacePanel.instance.GetComponentsInChildren<UIPanel>()[slidernum].GetComponentsInChildren<UISlider>()[0].value = replaceto;
-        }
-
         public static void ModifyMainUI()
         {
             if (oneSizeMode)
@@ -450,16 +426,15 @@ namespace TrafficLightReplacer
             }
 
             propGroup.m_position.y = propGroupCache[propGroupCounter].Position.y + transformOffset.Position.y;
-
             propGroup.m_position.z = propGroup.m_segmentOffset < 0
                 ? propGroupCache[propGroupCounter].Position.z + transformOffset.Position.z
                 : propGroupCache[propGroupCounter].Position.z - transformOffset.Position.z;
-
             var scale = 1 + ((transformOffset.Scale - 100) / 100);
             //Debug.Log("OSAP scale: " + scale);
-
-            propGroup.m_finalProp.m_minScale = scale;
+           // Debug.Log("transformOffset.Scale) " + transformOffset.Scale);
+            propGroup.m_finalProp.m_minScale = scale; 
             propGroup.m_finalProp.m_maxScale = scale;
+            //Debug.Log("m5");
         }
 
         private static void ReplaceProp(NetInfo.Lane lane, PropInfo newProp, NetLaneProps.Prop propGroup, int propGroupCounter)

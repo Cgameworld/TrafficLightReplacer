@@ -306,7 +306,6 @@ namespace TrafficLightReplacer
             clearButton.eventClick += (c, p) =>
             {
                 UpdateTransformSettings();
-                Replacer.SetTransformSliders(null, true);
             };
 
             #endregion
