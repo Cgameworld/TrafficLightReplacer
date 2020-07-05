@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ColossalFramework.UI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -153,7 +154,44 @@ namespace TrafficLightReplacer
             {
                 Debug.Log("transform not null!");
                 transformOffset = XMLinput.Transform;
+                SetTransformSliders(XMLinput, false);
             }
+            else
+            {
+                SetTransformSliders(XMLinput, true);
+            }
+        }
+
+        private static void SetTransformSliders(TLRConfig XMLinput, bool isReset)
+        { 
+            //check if panel items exist
+            if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
+            {
+                if (!isReset)
+                {
+                    //slider ui is at index 5-9
+                    SetTransformSlider(5, XMLinput.Transform.Position.x);
+                    SetTransformSlider(6, XMLinput.Transform.Position.y);
+                    SetTransformSlider(7, XMLinput.Transform.Position.z);
+                    SetTransformSlider(8, XMLinput.Transform.Angle);
+                    SetTransformSlider(9, XMLinput.Transform.Scale);
+                }
+                else
+                {
+                    //slider ui is at index 5-9
+                    SetTransformSlider(5, 0f);
+                    SetTransformSlider(6, 0f);
+                    SetTransformSlider(7, 0f);
+                    SetTransformSlider(8, 0f);
+                    SetTransformSlider(9, 100f);
+                }
+            }
+        }
+
+        private static void SetTransformSlider(int slidernum, float replaceto)
+        {
+                TrafficLightReplacePanel.instance.GetComponentsInChildren<UIPanel>()[slidernum].GetComponentsInChildren<UITextField>()[0].text = replaceto.ToString();
+                TrafficLightReplacePanel.instance.GetComponentsInChildren<UIPanel>()[slidernum].GetComponentsInChildren<UISlider>()[0].value = replaceto;
         }
 
         public static void ModifyMainUI()
