@@ -304,26 +304,7 @@ namespace TrafficLightReplacer
             clearButton.eventClick += (c, p) =>
             {
                 UpdateTransformSettings();
-
-                for (int i = 0; i < GetComponentsInChildren<UIPanel>().Length; i++)
-                {
-                    if (GetComponentsInChildren<UIPanel>()[i].name == "sliderrow")
-                    {
-                        GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].color = new Color32(255, 255, 255, 255);
-
-                        //Debug.Log("index of UIPANELS" + i);
-                        if (i == 9)
-                        {
-                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "100";
-                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 100f;
-                        }
-                        else
-                        {
-                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text = "0";
-                            GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UISlider>()[0].value = 0f;
-                        }
-                    }
-                }
+                Tools.SetTransformSliders(null, true);
             };
 
             #endregion
