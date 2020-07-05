@@ -92,7 +92,7 @@
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="blankprop.crp" />
+    <None Include="Assets\blankprop.crp" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
