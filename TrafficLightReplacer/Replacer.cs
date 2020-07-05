@@ -32,12 +32,7 @@ namespace TrafficLightReplacer
         public static PropInfo typeSignalPoleMirror;
 
         public static List<CachePropItem> propGroupCache = new List<CachePropItem>();
-        public static TransformValues transformOffset = new TransformValues()
-        {
-            Position = new Vector3(0,0,0),
-            Angle = 0,
-            Scale = 100
-        };
+        public static TransformValues transformOffset = new TransformValues();
 
         public static bool oneSizeMode = false;
        
@@ -101,6 +96,14 @@ namespace TrafficLightReplacer
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
             typeSignalPoleMirror = null;
 
+            //set default transform values
+            transformOffset = new TransformValues()
+            {
+                Position = new Vector3(0, 0, 0),
+                Angle = 0,
+                Scale = 100
+            };
+
             for (int i = 0; i < result.Count; i++)
             {
                 Debug.Log("Pack NAME! " + XMLinput.PackName);
@@ -143,6 +146,13 @@ namespace TrafficLightReplacer
                 {
                     typeSignalPoleMirror = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                 }
+            }
+
+            //read optional transform settings
+            if (XMLinput.Transform != null)
+            {
+                Debug.Log("transform not null!");
+                transformOffset = XMLinput.Transform;
             }
         }
 
