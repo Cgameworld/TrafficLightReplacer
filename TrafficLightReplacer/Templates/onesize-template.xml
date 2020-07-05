@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<PackName>One-Size Template</PackName>
-	<RemoveMirrorLights>false</RemoveMirrorLights>
 	<OneSize>true</OneSize>
 	<Assets>
     <!--Be sure to replace "Placeholder" with the Prop Prefab Name for each Asset!
