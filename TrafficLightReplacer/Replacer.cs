@@ -148,15 +148,15 @@ namespace TrafficLightReplacer
                 {
                     //Debug.Log("ran! OSM1");
                     //add code here to move dropdown2 up and change height
-                    TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = false;
+                    TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
                     TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = false;
                     TrafficLightReplacePanel.instance.customizePanel.isVisible = false;
 
-                    TrafficLightReplacePanel.instance.dropdown2.relativePosition = new Vector2(0, 100);
-                    TrafficLightReplacePanel.instance.vanillaConfigOffset = -75;
+                    TrafficLightReplacePanel.instance.dropdown2.relativePosition = new Vector2(0, 140);
+                    TrafficLightReplacePanel.instance.vanillaConfigOffset = -45;
                     TrafficLightReplacePanel.instance.dropdown2_init = TrafficLightReplacePanel.instance.dropdown2.relativePosition;
-                    TrafficLightReplacePanel.instance.height = 140;
+                    TrafficLightReplacePanel.instance.height = 170;
                 }
             }
             else
@@ -194,59 +194,66 @@ namespace TrafficLightReplacer
 
                     foreach (NetInfo.Lane lane in prefab.m_lanes)
                     {
-                        if (lane?.m_laneProps?.m_props != null)
+                    if (lane?.m_laneProps?.m_props != null)
+                    {
+                        foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
                         {
-                            foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+
+                            if (propGroup?.m_finalProp != null)
                             {
-                                if (propGroup?.m_finalProp != null)
+                                if (oneSizeMode)
                                 {
-                                    if (oneSizeMode)
+                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
+                                    {
+                                        ReplacePropFlipped(lane, propGroup, typeMain, isOneWay, propGroupCounter);
+                                    }
+                                    else
                                     {
                                         OneSizeReplace(propGroupCounter, propGroup, lane);
                                     }
-
-                                    else
+                                }
+                                else
+                                {
+                                    //Debug.Log("onesize mode off!");
+                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
                                     {
-                                        //Debug.Log("onesize mode off!");
-                                        if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
+                                        if (roadwidth >= 15 || isHighway)
                                         {
-                                            if (roadwidth >= 15 || isHighway)
-                                            {
-                                                ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
-                                            }
-                                            else if (roadwidth >= 6)
-                                            {
-                                                ReplacePropFlipped(lane, propGroup, typeMedium, isOneWay, propGroupCounter);
-                                            }
-                                            else
-                                            {
-                                                ReplacePropFlipped(lane, propGroup, typeSmall, isOneWay, propGroupCounter);  //regular
-                                            }
+                                            ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
+                                        }
+                                        else if (roadwidth >= 6)
+                                        {
+                                            ReplacePropFlipped(lane, propGroup, typeMedium, isOneWay, propGroupCounter);
                                         }
                                         else
                                         {
-                                            //panel is NULL
-                                            if (roadwidth >= 15 || isHighway)
-                                            {
-                                                ReplaceProp(lane, typeLarge, propGroup, propGroupCounter);
-                                            }
-                                            else if (roadwidth >= 6)
-                                            {
-                                                ReplaceProp(lane, typeMedium, propGroup, propGroupCounter);
+                                            ReplacePropFlipped(lane, propGroup, typeSmall, isOneWay, propGroupCounter);  //regular
                                         }
-                                            else
-                                            {
-                                                ReplaceProp(lane, typeSmall, propGroup, propGroupCounter);
-                                        }
-                                        }
-
                                     }
+                                    else
+                                    {
+                                        //panel is NULL
+                                        if (roadwidth >= 15 || isHighway)
+                                        {
+                                            ReplaceProp(lane, typeLarge, propGroup, propGroupCounter);
+                                        }
+                                        else if (roadwidth >= 6)
+                                        {
+                                            ReplaceProp(lane, typeMedium, propGroup, propGroupCounter);
+                                        }
+                                        else
+                                        {
+                                            ReplaceProp(lane, typeSmall, propGroup, propGroupCounter);
+                                        }
+                                    }
+
+                                }
 
                                 propGroupCounter++;
 
-                                }
                             }
                         }
+                    }
                 }
 
             }
@@ -328,7 +335,10 @@ namespace TrafficLightReplacer
                 //change road median ped signal
                 if (propGroup.m_prop.name == "Traffic Light Pedestrian")
                 {
-                    propGroup.m_finalProp = typePedSignal;
+
+                    //propGroup.m_finalProp = typePedSignal;
+                    propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight1.pedlight1_Data");
+                    MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
                 }
             }
 
@@ -345,11 +355,13 @@ namespace TrafficLightReplacer
             }
             else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
             {
-                propGroup.m_finalProp = typePedSignal;
-                if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
-                {
-                    propGroup.m_angle = 270;
-                }
+                //propGroup.m_finalProp = typePedSignal;
+                propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight2.pedlight2_Data");
+                //if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
+                //{
+                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
+                    //propGroup.m_angle = 270;
+               // }
             }
 
             //fix for one way roads with two ped lights!
@@ -357,7 +369,9 @@ namespace TrafficLightReplacer
             {
                 if (lane.m_position < 0)
                 {
-                    propGroup.m_finalProp = typePedSignal;
+                    //propGroup.m_finalProp = typePedSignal;
+                    propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight3.pedlight3_Data");
+                    MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
                 }
 
             }
