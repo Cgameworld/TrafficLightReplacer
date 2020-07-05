@@ -20,5 +20,9 @@
 			<Prefab>2032407437.Traffic Light - TLS_S1M_Data</Prefab>
 			<Type>Signal Pole</Type>
 		</Asset>
+    <Asset>
+      <Prefab>2032407437.Traffic Light - TLS_S1_Data</Prefab>
+      <Type>Signal Pole Mirror</Type>
+    </Asset>
 	</Assets>
 </TLRConfig>
