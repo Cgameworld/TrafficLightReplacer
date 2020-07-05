@@ -80,6 +80,7 @@ namespace TrafficLightReplacer
 
         private static void FindActiveEmbeddedPropXMLs()
         {
+            //mod detection part in CheckMods() in ModInfo.cs
             var propEmbedList = new List<string>();
             for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
             {
@@ -97,15 +98,18 @@ namespace TrafficLightReplacer
                 Debug.Log("crppath: " + crpPath);
                 if (crpPath == "2032407437")
                 {
-                    Debug.Log("CLUS traffic Lights!");
                     propEmbedList.Add("clus_lights.xml");
                 }
-
-                propEmbedList = Tools.AddResourcePrefix(propEmbedList);
-
-                TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
+                if (crpPath == "2084863228")
+                {
+                    propEmbedList.Add("USRP_Feare.xml");
+                }
 
             }
+
+            propEmbedList = Tools.AddResourcePrefix(propEmbedList);
+
+            TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
         }
     }
 }

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>USRP Traffic Signals</PackName>
+	<OneSize>false</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>2084863228.USRP TL A1_Data</Prefab>
+			<Name>Traffic Light A1</Name>
+			<Description>Traffic Light A1</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL A2_Data</Prefab>
+			<Name>Traffic Light A2</Name>
+			<Description>Traffic Light A2</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL B1_Data</Prefab>
+			<Name>Traffic Light B1</Name>
+			<Description>Traffic Light B1</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL B2_Data</Prefab>
+			<Name>Traffic Light B2</Name>
+			<Description>Traffic Light B2</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL A3_Data</Prefab>
+			<Name>Traffic Light A3</Name>
+			<Description>Traffic Light A3</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL A4_Data</Prefab>
+			<Name>Traffic Light A4</Name>
+			<Description>Traffic Light A4</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL C1_Data</Prefab>
+			<Name>Traffic Light C1</Name>
+			<Description>Traffic Light C1</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL C2_Data</Prefab>
+			<Name>Traffic Light C2</Name>
+			<Description>TL C2 Style</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL D1_Data</Prefab>
+			<Name>Traffic Light D1</Name>
+			<Description>TL D1 Style</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL D2_Data</Prefab>
+			<Name>Traffic Light D2</Name>
+			<Description>TL D2 Style</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL D3_Data</Prefab>
+			<Name>Traffic Light D3</Name>
+			<Description>TL D3 Style</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL D4_Data</Prefab>
+			<Name>Traffic Light D4</Name>
+			<Description>TL D4 Style</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL D5_Data</Prefab>
+			<Name>Traffic Light D5</Name>
+			<Description>TL D5 Style</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL D6_Data</Prefab>
+			<Name>Traffic Light D6</Name>
+			<Description>TL D6 Style</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL E1_Data</Prefab>
+			<Name>Traffic Light E1</Name>
+			<Description>TL E1 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL E2_Data</Prefab>
+			<Name>Traffic Light E2</Name>
+			<Description>TL E2 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL E3_Data</Prefab>
+			<Name>Traffic Light E3</Name>
+			<Description>TL E3 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL E4_Data</Prefab>
+			<Name>Traffic Light E4</Name>
+			<Description>TL E4 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL E5_Data</Prefab>
+			<Name>Traffic Light E5</Name>
+			<Description>TL E5 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL E6_Data</Prefab>
+			<Name>Traffic Light E6</Name>
+			<Description>TL E6 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL F1_Data</Prefab>
+			<Name>Traffic Light F1</Name>
+			<Description>TL F1 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL G1_Data</Prefab>
+			<Name>Traffic Light G1</Name>
+			<Description>TL G1 Style</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2084863228.USRP TL R2_Data</Prefab>
+			<Name>Signal Pole</Name>
+			<Description>TBA</Description>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+	<Transform>
+		<OffsetX>0</OffsetX>
+		<OffsetY>0</OffsetY>
+		<OffsetZ>0</OffsetZ>
+		<Angle>-90</Angle>
+		<Scale>100</Scale>
+	</Transform>
+</TLRConfig>

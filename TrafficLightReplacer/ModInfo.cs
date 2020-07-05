@@ -113,6 +113,8 @@ namespace TrafficLightReplacer
             embedList = Tools.AddResourcePrefix(embedList);
 
             TLRModSettings.instance.EmbeddedXMLActive = embedList;
+
+            //prop pack dectection in FindActiveEmbeddedPropXMLs() in InitReplace.cs
         }
     }
 
