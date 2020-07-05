@@ -13,10 +13,11 @@ namespace TrafficLightReplacer
     {
         public bool ShowCreatorTool { get; set; } = false;
         public bool EnableButtonBackground { get; set; } = false;
-        public int CurrentPackIndex { get; set; } = 0;
-        public string LastLoadedXML { get; set; } = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
         public Vector3 ButtonPosition { get; set; } = new Vector3(-9999, -9999, 0);
         public bool LoadTLRLocalFolder { get; set; } = false;
+        public string LastLoadedXML { get; set; } = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
+        public int CurrentPackIndex { get; set; } = 0;
+        public bool OppositeSideToggle{ get; set; } = false;
         public List<string> EmbeddedXMLActive { get; set; }
 
         //implementation from keallu's mods

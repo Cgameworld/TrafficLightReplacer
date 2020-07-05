@@ -107,7 +107,7 @@ namespace TrafficLightReplacer
 
             oppositeSideToggle = UIUtils.CreateCheckBox(this);
             oppositeSideToggle.text = Translation.Instance.GetTranslation(TranslationID.OPPOSITESIDETOGGLE);
-            oppositeSideToggle.isChecked = false;
+            oppositeSideToggle.isChecked = TLRModSettings.instance.OppositeSideToggle;
             oppositeSideToggle.relativePosition = new Vector2(20, 100);
             oppositeSideToggle.tooltip = Translation.Instance.GetTranslation(TranslationID.OPPOSITESIDETOOLTIP);
             oppositeSideToggle.isVisible = false;
@@ -115,6 +115,8 @@ namespace TrafficLightReplacer
             oppositeSideToggle.eventCheckChanged += (c, p) =>
             {           
                 Replacer.UpdateLaneProps();
+                TLRModSettings.instance.OppositeSideToggle = p;
+                TLRModSettings.instance.Save();
             };
 
             #region customizeDropdown
