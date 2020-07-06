@@ -146,9 +146,9 @@ namespace TrafficLightReplacer
             //set default lights for multisize (set from xml config in future)
             if (!oneSizeMode)
             {
-                typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[0].Prefab);
-                typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[0].Prefab);  //>6 width
-                typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[0].Prefab);  //>11 width
+                typeSmall = PrefabCollection<PropInfo>.FindLoaded(typeSmallOptions[TLRModSettings.instance.SmallLightIndex].Prefab);
+                typeMedium = PrefabCollection<PropInfo>.FindLoaded(typeMediumOptions[TLRModSettings.instance.MediumLightIndex].Prefab);  //>6 width
+                typeLarge = PrefabCollection<PropInfo>.FindLoaded(typeLargeOptions[TLRModSettings.instance.LargeLightIndex].Prefab);  //>11 width
             }
 
             //read optional transform settings

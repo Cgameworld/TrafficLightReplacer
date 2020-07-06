@@ -156,8 +156,8 @@ namespace TrafficLightReplacer
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
                         dropdownOffset = 120;
-                        ResetAllDropdowns();
-                        AddAllItemsToDropdowns();
+                        //ResetAllDropdowns();
+                        //AddAllItemsToDropdowns();
                     }
                 }
                 RefreshFooterItems();
@@ -179,7 +179,7 @@ namespace TrafficLightReplacer
             smallRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             smallRoadsDropdown.width = 185;
             smallRoadsDropdown.AddItem("Empty A");
-            smallRoadsDropdown.selectedIndex = 0;
+            smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
             smallRoadsDropdown.relativePosition = new Vector3(135, 0);
             smallRoadsDropdown.tooltip = "";
 
@@ -188,8 +188,9 @@ namespace TrafficLightReplacer
                 Debug.Log("smallroadsdropdown eventselectedindex called");
                 Replacer.typeSmall = GetCurrentProp(Replacer.typeSmallOptions, smallRoadsDropdown);
                 smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[smallRoadsDropdown.selectedIndex].Description;
+                TLRModSettings.instance.SmallLightIndex = smallRoadsDropdown.selectedIndex;
+                TLRModSettings.instance.Save();
                 Replacer.UpdateLaneProps();
-
             };
 
             UILabel mediumRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
@@ -203,7 +204,7 @@ namespace TrafficLightReplacer
             mediumRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             mediumRoadsDropdown.width = 185;
             mediumRoadsDropdown.AddItem("Empty B");
-            mediumRoadsDropdown.selectedIndex = 0;
+            mediumRoadsDropdown.selectedIndex = TLRModSettings.instance.MediumLightIndex;
             mediumRoadsDropdown.relativePosition = new Vector3(155, 40);
             mediumRoadsDropdown.tooltip = "";
 
@@ -211,6 +212,8 @@ namespace TrafficLightReplacer
             {
                 Replacer.typeMedium = GetCurrentProp(Replacer.typeMediumOptions, mediumRoadsDropdown);
                 mediumRoadsDropdown.tooltip = Replacer.typeMediumOptions[mediumRoadsDropdown.selectedIndex].Description;
+                TLRModSettings.instance.MediumLightIndex = mediumRoadsDropdown.selectedIndex;
+                TLRModSettings.instance.Save();
                 Replacer.UpdateLaneProps();
             };
 
@@ -225,7 +228,7 @@ namespace TrafficLightReplacer
             largeRoadsDropdown = UIUtils.CreateDropDown(customizePanel);
             largeRoadsDropdown.width = 185;
             largeRoadsDropdown.AddItem("Empty C");
-            largeRoadsDropdown.selectedIndex = 0;
+            largeRoadsDropdown.selectedIndex = TLRModSettings.instance.LargeLightIndex;
             largeRoadsDropdown.relativePosition = new Vector3(155, 80);
             largeRoadsDropdown.tooltip = "";
 
@@ -233,6 +236,8 @@ namespace TrafficLightReplacer
             {
                 Replacer.typeLarge = GetCurrentProp(Replacer.typeLargeOptions, largeRoadsDropdown);
                 largeRoadsDropdown.tooltip = Replacer.typeLargeOptions[largeRoadsDropdown.selectedIndex].Description;
+                TLRModSettings.instance.LargeLightIndex = largeRoadsDropdown.selectedIndex;
+                TLRModSettings.instance.Save();
                 Replacer.UpdateLaneProps();
             };
 
@@ -390,7 +395,11 @@ namespace TrafficLightReplacer
                 mediumRoadsDropdown.selectedIndex = 0;
                 largeRoadsDropdown.selectedIndex = 0;
             }
-           // Debug.Log("af sel0");
+            TLRModSettings.instance.SmallLightIndex = 0;
+            TLRModSettings.instance.MediumLightIndex = 0;
+            TLRModSettings.instance.LargeLightIndex = 0;
+            TLRModSettings.instance.Save();
+            // Debug.Log("af sel0");
             ResetDropdown(smallRoadsDropdown);
             ResetDropdown(mediumRoadsDropdown);
             ResetDropdown(largeRoadsDropdown);

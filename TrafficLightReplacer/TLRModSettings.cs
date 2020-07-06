@@ -18,6 +18,9 @@ namespace TrafficLightReplacer
         public string LastLoadedXML { get; set; } = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
         public int CurrentPackIndex { get; set; } = 0;
         public bool OppositeSideToggle{ get; set; } = false;
+        public int SmallLightIndex { get; set; } = 0;
+        public int MediumLightIndex { get; set; } = 0;
+        public int LargeLightIndex { get; set; } = 0;
         public List<string> EmbeddedXMLActive { get; set; }
 
         //implementation from keallu's mods
