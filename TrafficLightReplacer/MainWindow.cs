@@ -101,7 +101,6 @@ namespace TrafficLightReplacer
                 TLRModSettings.instance.CurrentPackIndex = packDropdown.selectedIndex;
                 TLRModSettings.instance.LastLoadedXML = Replacer.packList[packDropdown.selectedIndex].PackPath;
                 TLRModSettings.instance.Save();
-
                 CloseDropdowns();
             };
 
@@ -373,6 +372,8 @@ namespace TrafficLightReplacer
             transformPanel.isVisible = false;
             transformButtonToggle.backgroundSprite = "PropertyGroupClosed";
             transformOffset = 0;
+
+
             RefreshFooterItems();
         }
         private void ResetAllDropdowns()
@@ -381,11 +382,15 @@ namespace TrafficLightReplacer
             smallRoadsDropdown.AddItem("");
             mediumRoadsDropdown.AddItem("");
             largeRoadsDropdown.AddItem("");
-            Debug.Log("bf sel0");
-            smallRoadsDropdown.selectedIndex = 0;
-            mediumRoadsDropdown.selectedIndex = 0;
-            largeRoadsDropdown.selectedIndex = 0;
-            Debug.Log("af sel0");
+           // Debug.Log("smallRoadsDropdown.selectedIndex" + smallRoadsDropdown.selectedIndex);
+            //Debug.Log("onesizemode: " + Replacer.oneSizeMode);
+            if (!Replacer.oneSizeMode)
+            {
+                smallRoadsDropdown.selectedIndex = 0;
+                mediumRoadsDropdown.selectedIndex = 0;
+                largeRoadsDropdown.selectedIndex = 0;
+            }
+           // Debug.Log("af sel0");
             ResetDropdown(smallRoadsDropdown);
             ResetDropdown(mediumRoadsDropdown);
             ResetDropdown(largeRoadsDropdown);
