@@ -98,18 +98,9 @@ namespace TrafficLightReplacer
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {  
                 Debug.Log("TLR: Dropdown Changed To: " + Replacer.packList[packDropdown.selectedIndex].PackPath);
-                if (!initLoad)
-                {
-                    Debug.Log("reg-loaded");
-                    ResetDropdownIndices();
-                }
-                else
-                {
-                    
-                    Debug.Log("initload-loaded");
-                }
-                ResetDropdowns();
+                if (!initLoad) ResetDropdownIndices();
 
+                ResetDropdowns();
                 Replacer.Start(Replacer.packList[packDropdown.selectedIndex].PackPath);
                 AddAllItemsToDropdowns();
                 TLRModSettings.instance.CurrentPackIndex = packDropdown.selectedIndex;
@@ -118,9 +109,12 @@ namespace TrafficLightReplacer
 
                 if (initLoad)
                 {
-                    smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
-                    mediumRoadsDropdown.selectedIndex = TLRModSettings.instance.MediumLightIndex;
-                    largeRoadsDropdown.selectedIndex = TLRModSettings.instance.LargeLightIndex;
+                    if (!Replacer.oneSizeMode)
+                    {
+                        smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
+                        mediumRoadsDropdown.selectedIndex = TLRModSettings.instance.MediumLightIndex;
+                        largeRoadsDropdown.selectedIndex = TLRModSettings.instance.LargeLightIndex;
+                    }
                     initLoad = false;
                 }
                 CloseDropdowns();
