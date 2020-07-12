@@ -38,6 +38,8 @@ namespace TrafficLightReplacer
         private bool changingDropdown = false;
         private UIButton clearButton;
 
+        private bool dropdownFlag = false;
+
         public UIPanel dropdown1;
         public UIPanel dropdown2;
 
@@ -45,6 +47,7 @@ namespace TrafficLightReplacer
         int transformOffset = 0;
 
         public int vanillaConfigOffset = 0;
+        private bool initLoad = true;
 
         public static TrafficLightReplacePanel instance
         {
@@ -93,14 +96,33 @@ namespace TrafficLightReplacer
             packDropdown.selectedIndex = 0;
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
-            {
+            {  
                 Debug.Log("TLR: Dropdown Changed To: " + Replacer.packList[packDropdown.selectedIndex].PackPath);
+                if (!initLoad)
+                {
+                    Debug.Log("reg-loaded");
+                    ResetDropdownIndices();
+                }
+                else
+                {
+                    
+                    Debug.Log("initload-loaded");
+                }
+                ResetDropdowns();
+
                 Replacer.Start(Replacer.packList[packDropdown.selectedIndex].PackPath);
-                ResetAllDropdowns();
                 AddAllItemsToDropdowns();
                 TLRModSettings.instance.CurrentPackIndex = packDropdown.selectedIndex;
                 TLRModSettings.instance.LastLoadedXML = Replacer.packList[packDropdown.selectedIndex].PackPath;
                 TLRModSettings.instance.Save();
+
+                if (initLoad)
+                {
+                    smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
+                    mediumRoadsDropdown.selectedIndex = TLRModSettings.instance.MediumLightIndex;
+                    largeRoadsDropdown.selectedIndex = TLRModSettings.instance.LargeLightIndex;
+                    initLoad = false;
+                }
                 CloseDropdowns();
             };
 
@@ -185,6 +207,12 @@ namespace TrafficLightReplacer
 
             smallRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
+                if (dropdownFlag)
+                {
+                    Debug.Log("sr event cancelled dropdownflag: " + dropdownFlag);
+                    return;
+                }
+
                 Debug.Log("smallroadsdropdown eventselectedindex called");
                 Replacer.typeSmall = GetCurrentProp(Replacer.typeSmallOptions, smallRoadsDropdown);
                 smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[smallRoadsDropdown.selectedIndex].Description;
@@ -210,6 +238,12 @@ namespace TrafficLightReplacer
 
             mediumRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
+                if (dropdownFlag)
+                {
+                    Debug.Log("mr event cancelled dropdownflag: " + dropdownFlag);
+                    return;
+                }
+
                 Replacer.typeMedium = GetCurrentProp(Replacer.typeMediumOptions, mediumRoadsDropdown);
                 mediumRoadsDropdown.tooltip = Replacer.typeMediumOptions[mediumRoadsDropdown.selectedIndex].Description;
                 TLRModSettings.instance.MediumLightIndex = mediumRoadsDropdown.selectedIndex;
@@ -234,6 +268,12 @@ namespace TrafficLightReplacer
 
             largeRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
+                if (dropdownFlag)
+                {
+                    Debug.Log("lr event cancelled dropdownflag: " + dropdownFlag);
+                    return;
+                }
+
                 Replacer.typeLarge = GetCurrentProp(Replacer.typeLargeOptions, largeRoadsDropdown);
                 largeRoadsDropdown.tooltip = Replacer.typeLargeOptions[largeRoadsDropdown.selectedIndex].Description;
                 TLRModSettings.instance.LargeLightIndex = largeRoadsDropdown.selectedIndex;
@@ -340,6 +380,7 @@ namespace TrafficLightReplacer
             };
 
         }
+
         public void RefreshFooterItems()
         {
             dropdown2.relativePosition = dropdown2_init + new Vector3(0, dropdownOffset);
@@ -381,30 +422,30 @@ namespace TrafficLightReplacer
 
             RefreshFooterItems();
         }
-        private void ResetAllDropdowns()
+        private void ResetDropdownIndices()
         {
-            //add blank item before resetting index in case dropdown is null
-            smallRoadsDropdown.AddItem("");
-            mediumRoadsDropdown.AddItem("");
-            largeRoadsDropdown.AddItem("");
-           // Debug.Log("smallRoadsDropdown.selectedIndex" + smallRoadsDropdown.selectedIndex);
-            //Debug.Log("onesizemode: " + Replacer.oneSizeMode);
+
             if (!Replacer.oneSizeMode)
             {
+                dropdownFlag = true;
                 smallRoadsDropdown.selectedIndex = 0;
                 mediumRoadsDropdown.selectedIndex = 0;
                 largeRoadsDropdown.selectedIndex = 0;
+                dropdownFlag = false;
             }
+
             TLRModSettings.instance.SmallLightIndex = 0;
             TLRModSettings.instance.MediumLightIndex = 0;
             TLRModSettings.instance.LargeLightIndex = 0;
             TLRModSettings.instance.Save();
-            // Debug.Log("af sel0");
+        }
+
+        private void ResetDropdowns()
+        {
             ResetDropdown(smallRoadsDropdown);
             ResetDropdown(mediumRoadsDropdown);
             ResetDropdown(largeRoadsDropdown);
         }
-
         public static void ResetDropdown(UIDropDown dropdown)
         {
             string[] blank = new string[0];
