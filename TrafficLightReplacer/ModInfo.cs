@@ -107,6 +107,16 @@ namespace TrafficLightReplacer
                         embedList.Add("BP_American.xml");
                     }
 
+                    if (mod.name == "1108278552")
+                    {
+                        if (mod.isEnabled)
+                        {
+                            mod.isEnabled = false;
+                        }
+
+                        embedList.Add("USHorizontal_Cristolisto.xml");
+                    }
+
                 }
             }
 

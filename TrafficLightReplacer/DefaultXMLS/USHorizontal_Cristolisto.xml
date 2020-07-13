@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>US Horizontal Traffic Lights</PackName>
+	<OneSize>false</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>1108278552.HorizontalTrafficLights1_Data</Prefab>
+			<Name>Horizontal Light 1</Name>
+			<Description>Option 1</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1108278552.HorizontalTrafficLights3_Data</Prefab>
+			<Name>Horizontal Light 3</Name>
+			<Description>Option 3</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1108278552.HorizontalTrafficLights4_Data</Prefab>
+			<Name>Horizontal Light 4</Name>
+			<Description>Option 4</Description>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1108278552.HorizontalTrafficLights2_Data</Prefab>
+			<Name>Horizontal Light 2</Name>
+			<Description>Option 2</Description>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1108278552.HorizontalTrafficLights2_Data</Prefab>
+			<Name>Horizontal Light 2</Name>
+			<Description>Option 2</Description>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>Blank</Prefab>
+			<Name>Signal Pole</Name>
+			<Description>TBA</Description>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+  <Transform>
+    <Position>
+      <x>0.5</x>
+      <y>0</y>
+      <z>0</z>
+    </Position>
+    <Angle>0</Angle>
+    <Scale>100</Scale>
+  </Transform>
+</TLRConfig>

@@ -90,6 +90,7 @@
     <EmbeddedResource Include="DefaultXMLS\clus_lights.xml" />
     <EmbeddedResource Include="DefaultXMLS\BP_American.xml" />
     <EmbeddedResource Include="DefaultXMLS\USRP_Feare.xml" />
+    <EmbeddedResource Include="DefaultXMLS\USHorizontal_Cristolisto.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>
