@@ -63,7 +63,7 @@ namespace TrafficLightReplacer
 
         public override void Start()
         {
-            LoadResources(); 
+            LoadResources();
 
             atlas = UIUtils.GetAtlas("Ingame");
             backgroundSprite = "MenuPanel2";
@@ -96,7 +96,7 @@ namespace TrafficLightReplacer
             packDropdown.selectedIndex = 0;
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
-            {  
+            {
                 Debug.Log("TLR: Dropdown Changed To: " + Replacer.packList[packDropdown.selectedIndex].PackPath);
                 if (!initLoad) ResetDropdownIndices();
 
@@ -129,7 +129,6 @@ namespace TrafficLightReplacer
 
             oppositeSideToggle.eventCheckChanged += (c, p) =>
             {
-                Debug.Log("p checked" + p);
                 TLRModSettings.instance.OppositeSideToggle = p;
                 TLRModSettings.instance.Save();
                 Replacer.UpdateLaneProps();
@@ -167,7 +166,7 @@ namespace TrafficLightReplacer
                     {
                         customizePanel.isVisible = false;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupClosed";
-                        dropdownOffset = 0;                       
+                        dropdownOffset = 0;
                     }
                     else
                     {
@@ -372,11 +371,9 @@ namespace TrafficLightReplacer
 
             getmeditems.eventClick += (c, p) =>
             {
-               
+
             };
-
         }
-
         public void RefreshFooterItems()
         {
             dropdown2.relativePosition = dropdown2_init + new Vector3(0, dropdownOffset);

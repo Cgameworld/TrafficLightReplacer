@@ -221,5 +221,66 @@ namespace TrafficLightReplacer
             embedList = tempEmbedList;
             return embedList;
         }
+
+        public static void ModifyPropMeshPreload(PropInfo cris1, bool flipping)
+        {
+            if (cris1 != null)
+            {
+                Mesh meshcopy = RotateMesh180(cris1, flipping);
+                cris1.m_mesh = meshcopy;
+                cris1.m_mesh.RecalculateBounds();
+                cris1.m_mesh.RecalculateNormals();
+            }
+            else
+            {
+                Debug.Log("propmesh cris1 null");
+            }
+
+        }
+        private static Mesh RotateMesh180(PropInfo cris1, bool flip)
+        {
+            var mesh = cris1.m_mesh;
+            var newvertices = mesh.vertices;
+            var newtris = mesh.triangles;
+
+            Vector3 center = new Vector3(0, 0, 0);
+            Quaternion newRotation = new Quaternion();
+            newRotation.eulerAngles = new Vector3(0, 180, 0);
+
+            for (int i = 0; i < newvertices.Length; i++)
+            {
+                if (flip) newvertices[i].x *= -1;
+                newvertices[i] = newRotation * (newvertices[i] - center) + center;
+            }
+
+            if (flip) newtris = FlipNormals(newtris);
+
+            Mesh meshcopy = new Mesh
+            {
+                vertices = newvertices,
+                colors = mesh.colors,
+                triangles = newtris,
+                normals = mesh.normals,
+                tangents = mesh.tangents,
+                uv = mesh.uv,
+                uv2 = mesh.uv,
+                name = mesh.name
+            };
+            return meshcopy;
+        }
+        private static int[] FlipNormals(int[] tris)
+        {
+            for (int i = 0; i < tris.Length / 3; i++)
+            {
+                int a = tris[i * 3 + 0];
+                int b = tris[i * 3 + 1];
+                int c = tris[i * 3 + 2];
+                Debug.Log("mmbf tri" + i);
+                tris[i * 3 + 0] = c;
+                tris[i * 3 + 1] = b;
+                tris[i * 3 + 2] = a;
+            }
+            return tris;
+        }
     }
 }

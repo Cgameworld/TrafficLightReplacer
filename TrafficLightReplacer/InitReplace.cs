@@ -57,6 +57,9 @@ namespace TrafficLightReplacer
 
             //look for prop packs to add
             FindActiveEmbeddedPropXMLs();
+            
+            //makes tweaks to specfic traffic light meshes if found
+            PreloadPropModify();
 
             //grab initial prop postions
             InitReplace.CachePropFill();
@@ -77,7 +80,6 @@ namespace TrafficLightReplacer
             Replacer.Start(xmlfile);
 
         }
-
         private static void FindActiveEmbeddedPropXMLs()
         {
             //mod detection part in CheckMods() in ModInfo.cs
@@ -110,6 +112,12 @@ namespace TrafficLightReplacer
             propEmbedList = Tools.AddResourcePrefix(propEmbedList);
 
             TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
+        }
+        private static void PreloadPropModify()
+        {
+            Tools.ModifyPropMeshPreload(PrefabCollection<PropInfo>.FindLoaded("1108278552.HorizontalTrafficLights2_Data"), false);
+            Tools.ModifyPropMeshPreload(PrefabCollection<PropInfo>.FindLoaded("1108278552.HorizontalTrafficLights3_Data"), true);
+            Tools.ModifyPropMeshPreload(PrefabCollection<PropInfo>.FindLoaded("1108278552.HorizontalTrafficLights4_Data"), true);
         }
     }
 }

@@ -135,7 +135,14 @@ namespace TrafficLightReplacer
                 //all
                 if (result[i].Type == "Signal Pole")
                 {
-                    typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                    if (result[i].Prefab == "Blank")
+                    {
+                        typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
+                    }
+                    else
+                    {
+                        typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                    }
                 }
                 if (result[i].Type == "Signal Pole Mirror")
                 {
