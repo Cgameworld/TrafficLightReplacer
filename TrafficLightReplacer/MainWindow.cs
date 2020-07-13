@@ -90,7 +90,7 @@ namespace TrafficLightReplacer
 
             packDropdown = UIUtils.CreateDropDown(this);
             packDropdown.width = 270;
-            //add option to toggle between euro and generic vanilla!!!
+            //add option to toggle between euro and generic vanilla?
             packDropdown.relativePosition = new Vector3(80, 53);
             packDropdown.AddItem(Translation.Instance.GetTranslation(TranslationID.NULLDROPDOWN));
             packDropdown.selectedIndex = 0;

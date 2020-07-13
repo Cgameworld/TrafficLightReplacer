@@ -1,4 +1,5 @@
-﻿using ColossalFramework.IO;
+﻿using ColossalFramework;
+using ColossalFramework.IO;
 using ColossalFramework.Packaging;
 using Harmony;
 using System;
@@ -46,9 +47,14 @@ namespace TrafficLightReplacer
     [HarmonyPatch("OnLevelLoaded")]
     public class Patch
     {
-
         static void Postfix()
         {
+            //check if LHD (currently not supported)
+            if (Singleton<SimulationManager>.instance.m_metaData.m_invertTraffic == SimulationMetaData.MetaBool.True)
+            {
+                Tools.ShowErrorWindow("Traffic Light Replacer Error", "Left Hand Drive mode is currently not supported");
+            }
+
             //look for prop packs to add
             FindActiveEmbeddedPropXMLs();
 
@@ -70,12 +76,6 @@ namespace TrafficLightReplacer
 
             Replacer.Start(xmlfile);
 
-            // catch
-            //  {
-            //      TLRModSettings.instance.CurrentPackIndex = 0;
-            //      string defaultfile = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";
-            //     Replacer.Start(defaultfile);
-            //   }
         }
 
         private static void FindActiveEmbeddedPropXMLs()
