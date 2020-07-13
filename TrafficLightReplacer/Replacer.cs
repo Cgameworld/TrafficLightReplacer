@@ -258,7 +258,7 @@ namespace TrafficLightReplacer
                             {
                                 if (oneSizeMode)
                                 {
-                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
+                                    if (TLRModSettings.instance.OppositeSideToggle)
                                     {
                                         ReplacePropFlipped(lane, propGroup, typeMain, isOneWay, propGroupCounter);
                                     }
@@ -270,7 +270,7 @@ namespace TrafficLightReplacer
                                 else
                                 {
                                     //Debug.Log("onesize mode off!");
-                                    if (TrafficLightReplacePanel.instance.oppositeSideToggle != null && TrafficLightReplacePanel.instance.oppositeSideToggle.isChecked)
+                                    if (TLRModSettings.instance.OppositeSideToggle)
                                     {
                                         if (roadwidth >= 15 || isHighway)
                                         {

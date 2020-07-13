@@ -128,10 +128,12 @@ namespace TrafficLightReplacer
             oppositeSideToggle.isVisible = false;
 
             oppositeSideToggle.eventCheckChanged += (c, p) =>
-            {           
-                Replacer.UpdateLaneProps();
+            {
+                Debug.Log("p checked" + p);
                 TLRModSettings.instance.OppositeSideToggle = p;
                 TLRModSettings.instance.Save();
+                Replacer.UpdateLaneProps();
+
             };
 
             #region customizeDropdown
