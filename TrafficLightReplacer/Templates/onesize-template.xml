@@ -3,7 +3,7 @@
 	<PackName>One-Size Template</PackName>
 	<OneSize>true</OneSize>
 	<Assets>
-    <!--Be sure to replace "Placeholder" with the Prop Prefab Name for each Asset!
+    <!--Replace "Placeholder" with the Prop Prefab Name for each Asset, otherwise the mod might behave strangely!
     use the Pack Creator Helper window to easily copy prop names-->
 		<Asset>
 			<Prefab>Placeholder</Prefab>

@@ -60,6 +60,7 @@ namespace TrafficLightReplacer
             gentempXML.text = "Generate Template Pack XMLs";
             gentempXML.relativePosition = new Vector2(20, 50);
             gentempXML.width = 325;
+            gentempXML.enabled = false;
 
             gentempXML.eventClick += (c, p) =>
             {
@@ -128,6 +129,7 @@ namespace TrafficLightReplacer
             {
                 if (isVisible)
                 {
+                    Directory.CreateDirectory(Path.Combine(DataLocation.localApplicationData, "TLRLocal"));
                     Utils.OpenInFileBrowser(Path.Combine(DataLocation.localApplicationData, "TLRLocal"));
                 }
             };
