@@ -60,7 +60,6 @@ namespace TrafficLightReplacer
             gentempXML.text = "Generate Template Pack XMLs";
             gentempXML.relativePosition = new Vector2(20, 50);
             gentempXML.width = 325;
-            gentempXML.enabled = false;
 
             gentempXML.eventClick += (c, p) =>
             {

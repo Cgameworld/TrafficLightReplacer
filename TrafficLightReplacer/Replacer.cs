@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
+using TrafficLightReplacer.Locale;
+using TrafficLightReplacer.TranslationFramework;
 using UnityEngine;
 
 namespace TrafficLightReplacer
@@ -101,10 +103,11 @@ namespace TrafficLightReplacer
 
             for (int i = 0; i < result.Count; i++)
             {
-                Debug.Log("Pack NAME! " + XMLinput.PackName);
-                Debug.Log("entry:" + i);
-                Debug.Log("prefabname:" + result[i].Prefab);
-                Debug.Log("prefabsize:" + result[i].Type);
+                //helpful make toggable this debug info?
+               // Debug.Log("Pack NAME! " + XMLinput.PackName);
+               // Debug.Log("entry:" + i);
+               // Debug.Log("prefabname:" + result[i].Prefab);
+               // Debug.Log("prefabsize:" + result[i].Type);
 
                 //mutlisize config
                 if (result[i].Type == "Small")
@@ -135,13 +138,32 @@ namespace TrafficLightReplacer
                 //all
                 if (result[i].Type == "Signal Pole")
                 {
+                    Debug.Log("prefabname sigpole?" + PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab));
+
                     if (result[i].Prefab == "Blank")
                     {
                         typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
                     }
-                    else
+                    else if (PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab) != null)
                     {
                         typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                    }
+                    else
+                    {
+                        string errorstring;
+
+                        if (result[i].Prefab == "Placeholder")
+                        {                     
+                           errorstring = "The pack " + XMLinput.PackName + " contains placeholder prefab names! Be sure to fill all of the <Prefab></Prefab> tags with valid prop prefab names in the template xml file\n\nBroken XML filepath: " + path;
+                        }
+                        else
+                        {
+                            errorstring = "The prefab with name " + result[i].Prefab + " cannot be found in your game\n\nBroken XML filepath: " + path;
+                            //go through assets in xml?
+                            //If this is from a XML file you created, check to see if" +  result[i].Prefab + " exists in your game.\nIf this XML is from a published prop pack, check to see if all the prop assets are enabled in the content manager and/or contact the pack author
+                        }
+
+                        Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE) + " XML Error", errorstring);
                     }
                 }
                 if (result[i].Type == "Signal Pole Mirror")
