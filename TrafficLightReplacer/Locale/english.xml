@@ -16,6 +16,9 @@
     <Translation ID="TRANSFORMBUTTONTEXT" String="Transform Settings" />
     <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Change traffic prop curb positioning" />
     <!--Asset Creator Tool Window-->
+    <!--Error Windows-->
+    <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;" />
+    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;" />
 
   </Translations>
 </Language>
