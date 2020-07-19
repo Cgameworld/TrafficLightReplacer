@@ -69,6 +69,39 @@ namespace TrafficLightReplacer
                 reader.Close();
             }
 
+
+            //start of asset pack reading
+            //fill list with prop assets from XML
+            foreach (var item in XMLinput.Assets)
+            {
+                result.Add(item);
+            }
+
+
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                if (PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab) == null && result[i].Prefab != "Blank")
+                {
+                    string errorstring;
+
+                    if (result[i].Prefab == "Placeholder")
+                    {
+                        errorstring = "The pack " + XMLinput.PackName + " contains placeholder prefab names! Be sure to fill all of the <Prefab></Prefab> tags with valid prop prefab names in the template xml file\n\nBroken XML filepath: " + path;
+                    }
+                    else
+                    {
+                        errorstring = "The prefab with name " + result[i].Prefab + " cannot be found in your game\n\nBroken XML filepath: " + path;
+                    }
+
+                    Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE) + " XML Error", errorstring);
+
+                    return;
+                }
+            }
+
+
+
             AssignValues(path, XMLinput);
             ModifyMainUI();
 
@@ -81,13 +114,6 @@ namespace TrafficLightReplacer
 
             oneSizeMode = XMLinput.OneSize;
             Debug.Log("oneSizeMode: " + oneSizeMode);
-
-            //start of asset pack reading
-            //fill list with prop assets from XML
-            foreach (var item in XMLinput.Assets)
-            {
-                result.Add(item);
-            }
 
             //set to blank asset on default
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
@@ -144,26 +170,9 @@ namespace TrafficLightReplacer
                     {
                         typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
                     }
-                    else if (PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab) != null)
-                    {
-                        typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
-                    }
                     else
                     {
-                        string errorstring;
-
-                        if (result[i].Prefab == "Placeholder")
-                        {                     
-                           errorstring = "The pack " + XMLinput.PackName + " contains placeholder prefab names! Be sure to fill all of the <Prefab></Prefab> tags with valid prop prefab names in the template xml file\n\nBroken XML filepath: " + path;
-                        }
-                        else
-                        {
-                            errorstring = "The prefab with name " + result[i].Prefab + " cannot be found in your game\n\nBroken XML filepath: " + path;
-                            //go through assets in xml?
-                            //If this is from a XML file you created, check to see if" +  result[i].Prefab + " exists in your game.\nIf this XML is from a published prop pack, check to see if all the prop assets are enabled in the content manager and/or contact the pack author
-                        }
-
-                        Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE) + " XML Error", errorstring);
+                        typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
                     }
                 }
                 if (result[i].Type == "Signal Pole Mirror")
