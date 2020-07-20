@@ -78,7 +78,7 @@ namespace TrafficLightReplacer
             }
 
 
-
+            //check for XML errors!
             for (int i = 0; i < result.Count; i++)
             {
                 if (PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab) == null && result[i].Prefab != "Blank")
@@ -87,13 +87,11 @@ namespace TrafficLightReplacer
 
                     if (result[i].Prefab == "Placeholder")
                     {
-                        //errorstring = "The pack " + XMLinput.PackName + " contains placeholder prefab names! Be sure to fill all of the <Prefab></Prefab> tags with valid prop prefab names in the template xml file\n\nBroken XML filepath: " + path;
                         var message  = Translation.Instance.GetTranslation(TranslationID.PLACEHOLDERXMLERROR).Split('*');
                         errorstring = message[0] + XMLinput.PackName + message[1] + path;
                     }
                     else
                     {
-                       // errorstring = "The prefab with name " + result[i].Prefab + " cannot be found in your game\n\nBroken XML filepath: " + path;
                         var message = Translation.Instance.GetTranslation(TranslationID.GENERICXMLERROR).Split('*');
                         errorstring = message[0] + result[i].Prefab + message[1] + path;
                     }
@@ -103,8 +101,6 @@ namespace TrafficLightReplacer
                     return;
                 }
             }
-
-
 
             AssignValues(path, XMLinput);
             ModifyMainUI();

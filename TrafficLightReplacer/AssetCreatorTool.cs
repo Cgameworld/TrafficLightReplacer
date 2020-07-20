@@ -4,6 +4,8 @@ using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TrafficLightReplacer.Locale;
+using TrafficLightReplacer.TranslationFramework;
 using UnityEngine;
 
 namespace TrafficLightReplacer
@@ -57,7 +59,7 @@ namespace TrafficLightReplacer
             //m_title.isModal = true;
 
             gentempXML = UIUtils.CreateButton(this);
-            gentempXML.text = "Generate Template Pack XMLs";
+            gentempXML.text = Translation.Instance.GetTranslation(TranslationID.GENTEMPXML);
             gentempXML.relativePosition = new Vector2(20, 50);
             gentempXML.width = 325;
 
@@ -68,27 +70,30 @@ namespace TrafficLightReplacer
                 xmltemplates.Add("multisize-template.xml");
                 var tlrlocal = Path.Combine(DataLocation.localApplicationData, "TLRLocal");
                 Tools.ExtractEmbeddedResource(tlrlocal, "TrafficLightReplacer.Templates", xmltemplates);
-                Tools.ShowAlertWindow("Template XML Files Exported", "Template XML files exported to " + tlrlocal + "\n\nClick on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder");
+
+                var windowmessage = Translation.Instance.GetTranslation(TranslationID.GENTEMPXMLMESSAGE).Split('*');
+                //Tools.ShowAlertWindow("Template XML Files Exported", "Template XML files exported to " + tlrlocal + "\n\nClick on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder");
+                Tools.ShowAlertWindow(windowmessage[0], windowmessage[1] + tlrlocal + windowmessage[2]);
             };
 
             UILabel netNameLabel = AddUIComponent<UILabel>();
-            netNameLabel.text = "Name:";
+            netNameLabel.text = Translation.Instance.GetTranslation(TranslationID.NETNAMELABEL);
             netNameLabel.autoSize = false;
             netNameLabel.width = 125f;
             netNameLabel.height = 20f;
             netNameLabel.relativePosition = new Vector2(15, 100);
 
             netNameField = UIUtils.CreateTextField(this);
-            netNameField.text = "Press update to grab prop name";
+            netNameField.text = Translation.Instance.GetTranslation(TranslationID.NETNAMEFIELD);
             netNameField.width = 270f;
             netNameField.height = 25f;
             netNameField.padding = new RectOffset(0, 0, 6, 0);
             netNameField.relativePosition = new Vector3(80, 95);
 
             updateButton = UIUtils.CreateButton(this);
-            updateButton.text = "Update";
+            updateButton.text = Translation.Instance.GetTranslation(TranslationID.UPDATEBUTTON);
             updateButton.relativePosition = new Vector2(20, 135);
-            updateButton.tooltip = "Select a prop using Find It! and click update"; 
+            updateButton.tooltip = Translation.Instance.GetTranslation(TranslationID.UPDATEBUTTONTOOLTIP); 
             updateButton.width = 146;
 
             updateButton.eventClick += (c, p) =>
@@ -99,12 +104,13 @@ namespace TrafficLightReplacer
                 }
                 catch (Exception e)
                 {
-                    Tools.ShowErrorWindow("Null Prefab", "Make sure a prop is selected!\n" + e);
+                    var windowmessage = Translation.Instance.GetTranslation(TranslationID.UPDATEERRORTEXT).Split('*');
+                    Tools.ShowErrorWindow(windowmessage[0], windowmessage[1] + e);
                 }
             };
 
             copyButton = UIUtils.CreateButton(this);
-            copyButton.text = "Copy";
+            copyButton.text = Translation.Instance.GetTranslation(TranslationID.COPYBUTTON);
             copyButton.relativePosition = new Vector2(188, 135);
             copyButton.width = 100;
 
@@ -122,7 +128,7 @@ namespace TrafficLightReplacer
             openXMLFolderButton.relativePosition = new Vector2(310, 135);
             openXMLFolderButton.height = 25;
             openXMLFolderButton.width = 31;
-            openXMLFolderButton.tooltip = "Open local XML config folder";
+            openXMLFolderButton.tooltip = Translation.Instance.GetTranslation(TranslationID.XMLFOLDERBUTTONTOOLTIP);
 
             openXMLFolderButton.eventClick += (c, p) =>
             {
@@ -134,7 +140,7 @@ namespace TrafficLightReplacer
             };
 
             TLRLocalLoad = UIUtils.CreateCheckBox(this);
-            TLRLocalLoad.text = "Load TLRLocal Folder";
+            TLRLocalLoad.text = Translation.Instance.GetTranslation(TranslationID.TLRLOCALLOAD);
             TLRLocalLoad.isChecked = TLRModSettings.instance.LoadTLRLocalFolder;
             TLRLocalLoad.relativePosition = new Vector2(20, 185);
             TLRLocalLoad.tooltip = "";
@@ -146,7 +152,7 @@ namespace TrafficLightReplacer
             };
 
             refreshPack = UIUtils.CreateButton(this);
-            refreshPack.text = "Refresh Packs";
+            refreshPack.text = Translation.Instance.GetTranslation(TranslationID.REFRESHPACK);
             refreshPack.relativePosition = new Vector2(210, 180);
             refreshPack.width = 135;
 

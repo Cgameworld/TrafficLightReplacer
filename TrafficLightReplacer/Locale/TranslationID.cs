@@ -18,6 +18,25 @@
         public const string PLACEHOLDERXMLERROR = "PLACEHOLDERXMLERROR";
         public const string GENERICXMLERROR = "GENERICXMLERROR";
 
+        //Asset CREATOR WINDOW
+        public const string GENTEMPXML = "GENTEMPXML";
+        public const string GENTEMPXMLMESSAGE = "GENTEMPXMLMESSAGE";
+        public const string NETNAMELABEL = "NETNAMELABEL";
+        public const string NETNAMEFIELD = "NETNAMEFIELD";
+        public const string UPDATEBUTTON = "UPDATEBUTTON";
+        public const string UPDATEBUTTONTOOLTIP = "UPDATEBUTTONTOOLTIP";
+        public const string UPDATEERRORTEXT = "UPDATEERRORTEXT";
+        public const string COPYBUTTON = "COPYBUTTON";
+        public const string XMLFOLDERBUTTONTOOLTIP= "XMLFOLDERBUTTONTOOLTIP";
+        public const string TLRLOCALLOAD = "TLRLOCALLOAD";
+        public const string REFRESHPACK = "REFRESHPACK";
+
+        //MOD SETTINGS
+        public const string FEATURESGROUPTITLE = "FEATURESGROUPTITLE";
+        public const string PACKCREATOROPTION = "PACKCREATOROPTION";
+        public const string MAINBACKGROUNDOPTION = "MAINBACKGROUNDOPTION";
+        public const string RESETGROUPMESSAGE = "RESETGROUPMESSAGE";
+
 
     }
 }

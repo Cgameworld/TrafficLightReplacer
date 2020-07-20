@@ -2,7 +2,6 @@
 <Language UniqueName="en" ReadableName="English" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
   <Translations>  
     <Translation ID="MOD_DESCRIPTION" String="Customize your city's traffic lights" />
-    <!--Main Window-->
     <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer" />
     <Translation ID="MAINWINDOW_PACKLABEL" String="Pack:" />
     <Translation ID="NULLDROPDOWN" String="Empty" />
@@ -15,10 +14,23 @@
     <Translation ID="LARGEROADSDROPDOWNLABEL" String="Large Roads:" />
     <Translation ID="TRANSFORMBUTTONTEXT" String="Transform Settings" />
     <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Change traffic prop curb positioning" />
-    <!--Asset Creator Tool Window-->
-    <!--Error Windows-->
     <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;" />
-    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;" />
+    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;" />    
+    <Translation ID="GENTEMPXML" String="Generate Template Pack XMLs" />
+    <Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Click on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder" />
+    <Translation ID="NETNAMELABEL" String="Name:" />
+    <Translation ID="NETNAMEFIELD" String="Press update to grab prop name" />
+    <Translation ID="UPDATEBUTTON" String="Update" />
+    <Translation ID="UPDATEBUTTONTOOLTIP" String="Select a prop using Find It! and click update" />
+    <Translation ID="UPDATEERRORTEXT" String="Null Prefab *Make sure a prop is selected!&#10;" />
+    <Translation ID="COPYBUTTON" String="Copy" />
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Open local XML config folder" />
+    <Translation ID="TLRLOCALLOAD" String="Load TLRLocal Folder" />
+    <Translation ID="REFRESHPACK" String="Refresh Packs" />
+    <Translation ID="FEATURESGROUPTITLE" String="Mod Features" />
+    <Translation ID="PACKCREATOROPTION" String="Show Pack Creator Helper" />
+    <Translation ID="MAINBACKGROUNDOPTION" String="Main Button Background" />
+    <Translation ID="RESETGROUPMESSAGE" String="Reset * Icon Position * Button clicked!" />
 
   </Translations>
 </Language>

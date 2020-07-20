@@ -204,11 +204,9 @@ namespace TrafficLightReplacer
             {
                 if (dropdownFlag)
                 {
-                    Debug.Log("sr event cancelled dropdownflag: " + dropdownFlag);
                     return;
                 }
-
-                Debug.Log("smallroadsdropdown eventselectedindex called");
+                //Debug.Log("smallroadsdropdown eventselectedindex called");
                 Replacer.typeSmall = GetCurrentProp(Replacer.typeSmallOptions, smallRoadsDropdown);
                 smallRoadsDropdown.tooltip = Replacer.typeSmallOptions[smallRoadsDropdown.selectedIndex].Description;
                 TLRModSettings.instance.SmallLightIndex = smallRoadsDropdown.selectedIndex;
@@ -235,7 +233,6 @@ namespace TrafficLightReplacer
             {
                 if (dropdownFlag)
                 {
-                    Debug.Log("mr event cancelled dropdownflag: " + dropdownFlag);
                     return;
                 }
 
@@ -265,7 +262,6 @@ namespace TrafficLightReplacer
             {
                 if (dropdownFlag)
                 {
-                    Debug.Log("lr event cancelled dropdownflag: " + dropdownFlag);
                     return;
                 }
 

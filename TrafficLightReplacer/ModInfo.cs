@@ -49,9 +49,9 @@ namespace TrafficLightReplacer
         }
         public void OnSettingsUI(UIHelperBase helper)
         {
-            UIHelperBase featuresGroup = helper.AddGroup("Mod Features");
+            UIHelperBase featuresGroup = helper.AddGroup(Translation.Instance.GetTranslation(TranslationID.FEATURESGROUPTITLE));
 
-            featuresGroup.AddCheckbox("Show Pack Creator Helper", TLRModSettings.instance.ShowCreatorTool, sel =>
+            featuresGroup.AddCheckbox(Translation.Instance.GetTranslation(TranslationID.PACKCREATOROPTION), TLRModSettings.instance.ShowCreatorTool, sel =>
             {
                 TLRModSettings.instance.ShowCreatorTool = sel;
                 TLRModSettings.instance.Save();
@@ -60,7 +60,7 @@ namespace TrafficLightReplacer
                 CreatorToolPanel.instance.isVisible = sel;
             });
 
-            featuresGroup.AddCheckbox("Main Button Background", TLRModSettings.instance.EnableButtonBackground, sel =>
+            featuresGroup.AddCheckbox(Translation.Instance.GetTranslation(TranslationID.MAINBACKGROUNDOPTION), TLRModSettings.instance.EnableButtonBackground, sel =>
             {
                 TLRModSettings.instance.EnableButtonBackground = sel;
                 TLRModSettings.instance.Save();
@@ -70,10 +70,11 @@ namespace TrafficLightReplacer
             });
 
             //helper.AddSpace(15);
-            UIHelperBase resetGroup = helper.AddGroup("Reset");
-            resetGroup.AddButton("Reset Icon Position", () => {
+            var resetmessage = Translation.Instance.GetTranslation(TranslationID.RESETGROUPMESSAGE).Split('*');
+            UIHelperBase resetGroup = helper.AddGroup(resetmessage[0]);
+            resetGroup.AddButton(resetmessage[0]+resetmessage[1], () => {
                 MainButton.instance.SetDefaultPosition();
-                Debug.Log("Reset Pos Button clicked!");
+                Debug.Log(resetmessage[0] + resetmessage[2]);
             });
 
         }
