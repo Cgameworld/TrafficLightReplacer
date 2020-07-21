@@ -4,19 +4,19 @@
   <OneSize>true</OneSize>
   <Assets>
     <Asset>
-      <Prefab>blankprop.blankprop_Data</Prefab>
+      <Prefab>Blank</Prefab>
       <Type>Main</Type>
     </Asset>
     <Asset>
-      <Prefab>blankprop.blankprop_Data</Prefab>
+      <Prefab>Blank</Prefab>
       <Type>Mirror</Type>
     </Asset>
     <Asset>
-      <Prefab>blankprop.blankprop_Data</Prefab>
+      <Prefab>Blank</Prefab>
       <Type>Ped Signal</Type>
     </Asset>
     <Asset>
-      <Prefab>blankprop.blankprop_Data</Prefab>
+      <Prefab>Blank</Prefab>
       <Type>Signal Pole</Type>
     </Asset>
   </Assets>

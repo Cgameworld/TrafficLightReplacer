@@ -151,33 +151,24 @@ namespace TrafficLightReplacer
                 //vanilla config
                 if (result[i].Type == "Main")
                 {
-                    typeMain = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                    typeMain = SetProp(i);
                 }
                 if (result[i].Type == "Mirror")
                 {
-                    typeMirror = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                    typeMirror = SetProp(i);
                 }
                 if (result[i].Type == "Ped Signal")
                 {
-                    typePedSignal = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                    typePedSignal = SetProp(i);
                 }
                 //all
                 if (result[i].Type == "Signal Pole")
                 {
-                    Debug.Log("prefabname sigpole?" + PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab));
-
-                    if (result[i].Prefab == "Blank")
-                    {
-                        typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
-                    }
-                    else
-                    {
-                        typeSignalPole = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
-                    }
+                    typeSignalPole = SetProp(i);
                 }
                 if (result[i].Type == "Signal Pole Mirror")
                 {
-                    typeSignalPoleMirror = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+                    typeSignalPoleMirror = SetProp(i);
                 }
             }
 
@@ -201,6 +192,22 @@ namespace TrafficLightReplacer
                 SetTransformSliders(XMLinput, true);
             }
         }
+
+        private static PropInfo SetProp(int i)
+        {
+            PropInfo prop;
+            if (result[i].Prefab == "Blank")
+            {
+                prop = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
+            }
+            else
+            {
+                prop = PrefabCollection<PropInfo>.FindLoaded(result[i].Prefab);
+            }
+
+            return prop;
+        }
+
         public static void SetTransformSliders(TLRConfig XMLinput, bool isReset)
         {
             //check if panel items exist
