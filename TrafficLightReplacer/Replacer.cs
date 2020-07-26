@@ -183,21 +183,10 @@ namespace TrafficLightReplacer
                 Scale = 100
             };
          
-            /*
-            Debug.Log("XMLinput.Transform.Position: " + XMLinput.Transform.Position);
-            Debug.Log("XMLinput.Transform.Angle: " + XMLinput.Transform.Angle);
-            Debug.Log("NotTransformnull: " + (XMLinput.Transform != null));
-            Debug.Log("TLRModSettings.instance.SelectedOffsetValues=-pos: " + TLRModSettings.instance.SelectedOffsetValues.Position);
-            Debug.Log("eqinof " + TLRModSettings.instance.SelectedOffsetValues.Equals(initOffset));
-            Debug.Log("tequals? me " + Tools.CheckTransformEqual(TLRModSettings.instance.SelectedOffsetValues,initOffset));
-            */
 
             if (XMLinput.Transform != null && Tools.CheckTransformEqual(TLRModSettings.instance.SelectedOffsetValues, initOffset))
             {
-                //this doesnt work? selectedoffset broken grr
                 Debug.Log("transform not null!");
-                //transformOffset = XMLinput.Transform;
-                //TLRModSettings.instance.SelectedOffsetValues
                 transformOffset = XMLinput.Transform;
             }
 
@@ -264,7 +253,7 @@ namespace TrafficLightReplacer
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {
-                    //Debug.Log("ran! OSM1");
+                    Debug.Log("ran! OSM1");
                     //add code here to move dropdown2 up and change height
                     TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = false;

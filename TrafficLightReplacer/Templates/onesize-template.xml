@@ -3,8 +3,8 @@
 	<PackName>One-Size Template</PackName>
 	<OneSize>true</OneSize>
 	<Assets>
-    <!--Replace "Placeholder" with the Prop Prefab Name for each Asset, otherwise the mod might behave strangely!
-    use the Pack Creator Helper window to easily copy prop names-->
+    <!--Be sure to replace "Placeholder" with the prop prefab name for each asset
+    use the Pack Creator Helper window to easily copy prop prefab names-->
 		<Asset>
 			<Prefab>Placeholder</Prefab>
 			<Type>Main</Type>
@@ -22,4 +22,14 @@
 			<Type>Signal Pole</Type>
 		</Asset>
 	</Assets>
+  <!--Optional-->
+  <Transform>
+    <Position>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </Position>
+    <Angle>0</Angle>
+    <Scale>0</Scale>
+  </Transform>
 </TLRConfig>
