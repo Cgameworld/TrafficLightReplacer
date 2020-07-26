@@ -119,13 +119,8 @@ namespace TrafficLightReplacer
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
             typeSignalPoleMirror = null;
 
-            //set default transform values
-            transformOffset = new TransformValues()
-            {
-                Position = new Vector3(0, 0, 0),
-                Angle = 0,
-                Scale = 100
-            };
+            //set transform values
+            transformOffset = TLRModSettings.instance.SelectedOffsetValues;
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -181,16 +176,33 @@ namespace TrafficLightReplacer
             }
 
             //read optional transform settings
-            if (XMLinput.Transform != null)
+            TransformValues initOffset = new TransformValues()
             {
+                Position = new Vector3(0, 0, 0),
+                Angle = 0,
+                Scale = 100
+            };
+         
+            /*
+            Debug.Log("XMLinput.Transform.Position: " + XMLinput.Transform.Position);
+            Debug.Log("XMLinput.Transform.Angle: " + XMLinput.Transform.Angle);
+            Debug.Log("NotTransformnull: " + (XMLinput.Transform != null));
+            Debug.Log("TLRModSettings.instance.SelectedOffsetValues=-pos: " + TLRModSettings.instance.SelectedOffsetValues.Position);
+            Debug.Log("eqinof " + TLRModSettings.instance.SelectedOffsetValues.Equals(initOffset));
+            Debug.Log("tequals? me " + Tools.CheckTransformEqual(TLRModSettings.instance.SelectedOffsetValues,initOffset));
+            */
+
+            if (XMLinput.Transform != null && Tools.CheckTransformEqual(TLRModSettings.instance.SelectedOffsetValues, initOffset))
+            {
+                //this doesnt work? selectedoffset broken grr
                 Debug.Log("transform not null!");
+                //transformOffset = XMLinput.Transform;
+                //TLRModSettings.instance.SelectedOffsetValues
                 transformOffset = XMLinput.Transform;
-                SetTransformSliders(XMLinput, false);
             }
-            else
-            {
-                SetTransformSliders(XMLinput, true);
-            }
+
+            Debug.Log("transformOffset " + transformOffset.Position.x + " | ro " + transformOffset.Angle);
+            SetTransformSliders(transformOffset, false);
         }
 
         private static PropInfo SetProp(int i)
@@ -208,29 +220,35 @@ namespace TrafficLightReplacer
             return prop;
         }
 
-        public static void SetTransformSliders(TLRConfig XMLinput, bool isReset)
+        public static void SetTransformSliders(TransformValues transformOffset, bool isReset)
         {
+            Debug.Log("ran settransformslider");
             //check if panel items exist
             if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
             {
                 if (!isReset)
                 {
                     //slider ui is at index 5-9
-                    SetTransformSlider(5, XMLinput.Transform.Position.x);
-                    SetTransformSlider(6, XMLinput.Transform.Position.y);
-                    SetTransformSlider(7, XMLinput.Transform.Position.z);
-                    SetTransformSlider(8, XMLinput.Transform.Angle);
-                    SetTransformSlider(9, XMLinput.Transform.Scale);
+                    Debug.Log("settrans sli pos x " +  transformOffset.Position.x);
+                    SetTransformSlider(5, transformOffset.Position.x);
+                    SetTransformSlider(6, transformOffset.Position.y);
+                    SetTransformSlider(7, transformOffset.Position.z);
+                    SetTransformSlider(8, transformOffset.Angle);
+                    SetTransformSlider(9, transformOffset.Scale);
                 }
                 else
                 {
                     //slider ui is at index 5-9
+                    Debug.Log("landinghere??");
                     SetTransformSlider(5, 0f);
                     SetTransformSlider(6, 0f);
                     SetTransformSlider(7, 0f);
                     SetTransformSlider(8, 0f);
                     SetTransformSlider(9, 100f);
                 }
+            }
+            else {
+                Debug.Log("else settransformslider");
             }
         }
 

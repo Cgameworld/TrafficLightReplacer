@@ -21,6 +21,12 @@ namespace TrafficLightReplacer
         public int SmallLightIndex { get; set; } = 0;
         public int MediumLightIndex { get; set; } = 0;
         public int LargeLightIndex { get; set; } = 0;
+        public TransformValues SelectedOffsetValues { get; set; } = new TransformValues()
+        {
+            Position = new Vector3(0, 0, 0),
+            Angle = 0,
+            Scale = 100
+        };
         public List<string> EmbeddedXMLActive { get; set; }
 
         //implementation from keallu's mods

@@ -423,6 +423,14 @@ namespace TrafficLightReplacer
                 dropdownFlag = false;
             }
 
+            TLRModSettings.instance.SelectedOffsetValues = new TransformValues()
+            {
+                Position = new Vector3(0, 0, 0),
+                Angle = 0,
+                Scale = 100
+            };
+
+
             TLRModSettings.instance.SmallLightIndex = 0;
             TLRModSettings.instance.MediumLightIndex = 0;
             TLRModSettings.instance.LargeLightIndex = 0;
@@ -470,6 +478,8 @@ namespace TrafficLightReplacer
                 Scale = items[4]
             };
             Replacer.transformOffset = offset;
+            TLRModSettings.instance.SelectedOffsetValues = offset;
+            TLRModSettings.instance.Save();
 
             Replacer.UpdateLaneProps();
         }

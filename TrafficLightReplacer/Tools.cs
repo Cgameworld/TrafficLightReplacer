@@ -174,7 +174,7 @@ namespace TrafficLightReplacer
             };
             for (int j = 0; j < xmlPackNames.Count; j++)
             {
-                if (j != vanillatrafficindex && j !=nonetrafficindex)
+                if (j != vanillatrafficindex && j != nonetrafficindex)
                 {
                     tempPackList.Add(packList[j]);
                 }
@@ -282,5 +282,23 @@ namespace TrafficLightReplacer
             }
             return tris;
         }
+
+
+        public static bool CheckTransformEqual(TransformValues Obj1, TransformValues Obj2)
+        {
+            var haveSameData = false;
+
+            foreach (PropertyInfo prop in Obj1.GetType().GetProperties())
+            {
+                haveSameData = prop.GetValue(Obj1, null).Equals(prop.GetValue(Obj2, null));
+
+                if (!haveSameData)
+                    return false;
+            }
+            Debug.Log("checteq bf true");
+            return true;
+        }
+
+    
     }
 }
