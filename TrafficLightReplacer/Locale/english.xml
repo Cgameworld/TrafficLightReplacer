@@ -30,7 +30,7 @@
     <Translation ID="FEATURESGROUPTITLE" String="Mod Features" />
     <Translation ID="PACKCREATOROPTION" String="Show Pack Creator Helper" />
     <Translation ID="MAINBACKGROUNDOPTION" String="Main Button Background" />
-    <Translation ID="RESETGROUPMESSAGE" String="Reset * Icon Position * Button clicked!" />
+    <Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!" />
 
   </Translations>
 </Language>

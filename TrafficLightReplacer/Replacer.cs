@@ -292,15 +292,11 @@ namespace TrafficLightReplacer
                     float roadwidth = 0;
                     bool isOneWay = false;
                     bool isHighway = false;
-                    if (prefab.name.Contains("Highway"))
-                    {
-                        isHighway = true;
-                    }
 
                     GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
 
-                    foreach (NetInfo.Lane lane in prefab.m_lanes)
-                    {
+                foreach (NetInfo.Lane lane in prefab.m_lanes)
+                { 
                     if (lane?.m_laneProps?.m_props != null)
                     {
                         foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
@@ -321,9 +317,9 @@ namespace TrafficLightReplacer
                                 }
                                 else
                                 {
-                                    //Debug.Log("onesize mode off!");
+                                                                     //Debug.Log("onesize mode off!");
                                     if (TLRModSettings.instance.OppositeSideToggle)
-                                    {
+                                    {                     
                                         if (roadwidth >= 15 || isHighway)
                                         {
                                             ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
@@ -440,7 +436,7 @@ namespace TrafficLightReplacer
             else
             {
                 //change road median ped signal
-                if (propGroup.m_prop.name == "Traffic Light Pedestrian")
+                if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01" || propGroup.m_prop.name == "Traffic Light 01 Mirror")
                 {
 
                     propGroup.m_finalProp = typePedSignal;
@@ -535,7 +531,7 @@ namespace TrafficLightReplacer
                 }
             }
 
-            if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+            if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01" || propGroup.m_prop.name == "Traffic Light 01 Mirror")
             {
                 
                 propGroup.m_finalProp = typePedSignal;
@@ -552,7 +548,7 @@ namespace TrafficLightReplacer
         }
 
 
-        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
+            private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
         {
             //to do - take into account asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)
