@@ -57,6 +57,7 @@ namespace TrafficLightReplacer
         {
             if (p.buttons.IsFlagSet(UIMouseButton.Left))
             {
+                Debug.Log("TLR mainbuttonclicked");
                 Tools.CheckPanels();
             }
 
