@@ -360,14 +360,14 @@ namespace TrafficLightReplacer
             };
 
             getmeditems = UIUtils.CreateButton(this);
-            getmeditems.text = "getpaths-d";
-            getmeditems.relativePosition = new Vector2(220, 200);
-            getmeditems.width = 120;
-            getmeditems.isVisible = false;
+            getmeditems.text = "ModNodeTest";
+            getmeditems.relativePosition = new Vector2(170, 200);
+            getmeditems.width = 130;
+            //getmeditems.isVisible = false;
 
             getmeditems.eventClick += (c, p) =>
             {
-
+                Replacer.ModifyNodes();
             };
         }
         public void RefreshFooterItems()

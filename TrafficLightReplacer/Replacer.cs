@@ -1,4 +1,5 @@
-﻿using ColossalFramework.UI;
+﻿using ColossalFramework;
+using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,7 +39,7 @@ namespace TrafficLightReplacer
         public static TransformValues transformOffset = new TransformValues();
 
         public static bool oneSizeMode = false;
-       
+
         public static void Start(string path)
         {
             //clear list!
@@ -87,7 +88,7 @@ namespace TrafficLightReplacer
 
                     if (result[i].Prefab == "Placeholder")
                     {
-                        var message  = Translation.Instance.GetTranslation(TranslationID.PLACEHOLDERXMLERROR).Split('*');
+                        var message = Translation.Instance.GetTranslation(TranslationID.PLACEHOLDERXMLERROR).Split('*');
                         errorstring = message[0] + XMLinput.PackName + message[1] + path;
                     }
                     else
@@ -106,6 +107,7 @@ namespace TrafficLightReplacer
             ModifyMainUI();
 
             UpdateLaneProps();
+            //ModifyNodes();
         }
 
         private static void AssignValues(string path, TLRConfig XMLinput)
@@ -363,6 +365,52 @@ namespace TrafficLightReplacer
             Debug.Log("propGroupCounterTotal" + propGroupCounter);
         }
 
+        public static void ModifyNodes()
+        {
+            var bufferLength = (ushort)NetManager.instance.m_nodes.m_buffer.Length;
+            int idCount = 0;
+            for (ushort i = 0; i < bufferLength; i++)
+            {
+                var node = NetManager.instance.m_nodes.m_buffer[i];
+                if (node.Info == null)
+                {
+                    continue;
+                }
+
+                //find t-intersection (find if node has exactly 3 intersecting roads)
+
+                List<ushort> neighborSegmentIds = new List<ushort>
+                {
+                    node.m_segment0,
+                    node.m_segment1,
+                    node.m_segment2,
+                    node.m_segment3,
+                    node.m_segment4,
+                    node.m_segment5,
+                    node.m_segment6,
+                    node.m_segment7
+                };
+
+                int intersectingRoads = 0;
+                foreach (var id in neighborSegmentIds)
+                {
+                    if (id != 0)
+                    {
+                        intersectingRoads++;
+                    }
+                }
+
+                if (intersectingRoads == 3 && node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights))
+                {
+                    Debug.Log("node " + i + " is a T-intersection with traffic lights!");
+                    //Debug.Log("Trafficlight flag?: " + node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights));
+                }
+
+                idCount++;
+            }
+
+            Debug.Log("idnodes count: " + idCount);
+        }
         private static void OneSizeReplace(int propGroupCounter, NetLaneProps.Prop propGroup, NetInfo.Lane lane)
         {
             //Debug.Log("onesize mode on!");
