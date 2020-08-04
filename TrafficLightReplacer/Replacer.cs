@@ -404,22 +404,36 @@ namespace TrafficLightReplacer
                 {
                     Debug.Log("node " + i + " is a T-intersection with traffic lights!");
 
-                    foreach (var id in neighborSegmentIds)
+                    foreach (var segmentID in neighborSegmentIds)
                     {
-                        var segment = NetManager.instance.m_segments.m_buffer[id];
-                        float xDir = 0f;
+                        Debug.LogWarning("\nsegmentID: " + segmentID);
+                        var segment = NetManager.instance.m_segments.m_buffer[segmentID];
 
-                        if (segment.m_startNode == i)
+                        var laneID = segment.m_lanes;
+                        var segmentForward = false;
+
+                        while (laneID != 0)
                         {
-                            xDir = segment.m_startDirection.x;
-                            Debug.Log("startnode");
+                            NetLane.Flags flags = (NetLane.Flags)NetManager.instance.m_lanes.m_buffer[laneID].m_flags;
+                            Debug.Log("flags of lane " + laneID + " | " + flags.ToString());
+
+                            if (flags.IsFlagSet(NetLane.Flags.Forward)) segmentForward = true;
+
+                            laneID = NetManager.instance.m_lanes.m_buffer[laneID].m_nextLane;
+                           // Debug.Log("nextLaneID " + laneID);
                         }
-                        else if (segment.m_endNode == i)
+
+                        if (segmentID == 0) segmentForward = true;
+
+                        Debug.Log("Segment Forward? : " + segmentForward);
+
+                        if (!segmentForward)
                         {
-                            xDir = segment.m_endDirection.x;
-                            Debug.Log("endnode");
+                            Debug.Log("Segment id " + segmentID + " is intersecting");
                         }
-                        Debug.Log("id" + id + "node: " + i + "xdir: " + xDir);
+
+
+                        
                     }
 
                     //Debug.Log("Trafficlight flag?: " + node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights));
