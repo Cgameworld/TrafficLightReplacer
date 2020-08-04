@@ -406,7 +406,7 @@ namespace TrafficLightReplacer
 
                     foreach (var segmentID in neighborSegmentIds)
                     {
-                        Debug.LogWarning("\nsegmentID: " + segmentID);
+                        //Debug.LogWarning("\nsegmentID: " + segmentID);
                         var segment = NetManager.instance.m_segments.m_buffer[segmentID];
 
                         var laneID = segment.m_lanes;
@@ -415,25 +415,41 @@ namespace TrafficLightReplacer
                         while (laneID != 0)
                         {
                             NetLane.Flags flags = (NetLane.Flags)NetManager.instance.m_lanes.m_buffer[laneID].m_flags;
-                            Debug.Log("flags of lane " + laneID + " | " + flags.ToString());
-
+                           // Debug.Log("flags of lane " + laneID + " | " + flags.ToString());
                             if (flags.IsFlagSet(NetLane.Flags.Forward)) segmentForward = true;
-
                             laneID = NetManager.instance.m_lanes.m_buffer[laneID].m_nextLane;
-                           // Debug.Log("nextLaneID " + laneID);
                         }
 
                         if (segmentID == 0) segmentForward = true;
-
-                        Debug.Log("Segment Forward? : " + segmentForward);
+                        //Debug.Log("Segment Forward? : " + segmentForward);
 
                         if (!segmentForward)
                         {
                             Debug.Log("Segment id " + segmentID + " is intersecting");
+
+                            int sgfwrdloop = 0;
+
+                            foreach (NetInfo.Lane lane in segment.Info.m_lanes)
+                            {
+                                if (lane?.m_laneProps?.m_props != null)
+                                {
+                                    foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
+                                    {
+                                        if (propGroup?.m_finalProp != null)
+                                        {
+                                            if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                                            {
+                                                propGroup.m_finalProp = typePedSignal ;
+                                                //this replaces all 2L roads - need to make a harmony patch for this just segment instead 
+                                            }
+                                        }
+                                        sgfwrdloop++;
+                                    }
+                                }
+                            }
+                            Debug.Log("sgfwrdloop count " + sgfwrdloop);
                         }
 
-
-                        
                     }
 
                     //Debug.Log("Trafficlight flag?: " + node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights));
