@@ -403,6 +403,25 @@ namespace TrafficLightReplacer
                 if (intersectingRoads == 3 && node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights))
                 {
                     Debug.Log("node " + i + " is a T-intersection with traffic lights!");
+
+                    foreach (var id in neighborSegmentIds)
+                    {
+                        var segment = NetManager.instance.m_segments.m_buffer[id];
+                        float xDir = 0f;
+
+                        if (segment.m_startNode == i)
+                        {
+                            xDir = segment.m_startDirection.x;
+                            Debug.Log("startnode");
+                        }
+                        else if (segment.m_endNode == i)
+                        {
+                            xDir = segment.m_endDirection.x;
+                            Debug.Log("endnode");
+                        }
+                        Debug.Log("id" + id + "node: " + i + "xdir: " + xDir);
+                    }
+
                     //Debug.Log("Trafficlight flag?: " + node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights));
                 }
 
