@@ -4,4 +4,6 @@
 
 Customize your city's traffic lights
 
+Download the beta here: https://steamcommunity.com/sharedfiles/filedetails/?id=2053924034
+
 WIP
