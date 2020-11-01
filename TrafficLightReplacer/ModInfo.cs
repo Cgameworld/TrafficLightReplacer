@@ -138,6 +138,7 @@ namespace TrafficLightReplacer
         {
             TrafficLightReplacePanel.instance.Show();  //initalize UI
             CreatorToolPanel.instance.Show();
+            PerRoadPanel.instance.Show();
             m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
         }
        

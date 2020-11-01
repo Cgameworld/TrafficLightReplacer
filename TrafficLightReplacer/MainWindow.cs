@@ -48,6 +48,7 @@ namespace TrafficLightReplacer
 
         public int vanillaConfigOffset = 0;
         private bool initLoad = true;
+        private UIButton perRoadButton;
 
         public static TrafficLightReplacePanel instance
         {
@@ -172,7 +173,7 @@ namespace TrafficLightReplacer
                     {
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
-                        dropdownOffset = 120;
+                        dropdownOffset = 160;
                         //ResetAllDropdowns();
                         //AddAllItemsToDropdowns();
                     }
@@ -270,6 +271,35 @@ namespace TrafficLightReplacer
                 TLRModSettings.instance.LargeLightIndex = largeRoadsDropdown.selectedIndex;
                 TLRModSettings.instance.Save();
                 Replacer.UpdateLaneProps();
+            };
+
+
+            UILabel perRoadLabel = customizePanel.AddUIComponent<UILabel>();
+            //"select from road panel"
+            perRoadLabel.autoSize = false;
+            perRoadLabel.width = 145;
+            perRoadLabel.height = 30;
+            perRoadLabel.relativePosition = new Vector2(20, 87);
+            perRoadLabel.text = "Individual Road:";
+
+            perRoadButton = UIUtils.CreateButton(customizePanel);
+            perRoadButton.text = "Configure Lights";
+            //assign manually?
+            perRoadButton.relativePosition = new Vector2(188, 135);
+            perRoadButton.width = 100;
+
+            perRoadButton.eventClick += (c, p) =>
+            {
+               //modify this to destroy dropdown list (maybe on close of perclosewindow?)
+                /* var ifPanel = UIView.Find("PerRoadPanel");
+                 if (ifPanel != null)
+                 {
+                     UIPanel.DestroyImmediate(ifPanel);
+                     Debug.Log("destroyedold panel!");
+                 }
+                */
+                PerRoadPanel.instance.Show();
+                //add destroy here?
             };
 
             #endregion
@@ -450,7 +480,7 @@ namespace TrafficLightReplacer
             dropdown.items = blank;
         }
 
-        private static void AddItemsToDropdown(UIDropDown a, System.Collections.Generic.List<Asset> b)
+        public static void AddItemsToDropdown(UIDropDown a, System.Collections.Generic.List<Asset> b)
         {
             foreach (var sortedAsset in b)
             {
