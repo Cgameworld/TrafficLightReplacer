@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using TrafficLightReplacer.Locale;
+using TrafficLightReplacer.TranslationFramework;
 using UnityEngine;
 
 namespace TrafficLightReplacer
@@ -52,7 +54,7 @@ namespace TrafficLightReplacer
             //check if LHD (currently not supported)
             if (Singleton<SimulationManager>.instance.m_metaData.m_invertTraffic == SimulationMetaData.MetaBool.True)
             {
-                Tools.ShowErrorWindow("Traffic Light Replacer Error", "Left Hand Drive mode is currently not supported");
+                Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Error: Left Hand Drive mode is currently not supported");
             }
 
             //look for prop packs to add

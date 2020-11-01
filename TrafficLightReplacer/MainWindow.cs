@@ -342,6 +342,7 @@ namespace TrafficLightReplacer
             {
                 UpdateTransformSettings();
                 Replacer.SetTransformSliders(null, true);
+                Debug.Log("clearbuttonend");
             };
 
             #endregion
@@ -360,8 +361,8 @@ namespace TrafficLightReplacer
             };
 
             getmeditems = UIUtils.CreateButton(this);
-            getmeditems.text = "ModNodeTest";
-            getmeditems.relativePosition = new Vector2(170, 200);
+            getmeditems.text = "GetTIntersection";
+            getmeditems.relativePosition = new Vector2(170, -40);
             getmeditems.width = 130;
             //getmeditems.isVisible = false;
 

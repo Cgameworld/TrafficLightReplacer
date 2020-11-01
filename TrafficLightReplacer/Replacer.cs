@@ -53,23 +53,8 @@ namespace TrafficLightReplacer
             typeLargeOptions.Clear();
             typeLargeOptions.TrimExcess();
 
-            XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
-            TLRConfig XMLinput;
-
-            if (path.Contains("RESOURCE."))
-            {
-                var resourcePath = path.Replace("RESOURCE.", string.Empty);
-                Stream reader = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
-                XMLinput = (TLRConfig)serializer.Deserialize(reader);
-                reader.Close();
-            }
-            else
-            {
-                StreamReader reader = new StreamReader(path);
-                XMLinput = (TLRConfig)serializer.Deserialize(reader);
-                reader.Close();
-            }
-
+            //read xml input file returning TLRConfig object (refactor 10/31/2020)
+            TLRConfig XMLinput = ReadXMLInput(path);
 
             //start of asset pack reading
             //fill list with prop assets from XML
@@ -108,6 +93,28 @@ namespace TrafficLightReplacer
 
             UpdateLaneProps();
             //ModifyNodes();
+        }
+
+        private static TLRConfig ReadXMLInput(string path)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(TLRConfig));
+            TLRConfig XMLinput;
+
+            if (path.Contains("RESOURCE."))
+            {
+                var resourcePath = path.Replace("RESOURCE.", string.Empty);
+                Stream reader = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
+                XMLinput = (TLRConfig)serializer.Deserialize(reader);
+                reader.Close();
+            }
+            else
+            {
+                StreamReader reader = new StreamReader(path);
+                XMLinput = (TLRConfig)serializer.Deserialize(reader);
+                reader.Close();
+            }
+
+            return XMLinput;
         }
 
         private static void AssignValues(string path, TLRConfig XMLinput)
@@ -211,6 +218,42 @@ namespace TrafficLightReplacer
             return prop;
         }
 
+      //this method is used for the reset button in the transform settings panel
+        public static TransformValues GetXMLTransformValues(string path)
+        {
+            TransformValues defaultTransformValues = new TransformValues()
+            {
+                Position = new Vector3(0, 0, 0),
+                Angle = 0,
+                Scale = 100
+            };
+            
+            TransformValues newXMLTransformValues;
+
+            try
+            {
+                TLRConfig XMLinput = ReadXMLInput(path);
+
+
+                if (XMLinput.Transform != null)
+                {
+                    newXMLTransformValues = XMLinput.Transform;
+                }
+                else
+                {
+                    //if xml does not have transform offsets defined
+                    newXMLTransformValues = defaultTransformValues;
+                }
+            }
+            //if the input path is bad or something else goes wrong - since this method can be called way after the initial xml data is loaded. the xml file could for example be moved/deleted by the user
+            //main dropdown doesnt check for this? check there too?
+            catch {
+                Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Error: XML Transform values cannot be read due to " + path + " not being found. Default transform values will be used");
+                 newXMLTransformValues = defaultTransformValues;
+            }
+           
+            return newXMLTransformValues;
+        }      
         public static void SetTransformSliders(TransformValues transformOffset, bool isReset)
         {
             Debug.Log("ran settransformslider");
@@ -229,13 +272,19 @@ namespace TrafficLightReplacer
                 }
                 else
                 {
+                    var path = packList[TrafficLightReplacePanel.instance.packDropdown.selectedIndex].PackPath;
+                    Debug.Log("currentselectedpath! " + path);
+                    TransformValues xmlTransform = GetXMLTransformValues(path);
+                   /// check to see if bad path variable! ^
+                    //maybe do 000000 if fail
+
                     //slider ui is at index 5-9
                     Debug.Log("landinghere??");
-                    SetTransformSlider(5, 0f);
-                    SetTransformSlider(6, 0f);
-                    SetTransformSlider(7, 0f);
-                    SetTransformSlider(8, 0f);
-                    SetTransformSlider(9, 100f);
+                    SetTransformSlider(5, xmlTransform.Position.x);
+                    SetTransformSlider(6, xmlTransform.Position.y);
+                    SetTransformSlider(7, xmlTransform.Position.z);
+                    SetTransformSlider(8, xmlTransform.Angle);
+                    SetTransformSlider(9, xmlTransform.Scale);
                 }
             }
             else {
@@ -439,7 +488,8 @@ namespace TrafficLightReplacer
                                         {
                                             if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
                                             {
-                                                propGroup.m_finalProp = typePedSignal ;
+                                                Debug.Log("Reachedinner");
+                                               // propGroup.m_finalProp = typePedSignal ;
                                                 //this replaces all 2L roads - need to make a harmony patch for this just segment instead 
                                             }
                                         }

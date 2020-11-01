@@ -24,11 +24,13 @@ namespace TrafficLightReplacer
             ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
             panel.SetMessage(header, message, false);
             panel.GetComponentInChildren<UISprite>().spriteName = "IconError";
+            Debug.Log("--TLR: Error Window Shown--\n" + header + "\n" + message);
         }
         public static void ShowAlertWindow(string header, string message)
         {
             ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
             panel.SetMessage(header, message, false);
+            Debug.Log("--TLR: Alert Window Shown--\n" + header + "\n" + message);
         }
         public static void CheckPanels()
         {
