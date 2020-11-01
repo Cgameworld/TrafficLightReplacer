@@ -49,6 +49,7 @@ namespace TrafficLightReplacer
         public int vanillaConfigOffset = 0;
         private bool initLoad = true;
         private UIButton perRoadButton;
+        private UIButton pickerStartButton;
 
         public static TrafficLightReplacePanel instance
         {
@@ -293,6 +294,22 @@ namespace TrafficLightReplacer
                 */
                 PerRoadPanel.instance.Show();
                 //add destroy here?
+            };
+
+            pickerStartButton = UIUtils.CreateButtonSpriteImage(customizePanel, m_atlas);
+            pickerStartButton.normalBgSprite = "ButtonMenu";
+            pickerStartButton.hoveredBgSprite = "ButtonMenuHovered";
+            pickerStartButton.pressedBgSprite = "ButtonMenuPressed";
+            pickerStartButton.disabledBgSprite = "ButtonMenuDisabled";
+            pickerStartButton.normalFgSprite = "Picker";
+            pickerStartButton.relativePosition = new Vector2(270, 120);
+            pickerStartButton.height = 25;
+            pickerStartButton.width = 31;
+            pickerStartButton.tooltip = "Pick Network";
+
+            pickerStartButton.eventClick += (c, p) =>
+            {
+                Debug.Log("TODO");
             };
 
             #endregion
@@ -573,7 +590,8 @@ namespace TrafficLightReplacer
         {
             string[] spriteNames = new string[]
             {
-                "Folder"
+                "Folder",
+                "Picker"
             };
 
             m_atlas = ResourceLoader.CreateTextureAtlas("TrafficLightReplacer", spriteNames, "TrafficLightReplacer.Icons.");
