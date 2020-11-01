@@ -56,15 +56,15 @@ namespace TrafficLightReplacer
 
             // Title Bar
             m_title = AddUIComponent<UITitleBar>();
-            m_title.title = "Assign Traffic Lights";
+            m_title.title = "Assign Traffic Lights Per Road";
             //m_title.isModal = true;
 
             mainPanel = AddUIComponent<UIPanel>();
             mainPanel.relativePosition = new Vector2(15, 45);
             mainPanel.size = new Vector2(545, 785);
             mainScroll = UIUtils.CreateScrollBox(mainPanel, m_atlas);
-            mainScroll.size = new Vector2(545, 785);
-            mainScroll.relativePosition = new Vector2(0, 0);
+            mainScroll.size = new Vector2(545, 775);
+            mainScroll.relativePosition = new Vector2(0, 10);
 
             foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
             {
@@ -82,13 +82,17 @@ namespace TrafficLightReplacer
 
         private void AddDropDownRow(string netNameText)
         {
+            //to do 
+            //have default/selected (small med large light option in dropdown)
+            //and more connect to logic and save changes
+            //have it react to different pack changes!!
             int spaceamount = rownum * 40;
 
             UILabel netNameLabel = mainScroll.AddUIComponent<UILabel>();
             netNameLabel.text = netNameText;
             netNameLabel.clipChildren = true;
             netNameLabel.autoSize = false;
-            netNameLabel.width = 305f;
+            netNameLabel.width = 325f;
             netNameLabel.height = 20f;
             netNameLabel.relativePosition = new Vector2(0, 60 + spaceamount);
 
@@ -96,7 +100,7 @@ namespace TrafficLightReplacer
             netNameDropdown.width = 185;
             netNameDropdown.AddItem("Default");
             netNameDropdown.selectedIndex = 0;
-            netNameDropdown.relativePosition = new Vector3(345, 55 + spaceamount);
+            netNameDropdown.relativePosition = new Vector3(335, 55 + spaceamount);
             netNameDropdown.tooltip = "";
 
             TrafficLightReplacePanel.AddItemsToDropdown(netNameDropdown, Replacer.typeSmallOptions);

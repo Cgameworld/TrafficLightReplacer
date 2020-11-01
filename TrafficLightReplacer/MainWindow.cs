@@ -274,19 +274,12 @@ namespace TrafficLightReplacer
             };
 
 
-            UILabel perRoadLabel = customizePanel.AddUIComponent<UILabel>();
-            //"select from road panel"
-            perRoadLabel.autoSize = false;
-            perRoadLabel.width = 145;
-            perRoadLabel.height = 30;
-            perRoadLabel.relativePosition = new Vector2(20, 87);
-            perRoadLabel.text = "Individual Road:";
 
             perRoadButton = UIUtils.CreateButton(customizePanel);
-            perRoadButton.text = "Configure Lights";
+            perRoadButton.text = "Customize Per Road";
             //assign manually?
-            perRoadButton.relativePosition = new Vector2(188, 135);
-            perRoadButton.width = 100;
+            perRoadButton.relativePosition = new Vector2(20, 120);
+            perRoadButton.width = 230;
 
             perRoadButton.eventClick += (c, p) =>
             {
