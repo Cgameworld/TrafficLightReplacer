@@ -472,6 +472,9 @@ namespace TrafficLightReplacer
                 }
             }
 
+            //if z offset values negative, highlight box red
+            GetComponentsInChildren<UIPanel>()[7].GetComponentsInChildren<UITextField>()[0].color = items[2] < 0 ? new Color32(255, 175, 175, 255) : new Color32(255, 255, 255, 255);
+
             TransformValues offset = new TransformValues()
             {
                 Position = new Vector3(items[0],items[1],items[2]),
