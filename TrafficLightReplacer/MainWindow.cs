@@ -519,6 +519,7 @@ namespace TrafficLightReplacer
             UISlider sliderOffsetSlider = UIUtils.CreateSlider(sliderRowUIPanel, "slideroffsetslider", lower, upper, 0.05f, defaultValue);
             sliderOffsetSlider.width = 110f;
             sliderOffsetSlider.relativePosition = new Vector3(120, 5);
+            //sliderOffsetSlider.tooltip = "Hold alt to snap";
 
             UITextField sliderOffsetField = UIUtils.CreateTextField(sliderRowUIPanel);
             sliderOffsetField.text = sliderOffsetSlider.value.ToString();
@@ -531,6 +532,22 @@ namespace TrafficLightReplacer
             {
                 if (!changingDropdown)
                 {
+                    if (Input.GetKey(KeyCode.LeftAlt))
+                    {
+                        //if angle/scale
+                        if (bound == 180)
+                        {
+                            sliderOffsetSlider.stepSize = 5f;
+                        }
+                        else
+                        {
+                            sliderOffsetSlider.stepSize = 0.5f;
+                        }
+                    }
+                    else
+                    {
+                        sliderOffsetSlider.stepSize = 0.05f;
+                    }
                     sliderOffsetField.text = sliderOffsetSlider.value.ToString();
                     Update();
                 }
