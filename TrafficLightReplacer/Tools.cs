@@ -230,10 +230,6 @@ namespace TrafficLightReplacer
                 cris1.m_mesh.RecalculateBounds();
                 cris1.m_mesh.RecalculateNormals();
             }
-            else
-            {
-                Debug.Log("propmesh cris1 null");
-            }
 
         }
         private static Mesh RotateMesh180(PropInfo cris1, bool flip)
@@ -274,7 +270,6 @@ namespace TrafficLightReplacer
                 int a = tris[i * 3 + 0];
                 int b = tris[i * 3 + 1];
                 int c = tris[i * 3 + 2];
-                Debug.Log("mmbf tri" + i);
                 tris[i * 3 + 0] = c;
                 tris[i * 3 + 1] = b;
                 tris[i * 3 + 2] = a;
@@ -294,7 +289,6 @@ namespace TrafficLightReplacer
                 if (!haveSameData)
                     return false;
             }
-            Debug.Log("checteq bf true");
             return true;
         }
 
