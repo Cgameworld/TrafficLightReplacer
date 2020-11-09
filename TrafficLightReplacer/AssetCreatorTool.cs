@@ -65,15 +65,27 @@ namespace TrafficLightReplacer
 
             gentempXML.eventClick += (c, p) =>
             {
-                List<string> xmltemplates = new List<string>();
-                xmltemplates.Add("onesize-template.xml");
-                xmltemplates.Add("multisize-template.xml");
                 var tlrlocal = Path.Combine(DataLocation.localApplicationData, "TLRLocal");
-                Tools.ExtractEmbeddedResource(tlrlocal, "TrafficLightReplacer.Templates", xmltemplates);
 
-                var windowmessage = Translation.Instance.GetTranslation(TranslationID.GENTEMPXMLMESSAGE).Split('*');
-                //Tools.ShowAlertWindow("Template XML Files Exported", "Template XML files exported to " + tlrlocal + "\n\nClick on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder");
-                Tools.ShowAlertWindow(windowmessage[0], windowmessage[1] + tlrlocal + windowmessage[2]);
+                if (File.Exists(Path.Combine(tlrlocal, "onesize-template.xml")) || File.Exists(Path.Combine(tlrlocal, "multisize-template.xml")))
+                {
+                    ConfirmPanel.ShowModal("Overwrite Confimation", "Are you sure you want to overwrite the existing template xml files?", delegate (UIComponent comp, int ret)
+                    {
+                        if (ret != 1)
+                        {
+                            Debug.Log("TLR | canceled gentemp xml warning");
+                            return;
+                        }
+
+                        WriteTemplateXMLs(tlrlocal);
+                    });
+                }
+                else
+                {
+                    WriteTemplateXMLs(tlrlocal);
+                }
+
+               
             };
 
             UILabel netNameLabel = AddUIComponent<UILabel>();
@@ -164,6 +176,16 @@ namespace TrafficLightReplacer
                 }
             };
 
+        }
+
+        private static void WriteTemplateXMLs(string tlrlocal)
+        {
+            List<string> xmltemplates = new List<string>();
+            xmltemplates.Add("onesize-template.xml");
+            xmltemplates.Add("multisize-template.xml");
+            Tools.ExtractEmbeddedResource(tlrlocal, "TrafficLightReplacer.Templates", xmltemplates);
+            var windowmessage = Translation.Instance.GetTranslation(TranslationID.GENTEMPXMLMESSAGE).Split('*');
+            Tools.ShowAlertWindow(windowmessage[0], windowmessage[1] + tlrlocal + windowmessage[2]);
         }
 
         private void LoadResources()

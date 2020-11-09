@@ -196,8 +196,6 @@ namespace TrafficLightReplacer
             {
                 using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceLocation + @"." + file))
                 {
-                    if (!File.Exists(Path.Combine(outputDir, file)))
-                    {
                         using (FileStream fileStream = new FileStream(Path.Combine(outputDir, file), FileMode.Create))
                         {
                             for (int i = 0; i < stream.Length; i++)
@@ -206,7 +204,6 @@ namespace TrafficLightReplacer
                                 fileStream.WriteByte((byte)stream.ReadByte());
                             }
                             fileStream.Close();
-                        }
                     }
                 }
             }
