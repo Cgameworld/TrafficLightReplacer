@@ -432,9 +432,9 @@ namespace TrafficLightReplacer
             };
 
 
-            TLRModSettings.instance.SmallLightIndex = 0;
-            TLRModSettings.instance.MediumLightIndex = 0;
-            TLRModSettings.instance.LargeLightIndex = 0;
+            TLRModSettings.instance.SmallLightIndex = -1;
+            TLRModSettings.instance.MediumLightIndex = -1;
+            TLRModSettings.instance.LargeLightIndex = -1;
             TLRModSettings.instance.Save();
         }
 

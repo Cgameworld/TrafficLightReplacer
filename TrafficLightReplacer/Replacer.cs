@@ -176,18 +176,28 @@ namespace TrafficLightReplacer
                 }
             }
 
-            //set intial selected index - if defined in the xml file
-            if (XMLinput.DropdownSelectionIndex != null)
+
+            //run if no values initialized or changing dropdown
+            if (TLRModSettings.instance.SmallLightIndex == -1)
             {
-                Debug.Log("xmldropdownselectindex not null");
-                TLRModSettings.instance.SmallLightIndex = XMLinput.DropdownSelectionIndex.SmallRoads;
-                TLRModSettings.instance.MediumLightIndex = XMLinput.DropdownSelectionIndex.MediumRoads;
-                TLRModSettings.instance.LargeLightIndex = XMLinput.DropdownSelectionIndex.LargeRoads;
+                //set intial selected index per category - if defined in the xml file
+                if (XMLinput.DropdownSelectionIndex != null)
+                {
+                    Debug.Log("xmldropdownselectindex not null");
+                    TLRModSettings.instance.SmallLightIndex = XMLinput.DropdownSelectionIndex.SmallRoads;
+                    TLRModSettings.instance.MediumLightIndex = XMLinput.DropdownSelectionIndex.MediumRoads;
+                    TLRModSettings.instance.LargeLightIndex = XMLinput.DropdownSelectionIndex.LargeRoads;
+                }
+                else
+                {
+                    Debug.Log("xmldropdownselectindex null!");
+                    TLRModSettings.instance.SmallLightIndex = 0;
+                    TLRModSettings.instance.MediumLightIndex = 0;
+                    TLRModSettings.instance.LargeLightIndex = 0;
+                }
+                TLRModSettings.instance.Save();
             }
-            else
-            {
-                Debug.Log("xmldropdownselectindex null!");
-            }
+            Debug.Log("SmallLightIndex: " + TLRModSettings.instance.SmallLightIndex);
 
             //set default lights for multisize (set from xml config in future)
             if (!oneSizeMode)

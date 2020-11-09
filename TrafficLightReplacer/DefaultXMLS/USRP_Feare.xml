@@ -153,7 +153,7 @@
   </Transform>
   <DropdownSelectionIndex>
     <SmallRoads>0</SmallRoads>
-    <MediumRoads>3</MediumRoads>
-    <LargeRoads>1</LargeRoads>
+    <MediumRoads>5</MediumRoads>
+    <LargeRoads>0</LargeRoads>
   </DropdownSelectionIndex>
 </TLRConfig>
