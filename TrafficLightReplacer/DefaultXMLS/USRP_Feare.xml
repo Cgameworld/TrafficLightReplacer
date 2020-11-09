@@ -151,4 +151,9 @@
     <Angle>-90</Angle>
     <Scale>100</Scale>
   </Transform>
+  <DropdownSelectionIndex>
+    <SmallRoads>0</SmallRoads>
+    <MediumRoads>3</MediumRoads>
+    <LargeRoads>1</LargeRoads>
+  </DropdownSelectionIndex>
 </TLRConfig>

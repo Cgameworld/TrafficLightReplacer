@@ -12,7 +12,7 @@ namespace TrafficLightReplacer
         public bool OneSize { get; set; }
         public List<Asset> Assets { get; set; }
         public TransformValues Transform { get; set; }
-        public DSelectionIndex DropdownSelectionIndex { get; set; }
+        public DropdownSelectionIndex DropdownSelectionIndex { get; set; }
 
     }
     public class Asset
@@ -29,7 +29,7 @@ namespace TrafficLightReplacer
         public float Angle { get; set; }
         public float Scale { get; set; }
     }
-    public class DSelectionIndex
+    public class DropdownSelectionIndex
     {
         public int SmallRoads { get; set; }
         public int MediumRoads { get; set; }
