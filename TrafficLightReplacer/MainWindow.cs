@@ -38,7 +38,7 @@ namespace TrafficLightReplacer
         private bool changingDropdown = false;
         private UIButton clearButton;
 
-        private bool dropdownFlag = false;
+        public bool dropdownFlag = false;
 
         public UIPanel dropdown1;
         public UIPanel dropdown2;
@@ -175,6 +175,12 @@ namespace TrafficLightReplacer
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
                         dropdownOffset = 120;
+
+                        //update ui dropdowns
+                        smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
+                        instance.mediumRoadsDropdown.selectedIndex = TLRModSettings.instance.MediumLightIndex;
+                        largeRoadsDropdown.selectedIndex = TLRModSettings.instance.LargeLightIndex;
+
                         //ResetAllDropdowns();
                         //AddAllItemsToDropdowns();
                     }
