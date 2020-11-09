@@ -93,7 +93,7 @@ namespace TrafficLightReplacer
             //add option to toggle between euro and generic vanilla?
             packDropdown.relativePosition = new Vector3(80, 53);
             packDropdown.AddItem(Translation.Instance.GetTranslation(TranslationID.NULLDROPDOWN));
-            packDropdown.selectedIndex = 0;
+            packDropdown.selectedIndex = -1;
 
             packDropdown.eventSelectedIndexChanged += (c, p) =>
             {
@@ -109,8 +109,10 @@ namespace TrafficLightReplacer
 
                 if (initLoad)
                 {
+                    Debug.Log("initload true?");
                     if (!Replacer.oneSizeMode)
                     {
+                        Debug.Log("initload-onesize");
                         smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
                         mediumRoadsDropdown.selectedIndex = TLRModSettings.instance.MediumLightIndex;
                         largeRoadsDropdown.selectedIndex = TLRModSettings.instance.LargeLightIndex;
