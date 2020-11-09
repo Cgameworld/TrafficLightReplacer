@@ -132,13 +132,25 @@ namespace TrafficLightReplacer
 
     public class ModLoading : LoadingExtensionBase
     {
+        public static bool isMainGame;
         private static MainButton m_mainbutton;
 
         public override void OnLevelLoaded(LoadMode mode)
         {
-            TrafficLightReplacePanel.instance.Show();  //initalize UI
-            CreatorToolPanel.instance.Show();
-            m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
+            if (mode == LoadMode.LoadAsset
+                || mode == LoadMode.NewAsset
+                || mode == LoadMode.NewMap
+                || mode == LoadMode.LoadMap)
+            {
+                isMainGame = false;
+            }
+            else
+            {
+                isMainGame = true;
+                TrafficLightReplacePanel.instance.Show();  //initalize UI
+                CreatorToolPanel.instance.Show();
+                m_mainbutton = UIView.GetAView().AddUIComponent(typeof(MainButton)) as MainButton;
+            }
         }
        
     }

@@ -51,36 +51,39 @@ namespace TrafficLightReplacer
     {
         static void Postfix()
         {
-            //check if LHD (currently not supported)
-            if (Singleton<SimulationManager>.instance.m_metaData.m_invertTraffic == SimulationMetaData.MetaBool.True)
+            if (ModLoading.isMainGame)
             {
-                Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Error: Left Hand Drive mode is currently not supported");
-            }
 
-            //look for prop packs to add
-            FindActiveEmbeddedPropXMLs();
-            
-            //makes tweaks to specfic traffic light meshes if found
-            PreloadPropModify();
-
-            //grab initial prop postions
-            InitReplace.CachePropFill();
-
-            string xmlfile = TLRModSettings.instance.LastLoadedXML;
-
-            //change dropdown index based on xml 
-            List<Pack> packList = Tools.GetPackList();
-            for (int i = 0; i < packList.Count; i++)
-            {
-                if (packList[i].PackPath == xmlfile)
+                //check if LHD (currently not supported)
+                if (Singleton<SimulationManager>.instance.m_metaData.m_invertTraffic == SimulationMetaData.MetaBool.True)
                 {
-                    Debug.Log("i is packindex " + i);
-                    TLRModSettings.instance.CurrentPackIndex = i;
+                    Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Error: Left Hand Drive mode is currently not supported");
                 }
+
+                //look for prop packs to add
+                FindActiveEmbeddedPropXMLs();
+
+                //makes tweaks to specfic traffic light meshes if found
+                PreloadPropModify();
+
+                //grab initial prop postions
+                InitReplace.CachePropFill();
+
+                string xmlfile = TLRModSettings.instance.LastLoadedXML;
+
+                //change dropdown index based on xml 
+                List<Pack> packList = Tools.GetPackList();
+                for (int i = 0; i < packList.Count; i++)
+                {
+                    if (packList[i].PackPath == xmlfile)
+                    {
+                        Debug.Log("i is packindex " + i);
+                        TLRModSettings.instance.CurrentPackIndex = i;
+                    }
+                }
+
+                Replacer.Start(xmlfile);
             }
-
-            Replacer.Start(xmlfile);
-
         }
         private static void FindActiveEmbeddedPropXMLs()
         {
