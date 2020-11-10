@@ -398,7 +398,7 @@ namespace TrafficLightReplacer
                                         {
                                             ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
                                         }
-                                        else if (roadwidth >= 6)
+                                        else if (roadwidth > 6)
                                         {
                                             ReplacePropFlipped(lane, propGroup, typeMedium, isOneWay, propGroupCounter);
                                         }
@@ -414,7 +414,7 @@ namespace TrafficLightReplacer
                                         {
                                             ReplaceProp(lane, typeLarge, propGroup, propGroupCounter);
                                         }
-                                        else if (roadwidth >= 6)
+                                        else if (roadwidth > 6)
                                         {
                                             ReplaceProp(lane, typeMedium, propGroup, propGroupCounter);
                                         }
@@ -587,7 +587,8 @@ namespace TrafficLightReplacer
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp, bool isOneWay, int propGroupCounter)
         {
-            if (lane.m_laneType.ToString() == "Pedestrian")
+            //vehicle lane type for road hacks during loading
+            if (lane.m_laneType.ToString() == "Pedestrian" || lane.m_laneType.ToString() == "Vehicle")
             {
                 if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
                 {
