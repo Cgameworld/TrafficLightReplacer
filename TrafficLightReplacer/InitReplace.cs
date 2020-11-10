@@ -131,52 +131,58 @@ namespace TrafficLightReplacer
         {
             //badpeanut 4+1 asym roads compatibility hack
             //replace inner lane manhole covers with ped light props
-            NetInfo network = PrefabCollection<NetInfo>.FindLoaded("1205312481.4+1 Lane Asymmetric Road w/Trees_Data");  
-            
+            ReplaceBPAsymNet(PrefabCollection<NetInfo>.FindLoaded("1205312481.4+1 Lane Asymmetric Road_Data"));
+            ReplaceBPAsymNet(PrefabCollection<NetInfo>.FindLoaded("1205312481.4+1 Lane Asymmetric Road w/Grass_Data"));
+            ReplaceBPAsymNet(PrefabCollection<NetInfo>.FindLoaded("1205312481.4+1 Lane Asymmetric Road w/Trees_Data"));
+        }
+
+        private static void ReplaceBPAsymNet(NetInfo network)
+        {
+            if (network != null) { 
             foreach (NetInfo.Lane lane in network.m_lanes)
             {
-                if (lane?.m_laneProps?.m_props != null)
-                {
-                    if (lane.m_laneType.ToString() == "Vehicle")
+                    if (lane?.m_laneProps?.m_props != null)
                     {
-                        Debug.Log("A     vehdete");
-
-                        if (lane.m_position == -4.7f)
+                        if (lane.m_laneType.ToString() == "Vehicle")
                         {
-                            var manhole1 = lane.m_laneProps.m_props[7];
-                            manhole1.m_prop = PrefabCollection<PropInfo>.FindLoaded("Traffic Light Pedestrian");
-                           // manhole1.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight3.pedlight3_Data");
-                            manhole1.m_probability = 100;
-                            manhole1.m_segmentOffset = 1;
-                            manhole1.m_angle = 90f;
-                            manhole1.m_position = new Vector3(-15f, 0f, 0f);
-                            manhole1.m_flagsForbidden = NetLane.Flags.Inverted | NetLane.Flags.JoinedJunction;
-                            manhole1.m_endFlagsRequired = NetNode.Flags.TrafficLights;
-                            manhole1.m_endFlagsForbidden = NetNode.Flags.LevelCrossing;
-                            manhole1.m_colorMode = NetLaneProps.ColorMode.StartState;
+                            Debug.Log("A     vehdete");
 
-                            lane.m_laneProps.m_props[7] = manhole1;
+                            if (lane.m_position == -4.7f)
+                            {
+                                var manhole1 = lane.m_laneProps.m_props[7];
+                                manhole1.m_prop = PrefabCollection<PropInfo>.FindLoaded("Traffic Light Pedestrian");
+                                // manhole1.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight3.pedlight3_Data");
+                                manhole1.m_probability = 100;
+                                manhole1.m_segmentOffset = 1;
+                                manhole1.m_angle = 90f;
+                                manhole1.m_position = new Vector3(-15f, 0f, 0f);
+                                manhole1.m_flagsForbidden = NetLane.Flags.Inverted | NetLane.Flags.JoinedJunction;
+                                manhole1.m_endFlagsRequired = NetNode.Flags.TrafficLights;
+                                manhole1.m_endFlagsForbidden = NetNode.Flags.LevelCrossing;
+                                manhole1.m_colorMode = NetLaneProps.ColorMode.StartState;
+
+                                lane.m_laneProps.m_props[7] = manhole1;
+                            }
+
+                            if (lane.m_position == 1.7f)
+                            {
+                                var manhole2 = lane.m_laneProps.m_props[7];
+                                manhole2.m_prop = PrefabCollection<PropInfo>.FindLoaded("Traffic Light Pedestrian");
+                                // manhole1.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight2.pedlight2_Data");
+                                manhole2.m_probability = 100;
+                                manhole2.m_segmentOffset = 1;
+                                manhole2.m_angle = 90f;
+                                manhole2.m_position = new Vector3(-12f, 0f, 0f);
+                                manhole2.m_flagsForbidden = NetLane.Flags.Inverted | NetLane.Flags.JoinedJunction;
+                                manhole2.m_endFlagsRequired = NetNode.Flags.TrafficLights;
+                                manhole2.m_endFlagsForbidden = NetNode.Flags.LevelCrossing;
+                                manhole2.m_colorMode = NetLaneProps.ColorMode.EndState;
+
+                                lane.m_laneProps.m_props[7] = manhole2;
+                            }
+
                         }
-
-                        if (lane.m_position == 1.7f)
-                        {
-                            var manhole2 = lane.m_laneProps.m_props[7];
-                            manhole2.m_prop = PrefabCollection<PropInfo>.FindLoaded("Traffic Light Pedestrian");
-                           // manhole1.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight2.pedlight2_Data");
-                            manhole2.m_probability = 100;
-                            manhole2.m_segmentOffset = 1;
-                            manhole2.m_angle = 90f;
-                            manhole2.m_position = new Vector3(-12f, 0f, 0f);
-                            manhole2.m_flagsForbidden = NetLane.Flags.Inverted | NetLane.Flags.JoinedJunction;
-                            manhole2.m_endFlagsRequired = NetNode.Flags.TrafficLights;
-                            manhole2.m_endFlagsForbidden = NetNode.Flags.LevelCrossing;
-                            manhole2.m_colorMode = NetLaneProps.ColorMode.EndState;
-
-                            lane.m_laneProps.m_props[7] = manhole2;
-                        }
-                        
                     }
-            
 
                 }
             }
