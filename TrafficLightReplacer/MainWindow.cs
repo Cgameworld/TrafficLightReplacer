@@ -476,7 +476,7 @@ namespace TrafficLightReplacer
                 {
                     var item = float.Parse(GetComponentsInChildren<UIPanel>()[i].GetComponentsInChildren<UITextField>()[0].text);
                     items.Add(item);                   
-                    Debug.Log("i: " + i + "  |  item: " + item);
+                   // Debug.Log("i: " + i + "  |  item: " + item); //add this to logging setting?
                 }
             }
 

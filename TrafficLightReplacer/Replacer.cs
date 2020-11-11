@@ -183,21 +183,21 @@ namespace TrafficLightReplacer
                 //set intial selected index per category - if defined in the xml file
                 if (XMLinput.DropdownSelectionIndex != null)
                 {
-                    Debug.Log("xmldropdownselectindex not null");
+                    //Debug.Log("xmldropdownselectindex not null");
                     TLRModSettings.instance.SmallLightIndex = XMLinput.DropdownSelectionIndex.SmallRoads;
                     TLRModSettings.instance.MediumLightIndex = XMLinput.DropdownSelectionIndex.MediumRoads;
                     TLRModSettings.instance.LargeLightIndex = XMLinput.DropdownSelectionIndex.LargeRoads;
                 }
                 else
                 {
-                    Debug.Log("xmldropdownselectindex null!");
+                    //Debug.Log("xmldropdownselectindex null!");
                     TLRModSettings.instance.SmallLightIndex = 0;
                     TLRModSettings.instance.MediumLightIndex = 0;
                     TLRModSettings.instance.LargeLightIndex = 0;
                 }
                 TLRModSettings.instance.Save();
             }
-            Debug.Log("SmallLightIndex: " + TLRModSettings.instance.SmallLightIndex);
+            //Debug.Log("SmallLightIndex: " + TLRModSettings.instance.SmallLightIndex);
 
             //set default lights for multisize (set from xml config in future)
             if (!oneSizeMode)
@@ -218,11 +218,11 @@ namespace TrafficLightReplacer
 
             if (XMLinput.Transform != null && Tools.CheckTransformEqual(TLRModSettings.instance.SelectedOffsetValues, initOffset))
             {
-                Debug.Log("transform not null!");
+               // Debug.Log("transform not null!");
                 transformOffset = XMLinput.Transform;
             }
 
-            Debug.Log("transformOffset " + transformOffset.Position.x + " | ro " + transformOffset.Angle);
+            //Debug.Log("transformOffset " + transformOffset.Position.x + " | ro " + transformOffset.Angle);
             SetTransformSliders(transformOffset, false);
         }
 
@@ -279,14 +279,13 @@ namespace TrafficLightReplacer
         }      
         public static void SetTransformSliders(TransformValues transformOffset, bool isReset)
         {
-            Debug.Log("ran settransformslider");
             //check if panel items exist
             if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
             {
                 if (!isReset)
                 {
                     //slider ui is at index 5-9
-                    Debug.Log("settrans sli pos x " +  transformOffset.Position.x);
+                    //Debug.Log("settrans sli pos x " +  transformOffset.Position.x);
                     SetTransformSlider(5, transformOffset.Position.x);
                     SetTransformSlider(6, transformOffset.Position.y);
                     SetTransformSlider(7, transformOffset.Position.z);
@@ -302,7 +301,6 @@ namespace TrafficLightReplacer
                     //maybe do 000000 if fail
 
                     //slider ui is at index 5-9
-                    Debug.Log("landinghere??");
                     SetTransformSlider(5, xmlTransform.Position.x);
                     SetTransformSlider(6, xmlTransform.Position.y);
                     SetTransformSlider(7, xmlTransform.Position.z);
@@ -311,7 +309,7 @@ namespace TrafficLightReplacer
                 }
             }
             else {
-                Debug.Log("else settransformslider");
+               // Debug.Log("else settransformslider");
             }
         }
 
@@ -327,7 +325,7 @@ namespace TrafficLightReplacer
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {
-                    Debug.Log("ran! OSM1");
+                   // Debug.Log("ran! OSM1");
                     //add code here to move dropdown2 up and change height
                     TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
@@ -525,7 +523,7 @@ namespace TrafficLightReplacer
 
                     }
 
-                    //Debug.Log("Trafficlight flag?: " + node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights));
+                   // Debug.Log("Trafficlight flag?: " + node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights));
                 }
 
                 idCount++;
@@ -620,12 +618,10 @@ namespace TrafficLightReplacer
             {
                 if (typeSignalPoleMirror != null)
                 {
-                    Debug.Log("signalpole mirror selected!");
                     propGroup.m_finalProp = typeSignalPoleMirror;
                 }
                 else
                 {
-                    Debug.Log("signalpole selected!");
                     propGroup.m_finalProp = typeSignalPole;
                 }
 
