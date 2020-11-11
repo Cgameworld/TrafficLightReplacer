@@ -292,6 +292,15 @@ namespace TrafficLightReplacer
             return true;
         }
 
-    
+    }
+
+    //to avoid having to write multiple || statements 
+    //https://stackoverflow.com/questions/3907299/if-statements-matching-multiple-values
+    public static class Ext
+    {
+        public static bool In<T>(this T t, params T[] values)
+        {
+            return values.Contains(t);
+        }
     }
 }

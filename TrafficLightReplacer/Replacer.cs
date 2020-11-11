@@ -509,7 +509,7 @@ namespace TrafficLightReplacer
                                     {
                                         if (propGroup?.m_finalProp != null)
                                         {
-                                            if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                                            if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01", "Traffic Light Pedestrian European", "Traffic Light European 01"))
                                             {
                                                 Debug.Log("Reachedinner");
                                                // propGroup.m_finalProp = typePedSignal ;
@@ -537,25 +537,25 @@ namespace TrafficLightReplacer
         {
             //Debug.Log("onesize mode on!");
 
-            if (propGroup.m_prop.name == "Traffic Light 02")
+            if (propGroup.m_prop.name.In("Traffic Light 02", "Traffic Light European 02"))
             {
                 propGroup.m_finalProp = typeMain;
                 OneSizeApplyProperties(propGroupCounter, propGroup, lane);
             }
-            if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
+            if (propGroup.m_prop.name.In("Traffic Light 02 Mirror", "Traffic Light European 02 Mirror"))
             {
                 propGroup.m_finalProp = typeMirror;
                 OneSizeApplyProperties(propGroupCounter, propGroup, lane, true);
             }
 
-            if (propGroup.m_prop.name == "Traffic Light Pedestrian")
+            if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light Pedestrian European"))
             {
                 propGroup.m_finalProp = typePedSignal;
                 OneSizeApplyProperties(propGroupCounter, propGroup, lane);
 
             }
 
-            if (propGroup.m_prop.name == "Traffic Light 01") //see if mirror version comes up at all!
+            if (propGroup.m_prop.name.In("Traffic Light 01", "Traffic Light European 01")) //see if mirror version comes up at all!
             {
                 propGroup.m_finalProp = typeSignalPole;
                 OneSizeApplyProperties(propGroupCounter, propGroup, lane);
@@ -590,7 +590,7 @@ namespace TrafficLightReplacer
             //vehicle lane type for road hacks during loading
             if (lane.m_laneType.ToString() == "Pedestrian" || lane.m_laneType.ToString() == "Vehicle")
             {
-                if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01")
+                if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01", "Traffic Light Pedestrian European", "Traffic Light European 01"))
                 {
                     propGroup.m_finalProp = newProp;
 
@@ -607,7 +607,7 @@ namespace TrafficLightReplacer
             else
             {
                 //change road median ped signal
-                if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01" || propGroup.m_prop.name == "Traffic Light 01 Mirror")
+                if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01","Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01", "Traffic Light European 01 Mirror"))
                 {
 
                     propGroup.m_finalProp = typePedSignal;
@@ -616,7 +616,7 @@ namespace TrafficLightReplacer
                 }
             }
 
-            if (propGroup.m_prop.name == "Traffic Light 02")
+            if (propGroup.m_prop.name.In("Traffic Light 02", "Traffic Light European 02"))
             {
                 if (typeSignalPoleMirror != null)
                 {
@@ -636,7 +636,7 @@ namespace TrafficLightReplacer
                 MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter,false,true);
 
             }
-            else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
+            else if (propGroup.m_prop.name.In("Traffic Light 02 Mirror", "Traffic Light European 02 Mirror"))
             {
                 propGroup.m_finalProp = typePedSignal;
                 //propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight2.pedlight2_Data");
@@ -644,7 +644,7 @@ namespace TrafficLightReplacer
             }
 
             //fix for one way roads with two ped lights!
-            if (propGroup.m_prop.name == "Traffic Light Pedestrian" && isOneWay == true)
+            if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light Pedestrian European") && isOneWay == true)
             {
                 if (lane.m_position < 0)
                 {
@@ -687,13 +687,13 @@ namespace TrafficLightReplacer
         {
             //m_prop stays the same m_finalProp changes 
 
-            if (propGroup.m_prop.name == "Traffic Light 02")
+            if (propGroup.m_prop.name.In("Traffic Light 02", "Traffic Light European 02"))
             {
                 propGroup.m_finalProp = newProp;
                 MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
 
             }
-            else if (propGroup.m_prop.name == "Traffic Light 02 Mirror")
+            else if (propGroup.m_prop.name.In("Traffic Light 02 Mirror", "Traffic Light European 02 Mirror"))
             {
                 propGroup.m_finalProp = typePedSignal;
                 if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
@@ -702,7 +702,7 @@ namespace TrafficLightReplacer
                 }
             }
 
-            if (propGroup.m_prop.name == "Traffic Light Pedestrian" || propGroup.m_prop.name == "Traffic Light 01" || propGroup.m_prop.name == "Traffic Light 01 Mirror")
+            if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01","Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01", "Traffic Light European 01 Mirror"))
             {
                 
                 propGroup.m_finalProp = typePedSignal;
