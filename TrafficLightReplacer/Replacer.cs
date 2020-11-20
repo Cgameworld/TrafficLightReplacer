@@ -176,6 +176,10 @@ namespace TrafficLightReplacer
                 }
             }
 
+            if (typeSignalPoleMirror == null)
+            {
+                typeSignalPoleMirror = typeSignalPole;
+            }
 
             //run if no values initialized or changing dropdown
             if (TLRModSettings.instance.SmallLightIndex == -1)
@@ -631,15 +635,7 @@ namespace TrafficLightReplacer
 
             if (propGroup.m_prop.name.In("Traffic Light 02", "Traffic Light European 02"))
             {
-                if (typeSignalPoleMirror != null)
-                {
-                    propGroup.m_finalProp = typeSignalPoleMirror;
-                }
-                else
-                {
-                    propGroup.m_finalProp = typeSignalPole;
-                }
-
+                propGroup.m_finalProp = typeSignalPoleMirror;
 
                 propGroup.m_position.x = lane.m_position > 0
                 ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x + 1f
