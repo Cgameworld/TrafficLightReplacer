@@ -553,9 +553,16 @@ namespace TrafficLightReplacer
 
             }
 
-            if (propGroup.m_prop.name.In("Traffic Light 01", "Traffic Light European 01")) //see if mirror version comes up at all!
+            if (propGroup.m_prop.name.In("Traffic Light 01", "Traffic Light European 01"))
             {
                 propGroup.m_finalProp = typeSignalPole;
+                OneSizeApplyProperties(propGroupCounter, propGroup, lane);
+            }
+
+
+            if (propGroup.m_prop.name.In("Traffic Light 01 Mirror", "Traffic Light European 01 Mirror"))
+            {
+                propGroup.m_finalProp = typeSignalPoleMirror;
                 OneSizeApplyProperties(propGroupCounter, propGroup, lane);
             }
         }
