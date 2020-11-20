@@ -63,10 +63,10 @@ namespace TrafficLightReplacer
                 //look for prop packs to add
                 FindActiveEmbeddedPropXMLs();
 
-                //makes tweaks to specfic traffic light meshes if found
+                //makes compatibility tweaks to specfic traffic light meshes if found
                 PreloadPropModify();
 
-                //makes road tweaks to specfic road meshes if found
+                //makes compatibility tweaks to specfic road meshes if found
                 PreloadRoadModify();
 
                 //grab initial prop postions

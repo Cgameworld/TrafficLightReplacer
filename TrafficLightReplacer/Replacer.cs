@@ -601,6 +601,14 @@ namespace TrafficLightReplacer
                     MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter);
 
                 }
+                else
+                {
+                    //edgecase small dirt roads?
+                    if (propGroup.m_prop.name.In("Traffic Light 01 Mirror", "Traffic Light European 01 Mirror"))
+                    {
+                        propGroup.m_finalProp = typePedSignal;
+                    }
+                }
             }
             else
             {
