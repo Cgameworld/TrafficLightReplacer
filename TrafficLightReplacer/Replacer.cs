@@ -227,7 +227,6 @@ namespace TrafficLightReplacer
             }
 
             //Debug.Log("transformOffset " + transformOffset.Position.x + " | ro " + transformOffset.Angle);
-            SetTransformSliders(transformOffset, false);
         }
 
         private static PropInfo SetProp(int i)

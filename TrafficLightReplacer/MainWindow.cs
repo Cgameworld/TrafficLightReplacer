@@ -325,6 +325,7 @@ namespace TrafficLightReplacer
                         transformPanel.isVisible = true;
                         transformButtonToggle.backgroundSprite = "PropertyGroupOpen";
                         transformOffset = 240;
+                        Replacer.SetTransformSliders(Replacer.transformOffset, false);
                     }
                 }
                 RefreshFooterItems();
