@@ -17,8 +17,12 @@ namespace TrafficLightReplacer
     {
         public static void CachePropFill()
         {
-            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            int count = PrefabCollection<NetInfo>.LoadedCount();
+
+            for (uint index = 0; index < count; index++)
             {
+                var prefab = PrefabCollection<NetInfo>.GetLoaded(index);
+
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
                 {
                     if (lane?.m_laneProps?.m_props != null)

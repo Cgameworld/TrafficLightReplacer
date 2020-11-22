@@ -360,11 +360,15 @@ namespace TrafficLightReplacer
         public static void UpdateLaneProps()
         {
             int propGroupCounter = 0;
-            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
-            {
-                    //Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
 
-                    float roadwidth = 0;
+            int count = PrefabCollection<NetInfo>.LoadedCount();
+
+            for (uint index = 0; index < count; index++)
+            {
+                var prefab = PrefabCollection<NetInfo>.GetLoaded(index);
+                //Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
+
+                float roadwidth = 0;
                     bool isOneWay = false;
                     bool isHighway = false;
 
