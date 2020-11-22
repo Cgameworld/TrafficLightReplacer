@@ -18,7 +18,7 @@ namespace TrafficLightReplacer
 {
     public class Tools
     {
-        public static string BlankProp = "blankprop.blankprop_Data";
+        public static string BlankProp = "2053924034.blankprop_Data";
         public static void ShowErrorWindow(string header, string message)
         {
             ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
