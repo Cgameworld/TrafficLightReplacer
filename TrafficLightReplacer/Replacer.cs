@@ -598,9 +598,12 @@ namespace TrafficLightReplacer
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp, bool isOneWay, int propGroupCounter)
-        {
+        {        
+            bool isHighwayRampSide = lane.m_laneType.ToString() == "None" && lane.m_position > 4;
             //vehicle lane type for road hacks during loading
-            if (lane.m_laneType.ToString() == "Pedestrian" || lane.m_laneType.ToString() == "Vehicle")
+            bool isSidewalk = lane.m_laneType.ToString() == "Pedestrian" || lane.m_laneType.ToString() == "Vehicle";
+
+            if (isSidewalk || isHighwayRampSide)
             {
                 if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01", "Traffic Light Pedestrian European", "Traffic Light European 01"))
                 {
@@ -653,7 +656,7 @@ namespace TrafficLightReplacer
                 MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
             }
 
-            //fix for one way roads with two ped lights!
+            //fix for one way roads with two ped lights! for some reason NeXT2 makes this not work for vanilla one way roads :/
             if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light Pedestrian European") && isOneWay == true)
             {
                 if (lane.m_position < 0)
