@@ -59,6 +59,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="Locale\TranslationID.cs" />
     <Compile Include="Pack.cs" />
+    <Compile Include="TIntersectionPatch.cs" />
     <Compile Include="TLRAsset.cs" />
     <Compile Include="AssetCreatorTool.cs" />
     <Compile Include="lib\ResourceLoader.cs" />
