@@ -46,13 +46,14 @@ namespace TrafficLightReplacer
 
             if (replaceIds.Contains(laneID))
             {
-                //Debug.Log("LaneHere!!" + laneID);
-                if (prop.name == "Traffic Light 02" || prop.name == "Traffic Light 02 European")
+                if (prop != null)
                 {
-                   prop = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
+                    if (prop.name == "Traffic Light 02" || prop.name == "Traffic Light 02 European")
+                    {
+                        prop = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
+                    }
                 }
             }
-
             return prop;
         }
     }
@@ -99,16 +100,7 @@ namespace TrafficLightReplacer
                     node.m_segment7
                 };
 
-                int intersectingRoads = 0;
-                foreach (var id in neighborSegmentIds)
-                {
-                    if (id != 0)
-                    {
-                        intersectingRoads++;
-                    }
-                }
-
-                if (intersectingRoads == 3 && node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights))
+                if (node.CountSegments() == 3 && node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights))
                 {
                     //Debug.Log("node " + i + " is a T-intersection with traffic lights!");
                     ushort foundSegment = 0;
