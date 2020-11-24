@@ -17,8 +17,6 @@ namespace TrafficLightReplacer
 {
     public class ModInfo : IUserMod
     {
-        public static bool enableTProcess = false;
-
         private readonly string harmonyId = "cgameworld.trafficlightreplacer";
         private HarmonyInstance harmony;
 

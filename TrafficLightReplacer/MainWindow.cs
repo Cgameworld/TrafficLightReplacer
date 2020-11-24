@@ -377,9 +377,6 @@ namespace TrafficLightReplacer
 
             getmeditems.eventClick += (c, p) =>
             {
-                ModInfo.enableTProcess = true;
-
-
                 foreach (var item in TIntersectionPatch.replaceIds)
                 {
                     Debug.Log("replaceid loaded " + item);

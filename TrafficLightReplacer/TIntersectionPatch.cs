@@ -12,7 +12,7 @@ namespace TrafficLightReplacer
     [HarmonyPatch("RenderInstance")]
     public static class TIntersectionPatch
     {
-        public static List<uint> replaceIds = new List<uint>() {0 };
+        public static List<uint> replaceIds = new List<uint>() {};
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             var codes = new List<CodeInstruction>(instructions);
@@ -41,14 +41,14 @@ namespace TrafficLightReplacer
         {
             //Debug.Log("98Transpilation Worked!");
 
-            //figure out flipped/non flipped lights!
+            //figure out flipped/non flipped lights!, get regular prop argument since this just reads/changes the final prop!
+            //also figure out the significant lag when dragging nodes
 
             if (replaceIds.Contains(laneID))
             {
                 //Debug.Log("LaneHere!!" + laneID);
-                if (prop.name == "Traffic Light Pedestrian" || prop.name == "Traffic Light 01")
+                if (prop.name == "Traffic Light 02" || prop.name == "Traffic Light 02 European")
                 {
-                    Debug.Log("prophere");
                    prop = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
                 }
             }
@@ -64,9 +64,8 @@ namespace TrafficLightReplacer
     {
         static void Postfix()
         {
-            if (ModInfo.enableTProcess)
+            if (ModLoading.isMainGame)
             {
-                Debug.Log("3Segment Updated!!!");
                 ModifyNodes();
             }
         }
@@ -116,7 +115,6 @@ namespace TrafficLightReplacer
 
                     foreach (var segmentID in neighborSegmentIds)
                     {
-                        //Debug.LogWarning("\nsegmentID: " + segmentID);
                         var segment = NetManager.instance.m_segments.m_buffer[segmentID];
 
                         var laneID = segment.m_lanes;
@@ -125,7 +123,6 @@ namespace TrafficLightReplacer
                         while (laneID != 0)
                         {
                             NetLane.Flags flags = (NetLane.Flags)NetManager.instance.m_lanes.m_buffer[laneID].m_flags;
-                            // Debug.Log("flags of lane " + laneID + " | " + flags.ToString());
                             if (flags.IsFlagSet(NetLane.Flags.Forward))
                             {
                                 segmentForward = true;
@@ -142,7 +139,7 @@ namespace TrafficLightReplacer
                         }
                     }
 
-                    Debug.Log("intersecting road:" + foundSegment);
+                    //Debug.Log("intersecting road:" + foundSegment);
 
                     //add lane ids of intersecting segment!
                     if (foundSegment != 0)
