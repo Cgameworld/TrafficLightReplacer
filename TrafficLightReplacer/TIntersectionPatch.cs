@@ -2,41 +2,58 @@
 using Harmony;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
 using UnityEngine;
 
 namespace TrafficLightReplacer
 {
     [HarmonyPatch(typeof(NetLane))]
     [HarmonyPatch("RenderInstance")]
-    public class TIntersectionPatch
+    public static class TIntersectionPatch
     {
-        public static List<uint> replaceIds = new List<uint>() { 144045 };
-        static void Prefix(uint laneID, ref NetInfo.Lane laneInfo)
+        public static List<uint> replaceIds = new List<uint>() {0 };
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
-            if (replaceIds.Contains(laneID))
-            {
-                string a = "";
-                foreach (uint i in replaceIds)
-                {
-                    a = a + " | " + i;
-                }
-                Debug.Log("nsegids " + a);
+            var codes = new List<CodeInstruction>(instructions);
 
-                //  Debug.Log("DelLaneHere!!" + laneID);
-                NetLaneProps preProps = laneInfo.m_laneProps;
-                if (preProps != null)
+            var fixedInstructions = new[]
+            {
+                new CodeInstruction(OpCodes.Ldarg_3),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(TIntersectionPatch), nameof(GetFinalProp))),
+            };
+
+            for (int i = 0; i < codes.Count; i++)
+            {
+                //checking if object is null before converting it to string
+                var operandString = codes[i].operand?.ToString() ?? String.Empty;
+
+                if (operandString == "PropInfo m_finalProp")
                 {
-                    int len1 = preProps.m_props.Length;
-                    for (int i = 0; i < len1; i++)
-                    {
-                        NetLaneProps.Prop prop1 = preProps.m_props[i];
-                        if (prop1.m_prop.name == "Traffic Light Pedestrian" || prop1.m_prop.name == "Traffic Light 01")
-                        {
-                            prop1.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
-                        }
-                    }
+                    codes.InsertRange(i + 1, fixedInstructions);
                 }
             }
+            return codes.AsEnumerable();
+        }
+
+        // NetLane
+        public static PropInfo GetFinalProp(PropInfo prop, uint laneID)
+        {
+            //Debug.Log("98Transpilation Worked!");
+
+            //figure out flipped/non flipped lights!
+
+            if (replaceIds.Contains(laneID))
+            {
+                //Debug.Log("LaneHere!!" + laneID);
+                if (prop.name == "Traffic Light Pedestrian" || prop.name == "Traffic Light 01")
+                {
+                    Debug.Log("prophere");
+                   prop = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
+                }
+            }
+
+            return prop;
         }
     }
 
