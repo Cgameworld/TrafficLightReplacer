@@ -370,14 +370,15 @@ namespace TrafficLightReplacer
             };
 
             getmeditems = UIUtils.CreateButton(this);
-            getmeditems.text = "GetTIntersection";
+            getmeditems.text = "EnableTIntersection";
             getmeditems.relativePosition = new Vector2(170, -40);
             getmeditems.width = 130;
-            //getmeditems.isVisible = false;
+            getmeditems.isVisible = true;
 
             getmeditems.eventClick += (c, p) =>
             {
-                Replacer.ModifyNodes();
+                //ModInfo.enableTProcess = true;
+                TIntersectionFinder.ModifyNodes();
             };
         }
         public void RefreshFooterItems()
