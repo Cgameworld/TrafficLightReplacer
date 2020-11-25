@@ -100,40 +100,65 @@ namespace TrafficLightReplacer
                     node.m_segment7
                 };
 
+                List<Vector3> dirs = new List<Vector3>();
+                List<ushort> segids = new List<ushort>();
+
                 if (node.CountSegments() == 3 && node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights))
                 {
-                    //Debug.Log("node " + i + " is a T-intersection with traffic lights!");
                     ushort foundSegment = 0;
 
                     foreach (var segmentID in neighborSegmentIds)
                     {
                         var segment = NetManager.instance.m_segments.m_buffer[segmentID];
-
-                        var laneID = segment.m_lanes;
                         var segmentForward = false;
 
-                        while (laneID != 0)
-                        {
-                            NetLane.Flags flags = (NetLane.Flags)NetManager.instance.m_lanes.m_buffer[laneID].m_flags;
-                            if (flags.IsFlagSet(NetLane.Flags.Forward))
-                            {
-                                segmentForward = true;
-                            }
-                            laneID = NetManager.instance.m_lanes.m_buffer[laneID].m_nextLane;
-                        }
-
                         if (segmentID == 0) segmentForward = true;
-                        //Debug.Log("Segment Forward? : " + segmentForward);
 
                         if (!segmentForward)
                         {
-                            foundSegment = segmentID;
+                            var dirtoNode = NetManager.instance.m_segments.m_buffer[segmentID].GetDirection(i);
+                            //Debug.Log("seg:" + segmentID + " | to node: " + nodeID + " | dir " + dirtoNode);
+                            dirs.Add(dirtoNode);
+                            segids.Add(segmentID);
                         }
+
                     }
 
-                    //Debug.Log("intersecting road:" + foundSegment);
+                    //angle correction!
 
-                    //add lane ids of intersecting segment!
+                    List<float> angles = new List<float>();
+
+                    angles.Add(Vector3.Angle(dirs[0], dirs[1]));
+                    angles.Add(Vector3.Angle(dirs[1], dirs[2]));
+                    angles.Add(Vector3.Angle(dirs[2], dirs[0]));
+
+                    int locationofMax = angles.IndexOf(angles.Max());
+                    Debug.Log("locationofMax" + locationofMax);
+                    angles[locationofMax] = 360 - angles[locationofMax];
+
+                    Debug.Log("Corr0-1: " + angles[0]);
+                    Debug.Log("Corr1-2: " + angles[1]);
+                    Debug.Log("Corr2-0: " + angles[2]);
+
+
+                    switch (locationofMax)
+                    {
+                        case 0:
+                            foundSegment = segids[2];
+                            break;
+                        case 1:
+                            foundSegment = segids[0];
+                            break;
+                        case 2:
+                            foundSegment = segids[1];
+                            break;
+                        default:
+                            foundSegment = 0;
+                            Tools.ShowErrorWindow("ERROR", "segid error");
+                            break;
+                    }
+
+
                     if (foundSegment != 0)
                     {
                         var segment = NetManager.instance.m_segments.m_buffer[foundSegment];
@@ -144,11 +169,11 @@ namespace TrafficLightReplacer
                             foundIds.Add(laneID);
                             laneID = NetManager.instance.m_lanes.m_buffer[laneID].m_nextLane;
                         }
-                       
-                    }
 
                     }
-                idCount++;
+
+                }
+
             }
 
             // Debug.Log("idnodes count: " + idCount);
