@@ -2,6 +2,7 @@
 using Harmony;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
 using UnityEngine;
@@ -108,8 +109,10 @@ namespace TrafficLightReplacer
                 {
                     ushort foundSegment = 0;
 
-                    foreach (var segmentID in neighborSegmentIds)
+                    for (int j = 0; j < neighborSegmentIds.Count; j++)
                     {
+                        ushort segmentID = neighborSegmentIds[j];
+
                         var segment = NetManager.instance.m_segments.m_buffer[segmentID];
                         var segmentForward = false;
 
@@ -126,20 +129,14 @@ namespace TrafficLightReplacer
                     }
 
                     //angle correction!
+                    float[] angles = new float[] { Vector3.Angle(dirs[0], dirs[1]), Vector3.Angle(dirs[1], dirs[2]), Vector3.Angle(dirs[2], dirs[0]) };
 
-                    List<float> angles = new List<float>();
-
-                    angles.Add(Vector3.Angle(dirs[0], dirs[1]));
-                    angles.Add(Vector3.Angle(dirs[1], dirs[2]));
-                    angles.Add(Vector3.Angle(dirs[2], dirs[0]));
-
-                    int locationofMax = angles.IndexOf(angles.Max());
-                    Debug.Log("locationofMax" + locationofMax);
+                    int locationofMax = Array.IndexOf(angles, angles.Max());
                     angles[locationofMax] = 360 - angles[locationofMax];
 
-                    Debug.Log("Corr0-1: " + angles[0]);
-                    Debug.Log("Corr1-2: " + angles[1]);
-                    Debug.Log("Corr2-0: " + angles[2]);
+                   //Debug.Log("Corr0-1: " + angles[0]);
+                    //Debug.Log("Corr1-2: " + angles[1]);
+                    //Debug.Log("Corr2-0: " + angles[2]);
 
 
                     switch (locationofMax)
