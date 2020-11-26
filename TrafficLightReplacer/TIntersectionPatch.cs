@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace TrafficLightReplacer
 {
@@ -65,17 +66,27 @@ namespace TrafficLightReplacer
     [HarmonyPatch("UpdateSegmentRenderer")]
     public class TIntersectionFinder
     {
+        //make it so it does once imediately doesnt do again for x frames?
+        //frame trick doesn't work when placing directly? find different place to postfix/optimize code
         static void Postfix()
         {
             if (ModLoading.isMainGame)
             {
-                ModifyNodes();
+                int interval = 15;
+                //run every 15 frames?
+                if (Time.frameCount % interval == 0)
+                {
+                    ModifyNodes();
+                }             
             }
         }
 
 
         public static void ModifyNodes()
         {
+            var timer = new Stopwatch();
+            timer.Start();
+
             var bufferLength = (ushort)NetManager.instance.m_nodes.m_buffer.Length;
             int idCount = 0;
             List<uint> foundIds = new List<uint>();
@@ -102,8 +113,10 @@ namespace TrafficLightReplacer
                     node.m_segment7
                 };
 
+
                 List<Vector3> dirs = new List<Vector3>();
                 List<ushort> segids = new List<ushort>();
+
 
                 if (node.CountSegments() == 3 && node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights))
                 {
@@ -174,8 +187,13 @@ namespace TrafficLightReplacer
 
             }
 
+           
+
             // Debug.Log("idnodes count: " + idCount);
             TIntersectionPatch.replaceIds = foundIds;
+
+            Debug.Log("OUTOF FOR MD Time taken " + timer.ElapsedMilliseconds + "ms");
+            timer.Stop();
         }
     }
 }
