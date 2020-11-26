@@ -20,6 +20,7 @@ namespace TrafficLightReplacer
             var fixedInstructions = new[]
             {
                 new CodeInstruction(OpCodes.Ldarg_3),
+                new CodeInstruction(OpCodes.Ldloc,12),
                 new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(TIntersectionPatch), nameof(GetFinalProp))),
             };
 
@@ -37,24 +38,24 @@ namespace TrafficLightReplacer
         }
 
         // NetLane
-        public static PropInfo GetFinalProp(PropInfo prop, uint laneID)
+        public static PropInfo GetFinalProp(PropInfo replacedProp, uint laneID, NetLaneProps.Prop defaultProp)
         {
-            //Debug.Log("98Transpilation Worked!");
 
-            //figure out flipped/non flipped lights!, get regular prop argument since this just reads/changes the final prop!
             //also figure out the significant lag when dragging nodes
 
-            if (replaceIds.Contains(laneID))
+            if (replacedProp != null && TLRModSettings.instance.OppositeSideToggle)
             {
-                if (prop != null)
+                if (replaceIds.Contains(laneID))
                 {
-                    if (prop.name == "Traffic Light 02" || prop.name == "Traffic Light 02 European")
+                    var defaultName = defaultProp.m_prop.name;
+                    if (defaultName == "Traffic Light 01" || defaultName == "Traffic Light 01 European")
                     {
-                        prop = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
+                        replacedProp = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
                     }
                 }
             }
-            return prop;
+      
+            return replacedProp;
         }
     }
 
