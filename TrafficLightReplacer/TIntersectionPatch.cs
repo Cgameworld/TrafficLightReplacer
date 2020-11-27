@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using Harmony;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace TrafficLightReplacer
     [HarmonyPatch("RenderInstance")]
     public static class TIntersectionPatch
     {
-        public static List<uint> replaceIds = new List<uint>() {};
+        public static List<uint> replaceIds = new List<uint>() { };
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             var codes = new List<CodeInstruction>(instructions);
@@ -56,31 +57,36 @@ namespace TrafficLightReplacer
                     }
                 }
             }
-      
+
             return replacedProp;
         }
     }
 
 
     [HarmonyPatch(typeof(NetManager))]
-    [HarmonyPatch("UpdateSegmentRenderer")]
+    [HarmonyPatch("UpdateSegment", new Type[] { typeof(ushort), typeof(ushort), typeof(int) })]
     public class TIntersectionFinder
     {
         //make it so it does once imediately doesnt do again for x frames?
         //frame trick doesn't work when placing directly? find different place to postfix/optimize code
+        static bool isOver = false;
         static void Postfix()
         {
-            if (ModLoading.isMainGame)
+            //Debug.Log("works for createnodeimpl");
+            //runs function every 0.3 seconds when called, bad performance hack
+            if (!isOver)
             {
-                int interval = 15;
-                //run every 15 frames?
-                if (Time.frameCount % interval == 0)
-                {
-                    ModifyNodes();
-                }             
+                StaticCoroutine.Start(RunNodePatch());
             }
+            isOver = true;
         }
-
+        static IEnumerator RunNodePatch()
+        {
+            yield return new WaitForSeconds(0.3f);
+            ModifyNodes();
+            isOver = false;
+            yield break;
+        }
 
         public static void ModifyNodes()
         {
@@ -196,4 +202,5 @@ namespace TrafficLightReplacer
             timer.Stop();
         }
     }
+
 }

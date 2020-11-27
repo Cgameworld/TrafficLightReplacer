@@ -57,6 +57,7 @@
     <Compile Include="InitReplace.cs" />
     <Compile Include="CachePropItem.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="lib\StaticCoroutine.cs" />
     <Compile Include="Locale\TranslationID.cs" />
     <Compile Include="Pack.cs" />
     <Compile Include="TIntersectionPatch.cs" />
