@@ -90,11 +90,7 @@ namespace TrafficLightReplacer
 
         public static void ModifyNodes()
         {
-            var timer = new Stopwatch();
-            timer.Start();
-
             var bufferLength = (ushort)NetManager.instance.m_nodes.m_buffer.Length;
-            int idCount = 0;
             List<uint> foundIds = new List<uint>();
 
             for (ushort i = 0; i < bufferLength; i++)
@@ -107,7 +103,7 @@ namespace TrafficLightReplacer
 
                 //find t-intersection (find if node has exactly 3 intersecting roads)
 
-                List<ushort> neighborSegmentIds = new List<ushort>
+                ushort[] neighborSegmentIds = new ushort[]
                 {
                     node.m_segment0,
                     node.m_segment1,
@@ -119,16 +115,14 @@ namespace TrafficLightReplacer
                     node.m_segment7
                 };
 
-
                 List<Vector3> dirs = new List<Vector3>();
                 List<ushort> segids = new List<ushort>();
-
 
                 if (node.CountSegments() == 3 && node.m_flags.IsFlagSet(NetNode.Flags.TrafficLights))
                 {
                     ushort foundSegment = 0;
 
-                    for (int j = 0; j < neighborSegmentIds.Count; j++)
+                    for (int j = 0; j < neighborSegmentIds.Length; j++)
                     {
                         ushort segmentID = neighborSegmentIds[j];
 
@@ -140,7 +134,6 @@ namespace TrafficLightReplacer
                         if (!segmentForward)
                         {
                             var dirtoNode = NetManager.instance.m_segments.m_buffer[segmentID].GetDirection(i);
-                            //Debug.Log("seg:" + segmentID + " | to node: " + nodeID + " | dir " + dirtoNode);
                             dirs.Add(dirtoNode);
                             segids.Add(segmentID);
                         }
@@ -156,7 +149,6 @@ namespace TrafficLightReplacer
                    //Debug.Log("Corr0-1: " + angles[0]);
                     //Debug.Log("Corr1-2: " + angles[1]);
                     //Debug.Log("Corr2-0: " + angles[2]);
-
 
                     switch (locationofMax)
                     {
@@ -192,14 +184,7 @@ namespace TrafficLightReplacer
                 }
 
             }
-
-           
-
-            // Debug.Log("idnodes count: " + idCount);
             TIntersectionPatch.replaceIds = foundIds;
-
-            Debug.Log("OUTOF FOR MD Time taken " + timer.ElapsedMilliseconds + "ms");
-            timer.Stop();
         }
     }
 
