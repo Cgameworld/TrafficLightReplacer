@@ -51,10 +51,15 @@ namespace TrafficLightReplacer
                 if (replaceIds.Contains(laneID))
                 {
                     var defaultName = defaultProp.m_prop.name;
-                    if (defaultName == "Traffic Light 01" || defaultName == "Traffic Light 01 European")
+                    if (defaultName == "Traffic Light 01" || defaultName == "Traffic Light 01 European" || defaultName == "Traffic Light Pedestrian" || defaultName == "Traffic Light Pedestrian European")
                     {
-                        replacedProp = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
+                            replacedProp = Replacer.typePedSignal;
+                            //replacedProp = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
+                       
                     }
+
+                    //ped light needed when on specific side of road!
+
                 }
             }
 
@@ -172,11 +177,20 @@ namespace TrafficLightReplacer
                     {
                         var segment = NetManager.instance.m_segments.m_buffer[foundSegment];
                         var laneID = segment.m_lanes;
+                        
+
+                        var netInfoLanes = segment.Info.m_lanes;
+
+                        int lanecount = 0;
                         while (laneID != 0)
                         {
-
-                            foundIds.Add(laneID);
+                            bool isSidewalk = netInfoLanes[lanecount].m_laneType.ToString() == "Pedestrian" || netInfoLanes[lanecount].m_laneType.ToString() == "Vehicle";
+                            if (isSidewalk)
+                            {
+                                foundIds.Add(laneID);                                
+                            }
                             laneID = NetManager.instance.m_lanes.m_buffer[laneID].m_nextLane;
+                            lanecount++;
                         }
 
                     }

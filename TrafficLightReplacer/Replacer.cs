@@ -439,7 +439,7 @@ namespace TrafficLightReplacer
                 }
 
             }
-            Debug.Log("propGroupCounterTotal" + propGroupCounter);
+            //Debug.Log("propGroupCounterTotal" + propGroupCounter);
         }
         private static void OneSizeReplace(int propGroupCounter, NetLaneProps.Prop propGroup, NetInfo.Lane lane)
         {
