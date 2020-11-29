@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
+using TrafficLightReplacer;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -40,12 +41,8 @@ namespace TrafficLightReplacer
             return codes.AsEnumerable();
         }
 
-        // NetLane
         public static PropInfo GetFinalProp(PropInfo replacedProp, uint laneID, NetLaneProps.Prop defaultProp)
         {
-
-            //also figure out the significant lag when dragging nodes
-
             if (replacedProp != null && TLRModSettings.instance.OppositeSideToggle)
             {
                 if (replaceIds.Contains(laneID))
@@ -53,16 +50,14 @@ namespace TrafficLightReplacer
                     var defaultName = defaultProp.m_prop.name;
                     if (defaultName == "Traffic Light 01" || defaultName == "Traffic Light 01 European" || defaultName == "Traffic Light Pedestrian" || defaultName == "Traffic Light Pedestrian European")
                     {
-                            replacedProp = Replacer.typePedSignal;
-                            //replacedProp = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
-                       
+                        replacedProp = Replacer.typePedSignal;
+                        //replacedProp = PrefabCollection<PropInfo>.FindLoaded("Air Source Heat Pump 02");
+
                     }
 
                     //ped light needed when on specific side of road!
-
                 }
             }
-
             return replacedProp;
         }
     }
@@ -70,15 +65,12 @@ namespace TrafficLightReplacer
 
     [HarmonyPatch(typeof(NetManager))]
     [HarmonyPatch("UpdateSegment", new Type[] { typeof(ushort), typeof(ushort), typeof(int) })]
-    public class TIntersectionFinder
+    public static class TIntersectionFinder
     {
-        //make it so it does once imediately doesnt do again for x frames?
-        //frame trick doesn't work when placing directly? find different place to postfix/optimize code
+        //hacky solution - plan to rewrite when adding nodewise customization
         static bool isOver = false;
         static void Postfix()
         {
-            //Debug.Log("works for createnodeimpl");
-            //runs function every 0.3 seconds when called, bad performance hack
             if (!isOver)
             {
                 StaticCoroutine.Start(RunNodePatch());
@@ -87,7 +79,8 @@ namespace TrafficLightReplacer
         }
         static IEnumerator RunNodePatch()
         {
-            yield return new WaitForSeconds(0.3f);
+            //yield return new WaitForSeconds(0.3f);
+            yield return new WaitForEndOfFrame(); // check for performance with full mod load
             ModifyNodes();
             isOver = false;
             yield break;
@@ -151,7 +144,7 @@ namespace TrafficLightReplacer
                     int locationofMax = Array.IndexOf(angles, angles.Max());
                     angles[locationofMax] = 360 - angles[locationofMax];
 
-                   //Debug.Log("Corr0-1: " + angles[0]);
+                    //Debug.Log("Corr0-1: " + angles[0]);
                     //Debug.Log("Corr1-2: " + angles[1]);
                     //Debug.Log("Corr2-0: " + angles[2]);
 
@@ -177,7 +170,7 @@ namespace TrafficLightReplacer
                     {
                         var segment = NetManager.instance.m_segments.m_buffer[foundSegment];
                         var laneID = segment.m_lanes;
-                        
+
 
                         var netInfoLanes = segment.Info.m_lanes;
 
@@ -187,7 +180,7 @@ namespace TrafficLightReplacer
                             bool isSidewalk = netInfoLanes[lanecount].m_laneType.ToString() == "Pedestrian" || netInfoLanes[lanecount].m_laneType.ToString() == "Vehicle";
                             if (isSidewalk)
                             {
-                                foundIds.Add(laneID);                                
+                                foundIds.Add(laneID);
                             }
                             laneID = NetManager.instance.m_lanes.m_buffer[laneID].m_nextLane;
                             lanecount++;
@@ -202,4 +195,16 @@ namespace TrafficLightReplacer
         }
     }
 
+
+    //patch when toggling traffic lights manually - doesnt work with tmpe!
+    [HarmonyPatch(typeof(RoadBaseAI))]
+    [HarmonyPatch("ClickNodeButton")]
+    public static class IntersectionTogglePatch
+    {
+        static void Postfix()
+        {
+            Debug.Log("clicknoebutton");
+            TIntersectionFinder.ModifyNodes();
+        }
+    }
 }
