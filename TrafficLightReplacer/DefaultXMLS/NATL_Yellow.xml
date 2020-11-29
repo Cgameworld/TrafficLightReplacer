@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>NATL - Yellow Style</PackName>
+	<OneSize>false</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 8_Data</Prefab>
+			<Name>Traffic Light 8Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 9_Data</Prefab>
+			<Name>Traffic Light 9Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 10_Data</Prefab>
+			<Name>Traffic Light 10Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 11_Data</Prefab>
+			<Name>Traffic Light 11Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 12_Data</Prefab>
+			<Name>Traffic Light 12</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 12_Data</Prefab>
+			<Name>Traffic Light 12Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 13_Data</Prefab>
+			<Name>Traffic Light 13</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 13_Data</Prefab>
+			<Name>Traffic Light 13Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 14_Data</Prefab>
+			<Name>Traffic Light 14Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 15_Data</Prefab>
+			<Name>Traffic Light 15Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 16_Data</Prefab>
+			<Name>Traffic Light 16Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 18_Data</Prefab>
+			<Name>Traffic Light 18</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 19_Data</Prefab>
+			<Name>Traffic Light 19</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 25_Data</Prefab>
+			<Name>Traffic Light 25Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 26_Data</Prefab>
+			<Name>Traffic Light 26Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 27_Data</Prefab>
+			<Name>Traffic Light 27Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 30_Data</Prefab>
+			<Name>Traffic Light 30Y</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 1_Data</Prefab>
+			<Name>Traffic Light 1</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 2_Data</Prefab>
+			<Name>Traffic Light 2Y</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 3_Data</Prefab>
+			<Name>Traffic Light 3</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 3_Data</Prefab>
+			<Name>Traffic Light 3Y</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 4_Data</Prefab>
+			<Name>Traffic Light 4</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 4_Data</Prefab>
+			<Name>Traffic Light 4Y</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 5_Data</Prefab>
+			<Name>Traffic Light 5</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 6_Data</Prefab>
+			<Name>Traffic Light 6</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 7_Data</Prefab>
+			<Name>Traffic Light 7</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 8_Data</Prefab>
+			<Name>Traffic Light 8</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 9_Data</Prefab>
+			<Name>Traffic Light 9</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 10_Data</Prefab>
+			<Name>Traffic Light 10</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 14_Data</Prefab>
+			<Name>Traffic Light 14</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 15_Data</Prefab>
+			<Name>Traffic Light 15</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 17_Data</Prefab>
+			<Name>Traffic Light 17</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 18_Data</Prefab>
+			<Name>Traffic Light 18</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 19_Data</Prefab>
+			<Name>Traffic Light 19</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 20_Data</Prefab>
+			<Name>Traffic Light 20</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 21_Data</Prefab>
+			<Name>Traffic Light 21</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 22_Data</Prefab>
+			<Name>Traffic Light 22</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 29_Data</Prefab>
+			<Name>Traffic Light 29</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 11_Data</Prefab>
+			<Name>Traffic Light 11</Name>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 23_Data</Prefab>
+			<Name>Traffic Light 23Y</Name>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light Yellow 24_Data</Prefab>
+			<Name>Traffic Light 24Y</Name>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1535107168.New Traffic Light 17_Data</Prefab>
+			<Name>Signal Pole</Name>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+	<Transform>
+		<Position>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</Position>
+		<Angle>0</Angle>
+		<Scale>100</Scale>
+	</Transform>
+	<DropdownSelectionIndex>
+		<SmallRoads>0</SmallRoads>
+		<MediumRoads>4</MediumRoads>
+		<LargeRoads>2</LargeRoads>
+	</DropdownSelectionIndex>
+</TLRConfig>

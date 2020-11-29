@@ -96,6 +96,8 @@
     <EmbeddedResource Include="DefaultXMLS\NAF_Greyflame.xml" />
     <EmbeddedResource Include="DefaultXMLS\BIGUrbanLights.xml" />
     <EmbeddedResource Include="DefaultXMLS\NATL_NYCNJ.xml" />
+    <EmbeddedResource Include="DefaultXMLS\NATL_Grey.xml" />
+    <EmbeddedResource Include="DefaultXMLS\NATL_Yellow.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>

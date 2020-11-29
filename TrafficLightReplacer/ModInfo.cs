@@ -129,6 +129,26 @@ namespace TrafficLightReplacer
                         embedList.Add("NATL_NYCNJ.xml");
                     }
 
+                    if (mod.name == "1535107168")
+                    {
+                        if (mod.isEnabled)
+                        {
+                            mod.isEnabled = false;
+                        }
+
+                        embedList.Add("NATL_Yellow.xml");
+                    }
+
+                    if (mod.name == "1548117573")
+                    {
+                        if (mod.isEnabled)
+                        {
+                            mod.isEnabled = false;
+                        }
+
+                        embedList.Add("NATL_Grey.xml");
+                    }
+
                 }
             }
 
