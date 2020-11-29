@@ -152,6 +152,13 @@ namespace TrafficLightReplacer
                 {
                     typeLargeOptions.Add(result[i]);
                 }
+                //multisize - all sizes same prefab choices
+                if (result[i].Type == "All")
+                {
+                    typeSmallOptions.Add(result[i]);
+                    typeMediumOptions.Add(result[i]);
+                    typeLargeOptions.Add(result[i]);
+                }
                 //vanilla config
                 if (result[i].Type == "Main")
                 {
