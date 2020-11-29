@@ -73,11 +73,7 @@ namespace TrafficLightReplacer
         {
             if (!isOver)
             {
-                //only run if opposite side toggle on
-                if (TLRModSettings.instance.OppositeSideToggle)
-                {
-                    StaticCoroutine.Start(RunNodePatch());
-                }
+              StaticCoroutine.Start(RunNodePatch());
             }
             isOver = true;
         }
