@@ -307,7 +307,7 @@ namespace TrafficLightReplacer
             transformButtonToggle.backgroundSprite = "PropertyGroupClosed";
             transformButtonToggle.width = 18f;
             transformButtonToggle.height = 18f;
-            transformButtonToggle.relativePosition = new Vector2(32, 0);
+            transformButtonToggle.relativePosition = new Vector2(32, 4);
 
             transformButton.eventClick += (c, p) =>
             {
@@ -373,7 +373,7 @@ namespace TrafficLightReplacer
             getmeditems.text = "EnableTIntersection";
             getmeditems.relativePosition = new Vector2(170, -40);
             getmeditems.width = 130;
-            getmeditems.isVisible = true;
+            getmeditems.isVisible = false;
 
             getmeditems.eventClick += (c, p) =>
             {

@@ -2,7 +2,7 @@
 <Language UniqueName="en" ReadableName="English" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
   <Translations>  
     <Translation ID="MOD_DESCRIPTION" String="Customize your city's traffic lights" />
-    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer B" />
+    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer" />
     <Translation ID="MAINWINDOW_PACKLABEL" String="Pack:" />
     <Translation ID="NULLDROPDOWN" String="Empty" />
     <Translation ID="OPPOSITESIDETOGGLE" String="Place on opposite side of stop line" />

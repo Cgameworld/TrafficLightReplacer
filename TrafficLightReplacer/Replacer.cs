@@ -342,10 +342,10 @@ namespace TrafficLightReplacer
                     TrafficLightReplacePanel.instance.customizeButtonToggle.isVisible = false;
                     TrafficLightReplacePanel.instance.customizePanel.isVisible = false;
 
-                    TrafficLightReplacePanel.instance.dropdown2.relativePosition = new Vector2(0, 140);
+                    TrafficLightReplacePanel.instance.dropdown2.relativePosition = new Vector2(0, 135);
                     TrafficLightReplacePanel.instance.vanillaConfigOffset = -45;
                     TrafficLightReplacePanel.instance.dropdown2_init = TrafficLightReplacePanel.instance.dropdown2.relativePosition;
-                    TrafficLightReplacePanel.instance.height = 170;
+                    TrafficLightReplacePanel.instance.height = 175;
                 }
             }
             else
