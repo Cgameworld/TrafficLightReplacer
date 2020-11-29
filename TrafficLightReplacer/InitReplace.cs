@@ -118,6 +118,10 @@ namespace TrafficLightReplacer
                 {
                     propEmbedList.Add("USRP_Feare.xml");
                 }
+                if (crpPath == "2268192312")
+                {
+                    propEmbedList.Add("NAF_Greyflame.xml");
+                }
 
             }
 

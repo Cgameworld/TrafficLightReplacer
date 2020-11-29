@@ -93,6 +93,7 @@
     <EmbeddedResource Include="DefaultXMLS\BP_American.xml" />
     <EmbeddedResource Include="DefaultXMLS\USRP_Feare.xml" />
     <EmbeddedResource Include="DefaultXMLS\USHorizontal_Cristolisto.xml" />
+    <EmbeddedResource Include="DefaultXMLS\NAF_Greyflame.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>NAF Traffic Lights</PackName>
+	<OneSize>false</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>2268192312.NAF 2W Traffic Light 4m 1L_Data</Prefab>
+			<Name>Traffic Light 4m1L</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2268192312.NAF Traffic Light 4m 2L_Data</Prefab>
+			<Name>Traffic Light 4m2L</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2268192312.NAF Traffic Light 4m 3L_Data</Prefab>
+			<Name>Traffic Light 4m3L</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2268192312.NAF Traffic Light 4m 4L_Data</Prefab>
+			<Name>Traffic Light 4m4L</Name>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2268192312.NAF Traffic Light 4m 5L_Data</Prefab>
+			<Name>Traffic Light 4m5L</Name>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2268192312.NAF Traffic Light Single Right_Data</Prefab>
+			<Name>Signal Pole</Name>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+	<Transform>
+		<Position>
+			<x>0.5</x>
+			<y>0</y>
+			<z>0</z>
+		</Position>
+		<Angle>-90</Angle>
+		<Scale>100</Scale>
+	</Transform>
+	<DropdownSelectionIndex>
+		<SmallRoads>0</SmallRoads>
+		<MediumRoads>0</MediumRoads>
+		<LargeRoads>0</LargeRoads>
+	</DropdownSelectionIndex>
+</TLRConfig>
