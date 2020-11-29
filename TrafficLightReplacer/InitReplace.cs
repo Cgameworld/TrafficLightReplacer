@@ -122,6 +122,10 @@ namespace TrafficLightReplacer
                 {
                     propEmbedList.Add("NAF_Greyflame.xml");
                 }
+                if (crpPath == "2236570542")
+                {
+                    propEmbedList.Add("BIGUrbanLights.xml");
+                }
 
             }
 

@@ -118,6 +118,17 @@ namespace TrafficLightReplacer
                         embedList.Add("USHorizontal_Cristolisto.xml");
                     }
 
+
+                    if (mod.name == "1550720600")
+                    {
+                        if (mod.isEnabled)
+                        {
+                            mod.isEnabled = false;
+                        }
+
+                        embedList.Add("NATL_NYCNJ.xml");
+                    }
+
                 }
             }
 

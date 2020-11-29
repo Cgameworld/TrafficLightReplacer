@@ -94,6 +94,8 @@
     <EmbeddedResource Include="DefaultXMLS\USRP_Feare.xml" />
     <EmbeddedResource Include="DefaultXMLS\USHorizontal_Cristolisto.xml" />
     <EmbeddedResource Include="DefaultXMLS\NAF_Greyflame.xml" />
+    <EmbeddedResource Include="DefaultXMLS\BIGUrbanLights.xml" />
+    <EmbeddedResource Include="DefaultXMLS\NATL_NYCNJ.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>

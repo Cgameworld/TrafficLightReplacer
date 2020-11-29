@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>NATL - NYC/NJ Style</PackName>
+	<OneSize>false</OneSize>
+	<Assets>
+		<!--Be sure to replace "Placeholder" with the prop prefab name for each asset
+    use the Pack Creator Helper window to easily copy prop prefab names-->
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 2_Data</Prefab>
+			<Name>Traffic Light 2</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 4_Data</Prefab>
+			<Name>Traffic Light 4</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 5_Data</Prefab>
+			<Name>Traffic Light 5</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 6_Data</Prefab>
+			<Name>Traffic Light 6</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 7_Data</Prefab>
+			<Name>Traffic Light 7</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 8_Data</Prefab>
+			<Name>Traffic Light 8</Name>
+			<Type>All</Type>>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 9_Data</Prefab>
+			<Name>Traffic Light 9</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 10_Data</Prefab>
+			<Name>Traffic Light 10</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 11_Data</Prefab>
+			<Name>Traffic Light 11</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 12_Data</Prefab>
+			<Name>Traffic Light 12</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 13_Data</Prefab>
+			<Name>Traffic Light 13</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 16_Data</Prefab>
+			<Name>Traffic Light 16</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 17_Data</Prefab>
+			<Name>Traffic Light 17</Name>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1550720600.New Traffic Light NYC 2_Data</Prefab>
+			<Name>Traffic Light 2</Name>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+	<!--Optional-->
+	<Transform>
+		<Position>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</Position>
+		<Angle>0</Angle>
+		<Scale>100</Scale>
+	</Transform>
+	<DropdownSelectionIndex>
+		<SmallRoads>0</SmallRoads>
+		<MediumRoads>1</MediumRoads>
+		<LargeRoads>1</LargeRoads>
+	</DropdownSelectionIndex>
+</TLRConfig>

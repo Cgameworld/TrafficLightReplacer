@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>BIG Urban Traffic Lights</PackName>
+	<OneSize>false</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>2236570542.BIG Roads TL 1L+P_Data</Prefab>
+			<Name>TL 1L+P</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2236570542.BIG Roads TL 2L+P 1Way_Data</Prefab>
+			<Name>TL 2L+P</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2236570542.BIG Roads TL 3L+P Doghouse_Data</Prefab>
+			<Name>TL 3L+P Doghouse</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2236570542.BIG Roads TL 3L+P_Data</Prefab>
+			<Name>TL 3L+P</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2236570542.BIG Roads TL 3L+P_Data</Prefab>
+			<Name>TL 3L+P</Name>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>2236570542.BIG Roads TL Single_Data</Prefab>
+			<Name>Signal Pole</Name>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+	<Transform>
+		<Position>
+			<x>0.5</x>
+			<y>0</y>
+			<z>0</z>
+		</Position>
+		<Angle>-180</Angle>
+		<Scale>100</Scale>
+	</Transform>
+	<DropdownSelectionIndex>
+		<SmallRoads>0</SmallRoads>
+		<MediumRoads>0</MediumRoads>
+		<LargeRoads>0</LargeRoads>
+	</DropdownSelectionIndex>
+</TLRConfig>
