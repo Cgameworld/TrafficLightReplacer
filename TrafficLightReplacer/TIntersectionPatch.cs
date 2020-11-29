@@ -73,7 +73,11 @@ namespace TrafficLightReplacer
         {
             if (!isOver)
             {
-                StaticCoroutine.Start(RunNodePatch());
+                //only run if opposite side toggle on
+                if (TLRModSettings.instance.OppositeSideToggle)
+                {
+                    StaticCoroutine.Start(RunNodePatch());
+                }
             }
             isOver = true;
         }
@@ -192,19 +196,6 @@ namespace TrafficLightReplacer
 
             }
             TIntersectionPatch.replaceIds = foundIds;
-        }
-    }
-
-
-    //patch when toggling traffic lights manually - doesnt work with tmpe!
-    [HarmonyPatch(typeof(RoadBaseAI))]
-    [HarmonyPatch("ClickNodeButton")]
-    public static class IntersectionTogglePatch
-    {
-        static void Postfix()
-        {
-            Debug.Log("clicknoebutton");
-            TIntersectionFinder.ModifyNodes();
         }
     }
 }
