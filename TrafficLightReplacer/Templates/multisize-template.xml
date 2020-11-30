@@ -51,4 +51,5 @@
     <MediumRoads>0</MediumRoads>
     <LargeRoads>0</LargeRoads>
   </DropdownSelectionIndex>
+  <DefaultSideSignalPole>false</DefaultSideSignalPole>
 </TLRConfig>

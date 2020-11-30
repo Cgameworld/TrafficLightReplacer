@@ -13,6 +13,7 @@ namespace TrafficLightReplacer
         public List<Asset> Assets { get; set; }
         public TransformValues Transform { get; set; }
         public DropdownSelectionIndex DropdownSelectionIndex { get; set; }
+        public bool DefaultSideSignalPole { get; set; }
 
     }
     public class Asset

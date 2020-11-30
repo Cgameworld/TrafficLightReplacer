@@ -40,6 +40,8 @@ namespace TrafficLightReplacer
 
         public static bool oneSizeMode = false;
 
+        public static bool defaultSideSignalPole = false;
+
         public static void Start(string path)
         {
             //clear list!
@@ -234,6 +236,12 @@ namespace TrafficLightReplacer
             }
 
             //Debug.Log("transformOffset " + transformOffset.Position.x + " | ro " + transformOffset.Angle);
+
+           if (XMLinput.DefaultSideSignalPole != null)
+            {
+                defaultSideSignalPole = XMLinput.DefaultSideSignalPole;
+            }      
+            //Debug.Log("defaultSideSignalPole is: " + defaultSideSignalPole);
         }
 
         private static PropInfo SetProp(int i)
@@ -616,7 +624,7 @@ namespace TrafficLightReplacer
                 MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
 
             }
-            else if (propGroup.m_prop.name.In("Traffic Light 02 Mirror", "Traffic Light European 02 Mirror"))
+            if (propGroup.m_prop.name.In("Traffic Light 02 Mirror", "Traffic Light European 02 Mirror"))
             {
                 propGroup.m_finalProp = typePedSignal;
                 if (propGroup.m_position.x > 0) //fix for median ped signal being flipped
@@ -624,10 +632,10 @@ namespace TrafficLightReplacer
                     propGroup.m_angle = 270;
                 }
             }
-
-            if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01","Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01", "Traffic Light European 01 Mirror"))
-            {
-                
+        
+            
+            if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light 01", "Traffic Light European 01","Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01 Mirror"))
+            {                
                 propGroup.m_finalProp = typePedSignal;
 
                 if (lane.m_position > 0)
@@ -638,6 +646,17 @@ namespace TrafficLightReplacer
                 {
                     propGroup.m_angle = 90f;
                 }
+            }
+
+            if (defaultSideSignalPole && propGroup.m_prop.name.In("Traffic Light 01", "Traffic Light European 01"))
+            {
+                propGroup.m_finalProp = typeSignalPole;
+
+                propGroup.m_position.x = lane.m_position > 0
+                ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x + 1f
+                : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x + -1f;
+                propGroup.m_angle = (propGroupCache[propGroupCounter].Angle + transformOffset.Angle)-180;
+                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, false, false); // see if this works?
             }
         }
 
