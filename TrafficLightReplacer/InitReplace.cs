@@ -138,6 +138,7 @@ namespace TrafficLightReplacer
             Tools.ModifyPropMeshPreload(PrefabCollection<PropInfo>.FindLoaded("1108278552.HorizontalTrafficLights2_Data"), false);
             Tools.ModifyPropMeshPreload(PrefabCollection<PropInfo>.FindLoaded("1108278552.HorizontalTrafficLights3_Data"), true);
             Tools.ModifyPropMeshPreload(PrefabCollection<PropInfo>.FindLoaded("1108278552.HorizontalTrafficLights4_Data"), true);
+            Tools.ModifyPropMeshPreload(PrefabCollection<PropInfo>.FindLoaded("1251396095.TWTL_TYPE3_Ped_Data"), true);
         }
         public static void PreloadRoadModify()
         {
