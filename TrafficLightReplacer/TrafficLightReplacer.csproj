@@ -59,6 +59,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="lib\StaticCoroutine.cs" />
     <Compile Include="Locale\TranslationID.cs" />
+    <Compile Include="ModSettingsUI.cs" />
     <Compile Include="Pack.cs" />
     <Compile Include="TIntersectionPatch.cs" />
     <Compile Include="TLRAsset.cs" />

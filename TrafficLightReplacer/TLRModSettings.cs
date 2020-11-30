@@ -13,6 +13,7 @@ namespace TrafficLightReplacer
     {
         public bool ShowCreatorTool { get; set; } = false;
         public bool EnableButtonBackground { get; set; } = false;
+        public bool DefaultSideSignalPole { get; set; } = false;
         public Vector3 ButtonPosition { get; set; } = new Vector3(-9999, -9999, 0);
         public bool LoadTLRLocalFolder { get; set; } = false;
         public string LastLoadedXML { get; set; } = "RESOURCE.TrafficLightReplacer.DefaultXMLS.default.xml";

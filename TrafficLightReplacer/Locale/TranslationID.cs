@@ -33,10 +33,11 @@
 
         //MOD SETTINGS
         public const string FEATURESGROUPTITLE = "FEATURESGROUPTITLE";
+        public const string DEFAULTSIDESIGNALPOLE = "DEFAULTSIDESIGNALPOLE";
         public const string PACKCREATOROPTION = "PACKCREATOROPTION";
         public const string MAINBACKGROUNDOPTION = "MAINBACKGROUNDOPTION";
         public const string RESETGROUPMESSAGE = "RESETGROUPMESSAGE";
-
+        public const string TWEAKSGROUPTITLE = "TWEAKSGROUPTITLE";
 
     }
 }

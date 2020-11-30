@@ -40,7 +40,7 @@ namespace TrafficLightReplacer
 
         public static bool oneSizeMode = false;
 
-        public static bool defaultSideSignalPole = false;
+        public static bool defaultSideSignalPole;
 
         public static void Start(string path)
         {
@@ -130,6 +130,8 @@ namespace TrafficLightReplacer
             typePedSignal = PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp);
             typeSignalPoleMirror = null;
 
+
+            defaultSideSignalPole = TLRModSettings.instance.DefaultSideSignalPole;
             //set transform values
             transformOffset = TLRModSettings.instance.SelectedOffsetValues;
 
@@ -237,9 +239,9 @@ namespace TrafficLightReplacer
 
             //Debug.Log("transformOffset " + transformOffset.Position.x + " | ro " + transformOffset.Angle);
 
-           if (XMLinput.DefaultSideSignalPole != null)
+           if (XMLinput.ForceDefaultSideSignalPole == true)
             {
-                defaultSideSignalPole = XMLinput.DefaultSideSignalPole;
+                defaultSideSignalPole = XMLinput.ForceDefaultSideSignalPole;
             }      
             //Debug.Log("defaultSideSignalPole is: " + defaultSideSignalPole);
         }
