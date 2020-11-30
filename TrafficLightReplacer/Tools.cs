@@ -277,8 +277,62 @@ namespace TrafficLightReplacer
             return tris;
         }
 
+        public static List<Mesh> beforeModify = new List<Mesh>();
+        public static void MeshPreDynamicAdd(PropInfo cris1)
+        {
+            beforeModify.Add(cris1.m_mesh);
+        }
+            public static void MeshDynamicTweaks()
+        {
+            //flip tiles on ground for SKorea Lights
+            if (PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data") != null)
+            {
+                if (TLRModSettings.instance.OppositeSideToggle)
+                {
 
-        public static bool CheckTransformEqual(TransformValues Obj1, TransformValues Obj2)
+                }
+                
+                else if (TLRModSettings.instance.OppositeSideToggle == false)
+                {
+                    var prop = PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data");
+                    var mesh = prop.m_mesh;
+                    var newvertices = mesh.vertices;
+
+                    for (int i = 0; i < newvertices.Length; i++)
+                    {
+                        if (newvertices[i].x < -0.25f && newvertices[i].y < 0.03f && newvertices[i].z < 0f)
+                        {
+                            Debug.Log("vertex of krRm " + i + " : " + newvertices[i]);
+                            newvertices[i].x = newvertices[i].x + 2.5f;
+                        }
+                    }
+
+                    Mesh meshcopy = new Mesh
+                    {
+                        vertices = newvertices,
+                        colors = mesh.colors,
+                        triangles = mesh.triangles,
+                        normals = mesh.normals,
+                        tangents = mesh.tangents,
+                        uv = mesh.uv,
+                        uv2 = mesh.uv,
+                        name = mesh.name
+                    };
+
+                    prop.m_mesh = meshcopy;
+                    prop.m_mesh.RecalculateBounds();
+                    prop.m_mesh.RecalculateNormals();
+
+                }
+
+                // PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data")
+                // PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightRm_Data)
+
+            }
+        }
+
+
+            public static bool CheckTransformEqual(TransformValues Obj1, TransformValues Obj2)
         {
             var haveSameData = false;
 
