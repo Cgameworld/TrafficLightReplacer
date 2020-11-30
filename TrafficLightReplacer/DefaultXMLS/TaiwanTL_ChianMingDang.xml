@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>Taiwanese Traffic Lights</PackName>
+	<OneSize>false</OneSize>
+	<Assets>
+		<Asset>
+			<Prefab>1251396095.TWTL_TYPE2_Main_Data</Prefab>
+			<Name>Type2 Main</Name>
+			<Type>Small</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1251396095.TWTL_TYPE3_Sub_Data</Prefab>
+			<Name>Type3 Sub</Name>
+			<Type>Small</Type>
+		</Asset>
+						<Asset>
+			<Prefab>1251396095.TWTL_TP_Main_Data</Prefab>
+			<Name>Type Main</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1251396095.TWTL_TYPE2_Main_Data</Prefab>
+			<Name>Type2 Main</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1251396095.TWTL_TYPE3_Sub_Data</Prefab>
+			<Name>Type3 Sub</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1251396095.TWTL_TYPE3_Main_Data</Prefab>
+			<Name>Type3 Main</Name>
+			<Type>Medium</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1251396095.TWTL_TYPE3_Main_Data</Prefab>
+			<Name>Type3 Main</Name>
+			<Type>Large</Type>
+		</Asset>
+		<Asset>
+			<Prefab>1251396095.TWTL_TYPE3_Ped_Data</Prefab>
+			<Name>Signal Pole</Name>
+			<Description>TBA</Description>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+	<Transform>
+		<Position>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</Position>
+		<Angle>0</Angle>
+		<Scale>100</Scale>
+	</Transform>
+	<DropdownSelectionIndex>
+		<SmallRoads>0</SmallRoads>
+		<MediumRoads>2</MediumRoads>
+		<LargeRoads>0</LargeRoads>
+	</DropdownSelectionIndex>
+	<ForceDefaultSideSignalPole>true</ForceDefaultSideSignalPole>
+</TLRConfig>

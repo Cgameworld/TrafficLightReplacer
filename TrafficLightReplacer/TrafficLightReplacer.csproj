@@ -99,6 +99,7 @@
     <EmbeddedResource Include="DefaultXMLS\NATL_NYCNJ.xml" />
     <EmbeddedResource Include="DefaultXMLS\NATL_Grey.xml" />
     <EmbeddedResource Include="DefaultXMLS\NATL_Yellow.xml" />
+    <EmbeddedResource Include="DefaultXMLS\TaiwanTL_ChianMingDang.xml" />
     <Content Include="Icons\license.txt" />
   </ItemGroup>
   <ItemGroup>

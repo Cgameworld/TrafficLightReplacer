@@ -39,6 +39,7 @@ namespace TrafficLightReplacer
         public static TransformValues transformOffset = new TransformValues();
 
         public static bool oneSizeMode = false;
+        public static int allTypeCount;
 
         public static bool defaultSideSignalPole;
 
@@ -133,6 +134,9 @@ namespace TrafficLightReplacer
 
             defaultSideSignalPole = TLRModSettings.instance.DefaultSideSignalPole;
             //set transform values
+            allTypeCount = 0;
+
+
             transformOffset = TLRModSettings.instance.SelectedOffsetValues;
 
             for (int i = 0; i < result.Count; i++)
@@ -162,6 +166,7 @@ namespace TrafficLightReplacer
                     typeSmallOptions.Add(result[i]);
                     typeMediumOptions.Add(result[i]);
                     typeLargeOptions.Add(result[i]);
+                    allTypeCount++;
                 }
                 //vanilla config
                 if (result[i].Type == "Main")
@@ -341,7 +346,7 @@ namespace TrafficLightReplacer
 
         public static void ModifyMainUI()
         {
-            if (oneSizeMode)
+            if (oneSizeMode || allTypeCount == 1)
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {

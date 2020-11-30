@@ -121,6 +121,15 @@ namespace TrafficLightReplacer
 
                         embedList.Add("NATL_Grey.xml");
                     }
+                    if (mod.name == "1251396095")
+                    {
+                        if (mod.isEnabled)
+                        {
+                            mod.isEnabled = false;
+                        }
+
+                        embedList.Add("TaiwanTL_ChianMingDang.xml");
+                    }
 
                 }
             }
