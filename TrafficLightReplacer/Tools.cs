@@ -280,18 +280,24 @@ namespace TrafficLightReplacer
         public static List<Mesh> beforeModify = new List<Mesh>();
         public static void MeshPreDynamicAdd(PropInfo cris1)
         {
-            beforeModify.Add(cris1.m_mesh);
+            if (cris1 != null)
+            {
+                beforeModify.Add(cris1.m_mesh);
+            }
         }
             public static void MeshDynamicTweaks()
         {
-            //flip tiles on ground for SKorea Lights
+            //flip tiles on ground/fix ped signal location for SKorea Lights
             if (PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data") != null)
             {
                 if (TLRModSettings.instance.OppositeSideToggle)
                 {
-
+                    var mainTL = PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data");
+                    var meshTL = beforeModify[0];
+                    var verticesTL = meshTL.vertices;
+                    ApplyChanges(mainTL, meshTL, verticesTL);
                 }
-                
+
                 else if (TLRModSettings.instance.OppositeSideToggle == false)
                 {
                     var prop = PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data");
@@ -300,29 +306,19 @@ namespace TrafficLightReplacer
 
                     for (int i = 0; i < newvertices.Length; i++)
                     {
+                        //move tiles
                         if (newvertices[i].x < -0.25f && newvertices[i].y < 0.03f && newvertices[i].z < 0f)
                         {
                             Debug.Log("vertex of krRm " + i + " : " + newvertices[i]);
                             newvertices[i].x = newvertices[i].x + 2.5f;
                         }
+                        //move ped light
+                        if (newvertices[i].y > 1.2f && newvertices[i].y < 4f)
+                        {
+                            newvertices[i].x = newvertices[i].x + 0.9f;
+                        }
                     }
-
-                    Mesh meshcopy = new Mesh
-                    {
-                        vertices = newvertices,
-                        colors = mesh.colors,
-                        triangles = mesh.triangles,
-                        normals = mesh.normals,
-                        tangents = mesh.tangents,
-                        uv = mesh.uv,
-                        uv2 = mesh.uv,
-                        name = mesh.name
-                    };
-
-                    prop.m_mesh = meshcopy;
-                    prop.m_mesh.RecalculateBounds();
-                    prop.m_mesh.RecalculateNormals();
-
+                    ApplyChanges(prop, mesh, newvertices);
                 }
 
                 // PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data")
@@ -331,8 +327,26 @@ namespace TrafficLightReplacer
             }
         }
 
+        private static void ApplyChanges(PropInfo prop, Mesh mesh, Vector3[] newvertices)
+        {
+            Mesh meshcopy = new Mesh
+            {
+                vertices = newvertices,
+                colors = mesh.colors,
+                triangles = mesh.triangles,
+                normals = mesh.normals,
+                tangents = mesh.tangents,
+                uv = mesh.uv,
+                uv2 = mesh.uv,
+                name = mesh.name
+            };
 
-            public static bool CheckTransformEqual(TransformValues Obj1, TransformValues Obj2)
+            prop.m_mesh = meshcopy;
+            prop.m_mesh.RecalculateBounds();
+            prop.m_mesh.RecalculateNormals();
+        }
+
+        public static bool CheckTransformEqual(TransformValues Obj1, TransformValues Obj2)
         {
             var haveSameData = false;
 
