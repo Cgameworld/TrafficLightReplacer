@@ -287,6 +287,7 @@ namespace TrafficLightReplacer
         }
             public static void MeshDynamicTweaks()
         {
+            Debug.Log("meshdyn tweaks ran!!");
             //flip tiles on ground/fix ped signal location for SKorea Lights
             if (PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data") != null)
             {
@@ -296,6 +297,31 @@ namespace TrafficLightReplacer
                     var meshTL = beforeModify[0];
                     var verticesTL = meshTL.vertices;
                     ApplyChanges(mainTL, meshTL, verticesTL);
+
+                    var pedTL = PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightRm_Data");
+                    var meshPTL = RotateMesh180(pedTL, false);
+                    var verticesPTL = meshPTL.vertices;
+
+                    //rotate pedlight
+                    Vector3 center = new Vector3(0, 0, 0);
+                    Quaternion newRotation = new Quaternion();
+                    newRotation.eulerAngles = new Vector3(0, 180, 0);
+
+                    for (int i = 0; i < verticesPTL.Length; i++)
+                    {
+                        //move ped light
+                        if (verticesPTL[i].y > 1.2f && verticesPTL[i].y < 3.05f)
+                        {
+                            verticesPTL[i] = newRotation * (verticesPTL[i] - center) + center;
+                            verticesPTL[i].x = verticesPTL[i].x + 0.47f;
+                        }
+                        //move tiles
+                        if (verticesPTL[i].x < -0.25f && verticesPTL[i].y < 0.03f && verticesPTL[i].z < 0f)
+                        {
+                            verticesPTL[i].x = verticesPTL[i].x + 1f;
+                        }
+                    }
+                    ApplyChanges(pedTL, meshPTL, verticesPTL);
                 }
 
                 else if (TLRModSettings.instance.OppositeSideToggle == false)
@@ -309,7 +335,6 @@ namespace TrafficLightReplacer
                         //move tiles
                         if (newvertices[i].x < -0.25f && newvertices[i].y < 0.03f && newvertices[i].z < 0f)
                         {
-                            Debug.Log("vertex of krRm " + i + " : " + newvertices[i]);
                             newvertices[i].x = newvertices[i].x + 2.5f;
                         }
                         //move ped light
@@ -319,11 +344,27 @@ namespace TrafficLightReplacer
                         }
                     }
                     ApplyChanges(prop, mesh, newvertices);
+
+                    var pedProp = PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightRm_Data");
+                    ApplyChanges(pedProp, beforeModify[1], beforeModify[1].vertices);
+
+                    var updateverts = pedProp.m_mesh.vertices;
+                    var pedMesh = pedProp.m_mesh;
+
+                    for (int i = 0; i < updateverts.Length; i++)
+                    {
+                        //move tiles
+                        if (updateverts[i].x < -0.25f && updateverts[i].y < 0.03f && updateverts[i].z < 0f)
+                        {
+                            updateverts[i].x = updateverts[i].x + 0.5f;
+                        }
+                    }
+                    ApplyChanges(pedProp, pedMesh, updateverts);
+
                 }
 
                 // PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightL_Data")
-                // PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightRm_Data)
-
+                // PrefabCollection<PropInfo>.FindLoaded("888671987.KrTrafficLightRm_Data)  
             }
         }
 

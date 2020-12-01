@@ -135,6 +135,7 @@ namespace TrafficLightReplacer
                 TLRModSettings.instance.Save();
                 Replacer.UpdateLaneProps();
 
+                Tools.MeshDynamicTweaks();
             };
 
             #region customizeDropdown

@@ -381,8 +381,6 @@ namespace TrafficLightReplacer
         }
         public static void UpdateLaneProps()
         {
-            Tools.MeshDynamicTweaks();
-
             int propGroupCounter = 0;
 
             int count = PrefabCollection<NetInfo>.LoadedCount();

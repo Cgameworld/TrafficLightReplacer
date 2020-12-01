@@ -70,6 +70,9 @@ namespace TrafficLightReplacer
                 //makes compatibility tweaks to specfic traffic light meshes if found
                 PreloadPropModify();
 
+                //first run of dynamic compatibility tweaks to specfic traffic light meshes if found
+                Tools.MeshDynamicTweaks();
+
                 //makes compatibility tweaks to specfic road meshes if found
                 PreloadRoadModify();
 
