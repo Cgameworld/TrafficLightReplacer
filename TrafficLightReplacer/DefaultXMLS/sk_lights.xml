@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TLRConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PackName>S. Korea Traffic Lights</PackName>
+	<OneSize>false</OneSize>
+	<!--Edgecase: Multisize config with Single Asset. MultiSize is chosen since the Vanilla Mirror Light needs to be hidden -->
+	<Assets>
+		<Asset>
+			<Prefab>888671987.KrTrafficLightL_Data</Prefab>
+			<Name>S Option 1</Name>
+			<Description>Small Traffic Light Option 1</Description>
+			<Type>All</Type>
+		</Asset>
+		<Asset>
+			<Prefab>888671987.KrTrafficLightRm_Data</Prefab>
+			<Name>Signal Pole</Name>
+			<Description>TBA</Description>
+			<Type>Signal Pole</Type>
+		</Asset>
+	</Assets>
+  <!--Optional-->
+  <Transform>
+    <Position>
+      <x>0.5</x>
+      <y>0</y>
+      <z>0.5</z>
+    </Position>
+    <Angle>-180</Angle>
+    <Scale>100</Scale>
+  </Transform>
+  <DropdownSelectionIndex>
+    <SmallRoads>0</SmallRoads>
+    <MediumRoads>0</MediumRoads>
+    <LargeRoads>0</LargeRoads>
+  </DropdownSelectionIndex>
+  <ForceDefaultSideSignalPole>false</ForceDefaultSideSignalPole>
+</TLRConfig>
