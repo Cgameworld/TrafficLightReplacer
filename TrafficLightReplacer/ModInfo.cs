@@ -33,12 +33,12 @@ namespace TrafficLightReplacer
             {
                 // when enabled in content manager
                 Debug.Log("TLR Enabled!");
-                CheckMods();
+                CheckPacks();
             }
             else
             {
                 // when game first loads if already enabled
-                LoadingManager.instance.m_introLoaded += CheckMods;
+                LoadingManager.instance.m_introLoaded += CheckPacks;
             }
         }
 
@@ -51,13 +51,81 @@ namespace TrafficLightReplacer
         {
             ModSettingsUI.GenerateMenuSettings(helper);
         }
-        private static void CheckMods()
+        private static void CheckPacks()
         {
             var embedList = new List<string>();
             embedList.Add("default.xml");
             embedList.Add("none.xml");
 
-            foreach (PluginInfo mod in Singleton<PluginManager>.instance.GetPluginsInfo())
+            CheckMods(embedList);
+            CheckAssets(embedList);
+
+            embedList = Tools.AddResourcePrefix(embedList);
+
+            TLRModSettings.instance.EmbeddedXMLActive = embedList;
+        }
+
+        private static void CheckAssets(List<string> embedList)
+        {
+            var assetList = PackageManager.FilterAssets(UserAssetType.CustomAssetMetaData);
+            var foundTLRConfig = false;
+
+            foreach (var asset in assetList)
+            {
+                var packageName = asset.package.packageName;
+
+                if (packageName == "2032407437")
+                {
+                    embedList.Add("clus_lights.xml");
+                }
+                if (packageName == "2084863228")
+                {
+                    embedList.Add("USRP_Feare.xml");
+                }
+                if (packageName == "2268192312")
+                {
+                    embedList.Add("NAF_Greyflame.xml");
+                }
+                if (packageName == "2236570542")
+                {
+                    embedList.Add("BIGUrbanLights.xml");
+                }
+
+                var packagePath = asset.package.packagePath;
+                if (packagePath == null)
+                    continue;
+                var propDirectory = Directory.GetParent(packagePath);
+
+                if (propDirectory.ToString() != DataLocation.assetsPath)
+                {
+                    var folderFiles = propDirectory.GetFiles();
+
+                    foreach (var filePath in folderFiles)
+                    {
+                        var filename = Path.GetFileName(filePath.ToString());
+                        if (filename == "TLRConfig.xml")
+                        {
+                            foundTLRConfig = true;
+                        }
+                    }
+                }
+            }
+
+            CheckIfEmpty(embedList, foundTLRConfig);
+        }
+
+        private static void CheckIfEmpty(List<string> embedList, bool foundTLRConfig)
+        {
+            if (embedList.Count == 2 && foundTLRConfig == false)
+            {
+                Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "No traffic light packs installed! Go to the mod listing in the Steam Workshop to find packs to install");
+            }
+        }
+
+        private static void CheckMods(List<string> embedList)
+        {
+            var modList = Singleton<PluginManager>.instance.GetPluginsInfo();
+            foreach (PluginInfo mod in modList)
             {
                 if (mod.GetInstances<IUserMod>().Length != 0)
                 {
@@ -133,12 +201,6 @@ namespace TrafficLightReplacer
 
                 }
             }
-
-            embedList = Tools.AddResourcePrefix(embedList);
-
-            TLRModSettings.instance.EmbeddedXMLActive = embedList;
-
-            //prop pack dectection in FindActiveEmbeddedPropXMLs() in InitReplace.cs
         }
     }
 

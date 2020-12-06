@@ -64,9 +64,6 @@ namespace TrafficLightReplacer
                     Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Error: Left Hand Drive mode is currently not supported");
                 }
 
-                //look for prop packs to add
-                FindActiveEmbeddedPropXMLs();
-
                 //makes compatibility tweaks to specfic traffic light meshes if found
                 PreloadPropModify();
 
@@ -84,6 +81,7 @@ namespace TrafficLightReplacer
                 {
                     if (packList[i].PackPath == xmlfile)
                     {
+                        Debug.Log("pack loaded: " + packList[i]);
                         Debug.Log("i is packindex " + i);
                         TLRModSettings.instance.CurrentPackIndex = i;
                     }
@@ -91,47 +89,6 @@ namespace TrafficLightReplacer
 
                 Replacer.Start(xmlfile);
             }
-        }
-        private static void FindActiveEmbeddedPropXMLs()
-        {
-            //mod detection part in CheckMods() in ModInfo.cs
-            var propEmbedList = new List<string>();
-            for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
-            {
-                var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
-
-                if (prefab == null)
-                    continue;
-
-                var asset = PackageManager.FindAssetByName(prefab.name);
-                if (asset == null || asset.package == null)
-                    continue;
-
-                var crpPath = asset.package.packageName;
-
-                Debug.Log("crppath: " + crpPath);
-                if (crpPath == "2032407437")
-                {
-                    propEmbedList.Add("clus_lights.xml");
-                }
-                if (crpPath == "2084863228")
-                {
-                    propEmbedList.Add("USRP_Feare.xml");
-                }
-                if (crpPath == "2268192312")
-                {
-                    propEmbedList.Add("NAF_Greyflame.xml");
-                }
-                if (crpPath == "2236570542")
-                {
-                    propEmbedList.Add("BIGUrbanLights.xml");
-                }
-
-            }
-
-            propEmbedList = Tools.AddResourcePrefix(propEmbedList);
-
-            TLRModSettings.instance.EmbeddedXMLActive.AddRange(propEmbedList);
         }
         private static void PreloadPropModify()
         {
