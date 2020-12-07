@@ -592,6 +592,13 @@ namespace TrafficLightReplacer
                 }
 
             }
+
+            //fix for some oneway roads with grass (case with traffic light01 and traffic light01 mirror being the only lights?
+            if (isOneWay && propGroup.m_prop.name.In("Traffic Light 01", "Traffic Light European 01"))
+            {
+                propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight4.pedlight4_Data");
+            }
+
         }
 
         private static void MultiSizeFlippedApplyProperties(NetInfo.Lane lane, NetLaneProps.Prop propGroup, int propGroupCounter, bool includeX = false, bool includeAngle = false)
