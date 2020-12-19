@@ -582,7 +582,7 @@ namespace TrafficLightReplacer
             }
 
             //fix for one way roads with two ped lights! for some reason NeXT2 makes this not work for vanilla one way roads :/
-            if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light Pedestrian European") && isOneWay == true)
+            if (isOneWay && propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light Pedestrian European"))
             {
                 if (lane.m_position < 0)
                 {
@@ -593,10 +593,12 @@ namespace TrafficLightReplacer
 
             }
 
-            //fix for some oneway roads with grass (case with traffic light01 and traffic light01 mirror being the only lights?
+            //fix for some oneway roads with grass (case with traffic light01 and traffic light01 mirror being the only lights
             if (isOneWay && propGroup.m_prop.name.In("Traffic Light 01", "Traffic Light European 01"))
             {
-                propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight4.pedlight4_Data");
+               propGroup.m_finalProp = typePedSignal;
+               //propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight4.pedlight4_Data");
+                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
             }
 
         }
