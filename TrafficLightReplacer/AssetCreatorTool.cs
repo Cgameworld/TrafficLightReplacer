@@ -23,6 +23,7 @@ namespace TrafficLightReplacer
         private UIButton openXMLFolderButton;
         private UIButton gentempXML;
         private UIButton refreshPack;
+        private UIButton testButton;
 
         public static CreatorToolPanel instance
         {
@@ -106,7 +107,7 @@ namespace TrafficLightReplacer
             updateButton.text = Translation.Instance.GetTranslation(TranslationID.UPDATEBUTTON);
             updateButton.relativePosition = new Vector2(20, 135);
             updateButton.tooltip = Translation.Instance.GetTranslation(TranslationID.UPDATEBUTTONTOOLTIP); 
-            updateButton.width = 146;
+            updateButton.width = 100;
 
             updateButton.eventClick += (c, p) =>
             {
@@ -121,10 +122,32 @@ namespace TrafficLightReplacer
                 }
             };
 
+            testButton = UIUtils.CreateButton(this);
+            testButton.text = Translation.Instance.GetTranslation("Test");
+            testButton.relativePosition = new Vector2(130, 135);
+            testButton.width = 80;
+
+            testButton.eventClick += (c, p) =>
+            {
+                var testProp = PrefabCollection<PropInfo>.FindLoaded(netNameField.text);
+
+                Replacer.typeSmall = testProp;
+                Replacer.typeMedium = testProp;
+                Replacer.typeLarge = testProp;
+                Replacer.typePedSignal = testProp;
+                Replacer.typePedSignalMirror = testProp;
+                Replacer.typeMain = testProp;
+                Replacer.typeMirror = testProp;
+                Replacer.typeSignalPole = testProp;
+                Replacer.typeSignalPoleMirror = testProp;
+
+                Replacer.UpdateLaneProps();
+            };
+
             copyButton = UIUtils.CreateButton(this);
             copyButton.text = Translation.Instance.GetTranslation(TranslationID.COPYBUTTON);
-            copyButton.relativePosition = new Vector2(188, 135);
-            copyButton.width = 100;
+            copyButton.relativePosition = new Vector2(220, 135);
+            copyButton.width = 80;
 
             copyButton.eventClick += (c, p) =>
             {
