@@ -1,7 +1,9 @@
 ﻿using ColossalFramework;
 using ColossalFramework.IO;
 using ColossalFramework.Packaging;
+using ColossalFramework.Plugins;
 using Harmony;
+using NetworkSkins.Skins;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,6 +45,41 @@ namespace TrafficLightReplacer
                     }
                 }
 
+            }
+
+
+            //detect network skins 2 props and add them to counter?
+
+            //detect if network skins 2 is installed
+            if (PluginManager.instance.GetPluginsInfo().Any(mod => (
+        mod.publishedFileID.AsUInt64 == 1758376843uL ||
+        mod.name == "NetworkSkins"
+) && mod.isEnabled))
+            {
+                int netskinpropamount = 0;
+
+                var skins = NetworkSkinManager.instance.AppliedSkins;
+                Debug.Log("3allskins amount: " + skins.Count);
+
+                for (int i = 0; i < skins.Count; i++)
+                {
+                    var skin = skins[i];
+
+                    if (skin.m_lanes == null) return;
+
+                    for (var l = 0; l < skin.m_lanes.Length; l++)
+                    {
+                        var laneProps = skin.m_lanes[l]?.m_laneProps?.m_props;
+                        if (laneProps == null) continue;
+
+                        for (var p1 = 0; p1 < laneProps.Length; p1++)
+                        {
+                            netskinpropamount++;
+                        }
+                    }
+                }
+
+                Debug.Log("netskinpropamount: " + netskinpropamount);
             }
         }
     }

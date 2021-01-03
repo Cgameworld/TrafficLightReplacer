@@ -379,9 +379,10 @@ namespace TrafficLightReplacer
                 }
             }
         }
+
+        public static int propGroupCounter = 0;
         public static void UpdateLaneProps()
         {
-            int propGroupCounter = 0;
 
             int count = PrefabCollection<NetInfo>.LoadedCount();
 
@@ -402,67 +403,73 @@ namespace TrafficLightReplacer
                     {
                         foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
                         {
-
-                            if (propGroup?.m_finalProp != null)
-                            {
-                                if (oneSizeMode)
-                                {
-                                    if (TLRModSettings.instance.OppositeSideToggle)
-                                    {
-                                        ReplacePropFlipped(lane, propGroup, typeMain, isOneWay, propGroupCounter);
-                                    }
-                                    else
-                                    {
-                                        OneSizeReplace(propGroupCounter, propGroup, lane);
-                                    }
-                                }
-                                else
-                                {
-                                                                     //Debug.Log("onesize mode off!");
-                                    if (TLRModSettings.instance.OppositeSideToggle)
-                                    {                     
-                                        if (roadwidth >= 15 || isHighway)
-                                        {
-                                            ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
-                                        }
-                                        else if (roadwidth > 6)
-                                        {
-                                            ReplacePropFlipped(lane, propGroup, typeMedium, isOneWay, propGroupCounter);
-                                        }
-                                        else
-                                        {
-                                            ReplacePropFlipped(lane, propGroup, typeSmall, isOneWay, propGroupCounter);  //regular
-                                        }
-                                    }
-                                    else
-                                    {
-                                        //panel is NULL
-                                        if (roadwidth >= 15 || isHighway)
-                                        {
-                                            ReplaceProp(lane, typeLarge, propGroup, propGroupCounter);
-                                        }
-                                        else if (roadwidth > 6)
-                                        {
-                                            ReplaceProp(lane, typeMedium, propGroup, propGroupCounter);
-                                        }
-                                        else
-                                        {
-                                            ReplaceProp(lane, typeSmall, propGroup, propGroupCounter);
-                                        }
-                                    }
-
-                                }
-
-                                propGroupCounter++;
-
-                            }
+                            CategoryReplacement(roadwidth, isOneWay, isHighway, lane, propGroup);
                         }
                     }
                 }
 
             }
-            //Debug.Log("propGroupCounterTotal" + propGroupCounter);
+            Debug.Log("propGroupCounterTotal" + propGroupCounter);
+            propGroupCounter = 0;
         }
+
+        private static void CategoryReplacement(float roadwidth, bool isOneWay, bool isHighway, NetInfo.Lane lane, NetLaneProps.Prop propGroup)
+        {
+            if (propGroup?.m_finalProp != null)
+            {
+                if (oneSizeMode)
+                {
+                    if (TLRModSettings.instance.OppositeSideToggle)
+                    {
+                        ReplacePropFlipped(lane, propGroup, typeMain, isOneWay, propGroupCounter);
+                    }
+                    else
+                    {
+                        OneSizeReplace(propGroupCounter, propGroup, lane);
+                    }
+                }
+                else
+                {
+                    //Debug.Log("onesize mode off!");
+                    if (TLRModSettings.instance.OppositeSideToggle)
+                    {
+                        if (roadwidth >= 15 || isHighway)
+                        {
+                            ReplacePropFlipped(lane, propGroup, typeLarge, isOneWay, propGroupCounter);
+                        }
+                        else if (roadwidth > 6)
+                        {
+                            ReplacePropFlipped(lane, propGroup, typeMedium, isOneWay, propGroupCounter);
+                        }
+                        else
+                        {
+                            ReplacePropFlipped(lane, propGroup, typeSmall, isOneWay, propGroupCounter);  //regular
+                        }
+                    }
+                    else
+                    {
+                        //panel is NULL
+                        if (roadwidth >= 15 || isHighway)
+                        {
+                            ReplaceProp(lane, typeLarge, propGroup, propGroupCounter);
+                        }
+                        else if (roadwidth > 6)
+                        {
+                            ReplaceProp(lane, typeMedium, propGroup, propGroupCounter);
+                        }
+                        else
+                        {
+                            ReplaceProp(lane, typeSmall, propGroup, propGroupCounter);
+                        }
+                    }
+
+                }
+
+                propGroupCounter++;
+
+            }
+        }
+
         private static void OneSizeReplace(int propGroupCounter, NetLaneProps.Prop propGroup, NetInfo.Lane lane)
         {
             //Debug.Log("onesize mode on!");
