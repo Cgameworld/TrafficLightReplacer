@@ -1,5 +1,6 @@
 ﻿using ColossalFramework;
 using ColossalFramework.UI;
+using NetworkSkins.Skins;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -409,7 +410,42 @@ namespace TrafficLightReplacer
                 }
 
             }
-            Debug.Log("propGroupCounterTotal" + propGroupCounter);
+
+            Debug.Log("propGroupCounterTotal bf NS2 " + propGroupCounter);
+
+            //network skins 2 replace props of loaded skins
+
+            // add check if netskins is enabled!    
+            var skins = NetworkSkinManager.instance.AppliedSkins;
+            for (int i = 0; i < skins.Count; i++)
+            {
+                var skin = skins[i];
+
+                var prefab = skin.Prefab;
+                float roadwidth = 0;
+                bool isOneWay = false;
+                bool isHighway = false;
+                GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
+
+                if (skin.m_lanes == null) return;
+
+                for (var l = 0; l < skin.m_lanes.Length; l++)
+                {
+                    var laneProps = skin.m_lanes[l]?.m_laneProps?.m_props;
+                    if (laneProps == null) continue;
+
+                    for (var p1 = 0; p1 < laneProps.Length; p1++)
+                    {
+                        CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
+
+                    }
+                }
+            }
+
+
+
+            Debug.Log("propGroupCounterTotal " + propGroupCounter);
+            Debug.Log("propCacheLength: " + propGroupCache.Count);
             propGroupCounter = 0;
         }
 

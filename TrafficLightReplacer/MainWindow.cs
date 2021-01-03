@@ -357,16 +357,17 @@ namespace TrafficLightReplacer
             #endregion
 
             confirmButton = UIUtils.CreateButton(this);
-            confirmButton.text = "deleteitems+add1";
+            confirmButton.text = "get-cachedprops";
             confirmButton.relativePosition = new Vector2(20, 400);
             confirmButton.width = 150;
-            confirmButton.isVisible = false;
+            //confirmButton.isVisible = false;
 
             confirmButton.eventClick += (c, p) =>
             {
-                string[] blank = new string[0];
-                mediumRoadsDropdown.items = blank;
-                mediumRoadsDropdown.AddItem("TEST1");
+                for (int i = 0; i < Replacer.propGroupCache.Count; i++)
+                {
+                    Debug.Log("entry " + i + " : " + Replacer.propGroupCache[i].Angle);
+                }
             };
 
             getmeditems = UIUtils.CreateButton(this);

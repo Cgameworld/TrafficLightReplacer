@@ -74,7 +74,18 @@ namespace TrafficLightReplacer
 
                         for (var p1 = 0; p1 < laneProps.Length; p1++)
                         {
-                            netskinpropamount++;
+                            if (skin.m_lanes[l].m_laneProps.m_props[p1]?.m_finalProp != null)
+                            {
+                                CachePropItem propGroupProperties = new CachePropItem()
+                                {
+                                    Angle = skin.m_lanes[l].m_laneProps.m_props[p1].m_angle,
+                                    Position = skin.m_lanes[l].m_laneProps.m_props[p1].m_position,
+                                };
+
+                                Replacer.propGroupCache.Add(propGroupProperties);
+
+                                netskinpropamount++;
+                            }
                         }
                     }
                 }
