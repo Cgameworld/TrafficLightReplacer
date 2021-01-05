@@ -17,6 +17,7 @@ namespace TrafficLightReplacer
 {
     public static class InitReplace
     {
+        public static bool NetworkSkinsInstalled = false;
         public static List<NetworkSkin> CacheSkins = new List<NetworkSkin>();
         public static void CachePropFill()
         {
@@ -57,11 +58,10 @@ namespace TrafficLightReplacer
         mod.name == "NetworkSkins"
 ) && mod.isEnabled))
             {
+                NetworkSkinsInstalled = true;
+
                 int netskinpropamount = 0;
-
                 var skins = NetworkSkinManager.instance.AppliedSkins;
-                Debug.Log("3allskins amount: " + skins.Count);
-
                 for (int i = 0; i < skins.Count; i++)
                 {
                     var skin = skins[i];
@@ -91,8 +91,6 @@ namespace TrafficLightReplacer
                         }
                     }
                 }
-
-                Debug.Log("netskinpropamount: " + netskinpropamount);
             }
         }
     }

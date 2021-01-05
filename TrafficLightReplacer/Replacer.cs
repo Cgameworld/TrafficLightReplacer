@@ -415,54 +415,57 @@ namespace TrafficLightReplacer
 
             Debug.Log("propGroupCounterTotal bf NS2 " + propGroupCounter);
 
-            //network skins 2 replace props of loaded skins
-
-  
-            var skins = InitReplace.CacheSkins;
-            var currentskins = NetworkSkinManager.instance.AppliedSkins;
-
-            List<NetworkSkin> excludedskins = skins.Except(currentskins).ToList();
-
-            for (int i = 0; i < skins.Count; i++)
+            //network skins 2 compatibility replace props of loaded skins
+            if (InitReplace.NetworkSkinsInstalled)
             {
-                var skin = skins[i];
 
-                bool exclude = excludedskins.Any(a => a.Equals(skin));
+                var skins = InitReplace.CacheSkins;
+                var currentskins = NetworkSkinManager.instance.AppliedSkins;
 
-                Debug.Log("REPLACERSKIN hash: " + skin.GetHashCode());
+                List<NetworkSkin> excludedskins = skins.Except(currentskins).ToList();
 
-                var prefab = skin.Prefab;
-                float roadwidth = 0;
-                bool isOneWay = false;
-                bool isHighway = false;
-                GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
-
-                if (skin.m_lanes == null) return;
-
-                for (var l = 0; l < skin.m_lanes.Length; l++)
+                for (int i = 0; i < skins.Count; i++)
                 {
-                    var laneProps = skin.m_lanes[l]?.m_laneProps?.m_props;
-                    if (laneProps == null) continue;
+                    var skin = skins[i];
 
-                    for (var p1 = 0; p1 < laneProps.Length; p1++)
+                    //check if loaded skin still exists
+                    bool exclude = excludedskins.Any(a => a.Equals(skin));
+
+                    Debug.Log("REPLACERSKIN hash: " + skin.GetHashCode());
+
+                    var prefab = skin.Prefab;
+                    float roadwidth = 0;
+                    bool isOneWay = false;
+                    bool isHighway = false;
+                    GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
+
+                    if (skin.m_lanes == null) return;
+
+                    for (var l = 0; l < skin.m_lanes.Length; l++)
                     {
-                        if (!exclude)
+                        var laneProps = skin.m_lanes[l]?.m_laneProps?.m_props;
+                        if (laneProps == null) continue;
+
+                        for (var p1 = 0; p1 < laneProps.Length; p1++)
                         {
-                            CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
-                        }
-                        else
-                        {
-                            Debug.Log(skin.GetHashCode() + " excluded");
-                            propGroupCounter++;
+                            if (!exclude)
+                            {
+                                CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
+                            }
+                            else
+                            {
+                                Debug.Log(skin.GetHashCode() + " excluded");
+                                propGroupCounter++;
+                            }
                         }
                     }
                 }
-            }
 
 
-            foreach (var k in currentskins)
-            {
-                Debug.Log("CurrentSKIN hash: " + k.GetHashCode());
+                foreach (var k in currentskins)
+                {
+                    Debug.Log("CurrentSKIN hash: " + k.GetHashCode());
+                }
             }
 
             Debug.Log("propGroupCounterTotal " + propGroupCounter);
