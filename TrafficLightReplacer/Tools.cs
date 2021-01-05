@@ -5,6 +5,7 @@ using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using ICities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -290,6 +291,20 @@ namespace TrafficLightReplacer
                     return false;
             }
             return true;
+        }
+
+        //https://stackoverflow.com/questions/22939552/convert-listobject-to-listtype-type-is-known-at-runtime
+        public static IList ConvertList(Type newItemType, IList source)
+        {
+            var listType = typeof(List<>);
+            Type[] typeArgs = { newItemType };
+            var genericListType = listType.MakeGenericType(typeArgs);
+            var typedList = (IList)Activator.CreateInstance(genericListType);
+            foreach (var item in source)
+            {
+                typedList.Add(item);
+            }
+            return typedList;
         }
 
     }

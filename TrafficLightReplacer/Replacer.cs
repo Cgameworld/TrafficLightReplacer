@@ -1,6 +1,5 @@
 ﻿using ColossalFramework;
 using ColossalFramework.UI;
-using NetworkSkins.Skins;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -418,54 +417,7 @@ namespace TrafficLightReplacer
             //network skins 2 compatibility replace props of loaded skins
             if (InitReplace.NetworkSkinsInstalled)
             {
-
-                var skins = InitReplace.CacheSkins;
-                var currentskins = NetworkSkinManager.instance.AppliedSkins;
-
-                List<NetworkSkin> excludedskins = skins.Except(currentskins).ToList();
-
-                for (int i = 0; i < skins.Count; i++)
-                {
-                    var skin = skins[i];
-
-                    //check if loaded skin still exists
-                    bool exclude = excludedskins.Any(a => a.Equals(skin));
-
-                    Debug.Log("REPLACERSKIN hash: " + skin.GetHashCode());
-
-                    var prefab = skin.Prefab;
-                    float roadwidth = 0;
-                    bool isOneWay = false;
-                    bool isHighway = false;
-                    GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
-
-                    if (skin.m_lanes == null) return;
-
-                    for (var l = 0; l < skin.m_lanes.Length; l++)
-                    {
-                        var laneProps = skin.m_lanes[l]?.m_laneProps?.m_props;
-                        if (laneProps == null) continue;
-
-                        for (var p1 = 0; p1 < laneProps.Length; p1++)
-                        {
-                            if (!exclude)
-                            {
-                                CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
-                            }
-                            else
-                            {
-                                Debug.Log(skin.GetHashCode() + " excluded");
-                                propGroupCounter++;
-                            }
-                        }
-                    }
-                }
-
-
-                foreach (var k in currentskins)
-                {
-                    Debug.Log("CurrentSKIN hash: " + k.GetHashCode());
-                }
+                Compatibility.NetworkSkins2.ReplaceNS2Props();
             }
 
             Debug.Log("propGroupCounterTotal " + propGroupCounter);
@@ -473,7 +425,7 @@ namespace TrafficLightReplacer
             propGroupCounter = 0;
         }
 
-        private static void CategoryReplacement(float roadwidth, bool isOneWay, bool isHighway, NetInfo.Lane lane, NetLaneProps.Prop propGroup)
+        public static void CategoryReplacement(float roadwidth, bool isOneWay, bool isHighway, NetInfo.Lane lane, NetLaneProps.Prop propGroup)
         {
             if (propGroup?.m_finalProp != null)
             {
@@ -744,7 +696,7 @@ namespace TrafficLightReplacer
         }
 
 
-        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
+        public static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
         {
             //to do - take into account asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)

@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\NetworkSkins2.cs" />
     <Compile Include="InitReplace.cs" />
     <Compile Include="CachePropItem.cs" />
     <Compile Include="Configuration.cs" />
