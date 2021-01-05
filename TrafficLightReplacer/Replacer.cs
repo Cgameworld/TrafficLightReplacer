@@ -143,10 +143,10 @@ namespace TrafficLightReplacer
             for (int i = 0; i < result.Count; i++)
             {
                 //helpful make toggable this debug info?
-               // Debug.Log("Pack NAME! " + XMLinput.PackName);
-               // Debug.Log("entry:" + i);
-               // Debug.Log("prefabname:" + result[i].Prefab);
-               // Debug.Log("prefabsize:" + result[i].Type);
+                // Debug.Log("Pack NAME! " + XMLinput.PackName);
+                // Debug.Log("entry:" + i);
+                // Debug.Log("prefabname:" + result[i].Prefab);
+                // Debug.Log("prefabsize:" + result[i].Type);
 
                 //mutlisize config
                 if (result[i].Type == "Small")
@@ -235,20 +235,20 @@ namespace TrafficLightReplacer
                 Angle = 0,
                 Scale = 100
             };
-         
+
 
             if (XMLinput.Transform != null && Tools.CheckTransformEqual(TLRModSettings.instance.SelectedOffsetValues, initOffset))
             {
-               // Debug.Log("transform not null!");
+                // Debug.Log("transform not null!");
                 transformOffset = XMLinput.Transform;
             }
 
             //Debug.Log("transformOffset " + transformOffset.Position.x + " | ro " + transformOffset.Angle);
 
-           if (XMLinput.ForceDefaultSideSignalPole == true)
+            if (XMLinput.ForceDefaultSideSignalPole == true)
             {
                 defaultSideSignalPole = XMLinput.ForceDefaultSideSignalPole;
-            }      
+            }
             //Debug.Log("defaultSideSignalPole is: " + defaultSideSignalPole);
         }
 
@@ -267,7 +267,7 @@ namespace TrafficLightReplacer
             return prop;
         }
 
-      //this method is used for the reset button in the transform settings panel
+        //this method is used for the reset button in the transform settings panel
         public static TransformValues GetXMLTransformValues(string path)
         {
             TransformValues defaultTransformValues = new TransformValues()
@@ -276,7 +276,7 @@ namespace TrafficLightReplacer
                 Angle = 0,
                 Scale = 100
             };
-            
+
             TransformValues newXMLTransformValues;
 
             try
@@ -296,13 +296,14 @@ namespace TrafficLightReplacer
             }
             //if the input path is bad or something else goes wrong - since this method can be called way after the initial xml data is loaded. the xml file could for example be moved/deleted by the user
             //main dropdown doesnt check for this? check there too?
-            catch {
+            catch
+            {
                 Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Error: XML Transform values cannot be read due to " + path + " not being found. Default transform values will be used");
-                 newXMLTransformValues = defaultTransformValues;
+                newXMLTransformValues = defaultTransformValues;
             }
-           
+
             return newXMLTransformValues;
-        }      
+        }
         public static void SetTransformSliders(TransformValues transformOffset, bool isReset)
         {
             //check if panel items exist
@@ -323,7 +324,7 @@ namespace TrafficLightReplacer
                     var path = packList[TrafficLightReplacePanel.instance.packDropdown.selectedIndex].PackPath;
                     Debug.Log("currentselectedpath! " + path);
                     TransformValues xmlTransform = GetXMLTransformValues(path);
-                   /// check to see if bad path variable! ^
+                    /// check to see if bad path variable! ^
                     //maybe do 000000 if fail
 
                     //slider ui is at index 5-9
@@ -334,8 +335,9 @@ namespace TrafficLightReplacer
                     SetTransformSlider(9, xmlTransform.Scale);
                 }
             }
-            else {
-               // Debug.Log("else settransformslider");
+            else
+            {
+                // Debug.Log("else settransformslider");
             }
         }
 
@@ -351,7 +353,7 @@ namespace TrafficLightReplacer
             {
                 if (TrafficLightReplacePanel.instance.oppositeSideToggle != null)
                 {
-                   // Debug.Log("ran! OSM1");
+                    // Debug.Log("ran! OSM1");
                     //add code here to move dropdown2 up and change height
                     TrafficLightReplacePanel.instance.oppositeSideToggle.isVisible = true;
                     TrafficLightReplacePanel.instance.customizeButton.isVisible = false;
@@ -393,13 +395,13 @@ namespace TrafficLightReplacer
                 //Debug.Log("prefab.name: " + prefab.name  + " || propgroup counter: " + propGroupCounter);
 
                 float roadwidth = 0;
-                    bool isOneWay = false;
-                    bool isHighway = false;
+                bool isOneWay = false;
+                bool isHighway = false;
 
-                    GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
+                GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
 
                 foreach (NetInfo.Lane lane in prefab.m_lanes)
-                { 
+                {
                     if (lane?.m_laneProps?.m_props != null)
                     {
                         foreach (NetLaneProps.Prop propGroup in lane.m_laneProps.m_props)
@@ -415,11 +417,19 @@ namespace TrafficLightReplacer
 
             //network skins 2 replace props of loaded skins
 
-            // add check if netskins is enabled!    
-            var skins = NetworkSkinManager.instance.AppliedSkins;
+  
+            var skins = InitReplace.CacheSkins;
+            var currentskins = NetworkSkinManager.instance.AppliedSkins;
+
+            List<NetworkSkin> excludedskins = skins.Except(currentskins).ToList();
+
             for (int i = 0; i < skins.Count; i++)
             {
                 var skin = skins[i];
+
+                bool exclude = excludedskins.Any(a => a.Equals(skin));
+
+                Debug.Log("REPLACERSKIN hash: " + skin.GetHashCode());
 
                 var prefab = skin.Prefab;
                 float roadwidth = 0;
@@ -436,13 +446,24 @@ namespace TrafficLightReplacer
 
                     for (var p1 = 0; p1 < laneProps.Length; p1++)
                     {
-                        CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
-
+                        if (!exclude)
+                        {
+                            CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
+                        }
+                        else
+                        {
+                            Debug.Log(skin.GetHashCode() + " excluded");
+                            propGroupCounter++;
+                        }
                     }
                 }
             }
 
 
+            foreach (var k in currentskins)
+            {
+                Debug.Log("CurrentSKIN hash: " + k.GetHashCode());
+            }
 
             Debug.Log("propGroupCounterTotal " + propGroupCounter);
             Debug.Log("propCacheLength: " + propGroupCache.Count);
@@ -566,14 +587,14 @@ namespace TrafficLightReplacer
         }
 
         private static void ReplacePropFlipped(NetInfo.Lane lane, NetLaneProps.Prop propGroup, PropInfo newProp, bool isOneWay, int propGroupCounter)
-        {        
+        {
             bool isHighwayRampSide = lane.m_laneType.ToString() == "None" && lane.m_position > 4;
             //vehicle lane type for road hacks during loading
             bool isSidewalk = lane.m_laneType.ToString() == "Pedestrian" || lane.m_laneType.ToString() == "Vehicle";
 
             if (isSidewalk || isHighwayRampSide)
             {
-                if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01", "Traffic Light Pedestrian European", "Traffic Light European 01"))
+                if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light 01", "Traffic Light Pedestrian European", "Traffic Light European 01"))
                 {
                     propGroup.m_finalProp = newProp;
 
@@ -598,7 +619,7 @@ namespace TrafficLightReplacer
             else
             {
                 //change road median ped signal
-                if (propGroup.m_prop.name.In("Traffic Light Pedestrian","Traffic Light 01","Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01", "Traffic Light European 01 Mirror"))
+                if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light 01", "Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01", "Traffic Light European 01 Mirror"))
                 {
 
                     propGroup.m_finalProp = typePedSignal;
@@ -614,7 +635,7 @@ namespace TrafficLightReplacer
                 propGroup.m_position.x = lane.m_position > 0
                 ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x + 1f
                 : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x + -1f;
-                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter,false,true);
+                MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, false, true);
 
             }
             else if (propGroup.m_prop.name.In("Traffic Light 02 Mirror", "Traffic Light European 02 Mirror"))
@@ -639,8 +660,8 @@ namespace TrafficLightReplacer
             //fix for some oneway roads with grass (case with traffic light01 and traffic light01 mirror being the only lights
             if (isOneWay && propGroup.m_prop.name.In("Traffic Light 01", "Traffic Light European 01"))
             {
-               propGroup.m_finalProp = typePedSignal;
-               //propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight4.pedlight4_Data");
+                propGroup.m_finalProp = typePedSignal;
+                //propGroup.m_finalProp = PrefabCollection<PropInfo>.FindLoaded("pedlight4.pedlight4_Data");
                 MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, true, true);
             }
 
@@ -691,10 +712,10 @@ namespace TrafficLightReplacer
                     propGroup.m_angle = 270;
                 }
             }
-        
-            
-            if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light 01", "Traffic Light European 01","Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01 Mirror"))
-            {                
+
+
+            if (propGroup.m_prop.name.In("Traffic Light Pedestrian", "Traffic Light 01", "Traffic Light European 01", "Traffic Light 01 Mirror", "Traffic Light Pedestrian European", "Traffic Light European 01 Mirror"))
+            {
                 propGroup.m_finalProp = typePedSignal;
 
                 if (lane.m_position > 0)
@@ -714,13 +735,13 @@ namespace TrafficLightReplacer
                 propGroup.m_position.x = lane.m_position > 0
                 ? propGroupCache[propGroupCounter].Position.x + transformOffset.Position.x + 1f
                 : propGroupCache[propGroupCounter].Position.x - transformOffset.Position.x + -1f;
-                propGroup.m_angle = (propGroupCache[propGroupCounter].Angle + transformOffset.Angle)-180;
+                propGroup.m_angle = (propGroupCache[propGroupCounter].Angle + transformOffset.Angle) - 180;
                 MultiSizeFlippedApplyProperties(lane, propGroup, propGroupCounter, false, false); // see if this works?
             }
         }
 
 
-            private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
+        private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
         {
             //to do - take into account asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)

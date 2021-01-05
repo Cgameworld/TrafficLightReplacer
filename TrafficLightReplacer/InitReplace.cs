@@ -17,6 +17,7 @@ namespace TrafficLightReplacer
 {
     public static class InitReplace
     {
+        public static List<NetworkSkin> CacheSkins = new List<NetworkSkin>();
         public static void CachePropFill()
         {
             int count = PrefabCollection<NetInfo>.LoadedCount();
@@ -64,6 +65,7 @@ namespace TrafficLightReplacer
                 for (int i = 0; i < skins.Count; i++)
                 {
                     var skin = skins[i];
+                    CacheSkins.Add(skin);
 
                     if (skin.m_lanes == null) return;
 
