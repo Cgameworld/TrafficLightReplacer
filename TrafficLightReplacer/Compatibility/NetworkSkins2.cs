@@ -11,15 +11,17 @@ namespace TrafficLightReplacer.Compatibility
     public class NetworkSkins2
     {
         public static ObjectIDGenerator idgen = new ObjectIDGenerator();
+        public static List<int> propCount = new List<int>();
 
         public static void AddInitProps()
         {
-            int netskinpropamount = 0;
             var skins = NetworkSkinManager.instance.AppliedSkins;
 
             for (int i = 0; i < skins.Count; i++)
             {
                 var skin = skins[i];
+                int propAmount = 0;
+
                 long idnum = idgen.GetId(skin, out _);
                 Debug.Log("loadskinid: " + idnum);
 
@@ -42,24 +44,48 @@ namespace TrafficLightReplacer.Compatibility
 
                             Replacer.propGroupCache.Add(propGroupProperties);
 
-                            netskinpropamount++;
+                            propAmount++;
                         }
                     }
                 }
+
+                propCount.Add(propAmount);
+
             }
 
         }
 
         public static void ReplaceNS2Props()
         {
-            var skins = NetworkSkinManager.instance.AppliedSkins;            
+            var skins = NetworkSkinManager.instance.AppliedSkins;
+
+            List<long> remainingskinIDs = new List<long>();
+
             for (int i = 0; i < skins.Count; i++)
             {
                 var skin = skins[i];
-                    
+
                 bool exclude;
                 long number = idgen.HasId(skin, out exclude);
                 Debug.Log("skin " + number + " is " + exclude);
+                if (!exclude)
+                {
+                    remainingskinIDs.Add(number);
+                }
+            }
+
+            foreach (var item in remainingskinIDs)
+            {
+                Debug.Log("remaining " + item);
+            }
+
+
+           /*
+            for (int i = 0; i < skins.Count; i++)
+            {
+                var skin = skins[i];
+
+
 
                 var prefab = skin.Prefab;
                 float roadwidth = 0;
@@ -88,6 +114,8 @@ namespace TrafficLightReplacer.Compatibility
                     }
                 }
             }
+
+            */
         }
 
 
