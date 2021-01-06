@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ namespace TrafficLightReplacer.Compatibility
 {
     public class NetworkSkins2
     {
-        //public static List<NetworkSkin> CacheSkins = new List<NetworkSkin>();
-        public static List<object> CacheSkins = new List<object>();
+        public static ObjectIDGenerator idgen = new ObjectIDGenerator();
+
         public static void AddInitProps()
         {
             int netskinpropamount = 0;
@@ -19,7 +20,8 @@ namespace TrafficLightReplacer.Compatibility
             for (int i = 0; i < skins.Count; i++)
             {
                 var skin = skins[i];
-                CacheSkins.Add(skin);
+                long idnum = idgen.GetId(skin, out _);
+                Debug.Log("loadskinid: " + idnum);
 
                 if (skin.m_lanes == null) return;
 
@@ -50,19 +52,14 @@ namespace TrafficLightReplacer.Compatibility
 
         public static void ReplaceNS2Props()
         {
-            var skins = CacheSkins;
-            var currentskins = NetworkSkinManager.instance.AppliedSkins;
-
-            List<NetworkSkin> excludedskins = skins.Except(currentskins).ToList();
-
+            var skins = NetworkSkinManager.instance.AppliedSkins;            
             for (int i = 0; i < skins.Count; i++)
             {
                 var skin = skins[i];
-
-                //check if loaded skin still exists
-                bool exclude = excludedskins.Any(a => a.Equals(skin));
-
-                Debug.Log("REPLACERSKIN hash: " + skin.GetHashCode());
+                    
+                bool exclude;
+                long number = idgen.HasId(skin, out exclude);
+                Debug.Log("skin " + number + " is " + exclude);
 
                 var prefab = skin.Prefab;
                 float roadwidth = 0;
@@ -85,17 +82,11 @@ namespace TrafficLightReplacer.Compatibility
                         }
                         else
                         {
-                            Debug.Log(skin.GetHashCode() + " excluded");
+                            Debug.Log("skipped " + number);
                             Replacer.propGroupCounter++;
                         }
                     }
                 }
-            }
-
-
-            foreach (var k in currentskins)
-            {
-                Debug.Log("CurrentSKIN hash: " + k.GetHashCode());
             }
         }
 
