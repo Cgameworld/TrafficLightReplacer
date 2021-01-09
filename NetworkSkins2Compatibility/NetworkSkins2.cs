@@ -10,6 +10,12 @@ namespace NetworkSkins2Compatibility
     public class NetworkSkins2
     {
         public static List<NetworkSkin> CacheSkins = new List<NetworkSkin>();
+        
+        public static void TestCall()
+        {
+            Debug.Log("Hello! NS2Compat DLL call successful!");
+        }
+        
         public static void AddInitProps()
         {
             int netskinpropamount = 0;

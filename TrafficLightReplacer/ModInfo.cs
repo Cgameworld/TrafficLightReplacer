@@ -5,8 +5,10 @@ using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using Harmony;
 using ICities;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using TrafficLightReplacer.Locale;
 using TrafficLightReplacer.TranslationFramework;
@@ -63,6 +65,43 @@ namespace TrafficLightReplacer
             embedList = Tools.AddResourcePrefix(embedList);
 
             TLRModSettings.instance.EmbeddedXMLActive = embedList;
+
+            //detect if network skins 2 is installed
+            if (PluginManager.instance.GetPluginsInfo().Any(mod => (
+        mod.publishedFileID.AsUInt64 == 1758376843uL ||
+        mod.name == "NetworkSkins"
+) && mod.isEnabled))
+            {
+                //TrafficLightReplacer.lib.NetworkSkins2Compatibility.dll
+                Debug.Log("bfchanges");
+                Assembly a = Load();
+                Type t = a.GetType("NetworkSkins2Compatibility.NetworkSkins2");
+                MethodInfo m = t.GetMethod("TestCall"); 
+                m.Invoke(null, new object[] { });
+                Debug.Log("afchanges");
+            }
+            else
+            {
+                Debug.Log("ns2 not found!");
+            }
+
+
+
+            Console.ReadLine();
+        }
+
+        public static Assembly Load()
+        {
+            byte[] ba = null;
+            string resource = "TrafficLightReplacer.lib.NetworkSkins2Compatibility.dll";
+            Assembly curAsm = Assembly.GetExecutingAssembly();
+            using (Stream stm = curAsm.GetManifestResourceStream(resource))
+            {
+                ba = new byte[(int)stm.Length];
+                stm.Read(ba, 0, (int)stm.Length);
+
+                return Assembly.Load(ba);
+            }
         }
 
         private static void CheckAssets(List<string> embedList)
