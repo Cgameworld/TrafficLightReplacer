@@ -60,8 +60,6 @@ namespace NetworkSkins2Compatibility
                 //check if loaded skin still exists
                 bool exclude = excludedskins.Any(a => a.Equals(skin));
 
-                Debug.Log("fweewfewfewfewf hash: " + skin.GetHashCode());
-
                 var prefab = skin.Prefab;
                 float roadwidth = 0;
                 bool isOneWay = false;
@@ -89,7 +87,6 @@ namespace NetworkSkins2Compatibility
                     }
                 }
             }
-
 
             foreach (var k in currentskins)
             {
