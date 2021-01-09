@@ -413,7 +413,7 @@ namespace TrafficLightReplacer
             propGroupCounter = 0;
         }
 
-        private static void CategoryReplacement(float roadwidth, bool isOneWay, bool isHighway, NetInfo.Lane lane, NetLaneProps.Prop propGroup)
+        public static void CategoryReplacement(float roadwidth, bool isOneWay, bool isHighway, NetInfo.Lane lane, NetLaneProps.Prop propGroup)
         {
             if (propGroup?.m_finalProp != null)
             {
@@ -684,7 +684,7 @@ namespace TrafficLightReplacer
         }
 
 
-            private static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
+            public static void GetRoadInformation(NetInfo prefab, ref float roadwidth, ref bool isOneWay)
         {
             //to do - take into account asym roads?
             foreach (NetInfo.Lane lane in prefab.m_lanes)
