@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using TrafficLightReplacer.Locale;
 using TrafficLightReplacer.TranslationFramework;
@@ -44,6 +45,18 @@ namespace TrafficLightReplacer
                     }
                 }
 
+            }
+
+            if (ModInfo.NetSkinCompatAssembly != null)
+            {
+                Debug.Log("cachepropfill ns2 patch run");
+                Type t = ModInfo.NetSkinCompatAssembly.GetType("NetworkSkins2Compatibility.NetworkSkins2");
+                MethodInfo m = t.GetMethod("AddInitProps");
+                m.Invoke(null, new object[] { });
+            }
+            else
+            {
+                Debug.Log("cachepropfill ns2 patch NOT loaded");
             }
 
         }

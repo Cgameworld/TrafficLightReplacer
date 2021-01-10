@@ -21,10 +21,11 @@ namespace TrafficLightReplacer
     {
         private readonly string harmonyId = "cgameworld.trafficlightreplacer";
         private HarmonyInstance harmony;
-
         public string Name => "Traffic Light Replacer";
 
         public string Description => Translation.Instance.GetTranslation(TranslationID.MOD_DESCRIPTION);
+
+        public static Assembly NetSkinCompatAssembly = null;
 
         public void OnEnabled()
         {
@@ -73,9 +74,8 @@ namespace TrafficLightReplacer
 ) && mod.isEnabled))
             {
                 //TrafficLightReplacer.lib.NetworkSkins2Compatibility.dll
-                Debug.Log("bfchanges");
-                Assembly a = Load();
-                Type t = a.GetType("NetworkSkins2Compatibility.NetworkSkins2");
+                NetSkinCompatAssembly = LoadEmbeddedAssembly("TrafficLightReplacer.lib.NetworkSkins2Compatibility.dll");
+                Type t = NetSkinCompatAssembly.GetType("NetworkSkins2Compatibility.NetworkSkins2");
                 MethodInfo m = t.GetMethod("TestCall"); 
                 m.Invoke(null, new object[] { });
                 Debug.Log("afchanges");
@@ -90,10 +90,9 @@ namespace TrafficLightReplacer
             Console.ReadLine();
         }
 
-        public static Assembly Load()
+        public static Assembly LoadEmbeddedAssembly(string resource)
         {
             byte[] ba = null;
-            string resource = "TrafficLightReplacer.lib.NetworkSkins2Compatibility.dll";
             Assembly curAsm = Assembly.GetExecutingAssembly();
             using (Stream stm = curAsm.GetManifestResourceStream(resource))
             {
