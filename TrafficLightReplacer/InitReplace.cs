@@ -77,6 +77,7 @@ namespace TrafficLightReplacer
     [HarmonyPatch("OnLevelLoaded")]
     public class Patch
     {
+        [HarmonyPriority(Priority.Last)]
         static void Postfix()
         {
             if (ModLoading.isMainGame)
