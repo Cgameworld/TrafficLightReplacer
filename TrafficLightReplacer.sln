@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficLightReplacer", "TrafficLightReplacer\TrafficLightReplacer.csproj", "{026AB676-2F64-451A-B921-25F2C673E733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkSkins2Compatibility", "NetworkSkins2Compatibility\NetworkSkins2Compatibility.csproj", "{65B4696D-4165-49F6-9B66-A8FF80687BA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NS2Compatibility", "NS2Compatibility\NS2Compatibility.csproj", "{65B4696D-4165-49F6-9B66-A8FF80687BA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

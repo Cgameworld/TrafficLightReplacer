@@ -7,8 +7,8 @@
     <ProjectGuid>{65B4696D-4165-49F6-9B66-A8FF80687BA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetworkSkins2Compatibility</RootNamespace>
-    <AssemblyName>NetworkSkins2Compatibility</AssemblyName>
+    <RootNamespace>NS2Compatibility</RootNamespace>
+    <AssemblyName>NS2Compatibility</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

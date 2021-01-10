@@ -414,7 +414,7 @@ namespace TrafficLightReplacer
             if (ModInfo.NetSkinCompatAssembly != null)
             {
                 Debug.Log("lanepatch ns2 run");
-                Type t = ModInfo.NetSkinCompatAssembly.GetType("NetworkSkins2Compatibility.NetworkSkins2");
+                Type t = ModInfo.NetSkinCompatAssembly.GetType("NS2Compatibility.NetworkSkins2");
                 MethodInfo m = t.GetMethod("ReplaceNS2Props");
                 m.Invoke(null, new object[] { });
             }

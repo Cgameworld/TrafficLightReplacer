@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace NetworkSkins2Compatibility
+namespace NS2Compatibility
 {
     public class NetworkSkins2
     {
@@ -73,14 +73,17 @@ namespace NetworkSkins2Compatibility
 
                     for (var p1 = 0; p1 < laneProps.Length; p1++)
                     {
-                        if (!exclude)
+                        if (skin.m_lanes[l].m_laneProps.m_props[p1]?.m_finalProp != null)
                         {
-                            TrafficLightReplacer.Replacer.CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
-                        }
-                        else
-                        {
-                            Debug.Log(skin.GetHashCode() + " excluded");
-                            TrafficLightReplacer.Replacer.propGroupCounter++;
+                            if (!exclude)
+                            {
+                                TrafficLightReplacer.Replacer.CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
+                            }
+                            else
+                            {
+                                Debug.Log(skin.GetHashCode() + " excluded");
+                                TrafficLightReplacer.Replacer.propGroupCounter++;
+                            }
                         }
                     }
                 }

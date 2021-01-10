@@ -50,7 +50,7 @@ namespace TrafficLightReplacer
             if (ModInfo.NetSkinCompatAssembly != null)
             {
                 //detect network skins 2 props and add them to counter
-                Type t = ModInfo.NetSkinCompatAssembly.GetType("NetworkSkins2Compatibility.NetworkSkins2");
+                Type t = ModInfo.NetSkinCompatAssembly.GetType("NS2Compatibility.NetworkSkins2");
                 MethodInfo m = t.GetMethod("AddInitProps");
                 m.Invoke(null, new object[] { });
 
