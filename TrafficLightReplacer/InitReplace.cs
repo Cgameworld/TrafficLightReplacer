@@ -49,16 +49,25 @@ namespace TrafficLightReplacer
 
             if (ModInfo.NetSkinCompatAssembly != null)
             {
-                Debug.Log("cachepropfill ns2 patch run");
+                //detect network skins 2 props and add them to counter
                 Type t = ModInfo.NetSkinCompatAssembly.GetType("NetworkSkins2Compatibility.NetworkSkins2");
                 MethodInfo m = t.GetMethod("AddInitProps");
                 m.Invoke(null, new object[] { });
-            }
-            else
-            {
-                Debug.Log("cachepropfill ns2 patch NOT loaded");
-            }
 
+                //turn off street light effects for USRP lights, will remove when NS2 updated
+                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+                {
+                    var prefab = PrefabCollection<PropInfo>.GetLoaded(i);
+
+                    if (prefab.name.Contains("2084863228"))
+                    {
+                        Debug.Log("USRP prefab.name " + prefab.name + "effects l " + prefab.m_effects.Length);
+                        prefab.m_effects = null;
+                        prefab.m_hasEffects = false;
+                        prefab.m_effectLayer = -1;
+                    }
+                }
+            }
         }
     }
 

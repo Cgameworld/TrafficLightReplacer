@@ -73,19 +73,11 @@ namespace TrafficLightReplacer
         mod.name == "NetworkSkins"
 ) && mod.isEnabled))
             {
-                //TrafficLightReplacer.lib.NetworkSkins2Compatibility.dll
                 NetSkinCompatAssembly = LoadEmbeddedAssembly("TrafficLightReplacer.lib.NetworkSkins2Compatibility.dll");
                 Type t = NetSkinCompatAssembly.GetType("NetworkSkins2Compatibility.NetworkSkins2");
                 MethodInfo m = t.GetMethod("TestCall"); 
                 m.Invoke(null, new object[] { });
-                Debug.Log("afchanges");
             }
-            else
-            {
-                Debug.Log("ns2 not found!");
-            }
-
-
 
             Console.ReadLine();
         }
