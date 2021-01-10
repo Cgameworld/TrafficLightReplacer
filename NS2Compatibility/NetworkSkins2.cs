@@ -18,9 +18,9 @@ namespace NS2Compatibility
             for (int i = 0; i < skins.Count; i++)
             {
                 var skin = skins[i];
-                CacheSkins.Add(skin);
-
                 if (skin.m_lanes == null) return;
+
+                CacheSkins.Add(skin);
 
                 for (var l = 0; l < skin.m_lanes.Length; l++)
                 {
@@ -53,7 +53,9 @@ namespace NS2Compatibility
 
             for (int i = 0; i < skins.Count; i++)
             {
+
                 var skin = skins[i];
+                if (skin.m_lanes == null) return;
 
                 //check if loaded skin still exists
                 bool exclude = excludedskins.Any(a => a.Equals(skin));
@@ -64,8 +66,8 @@ namespace NS2Compatibility
                 bool isHighway = false;
                 TrafficLightReplacer.Replacer.GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
 
-                if (skin.m_lanes == null) return;
 
+                int dbugpropcount = 0;
                 for (var l = 0; l < skin.m_lanes.Length; l++)
                 {
                     var laneProps = skin.m_lanes[l]?.m_laneProps?.m_props;
@@ -77,16 +79,20 @@ namespace NS2Compatibility
                         {
                             if (!exclude)
                             {
+                                dbugpropcount++;
                                 TrafficLightReplacer.Replacer.CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
                             }
                             else
                             {
+                                dbugpropcount++;
                                 Debug.Log(skin.GetHashCode() + " excluded");
                                 TrafficLightReplacer.Replacer.propGroupCounter++;
                             }
                         }
                     }
                 }
+
+                Debug.Log("2props cycled " + dbugpropcount + " exclude? " + exclude);
             }
 
             foreach (var k in currentskins)
