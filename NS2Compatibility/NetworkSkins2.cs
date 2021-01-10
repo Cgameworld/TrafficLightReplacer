@@ -9,18 +9,18 @@ namespace NS2Compatibility
 {
     public class NetworkSkins2
     {
-        public static List<NetworkSkin> CacheSkins = new List<NetworkSkin>();
-             
+        public static Dictionary<NetworkSkin,int> CacheSkins = new Dictionary<NetworkSkin, int>();
+
         public static void AddInitProps()
         {
+            
             var skins = NetworkSkinManager.instance.AppliedSkins;
 
             for (int i = 0; i < skins.Count; i++)
             {
+                int propcount = 0;
                 var skin = skins[i];
                 if (skin.m_lanes == null) return;
-
-                CacheSkins.Add(skin);
 
                 for (var l = 0; l < skin.m_lanes.Length; l++)
                 {
@@ -38,15 +38,21 @@ namespace NS2Compatibility
                             };
 
                             TrafficLightReplacer.Replacer.propGroupCache.Add(propGroupProperties);
+                            propcount++;
                         }
                     }
+                    
                 }
+
+                CacheSkins.Add(skin,propcount);
             }
+
         }
 
         public static void ReplaceNS2Props()
         {
-            var skins = CacheSkins;
+            var skins = CacheSkins.Keys.ToList();
+            var propnumVals = CacheSkins.Values.ToList();
             var currentskins = NetworkSkinManager.instance.AppliedSkins;
 
             List<NetworkSkin> excludedskins = skins.Except(currentskins).ToList();
@@ -86,12 +92,20 @@ namespace NS2Compatibility
                             {
                                 dbugpropcount++;
                                 Debug.Log(skin.GetHashCode() + " excluded");
-                                TrafficLightReplacer.Replacer.propGroupCounter++;
+
+                                //TrafficLightReplacer.Replacer.propGroupCounter++;
                             }
                         }
+                        //Debug.Log("p1: " + p1);
                     }
+                    Debug.Log("L: " + l);
                 }
-
+                Debug.Log("ii: " + i);
+                if (exclude)
+                {
+                    TrafficLightReplacer.Replacer.propGroupCounter += propnumVals[i];
+                    Debug.Log("added " + propnumVals[i]);
+                }
                 Debug.Log("2props cycled " + dbugpropcount + " exclude? " + exclude);
             }
 
