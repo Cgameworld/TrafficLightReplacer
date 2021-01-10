@@ -72,8 +72,6 @@ namespace NS2Compatibility
                 bool isHighway = false;
                 TrafficLightReplacer.Replacer.GetRoadInformation(prefab, ref roadwidth, ref isOneWay);
 
-
-                int dbugpropcount = 0;
                 for (var l = 0; l < skin.m_lanes.Length; l++)
                 {
                     var laneProps = skin.m_lanes[l]?.m_laneProps?.m_props;
@@ -85,28 +83,16 @@ namespace NS2Compatibility
                         {
                             if (!exclude)
                             {
-                                dbugpropcount++;
                                 TrafficLightReplacer.Replacer.CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
                             }
-                            else
-                            {
-                                dbugpropcount++;
-                                Debug.Log(skin.GetHashCode() + " excluded");
-
-                                //TrafficLightReplacer.Replacer.propGroupCounter++;
-                            }
                         }
-                        //Debug.Log("p1: " + p1);
                     }
-                    Debug.Log("L: " + l);
                 }
-                Debug.Log("ii: " + i);
                 if (exclude)
                 {
                     TrafficLightReplacer.Replacer.propGroupCounter += propnumVals[i];
-                    Debug.Log("added " + propnumVals[i]);
+                    //Debug.Log("added propnumvals" + propnumVals[i]);
                 }
-                Debug.Log("2props cycled " + dbugpropcount + " exclude? " + exclude);
             }
 
             foreach (var k in currentskins)
