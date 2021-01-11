@@ -419,6 +419,10 @@ namespace TrafficLightReplacer
                 m.Invoke(null, new object[] { });
             }
 
+            if (propGroupCache.Count != propGroupCounter)
+            {
+                Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Prop Counting Error! Traffic Lights may have incorrect positions and rotations");
+            }
             Debug.Log("propCacheLength: " + propGroupCache.Count);
             Debug.Log("propGroupCounterTotal" + propGroupCounter);
             propGroupCounter = 0;
