@@ -84,6 +84,9 @@ namespace TrafficLightReplacer
 ) && mod.isEnabled))
             {
                 TMCompatAssembly = LoadEmbeddedAssembly("TrafficLightReplacer.lib.TMCompatibility.dll");
+                Type t = TMCompatAssembly.GetType("TMCompatibility.TMPE");
+                MethodInfo m = t.GetMethod("StartHarmony");
+                m.Invoke(null, new object[] { });
             }
 
         }
