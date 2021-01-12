@@ -85,7 +85,6 @@ namespace TrafficLightReplacer
             isOver = false;
             yield break;
         }
-
         public static void ModifyNodes()
         {
             var bufferLength = (ushort)NetManager.instance.m_nodes.m_buffer.Length;
@@ -194,4 +193,16 @@ namespace TrafficLightReplacer
             TIntersectionPatch.replaceIds = foundIds;
         }
     }
-}
+
+
+    //patch when toggling traffic lights manually (vanilla) - tmpe requires separate patches
+    [HarmonyPatch(typeof(RoadBaseAI))]
+    [HarmonyPatch("ClickNodeButton")]
+    public static class IntersectionTogglePatch
+    {
+        static void Postfix()
+        {
+            TIntersectionFinder.ModifyNodes();
+        }
+    }
+} 

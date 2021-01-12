@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using TrafficManager.Custom.AI;
+using TrafficManager.UI.SubTools;
 using UnityEngine;
 
 namespace TMCompatibility
@@ -29,12 +30,24 @@ namespace TMCompatibility
 
     [HarmonyPatch(typeof(CustomRoadBaseAI))]
     [HarmonyPatch("CustomClickNodeButton")]
-    public static class Patch
+    public static class VanillaTLToggle
     {
 
         static void Postfix()
         {
-            Debug.Log("TLR TMPE TL Click PATCH WORKS!!");
+            TrafficLightReplacer.TIntersectionFinder.ModifyNodes();
+        }
+
+    }
+
+    [HarmonyPatch(typeof(ToggleTrafficLightsTool))]
+    [HarmonyPatch("OnPrimaryClickOverlay")]
+    public static class TMPETLToggle
+    {
+
+        static void Postfix()
+        {
+            TrafficLightReplacer.TIntersectionFinder.ModifyNodes();
         }
 
     }
