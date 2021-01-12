@@ -26,6 +26,7 @@ namespace TrafficLightReplacer
         public string Description => Translation.Instance.GetTranslation(TranslationID.MOD_DESCRIPTION);
 
         public static Assembly NetSkinCompatAssembly = null;
+        public static Assembly TMCompatAssembly = null;
 
         public void OnEnabled()
         {
@@ -76,20 +77,29 @@ namespace TrafficLightReplacer
                 NetSkinCompatAssembly = LoadEmbeddedAssembly("TrafficLightReplacer.lib.NS2Compatibility.dll");
             }
 
-            Console.ReadLine();
+            //detect if TMPE is installed
+            if (PluginManager.instance.GetPluginsInfo().Any(mod => (
+        mod.publishedFileID.AsUInt64 == 1637663252uL ||
+        mod.name == "TrafficManager"
+) && mod.isEnabled))
+            {
+                TMCompatAssembly = LoadEmbeddedAssembly("TrafficLightReplacer.lib.TMCompatibility.dll");
+            }
+
         }
 
         public static Assembly LoadEmbeddedAssembly(string resource)
         {
             byte[] ba = null;
             Assembly curAsm = Assembly.GetExecutingAssembly();
+
             using (Stream stm = curAsm.GetManifestResourceStream(resource))
             {
                 ba = new byte[(int)stm.Length];
                 stm.Read(ba, 0, (int)stm.Length);
-
                 return Assembly.Load(ba);
             }
+            
         }
 
         private static void CheckAssets(List<string> embedList)
