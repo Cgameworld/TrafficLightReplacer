@@ -15,7 +15,12 @@
     <Translation ID="TRANSFORMBUTTONTEXT" String="Transform Settings" />
     <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Change traffic prop curb positioning" />
     <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;" />
-    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;" />    
+    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;" />
+    <Translation ID="LHDERROR" String="Error: Left Hand Drive mode is currently not supported" />
+    <Translation ID="COUNTINGERROR" String="Prop Counting Error! Traffic Lights may have incorrect positions and rotations" />
+    <Translation ID="TSEGIDERROR" String="Error finding segment ids for T-intersections" />
+    
+    <!-- Asset CREATOR WINDOW -->
     <Translation ID="GENTEMPXML" String="Generate Template Pack XMLs" />
     <Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Click on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder" />
     <Translation ID="NETNAMELABEL" String="Name:" />
@@ -27,6 +32,11 @@
     <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Open local XML config folder" />
     <Translation ID="TLRLOCALLOAD" String="Load TLRLocal Folder" />
     <Translation ID="REFRESHPACK" String="Refresh Packs" />
+    <Translation ID="ERROROVERWRITE" String="Overwrite Confimation" />
+    <Translation ID="ERROROVERWRITEDESCRP" String="Are you sure you want to overwrite the existing template xml files?" />
+    <Translation ID="TESTBUTTON" String="Test" />
+    
+    <!--MOD SETTINGS-->
     <Translation ID="FEATURESGROUPTITLE" String="Mod Features" />
     <Translation ID="PACKCREATOROPTION" String="Show Pack Creator Helper" />
     <Translation ID="MAINBACKGROUNDOPTION" String="Main Button Background" />

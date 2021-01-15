@@ -70,7 +70,7 @@ namespace TrafficLightReplacer
 
                 if (File.Exists(Path.Combine(tlrlocal, "onesize-template.xml")) || File.Exists(Path.Combine(tlrlocal, "multisize-template.xml")))
                 {
-                    ConfirmPanel.ShowModal("Overwrite Confimation", "Are you sure you want to overwrite the existing template xml files?", delegate (UIComponent comp, int ret)
+                    ConfirmPanel.ShowModal(Translation.Instance.GetTranslation(TranslationID.ERROROVERWRITE), Translation.Instance.GetTranslation(TranslationID.ERROROVERWRITEDESCRP), delegate (UIComponent comp, int ret)
                     {
                         if (ret != 1)
                         {
@@ -123,7 +123,7 @@ namespace TrafficLightReplacer
             };
 
             testButton = UIUtils.CreateButton(this);
-            testButton.text = Translation.Instance.GetTranslation("Test");
+            testButton.text = Translation.Instance.GetTranslation(TranslationID.TESTBUTTON);
             testButton.relativePosition = new Vector2(130, 135);
             testButton.width = 80;
 

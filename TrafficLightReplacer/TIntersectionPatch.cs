@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
 using TrafficLightReplacer;
+using TrafficLightReplacer.Locale;
+using TrafficLightReplacer.TranslationFramework;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -160,7 +162,7 @@ namespace TrafficLightReplacer
                             break;
                         default:
                             foundSegment = 0;
-                            Tools.ShowErrorWindow("ERROR", "segid error");
+                            Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), Translation.Instance.GetTranslation(TranslationID.TSEGIDERROR));
                             break;
                     }
 

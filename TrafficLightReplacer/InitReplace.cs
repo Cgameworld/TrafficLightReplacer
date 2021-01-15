@@ -86,7 +86,7 @@ namespace TrafficLightReplacer
                 //check if LHD (currently not supported)
                 if (Singleton<SimulationManager>.instance.m_metaData.m_invertTraffic == SimulationMetaData.MetaBool.True)
                 {
-                    Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Error: Left Hand Drive mode is currently not supported");
+                    Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), Translation.Instance.GetTranslation(TranslationID.LHDERROR));
                 }
 
                 //makes compatibility tweaks to specfic traffic light meshes if found

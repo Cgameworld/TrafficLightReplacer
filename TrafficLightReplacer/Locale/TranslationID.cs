@@ -17,6 +17,9 @@
         public const string TRANSFORMBUTTONTEXTTOOLTIP = "TRANSFORMBUTTONTEXTTOOLTIP";
         public const string PLACEHOLDERXMLERROR = "PLACEHOLDERXMLERROR";
         public const string GENERICXMLERROR = "GENERICXMLERROR";
+        public const string LHDERROR = "LHDERROR";
+        public const string COUNTINGERROR = "COUNTINGERROR";
+        public const string TSEGIDERROR = "TSEGIDERROR";
 
         //Asset CREATOR WINDOW
         public const string GENTEMPXML = "GENTEMPXML";
@@ -30,6 +33,10 @@
         public const string XMLFOLDERBUTTONTOOLTIP= "XMLFOLDERBUTTONTOOLTIP";
         public const string TLRLOCALLOAD = "TLRLOCALLOAD";
         public const string REFRESHPACK = "REFRESHPACK";
+        public const string ERROROVERWRITE = "ERROROVERWRITE";
+        public const string ERROROVERWRITEDESCRP = "ERROROVERWRITEDESCRP";
+        public const string TESTBUTTON = "TESTBUTTON";
+
 
         //MOD SETTINGS
         public const string FEATURESGROUPTITLE = "FEATURESGROUPTITLE";
