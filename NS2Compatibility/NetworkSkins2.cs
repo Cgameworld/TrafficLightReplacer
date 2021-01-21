@@ -1,7 +1,9 @@
-﻿using NetworkSkins.Skins;
+﻿using Harmony;
+using NetworkSkins.Skins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -10,6 +12,14 @@ namespace NS2Compatibility
     public class NetworkSkins2
     {
         public static Dictionary<NetworkSkin,int> CacheSkins = new Dictionary<NetworkSkin, int>();
+
+        public static void StartHarmony()
+        {
+            string harmonyId = "cgameworld.trafficlightreplacer.NS2Compat";
+            HarmonyInstance harmony;
+            harmony = HarmonyInstance.Create(harmonyId);
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+        }
 
         public static void AddInitProps()
         {
@@ -55,6 +65,17 @@ namespace NS2Compatibility
             var propnumVals = CacheSkins.Values.ToList();
             var currentskins = NetworkSkinManager.instance.AppliedSkins;
 
+            foreach (var e in CacheSkins)
+            {
+                Debug.Log("Cacheskins hash: " + e.Key.GetHashCode());
+                Debug.Log("Cacheskins propcount: " + e.Value);
+            }
+
+               foreach (var k in currentskins)
+            {
+                Debug.Log("CurrentSKIN hash: " + k.GetHashCode());
+            }
+
             List<NetworkSkin> excludedskins = skins.Except(currentskins).ToList();
 
             for (int i = 0; i < skins.Count; i++)
@@ -84,6 +105,7 @@ namespace NS2Compatibility
                             if (!exclude)
                             {
                                 TrafficLightReplacer.Replacer.CategoryReplacement(roadwidth, isOneWay, isHighway, skin.m_lanes[l], skin.m_lanes[l].m_laneProps.m_props[p1]);
+                                Debug.Log(skin.GetHashCode() + " excluded");
                             }
                         }
                     }
@@ -95,10 +117,6 @@ namespace NS2Compatibility
                 }
             }
 
-            foreach (var k in currentskins)
-            {
-                Debug.Log("CurrentSKIN hash: " + k.GetHashCode());
-            }
         }
 
 

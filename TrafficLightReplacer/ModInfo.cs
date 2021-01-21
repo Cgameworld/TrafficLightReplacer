@@ -75,6 +75,9 @@ namespace TrafficLightReplacer
 ) && mod.isEnabled))
             {
                 NetSkinCompatAssembly = LoadEmbeddedAssembly("TrafficLightReplacer.lib.NS2Compatibility.dll");
+                Type t = NetSkinCompatAssembly.GetType("NS2Compatibility.NetworkSkins2");
+                MethodInfo m = t.GetMethod("StartHarmony");
+                m.Invoke(null, new object[] { });
             }
 
             //detect if TMPE is installed
