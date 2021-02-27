@@ -81,6 +81,7 @@
     <Compile Include="TranslationFramework\TranslationUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Locale\zh.xml" />
     <EmbeddedResource Include="lib\TMCompatibility.dll" />
     <EmbeddedResource Include="lib\NS2Compatibility.dll" />
     <EmbeddedResource Include="Locale\english.xml" />

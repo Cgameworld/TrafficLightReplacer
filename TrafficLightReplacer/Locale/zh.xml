@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="zh" ReadableName="Chinese" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>
+    <Translation ID="MOD_DESCRIPTION" String="自定义城市所有的红绿灯"/>
+<Translation ID="MAINWINDOW_TITLE" String="红绿灯替换工具"/>
+<Translation ID="MAINWINDOW_PACKLABEL" String="包:"/>
+<Translation ID="NULLDROPDOWN" String="空"/>
+<Translation ID="OPPOSITESIDETOGGLE" String="放置于停止线对侧"/>
+<Translation ID="OPPOSITESIDETOOLTIP" String="将红绿灯放置于停止线对侧"/>
+<Translation ID="CUSTOMIZEBUTTONTEXT" String="自定义红绿灯"/>
+<Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="选择红绿灯"/>
+<Translation ID="SMALLROADSDROPDOWNLABEL" String="小型道路"/>
+<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="中型道路"/>
+<Translation ID="LARGEROADSDROPDOWNLABEL" String="大型道路"/>
+<Translation ID="TRANSFORMBUTTONTEXT" String="位置设置"/>
+<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="改变红绿灯的位置"/>
+<Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;" />
+<Translation ID="LHDERROR" String="暂时不支持左侧通行"/>
+<Translation ID="COUNTINGERROR" String="Prop Counting Error! Traffic Lights may have incorrect positions and rotations"/>
+<Translation ID="TSEGIDERROR" String="Error finding segment ids for T-intersections"/>
+<Translation ID="GENTEMPXML" String="创建XML格式的模板"/>
+<Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Click on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder"/>
+<Translation ID="NETNAMELABEL" String="名称"/>
+<Translation ID="NETNAMEFIELD" String="按更新获取道具名称"/>
+<Translation ID="UPDATEBUTTON" String="更新"/>
+<Translation ID="UPDATEBUTTONTOOLTIP" String="Select a prop using Find It! and click update"/>
+<Translation ID="UPDATEERRORTEXT" String="Null Prefab *Make sure a prop is selected!&#10;"/>
+<Translation ID="COPYBUTTON" String="复制"/>
+<Translation ID="XMLFOLDERBUTTONTOOLTIP" String="打开本地XML文件夹"/>
+<Translation ID="TLRLOCALLOAD" String="加载 TLR Local 文件夹"/>
+<Translation ID="REFRESHPACK" String="刷新"/>
+<Translation ID="ERROROVERWRITE" String="覆盖设置"/>
+<Translation ID="ERROROVERWRITEDESCRP" String="是否确认更改"/>
+<Translation ID="TESTBUTTON" String="测试"/>
+<Translation ID="FEATURESGROUPTITLE" String="Mod功能"/>
+<Translation ID="PACKCREATOROPTION" String="显示 Pack Creator Helper"/>
+<Translation ID="MAINBACKGROUNDOPTION" String="主按钮背景"/>
+<Translation ID="TWEAKSGROUPTITLE" String="Tweaks"/>
+<Translation ID="DEFAULTSIDESIGNALPOLE" String="在默认一侧放置红绿灯"/>
+<Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!"/>
+  </Translations>
+</Language>
