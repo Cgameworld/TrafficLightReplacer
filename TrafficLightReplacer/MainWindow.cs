@@ -1,4 +1,5 @@
 ﻿using ColossalFramework;
+using ColossalFramework.Globalization;
 using ColossalFramework.IO;
 using ColossalFramework.Packaging;
 using ColossalFramework.Plugins;
@@ -127,6 +128,7 @@ namespace TrafficLightReplacer
             oppositeSideToggle.isChecked = TLRModSettings.instance.OppositeSideToggle;
             oppositeSideToggle.relativePosition = new Vector2(20, 100);
             oppositeSideToggle.tooltip = Translation.Instance.GetTranslation(TranslationID.OPPOSITESIDETOOLTIP);
+            oppositeSideToggle.width = 320;
             oppositeSideToggle.isVisible = false;
 
             oppositeSideToggle.eventCheckChanged += (c, p) =>
@@ -196,7 +198,7 @@ namespace TrafficLightReplacer
             UILabel smallRoadsDropdownLabel = customizePanel.AddUIComponent<UILabel>();
             //"select from road panel"
             smallRoadsDropdownLabel.autoSize = false;
-            smallRoadsDropdownLabel.width = 110;
+            smallRoadsDropdownLabel.width = 145;
             smallRoadsDropdownLabel.height = 30;
             smallRoadsDropdownLabel.relativePosition = new Vector2(20, 7);
             smallRoadsDropdownLabel.text = Translation.Instance.GetTranslation(TranslationID.SMALLROADSDROPDOWNLABEL);
@@ -207,6 +209,7 @@ namespace TrafficLightReplacer
             smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
             smallRoadsDropdown.relativePosition = new Vector3(135, 0);
             smallRoadsDropdown.tooltip = "";
+
 
             smallRoadsDropdown.eventSelectedIndexChanged += (c, p) =>
             {
@@ -279,6 +282,20 @@ namespace TrafficLightReplacer
                 TLRModSettings.instance.Save();
                 Replacer.UpdateLaneProps();
             };
+
+            if (LocaleManager.instance.language == "de")
+            {
+                smallRoadsDropdown.relativePosition = new Vector3(155, 0);
+                mediumRoadsDropdown.relativePosition = new Vector3(170, 40);
+                largeRoadsDropdown.relativePosition = new Vector3(160, 80);
+            }
+            if (LocaleManager.instance.language == "zh")
+            {
+                packDropdown.relativePosition = new Vector3(50f, 53f);
+                smallRoadsDropdown.relativePosition = new Vector3(105, 0);
+                mediumRoadsDropdown.relativePosition = new Vector3(105, 40);
+                largeRoadsDropdown.relativePosition = new Vector3(105, 80);
+            }
 
             #endregion
 

@@ -9,9 +9,9 @@
 <Translation ID="OPPOSITESIDETOOLTIP" String="将红绿灯放置于停止线对侧"/>
 <Translation ID="CUSTOMIZEBUTTONTEXT" String="自定义红绿灯"/>
 <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="选择红绿灯"/>
-<Translation ID="SMALLROADSDROPDOWNLABEL" String="小型道路"/>
-<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="中型道路"/>
-<Translation ID="LARGEROADSDROPDOWNLABEL" String="大型道路"/>
+<Translation ID="SMALLROADSDROPDOWNLABEL" String="小型道路:"/>
+<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="中型道路:"/>
+<Translation ID="LARGEROADSDROPDOWNLABEL" String="大型道路:"/>
 <Translation ID="TRANSFORMBUTTONTEXT" String="位置设置"/>
 <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="改变红绿灯的位置"/>
 <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;"/>

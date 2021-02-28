@@ -14,8 +14,8 @@
 		<Translation ID="LARGEROADSDROPDOWNLABEL" String="Große Straßen:"/>
 		<Translation ID="TRANSFORMBUTTONTEXT" String="Transform Einstellungen"/>
 		<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Ampel positionierung ändern"/>
-		<Translation ID="PLACEHOLDERXMLERROR" String="Der Pack * hat Platzhalter Prefab Namen! Mach sicher dass alle die &lt;Prefab&gt; &lt;/Prefab&gt; Tags mit gültigen Prefab Namen in der XML Vorlagendatei eingefüllt sind."/>
-		<Translation ID="GENERICXMLERROR" String="Der Prefab mit Name * kann nicht deinem Spiel gefunden werden &#10;&#10;. Gebrochener XML Dateipfad:&#10;"/>
+		<Translation ID="PLACEHOLDERXMLERROR" String="Der Pack * hat Platzhalter Prefab Namen! Mach sicher dass alle die &lt;Prefab&gt; &lt;/Prefab&gt; Tags mit gültigen Prefab Namen in der XML Vorlagendatei eingefüllt sind.&#10;&#10;Gebrochener XML Dateipfad:&#10;"/>
+		<Translation ID="GENERICXMLERROR" String="Der Prefab mit Name * kann nicht deinem Spiel gefunden werden. &#10;&#10;Gebrochener XML Dateipfad:&#10;"/>
 		<Translation ID="LHDERROR" String="Fehler: Linkssteuerung modus nicht unterstützt"/>
 		<Translation ID="COUNTINGERROR" String="Prop Zählfehler! Ampeln können falsche Positionen und Rotationen haben"/>
 		<Translation ID="TSEGIDERROR" String="Fehler: Segment IDs für T-intersections nicht gefunden"/>
@@ -29,7 +29,7 @@
 		<Translation ID="COPYBUTTON" String="Kopieren"/>
 		<Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Lokalen XML Config Ordner öffnen"/>
 		<Translation ID="TLRLOCALLOAD" String="TLRLocal Ordner laden"/>
-		<Translation ID="REFRESHPACK" String="Packs Aktualisieren"/>
+		<Translation ID="REFRESHPACK" String="Aktualisieren"/>
 		<Translation ID="ERROROVERWRITE" String="Überschreibungsbestätigung"/>
 		<Translation ID="ERROROVERWRITEDESCRP" String="Bist du sicher die bestehende XML Template Datien zu überschreiben?"/>
 		<Translation ID="TESTBUTTON" String="Test"/>

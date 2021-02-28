@@ -1,4 +1,5 @@
 ﻿using ColossalFramework;
+using ColossalFramework.Globalization;
 using ColossalFramework.IO;
 using ColossalFramework.UI;
 using System;
@@ -103,6 +104,12 @@ namespace TrafficLightReplacer
             netNameField.padding = new RectOffset(0, 0, 6, 0);
             netNameField.relativePosition = new Vector3(80, 95);
 
+            if (LocaleManager.instance.language == "de")
+            {
+                netNameField.textScale = 0.75f;
+                netNameField.padding.top = 8;
+            }
+
             updateButton = UIUtils.CreateButton(this);
             updateButton.text = Translation.Instance.GetTranslation(TranslationID.UPDATEBUTTON);
             updateButton.relativePosition = new Vector2(20, 135);
@@ -190,6 +197,12 @@ namespace TrafficLightReplacer
             refreshPack.text = Translation.Instance.GetTranslation(TranslationID.REFRESHPACK);
             refreshPack.relativePosition = new Vector2(210, 180);
             refreshPack.width = 135;
+
+            if (LocaleManager.instance.language == "de")
+            {
+                refreshPack.relativePosition = new Vector3(230f, 180f);
+                refreshPack.width = 120;
+            }
 
             refreshPack.eventClick += (c, p) =>
             {
