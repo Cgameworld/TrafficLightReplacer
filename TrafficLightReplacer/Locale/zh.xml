@@ -39,5 +39,8 @@
 <Translation ID="TWEAKSGROUPTITLE" String="Tweaks"/>
 <Translation ID="DEFAULTSIDESIGNALPOLE" String="在默认一侧放置红绿灯"/>
 <Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!"/>
+    <Translation ID="OFFSET" String="Offset" />
+    <Translation ID="ANGLE" String="Angle" />
+    <Translation ID="SCALE" String="Scale" />
   </Translations>
 </Language>

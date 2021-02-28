@@ -336,11 +336,11 @@ namespace TrafficLightReplacer
             transformPanel.size = new Vector2(260, 110);
             transformPanel.isVisible = false;
 
-            CreateSliderRow("Offset X:", 9f, 0, "u", UpdateTransformSettings);
-            CreateSliderRow("Offset Y:", 9f, 1, "u", UpdateTransformSettings);
-            CreateSliderRow("Offset Z:", 9f, 2, "u", UpdateTransformSettings);
-            CreateSliderRow("Angle:", 180f, 3, "\x00B0", UpdateTransformSettings);
-            CreateSliderRow("Scale:", 180f, 4, "%", UpdateTransformSettings, 1, 200, 100);
+            CreateSliderRow(Translation.Instance.GetTranslation(TranslationID.OFFSET) + " X:", 9f, 0, "u", UpdateTransformSettings);
+            CreateSliderRow(Translation.Instance.GetTranslation(TranslationID.OFFSET) + " Y:", 9f, 1, "u", UpdateTransformSettings);
+            CreateSliderRow(Translation.Instance.GetTranslation(TranslationID.OFFSET) + " Z:", 9f, 2, "u", UpdateTransformSettings);
+            CreateSliderRow(Translation.Instance.GetTranslation(TranslationID.ANGLE) + ":", 180f, 3, "\x00B0", UpdateTransformSettings);
+            CreateSliderRow(Translation.Instance.GetTranslation(TranslationID.SCALE) + ":", 180f, 4, "%", UpdateTransformSettings, 1, 200, 100);
 
             clearButton = UIUtils.CreateButton(transformPanel);
             clearButton.text = "Reset";

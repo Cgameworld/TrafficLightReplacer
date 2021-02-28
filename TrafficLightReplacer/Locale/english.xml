@@ -43,5 +43,12 @@
     <Translation ID="TWEAKSGROUPTITLE" String="Tweaks" />
     <Translation ID="DEFAULTSIDESIGNALPOLE" String="Show Signal Pole Style Lights on Default Side" />  
     <Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!" />
+  
+ <!--TransformSettingsLabel-->
+    <Translation ID="OFFSET" String="Offset" />
+    <Translation ID="ANGLE" String="Angle" />
+    <Translation ID="SCALE" String="Scale" />
+    
+
   </Translations>
 </Language>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="de" ReadableName="German" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+	<Translations>
+		<Translation ID="MOD_DESCRIPTION" String="Ampeln ersetzen"/>
+		<Translation ID="MAINWINDOW_TITLE" String="Ampel Ersetzer"/>
+		<Translation ID="MAINWINDOW_PACKLABEL" String="Pack:"/>
+		<Translation ID="NULLDROPDOWN" String="Leer"/>
+		<Translation ID="OPPOSITESIDETOGGLE" String="Andere Seite der Haltelinie platzieren "/>
+		<Translation ID="OPPOSITESIDETOOLTIP" String="Platziert Ampeln auf der gegenüberliegenden Seite der Haltelinie"/>
+		<Translation ID="CUSTOMIZEBUTTONTEXT" String="Ampelvarianten"/>
+		<Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Ampeln anpassen"/>
+		<Translation ID="SMALLROADSDROPDOWNLABEL" String="Kleine Straßen:"/>
+		<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Mittlere Straßen:"/>
+		<Translation ID="LARGEROADSDROPDOWNLABEL" String="Große Straßen:"/>
+		<Translation ID="TRANSFORMBUTTONTEXT" String="Transform Einstellungen"/>
+		<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Ampel positionierung ändern"/>
+		<Translation ID="PLACEHOLDERXMLERROR" String="Der Pack * hat Platzhalter Prefab Namen! Mach sicher dass alle die &lt;Prefab&gt; &lt;/Prefab&gt; Tags mit gültigen Prefab Namen in der XML Vorlagendatei eingefüllt sind."/>
+		<Translation ID="GENERICXMLERROR" String="Der Prefab mit Name * kann nicht deinem Spiel gefunden werden &#10;&#10;. Gebrochener XML Dateipfad:&#10;"/>
+		<Translation ID="LHDERROR" String="Fehler: Linkssteuerung modus nicht unterstützt"/>
+		<Translation ID="COUNTINGERROR" String="Prop Zählfehler! Ampeln können falsche Positionen und Rotationen haben"/>
+		<Translation ID="TSEGIDERROR" String="Fehler: Segment IDs für T-intersections nicht gefunden"/>
+		<Translation ID="GENTEMPXML" String="Pack Template XMLs generieren"/>
+		<Translation ID="GENTEMPXMLMESSAGE" String="Template XML Dateien Exportiert * Template XML Dateien exportiert nach: *&#10;&#10; Klick auf das Ordner Icon im Pack Creator Helper Fenster um den TLRLocal Ordner zu öffnen."/>
+		<Translation ID="NETNAMELABEL" String="Name:"/>
+		<Translation ID="NETNAMEFIELD" String="Klick Update um Prop Name einzufügen"/>
+		<Translation ID="UPDATEBUTTON" String="Update"/>
+		<Translation ID="UPDATEBUTTONTOOLTIP" String="Wähle ein Prop mit Find It! und klick auf Update"/>
+		<Translation ID="UPDATEERRORTEXT" String="Null Prefab *Mach sicher dass ein Prop ausgewählt ist&#10;"/>
+		<Translation ID="COPYBUTTON" String="Kopieren"/>
+		<Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Lokalen XML Config Ordner öffnen"/>
+		<Translation ID="TLRLOCALLOAD" String="TLRLocal Ordner laden"/>
+		<Translation ID="REFRESHPACK" String="Packs Aktualisieren"/>
+		<Translation ID="ERROROVERWRITE" String="Überschreibungsbestätigung"/>
+		<Translation ID="ERROROVERWRITEDESCRP" String="Bist du sicher die bestehende XML Template Datien zu überschreiben?"/>
+		<Translation ID="TESTBUTTON" String="Test"/>
+		<Translation ID="FEATURESGROUPTITLE" String="Mod Funktionen"/>
+		<Translation ID="PACKCREATOROPTION" String="Zeige Pack Creator Helper"/>
+		<Translation ID="MAINBACKGROUNDOPTION" String="Hauptknopf Hintergrund"/>
+		<Translation ID="TWEAKSGROUPTITLE" String="Optimierungen"/>
+		<Translation ID="DEFAULTSIDESIGNALPOLE" String="Zeige Signalpolstil Lichter an der Standardseite"/>
+		<Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button klicked!"/>
+		<Translation ID="OFFSET" String="Versatz"/>
+		<Translation ID="ANGLE" String="Winkel"/>
+		<Translation ID="SCALE" String="Maßstab"/>
+	</Translations>
+</Language>

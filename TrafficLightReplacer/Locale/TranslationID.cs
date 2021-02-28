@@ -30,7 +30,7 @@
         public const string UPDATEBUTTONTOOLTIP = "UPDATEBUTTONTOOLTIP";
         public const string UPDATEERRORTEXT = "UPDATEERRORTEXT";
         public const string COPYBUTTON = "COPYBUTTON";
-        public const string XMLFOLDERBUTTONTOOLTIP= "XMLFOLDERBUTTONTOOLTIP";
+        public const string XMLFOLDERBUTTONTOOLTIP = "XMLFOLDERBUTTONTOOLTIP";
         public const string TLRLOCALLOAD = "TLRLOCALLOAD";
         public const string REFRESHPACK = "REFRESHPACK";
         public const string ERROROVERWRITE = "ERROROVERWRITE";
@@ -45,6 +45,10 @@
         public const string MAINBACKGROUNDOPTION = "MAINBACKGROUNDOPTION";
         public const string RESETGROUPMESSAGE = "RESETGROUPMESSAGE";
         public const string TWEAKSGROUPTITLE = "TWEAKSGROUPTITLE";
+
+        public const string OFFSET = "OFFSET";
+        public const string ANGLE = "ANGLE";
+        public const string SCALE = "SCALE";
 
     }
 }
