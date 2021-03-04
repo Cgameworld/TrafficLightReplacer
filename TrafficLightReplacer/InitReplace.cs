@@ -75,6 +75,11 @@ namespace TrafficLightReplacer
                     Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), Translation.Instance.GetTranslation(TranslationID.LHDERROR));
                 }
 
+                //check if internal blank prop is present!
+                if (PrefabCollection<PropInfo>.FindLoaded(Tools.BlankProp) == null)
+                {
+                    Tools.ShowErrorWindow(Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_TITLE), "Critical Error: Internal Blank Prop Not Found!");
+                }
                 //makes compatibility tweaks to specfic traffic light meshes if found
                 PreloadPropModify();
 
