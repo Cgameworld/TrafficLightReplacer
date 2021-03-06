@@ -14,7 +14,7 @@
 		<Translation ID="LARGEROADSDROPDOWNLABEL" String="Estradas Grandes:"/>
 		<Translation ID="TRANSFORMBUTTONTEXT" String="Definições de Conversão"/>
 		<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Alterar a posição "/>
-		<Translation ID="PLACEHOLDERXMLERROR" String=""/>
+    <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;" />
 		<Translation ID="GENERICXMLERROR" String="O prefab com o nome * não foi encontrado no teu jogo&#10;&#10;Caminho do ficheiro XML danificado:&#10;"/>
 		<Translation ID="LHDERROR" String="Erro: o modo de Circulação pela Esquerda não está suportado atualmente"/>
 		<Translation ID="COUNTINGERROR" String="Erro de Contagem de Adereços! Os Semáforos podem estar com posições e rotações incorretas"/>
@@ -37,8 +37,8 @@
 		<Translation ID="PACKCREATOROPTION" String="Mostrar Pack Creator Helper"/>
 		<Translation ID="MAINBACKGROUNDOPTION" String="Fundo do Botão Principal"/>
 		<Translation ID="TWEAKSGROUPTITLE" String="Modificações"/>
-		<Translation ID="DEFAULTSIDESIGNALPOLE" String=""/>
-		<Translation ID="RESETGROUPMESSAGE" String="Repor* Posição do Ícone* Botão clicado!"/>
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="Show Signal Pole Style Lights on Default Side" />
+    <Translation ID="RESETGROUPMESSAGE" String="Repor* Posição do Ícone* Botão clicado!"/>
 		<Translation ID="OFFSET" String="Desvio"/>
 		<Translation ID="ANGLE" String="Ângulo"/>
 		<Translation ID="SCALE" String="Tamanho"/>

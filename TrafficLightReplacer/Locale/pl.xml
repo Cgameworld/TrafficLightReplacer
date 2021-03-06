@@ -2,7 +2,7 @@
 <Language UniqueName="pl" ReadableName="Polish" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
 	<Translations>
 		<Translation ID="MOD_DESCRIPTION" String="Dostosuj sygnalizację świetlną swojego miasta"/>
-		<Translation ID="MAINWINDOW_TITLE" String=""/>
+    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer" />
 		<Translation ID="MAINWINDOW_PACKLABEL" String="Paczka:"/>
 		<Translation ID="NULLDROPDOWN" String="Pusty"/>
 		<Translation ID="OPPOSITESIDETOGGLE" String="Umieść po drugiej stronie linii zatrzymania"/>
@@ -12,34 +12,35 @@
 		<Translation ID="SMALLROADSDROPDOWNLABEL" String="Małe drogi:"/>
 		<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Średnie drogi:"/>
 		<Translation ID="LARGEROADSDROPDOWNLABEL" String="Duże drogi:"/>
-    <!--Fix Blank Strings!! -->
-		<Translation ID="TRANSFORMBUTTONTEXT" String=""/>
-		<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String=""/>
-		<Translation ID="PLACEHOLDERXMLERROR" String=""/>
-		<Translation ID="GENERICXMLERROR" String=""/>
+    <Translation ID="TRANSFORMBUTTONTEXT" String="Transform Settings" />
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Change traffic prop curb positioning" />
+    <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;" />
+    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;" />
 		<Translation ID="LHDERROR" String="Błąd: tryb ruchu lewostronnego nie jest obecnie obsługiwany"/>
-		<Translation ID="COUNTINGERROR" String=""/>
-		<Translation ID="TSEGIDERROR" String=""/>
-		<Translation ID="GENTEMPXML" String=""/>
-		<Translation ID="GENTEMPXMLMESSAGE" String=""/>
+    <Translation ID="COUNTINGERROR" String="Prop Counting Error! Traffic Lights may have incorrect positions and rotations" />
+    <Translation ID="TSEGIDERROR" String="Error finding segment ids for T-intersections" />
+
+    <!-- Asset CREATOR WINDOW -->
+    <Translation ID="GENTEMPXML" String="Generate Template Pack XMLs" />
+    <Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Click on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder" />
 		<Translation ID="NETNAMELABEL" String="Nazwa:"/>
-		<Translation ID="NETNAMEFIELD" String=""/>
+    <Translation ID="NETNAMEFIELD" String="Press update to grab prop name" />
 		<Translation ID="UPDATEBUTTON" String="Aktualizuj"/>
 		<Translation ID="UPDATEBUTTONTOOLTIP" String="Wybierz rekwizyt używając Find It! i kliknij Aktualizuj"/>
-		<Translation ID="UPDATEERRORTEXT" String=""/>
+    <Translation ID="UPDATEERRORTEXT" String="Null Prefab *Make sure a prop is selected!&#10;" />
 		<Translation ID="COPYBUTTON" String="Kopiuj"/>
-		<Translation ID="XMLFOLDERBUTTONTOOLTIP" String=""/>
-		<Translation ID="TLRLOCALLOAD" String=""/>
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Open local XML config folder" />
+    <Translation ID="TLRLOCALLOAD" String="Load TLRLocal Folder" />
 		<Translation ID="REFRESHPACK" String="Odśwież paczki"/>
-		<Translation ID="ERROROVERWRITE" String=""/>
+    <Translation ID="ERROROVERWRITE" String="Overwrite Confirmation" />
 		<Translation ID="ERROROVERWRITEDESCRP" String="Czy na pewno chcesz nadpisać istniejące pliki XML szablonu?"/>
 		<Translation ID="TESTBUTTON" String="Test"/>
 		<Translation ID="FEATURESGROUPTITLE" String="Funkcje moda"/>
-		<Translation ID="PACKCREATOROPTION" String=""/>
-		<Translation ID="MAINBACKGROUNDOPTION" String=""/>
-		<Translation ID="TWEAKSGROUPTITLE" String=""/>
-		<Translation ID="DEFAULTSIDESIGNALPOLE" String=""/>
-		<Translation ID="RESETGROUPMESSAGE" String=""/>
+    <Translation ID="PACKCREATOROPTION" String="Show Pack Creator Helper" />
+    <Translation ID="MAINBACKGROUNDOPTION" String="Main Button Background" />
+    <Translation ID="TWEAKSGROUPTITLE" String="Tweaks" />
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="Show Signal Pole Style Lights on Default Side" />
+    <Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!" />
 		<Translation ID="OFFSET" String="Offset"/>
 		<Translation ID="ANGLE" String="Kąt"/>
 		<Translation ID="SCALE" String="Skala"/>

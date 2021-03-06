@@ -20,7 +20,7 @@
 		<Translation ID="COUNTINGERROR" String="Prop telfout! Verkeerslichten hebben mogelijk verkeerde posities en rotaties"/>
 		<Translation ID="TSEGIDERROR" String="Fout: segment ID voor T-kruising niet gevonden"/>
 		<Translation ID="GENTEMPXML" String="Pakket template XML's genereren"/>
-		<Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Klik op het map ikoon iPack Creator Helper window om de TLRLocal Folder te openen"/>
+		<Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Klik op het map ikoon Pack Creator Helper window om de TLRLocal Folder te openen"/>
 		<Translation ID="NETNAMELABEL" String="Naam:"/>
 		<Translation ID="NETNAMEFIELD" String="Klik op Update om de propnaam toe te voegen"/>
 		<Translation ID="UPDATEBUTTON" String="Update"/>
