@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="pl" ReadableName="Polish" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+	<Translations>
+		<Translation ID="MOD_DESCRIPTION" String="Dostosuj sygnalizację świetlną swojego miasta"/>
+		<Translation ID="MAINWINDOW_TITLE" String=""/>
+		<Translation ID="MAINWINDOW_PACKLABEL" String="Paczka:"/>
+		<Translation ID="NULLDROPDOWN" String="Pusty"/>
+		<Translation ID="OPPOSITESIDETOGGLE" String="Umieść po drugiej stronie linii zatrzymania"/>
+		<Translation ID="OPPOSITESIDETOOLTIP" String="Umieszcza sygnalizację świetlną po drugiej stronie linii zatrzymania"/>
+		<Translation ID="CUSTOMIZEBUTTONTEXT" String="Dostosuj światła"/>
+		<Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Wybierz odmiany sygnalizacji świetlnej"/>
+		<Translation ID="SMALLROADSDROPDOWNLABEL" String="Małe drogi:"/>
+		<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Średnie drogi:"/>
+		<Translation ID="LARGEROADSDROPDOWNLABEL" String="Duże drogi:"/>
+    <!--Fix Blank Strings!! -->
+		<Translation ID="TRANSFORMBUTTONTEXT" String=""/>
+		<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String=""/>
+		<Translation ID="PLACEHOLDERXMLERROR" String=""/>
+		<Translation ID="GENERICXMLERROR" String=""/>
+		<Translation ID="LHDERROR" String="Błąd: tryb ruchu lewostronnego nie jest obecnie obsługiwany"/>
+		<Translation ID="COUNTINGERROR" String=""/>
+		<Translation ID="TSEGIDERROR" String=""/>
+		<Translation ID="GENTEMPXML" String=""/>
+		<Translation ID="GENTEMPXMLMESSAGE" String=""/>
+		<Translation ID="NETNAMELABEL" String="Nazwa:"/>
+		<Translation ID="NETNAMEFIELD" String=""/>
+		<Translation ID="UPDATEBUTTON" String="Aktualizuj"/>
+		<Translation ID="UPDATEBUTTONTOOLTIP" String="Wybierz rekwizyt używając Find It! i kliknij Aktualizuj"/>
+		<Translation ID="UPDATEERRORTEXT" String=""/>
+		<Translation ID="COPYBUTTON" String="Kopiuj"/>
+		<Translation ID="XMLFOLDERBUTTONTOOLTIP" String=""/>
+		<Translation ID="TLRLOCALLOAD" String=""/>
+		<Translation ID="REFRESHPACK" String="Odśwież paczki"/>
+		<Translation ID="ERROROVERWRITE" String=""/>
+		<Translation ID="ERROROVERWRITEDESCRP" String="Czy na pewno chcesz nadpisać istniejące pliki XML szablonu?"/>
+		<Translation ID="TESTBUTTON" String="Test"/>
+		<Translation ID="FEATURESGROUPTITLE" String="Funkcje moda"/>
+		<Translation ID="PACKCREATOROPTION" String=""/>
+		<Translation ID="MAINBACKGROUNDOPTION" String=""/>
+		<Translation ID="TWEAKSGROUPTITLE" String=""/>
+		<Translation ID="DEFAULTSIDESIGNALPOLE" String=""/>
+		<Translation ID="RESETGROUPMESSAGE" String=""/>
+		<Translation ID="OFFSET" String="Offset"/>
+		<Translation ID="ANGLE" String="Kąt"/>
+		<Translation ID="SCALE" String="Skala"/>
+	</Translations>
+</Language>

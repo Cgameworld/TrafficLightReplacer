@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="nl" ReadableName="Dutch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+	<Translations>
+		<Translation ID="MOD_DESCRIPTION" String="Verkeerslichten vervangen"/>
+		<Translation ID="MAINWINDOW_TITLE" String="Verkeerslicht vervanger"/>
+		<Translation ID="MAINWINDOW_PACKLABEL" String="Pakket:"/>
+		<Translation ID="NULLDROPDOWN" String="Leeg"/>
+		<Translation ID="OPPOSITESIDETOGGLE" String="Plaats aan andere kant van de stopstreep"/>
+		<Translation ID="OPPOSITESIDETOOLTIP" String="Plaatst verkeerslichten aan de andere kant van de stopstreep"/>
+		<Translation ID="CUSTOMIZEBUTTONTEXT" String="Verkeerslicht variaties"/>
+		<Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Verkeerslichten aanpassen"/>
+		<Translation ID="SMALLROADSDROPDOWNLABEL" String="Smalle straten"/>
+		<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Midden straten"/>
+		<Translation ID="LARGEROADSDROPDOWNLABEL" String="Brede straten"/>
+		<Translation ID="TRANSFORMBUTTONTEXT" String="Instellingen aanpassen"/>
+		<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Verkeerslicht positie aanpassen"/>
+		<Translation ID="PLACEHOLDERXMLERROR" String="Het pakket * heeft tijdelijke prefab namen! Pas alle &lt;Prefab&gt; &lt;/Prefab&gt; tags aan met geldige prop prefab namen in het template xml file&#10;&#10;Broken XML filepath:&#10;"/>
+		<Translation ID="GENERICXMLERROR" String="De prefab met naam * kan niet gevonden worden in je spel&#10;&#10;Broken XML filepath:&#10;"/>
+		<Translation ID="LHDERROR" String="Fout: Linksrijden wordt niet ondersteund"/>
+		<Translation ID="COUNTINGERROR" String="Prop telfout! Verkeerslichten hebben mogelijk verkeerde posities en rotaties"/>
+		<Translation ID="TSEGIDERROR" String="Fout: segment ID voor T-kruising niet gevonden"/>
+		<Translation ID="GENTEMPXML" String="Pakket template XML's genereren"/>
+		<Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Klik op het map ikoon iPack Creator Helper window om de TLRLocal Folder te openen"/>
+		<Translation ID="NETNAMELABEL" String="Naam:"/>
+		<Translation ID="NETNAMEFIELD" String="Klik op Update om de propnaam toe te voegen"/>
+		<Translation ID="UPDATEBUTTON" String="Update"/>
+		<Translation ID="UPDATEBUTTONTOOLTIP" String="Kies een prop met Find It! en klik op Update"/>
+		<Translation ID="UPDATEERRORTEXT" String="Null Prefab *Selecteer een prop!&#10;"/>
+		<Translation ID="COPYBUTTON" String="Copy"/>
+		<Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Open lokale XML Config map"/>
+		<Translation ID="TLRLOCALLOAD" String="Laad TLRLocal map"/>
+		<Translation ID="REFRESHPACK" String="Opnieuw laden"/>
+		<Translation ID="ERROROVERWRITE" String="Bevestig overschrijving"/>
+		<Translation ID="ERROROVERWRITEDESCRP" String="Weet je zeker dat je de bestaande XML template files wilt overschrijven?"/>
+		<Translation ID="TESTBUTTON" String="Test"/>
+		<Translation ID="FEATURESGROUPTITLE" String="Mod kenmerken"/>
+		<Translation ID="PACKCREATOROPTION" String="Toon Pack Creater Helper"/>
+		<Translation ID="MAINBACKGROUNDOPTION" String="Hoofdknop achtergrond"/>
+		<Translation ID="TWEAKSGROUPTITLE" String="Tweaks"/>
+		<Translation ID="DEFAULTSIDESIGNALPOLE" String="Toon waarschuwinglicht stijl aan de standaard kant"/>
+		<Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!"/>
+		<Translation ID="OFFSET" String="Verloop"/>
+		<Translation ID="ANGLE" String="Hoek"/>
+		<Translation ID="SCALE" String="Schaal"/>
+	</Translations>
+</Language>

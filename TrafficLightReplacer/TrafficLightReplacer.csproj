@@ -81,11 +81,14 @@
     <Compile Include="TranslationFramework\TranslationUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Locale\pl.xml" />
+    <EmbeddedResource Include="Locale\pt.xml" />
+    <EmbeddedResource Include="Locale\nl.xml" />
     <EmbeddedResource Include="Locale\de.xml" />
     <EmbeddedResource Include="Locale\zh.xml" />
     <EmbeddedResource Include="lib\TMCompatibility.dll" />
     <EmbeddedResource Include="lib\NS2Compatibility.dll" />
-    <EmbeddedResource Include="Locale\english.xml" />
+    <EmbeddedResource Include="Locale\en.xml" />
     <EmbeddedResource Include="Icons\tlr-button-padding.png" />
     <EmbeddedResource Include="Icons\tlr-button.png" />
     <EmbeddedResource Include="Icons\Folder.png" />
