@@ -39,6 +39,16 @@ namespace TrafficLightReplacer.TranslationFramework
                 return;
             CurrentLanguage = Languages.Find(lang => lang._uniqueName == LocaleManager.instance.language) ??
                                Languages.Find(lang => lang._uniqueName == FallbackLanguage);
+
+            if (ModLoading.isMainGame)
+            {
+                //hack to refresh all text objects
+                Object.DestroyImmediate(TrafficLightReplacePanel.instance);
+                TrafficLightReplacePanel.instance.Show();
+
+                Object.DestroyImmediate(CreatorToolPanel.instance);
+                CreatorToolPanel.instance.Show();
+            }
         }
 
 
