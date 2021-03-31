@@ -312,6 +312,14 @@ namespace TrafficLightReplacer
                 mediumRoadsDropdown.relativePosition = new Vector3(145, 40);
                 largeRoadsDropdown.relativePosition = new Vector3(125, 80);
             }
+            if (LocaleManager.instance.language == "pt")
+            {
+                packDropdown.width = 260;
+                packDropdown.relativePosition = new Vector3(90f, 53f);
+                smallRoadsDropdown.relativePosition = new Vector3(125, 0);
+                mediumRoadsDropdown.relativePosition = new Vector3(145, 40);
+                largeRoadsDropdown.relativePosition = new Vector3(125, 80);
+            }
 
             #endregion
 

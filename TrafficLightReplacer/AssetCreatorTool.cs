@@ -99,6 +99,7 @@ namespace TrafficLightReplacer
 
             netNameField = UIUtils.CreateTextField(this);
             netNameField.text = Translation.Instance.GetTranslation(TranslationID.NETNAMEFIELD);
+            netNameField.tooltip = Translation.Instance.GetTranslation(TranslationID.NETNAMEFIELD);
             netNameField.width = 270f;
             netNameField.height = 25f;
             netNameField.padding = new RectOffset(0, 0, 6, 0);
@@ -183,6 +184,7 @@ namespace TrafficLightReplacer
 
             TLRLocalLoad = UIUtils.CreateCheckBox(this);
             TLRLocalLoad.text = Translation.Instance.GetTranslation(TranslationID.TLRLOCALLOAD);
+            TLRLocalLoad.tooltip = Translation.Instance.GetTranslation(TranslationID.TLRLOCALLOAD);
             TLRLocalLoad.isChecked = TLRModSettings.instance.LoadTLRLocalFolder;
             TLRLocalLoad.relativePosition = new Vector2(20, 185);
             TLRLocalLoad.tooltip = "";
@@ -195,6 +197,7 @@ namespace TrafficLightReplacer
 
             refreshPack = UIUtils.CreateButton(this);
             refreshPack.text = Translation.Instance.GetTranslation(TranslationID.REFRESHPACK);
+            refreshPack.tooltip = Translation.Instance.GetTranslation(TranslationID.REFRESHPACK);
             refreshPack.relativePosition = new Vector2(210, 180);
             refreshPack.width = 135;
 
