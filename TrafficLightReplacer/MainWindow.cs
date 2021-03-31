@@ -84,7 +84,7 @@ namespace TrafficLightReplacer
             UILabel areaTypeLabel = AddUIComponent<UILabel>();
             //"select from road panel"
             areaTypeLabel.autoSize = false;
-            areaTypeLabel.width = 60;
+            areaTypeLabel.width = 80;
             areaTypeLabel.height = 30;
             areaTypeLabel.relativePosition = new Vector2(20, 60);
             areaTypeLabel.text = Translation.Instance.GetTranslation(TranslationID.MAINWINDOW_PACKLABEL);
@@ -128,7 +128,7 @@ namespace TrafficLightReplacer
             oppositeSideToggle.isChecked = TLRModSettings.instance.OppositeSideToggle;
             oppositeSideToggle.relativePosition = new Vector2(20, 100);
             oppositeSideToggle.tooltip = Translation.Instance.GetTranslation(TranslationID.OPPOSITESIDETOOLTIP);
-            oppositeSideToggle.width = 320;
+            oppositeSideToggle.width = 340;
             oppositeSideToggle.isVisible = false;
 
             oppositeSideToggle.eventCheckChanged += (c, p) =>
@@ -295,6 +295,22 @@ namespace TrafficLightReplacer
                 smallRoadsDropdown.relativePosition = new Vector3(105, 0);
                 mediumRoadsDropdown.relativePosition = new Vector3(105, 40);
                 largeRoadsDropdown.relativePosition = new Vector3(105, 80);
+            }
+            if (LocaleManager.instance.language == "nl")
+            {
+                packDropdown.width = 260;
+                packDropdown.relativePosition = new Vector3(90f, 53f);
+                smallRoadsDropdown.relativePosition = new Vector3(155, 0);
+                mediumRoadsDropdown.relativePosition = new Vector3(160, 40);
+                largeRoadsDropdown.relativePosition = new Vector3(150, 80);
+            }
+            if (LocaleManager.instance.language == "pl")
+            {
+                packDropdown.width = 260;
+                packDropdown.relativePosition = new Vector3(90f, 53f);
+                smallRoadsDropdown.relativePosition = new Vector3(125, 0);
+                mediumRoadsDropdown.relativePosition = new Vector3(145, 40);
+                largeRoadsDropdown.relativePosition = new Vector3(125, 80);
             }
 
             #endregion
