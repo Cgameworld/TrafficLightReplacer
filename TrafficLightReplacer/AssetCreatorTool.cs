@@ -187,7 +187,6 @@ namespace TrafficLightReplacer
             TLRLocalLoad.tooltip = Translation.Instance.GetTranslation(TranslationID.TLRLOCALLOAD);
             TLRLocalLoad.isChecked = TLRModSettings.instance.LoadTLRLocalFolder;
             TLRLocalLoad.relativePosition = new Vector2(20, 185);
-            TLRLocalLoad.tooltip = "";
 
             TLRLocalLoad.eventCheckChanged += (c, p) =>
             {

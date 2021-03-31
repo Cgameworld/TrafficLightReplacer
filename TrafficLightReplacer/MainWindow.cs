@@ -316,9 +316,18 @@ namespace TrafficLightReplacer
             {
                 packDropdown.width = 260;
                 packDropdown.relativePosition = new Vector3(90f, 53f);
-                smallRoadsDropdown.relativePosition = new Vector3(125, 0);
-                mediumRoadsDropdown.relativePosition = new Vector3(145, 40);
-                largeRoadsDropdown.relativePosition = new Vector3(125, 80);
+
+                smallRoadsDropdownLabel.textScale = 0.85f;
+                smallRoadsDropdownLabel.padding.top = 1;
+                smallRoadsDropdown.relativePosition = new Vector3(170, 0);
+
+                mediumRoadsDropdownLabel.textScale = 0.85f;
+                mediumRoadsDropdownLabel.padding.top = 1;
+                mediumRoadsDropdown.relativePosition = new Vector3(155, 40);
+
+                largeRoadsDropdownLabel.textScale = 0.85f;
+                largeRoadsDropdownLabel.padding.top = 1;
+                largeRoadsDropdown.relativePosition = new Vector3(170, 80);
             }
 
             #endregion
