@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="fr" ReadableName="French" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>
+    <Translation ID="MOD_DESCRIPTION" String="Customisez vos feux de circulation"/>
+    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer"/>
+    <Translation ID="MAINWINDOW_PACKLABEL" String="Pack:"/>
+    <Translation ID="NULLDROPDOWN" String="Vide"/>
+    <Translation ID="OPPOSITESIDETOGGLE" String="Placez au côté opposé de ligne de stop "/>
+    <Translation ID="OPPOSITESIDETOOLTIP" String="Placez les feux de circulations au côté opposé de la ligne du stop"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXT" String="Customisez les feux"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Séléctionez une variation de feux de circulations"/>
+    <Translation ID="SMALLROADSDROPDOWNLABEL" String="Petite routes "/>
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Routes moyen"/>
+    <Translation ID="LARGEROADSDROPDOWNLABEL" String="Grandes routes "/>
+    <Translation ID="TRANSFORMBUTTONTEXT" String="Modifiez les paramètres "/>
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Modifier le positionnement de la bordure de la route"/>
+    <Translation ID="PLACEHOLDERXMLERROR" String="Le pack * contient un espace reservé pour des noms de configuration! Soyez sûr de remplir tout le &lt;configurations&gt; &lt;/configurationsb&gt; tags avec une configuration d'objet valide à partir du modèle xml fichier&#10;&#10;Cassé XML filepath:&#10;"/>
+    <Translation ID="GENERICXMLERROR" String="Le prefab suivant * n'est pas trouvé dans le jeu &#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="LHDERROR" String="Erreur : la circulation è gauche n'est actuellement pas suportée"/>
+    <Translation ID="COUNTINGERROR" String="Prop Counting Error! Les feux sont dans une position ou une rotation incorecte"/>
+    <Translation ID="TSEGIDERROR" String="Error finding segment ids for T-intersections"/>
+    <Translation ID="GENTEMPXML" String="Generate Template Pack XMLs"/>
+    <Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Click on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder"/>
+    <Translation ID="NETNAMELABEL" String="nom:"/>
+    <Translation ID="NETNAMEFIELD" String="Press update to grab prop name"/>
+    <Translation ID="UPDATEBUTTON" String="Mise a jours"/>
+    <Translation ID="UPDATEBUTTONTOOLTIP" String="Select a prop using Find It! and click update"/>
+    <Translation ID="UPDATEERRORTEXT" String="Null Prefab *Make sure a prop is selected!&#10;"/>
+    <Translation ID="COPYBUTTON" String="Copie"/>
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Ouvrir le dossier locale du la configuration XML"/>
+    <Translation ID="TLRLOCALLOAD" String="Charger le dossier locale du TLR"/>
+    <Translation ID="REFRESHPACK" String="Actualiser les packs"/>
+    <Translation ID="ERROROVERWRITE" String="Overwrite Confirmation"/>
+    <Translation ID="ERROROVERWRITEDESCRP" String="Are you sure you want to overwrite the existing template xml files?"/>
+    <Translation ID="TESTBUTTON" String="Test"/>
+    <Translation ID="FEATURESGROUPTITLE" String="Caractéristique du Mod"/>
+    <Translation ID="PACKCREATOROPTION" String="Montrer l'aide du créateur"/>
+    <Translation ID="MAINBACKGROUNDOPTION" String="Main Button Background"/>
+    <Translation ID="TWEAKSGROUPTITLE" String="Modifications"/>
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="Show Signal Pole Style Lights on Default Side"/>
+    <Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!"/>
+    <Translation ID="OFFSET" String="Offset"/>
+    <Translation ID="ANGLE" String="Angle"/>
+    <Translation ID="SCALE" String="Taille"/>
+  </Translations>
+</Language>

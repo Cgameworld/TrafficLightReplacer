@@ -81,6 +81,7 @@
     <Compile Include="TranslationFramework\TranslationUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Locale\fr.xml" />
     <EmbeddedResource Include="Locale\es.xml" />
     <EmbeddedResource Include="Locale\ru.xml" />
     <EmbeddedResource Include="Locale\pl.xml" />
