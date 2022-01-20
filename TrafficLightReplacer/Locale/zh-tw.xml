@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="zh-TW" ReadableName="Chinese" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>
+    <Translation ID="MOD_DESCRIPTION" String="自訂您的城市中所有交通號誌燈"/>
+    <Translation ID="MAINWINDOW_TITLE" String="交通號誌燈替換工具"/>
+    <Translation ID="MAINWINDOW_PACKLABEL" String="組合包:"/>
+    <Translation ID="NULLDROPDOWN" String="空"/>
+    <Translation ID="OPPOSITESIDETOGGLE" String="放置於停止線對側"/>
+    <Translation ID="OPPOSITESIDETOOLTIP" String="將號誌燈放置於停止線之對側"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXT" String="自訂交通號誌燈"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="選擇號誌燈種類"/>
+    <Translation ID="SMALLROADSDROPDOWNLABEL" String="小型道路:"/>
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="中型道路:"/>
+    <Translation ID="LARGEROADSDROPDOWNLABEL" String="大型道路:"/>
+    <Translation ID="TRANSFORMBUTTONTEXT" String="變體設定"/>
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="改變號誌燈座位置"/>
+    <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="GENERICXMLERROR" String="找不到名為 * 的組件；&#10;Broken XML filepath: &#10;"/>
+    <Translation ID="LHDERROR" String="錯誤:現不支援靠左駕駛模式"/>
+    <Translation ID="COUNTINGERROR" String="物件計算錯誤! 號誌燈位置及角度可能有誤。"/>
+    <Translation ID="TSEGIDERROR" String="T字路口分段ID錯誤"/>
+    <Translation ID="GENTEMPXML" String="產生XML格式的模板"/>
+    <Translation ID="GENTEMPXMLMESSAGE" String="XML模板已輸出 *XML檔已輸出至*&#10;&#10; 點擊創作者幫手視窗內的資料夾圖標來開啟本機TLR資料夾"/>
+    <Translation ID="NETNAMELABEL" String="名稱:"/>
+    <Translation ID="NETNAMEFIELD" String="按下更新以獲取物件名稱"/>
+    <Translation ID="UPDATEBUTTON" String="更新"/>
+    <Translation ID="UPDATEBUTTONTOOLTIP" String="使用 Find it 選擇一個物件並點擊更新"/>
+    <Translation ID="UPDATEERRORTEXT" String="無效的操作 *請選擇一個物件!&#10;"/>
+    <Translation ID="COPYBUTTON" String="複製"/>
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="開啟本機XML資料夾"/>
+    <Translation ID="TLRLOCALLOAD" String="載入本機TLR資料夾"/>
+    <Translation ID="REFRESHPACK" String="重新載入"/>
+    <Translation ID="ERROROVERWRITE" String="覆寫確認"/>
+    <Translation ID="ERROROVERWRITEDESCRP" String="您確定要覆寫已存在之XML模板設定嗎?"/>
+    <Translation ID="TESTBUTTON" String="測試"/>
+    <Translation ID="FEATURESGROUPTITLE" String="模組特性"/>
+    <Translation ID="PACKCREATOROPTION" String="顯示小幫手"/>
+    <Translation ID="MAINBACKGROUNDOPTION" String="主按鈕背景"/>
+    <Translation ID="TWEAKSGROUPTITLE" String="微調"/>
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="在預設位置顯示號誌燈選單"/>
+    <Translation ID="RESETGROUPMESSAGE" String="圖標位置重設按鈕被點擊了!"/>
+    <Translation ID="OFFSET" String="偏移"/>
+    <Translation ID="ANGLE" String="角度"/>
+    <Translation ID="SCALE" String="比例"/>
+  </Translations>
+</Language>
