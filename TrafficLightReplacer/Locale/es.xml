@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="es" ReadableName="Spanish" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>
+    <Translation ID="MOD_DESCRIPTION" String="Personaliza los semáforos de tu ciudad"/>
+    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer"/>
+    <Translation ID="MAINWINDOW_PACKLABEL" String="Paquete:"/>
+    <Translation ID="NULLDROPDOWN" String="Vacío"/>
+    <Translation ID="OPPOSITESIDETOGGLE" String="Colocar al otro lado de la calle"/>
+    <Translation ID="OPPOSITESIDETOOLTIP" String="Coloca los semáforos en el lado opuesto de la línea de alto"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXT" String="Personalizar luces"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Selecciona un estilo de semáforos"/>
+    <Translation ID="SMALLROADSDROPDOWNLABEL" String="Calles Pequeñas"/>
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Calles Medianas"/>
+    <Translation ID="LARGEROADSDROPDOWNLABEL" String="Calles Grandes"/>
+    <Translation ID="TRANSFORMBUTTONTEXT" String="Ajustes de transformación"/>
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Cambiar la posición del prop"/>
+    <Translation ID="PLACEHOLDERXMLERROR" String="El paquete * contiene nombres de prefabs! Asegúrate de completar todos los tags &lt;Prefab&gt; &lt;/Prefab&gt; con nombres de accesorios válidos en la plantilla XML &#10;&#10;Ruta XML corrupta:&#10;"/>
+    <Translation ID="GENERICXMLERROR" String="El elemento con el nombre * no se puede encontrar en tu juego &#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="LHDERROR" String="Error: El modo de conducción por la izquierda todavía no es soportado"/>
+    <Translation ID="COUNTINGERROR" String="Error de conteo de accesorios! Probablemente los semáforos tienen posiciones incorrectas"/>
+    <Translation ID="TSEGIDERROR" String="Error al buscar ids de segmentos para Cruces en T"/>
+    <Translation ID="GENTEMPXML" String="Generar Plantilla XML del paquete"/>
+    <Translation ID="GENTEMPXMLMESSAGE" String="Se ha exportado el archivo XML *Plantilla exportada en *&#10;&#10;Clic en el ícono de carpeta en la ventana de Creación de Paquete para abrir la ubicación"/>
+    <Translation ID="NETNAMELABEL" String="Nombre:"/>
+    <Translation ID="NETNAMEFIELD" String="Presiona actualizar para cargar un accesorio"/>
+    <Translation ID="UPDATEBUTTON" String="Actualizar"/>
+    <Translation ID="UPDATEBUTTONTOOLTIP" String="Selecciona un accesorio con FindIt! y haz clic en actualizar."/>
+    <Translation ID="UPDATEERRORTEXT" String="Prefab Vacío *Asegúrate de que el accesorio está seleccionado."/>
+    <Translation ID="COPYBUTTON" String="Copiar"/>
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Abrir carpeta local de configuración XML"/>
+    <Translation ID="TLRLOCALLOAD" String="Cargar Carpeta local de TLR"/>
+    <Translation ID="REFRESHPACK" String="Actualizar paquetes"/>
+    <Translation ID="ERROROVERWRITE" String="Confirmación de sobreescribir"/>
+    <Translation ID="ERROROVERWRITEDESCRP" String="¿Estás seguro que deseas sobreescribir la plantilla XML?"/>
+    <Translation ID="TESTBUTTON" String="Probar"/>
+    <Translation ID="FEATURESGROUPTITLE" String="Características del Mod"/>
+    <Translation ID="PACKCREATOROPTION" String="Mostrar Ayuda de Creación de Paquetes"/>
+    <Translation ID="MAINBACKGROUNDOPTION" String="Fondo de Botón Principal"/>
+    <Translation ID="TWEAKSGROUPTITLE" String="Modificaciones"/>
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="Mostrar Poste de Señales en el Lado Predeterminado"/>
+    <Translation ID="RESETGROUPMESSAGE" String="Restaurar* Posición del ícono* Botón Presionado!"/>
+    <Translation ID="OFFSET" String="Ajuste"/>
+    <Translation ID="ANGLE" String="Ángulo"/>
+    <Translation ID="SCALE" String="Escala"/>
+  </Translations>
+</Language>
