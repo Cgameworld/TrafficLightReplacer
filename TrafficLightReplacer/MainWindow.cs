@@ -312,7 +312,7 @@ namespace TrafficLightReplacer
                 mediumRoadsDropdown.relativePosition = new Vector3(145, 40);
                 largeRoadsDropdown.relativePosition = new Vector3(125, 80);
             }
-            if (LocaleManager.instance.language == "pt")
+            if (LocaleManager.instance.language == "pt" || LocaleManager.instance.language == "ru")
             {
                 packDropdown.width = 260;
                 packDropdown.relativePosition = new Vector3(90f, 53f);
@@ -328,6 +328,11 @@ namespace TrafficLightReplacer
                 largeRoadsDropdownLabel.textScale = 0.85f;
                 largeRoadsDropdownLabel.padding.top = 1;
                 largeRoadsDropdown.relativePosition = new Vector3(170, 80);
+            }
+            if (LocaleManager.instance.language == "ru")
+            {
+                smallRoadsDropdown.relativePosition = new Vector3(140, 0);
+                largeRoadsDropdown.relativePosition = new Vector3(165, 80);
             }
 
             #endregion

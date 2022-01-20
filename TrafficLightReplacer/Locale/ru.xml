@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="ru" ReadableName="Russian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>  
+<Translation ID="MOD_DESCRIPTION" String="Настройте светофоры своего города"/>
+<Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer"/>
+<Translation ID="MAINWINDOW_PACKLABEL" String="Pack:"/>
+<Translation ID="NULLDROPDOWN" String="Empty"/>
+<Translation ID="OPPOSITESIDETOGGLE" String="Place on opposite side of stop line"/>
+<Translation ID="OPPOSITESIDETOOLTIP" String="Places traffic lights on the opposite side of the stop line"/>
+<Translation ID="CUSTOMIZEBUTTONTEXT" String="Customize Lights"/>
+<Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Выберите варианты светофора"/>
+<Translation ID="SMALLROADSDROPDOWNLABEL" String="Узкие дороги:"/>
+<Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Средние дороги:"/>
+<Translation ID="LARGEROADSDROPDOWNLABEL" String="Широкие дороги:"/>
+<Translation ID="TRANSFORMBUTTONTEXT" String="Настройки преобразования"/>
+<Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Change traffic prop curb positioning"/>
+<Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;"/>
+<Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;"/>
+<Translation ID="LHDERROR" String="Error: Left Hand Traffic mode is currently not supported"/>
+<Translation ID="COUNTINGERROR" String="Prop Counting Error! Traffic Lights may have incorrect positions and rotations"/>
+<Translation ID="TSEGIDERROR" String="Error finding segment ids for T-intersections"/>
+<Translation ID="GENTEMPXML" String="Generate Template Pack XMLs"/>
+<Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Click on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder"/>
+<Translation ID="NETNAMELABEL" String="Название:"/>
+<Translation ID="NETNAMEFIELD" String="Press update to grab prop name"/>
+<Translation ID="UPDATEBUTTON" String="Обновить"/>
+<Translation ID="UPDATEBUTTONTOOLTIP" String="Select a prop using Find It! and click update"/>
+<Translation ID="UPDATEERRORTEXT" String="Null Prefab *Make sure a prop is selected!&#10;"/>
+<Translation ID="COPYBUTTON" String="Копировать"/>
+<Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Открыть локальную папку конфигурации XML"/>
+<Translation ID="TLRLOCALLOAD" String="Load TLRLocal Folder"/>
+<Translation ID="REFRESHPACK" String="Обновить пакеты"/>
+<Translation ID="ERROROVERWRITE" String="Overwrite Confirmation"/>
+<Translation ID="ERROROVERWRITEDESCRP" String="Вы уверены, что хотите перезаписать существующие XML-файлы шаблона?"/>
+<Translation ID="TESTBUTTON" String="Test"/>
+<Translation ID="FEATURESGROUPTITLE" String="Особенности мода"/>
+<Translation ID="PACKCREATOROPTION" String="Show Pack Creator Helper"/>
+<Translation ID="MAINBACKGROUNDOPTION" String="Main Button Background"/>
+<Translation ID="TWEAKSGROUPTITLE" String="Tweaks"/>
+<Translation ID="DEFAULTSIDESIGNALPOLE" String="Show Signal Pole Style Lights on Default Side"/>
+<Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!"/>
+<Translation ID="OFFSET" String="Смещение"/>
+<Translation ID="ANGLE" String="Угол"/>
+<Translation ID="SCALE" String="Шкала"/>
+  </Translations>
+</Language>
