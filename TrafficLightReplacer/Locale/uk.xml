@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="uk" ReadableName="Ukrainian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>
+    <Translation ID="MOD_DESCRIPTION" String="Налаштуйте світлофори свого міста"/>
+    <Translation ID="MAINWINDOW_TITLE" String="Замінник світлофорів"/>
+    <Translation ID="MAINWINDOW_PACKLABEL" String="Пакунок:"/>
+    <Translation ID="NULLDROPDOWN" String="Порожній"/>
+    <Translation ID="OPPOSITESIDETOGGLE" String="Розмістити з іншого боку стоп-лінії"/>
+    <Translation ID="OPPOSITESIDETOOLTIP" String="Розмістити світлофори з іншого боку стоп-лінії"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXT" String="Персоналізувати світлофори"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Вибрати варіанти світлофорів"/>
+    <Translation ID="SMALLROADSDROPDOWNLABEL" String="Вузькі дороги:"/>
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Середні дороги:"/>
+    <Translation ID="LARGEROADSDROPDOWNLABEL" String="Широкі дороги:"/>
+    <Translation ID="TRANSFORMBUTTONTEXT" String="Налаштування перетворення"/>
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Change traffic prop curb positioning"/>
+    <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="LHDERROR" String="Помилка: лівосторонній рух не підтримується на даний момент"/>
+    <Translation ID="COUNTINGERROR" String="Prop Counting Error! Traffic Lights may have incorrect positions and rotations"/>
+    <Translation ID="TSEGIDERROR" String="Error finding segment ids for T-intersections"/>
+    <Translation ID="GENTEMPXML" String="Згенерувати XMLs шаблон пакунку"/>
+    <Translation ID="GENTEMPXMLMESSAGE" String="Template XML Files Exported *Template XML files exported to *&#10;&#10;Click on the folder icon in the Pack Creator Helper window to open the TLRLocal Folder"/>
+    <Translation ID="NETNAMELABEL" String="Назва:"/>
+    <Translation ID="NETNAMEFIELD" String="Натисніть оновити, щоб отримати назву об'єкту"/>
+    <Translation ID="UPDATEBUTTON" String="Оновити"/>
+    <Translation ID="UPDATEBUTTONTOOLTIP" String="Select a prop using Find It! and click update"/>
+    <Translation ID="UPDATEERRORTEXT" String="Null Prefab *Make sure a prop is selected!&#10;"/>
+    <Translation ID="COPYBUTTON" String="Копіювати"/>
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="Відкрити локальну теку модифікації"/>
+    <Translation ID="TLRLOCALLOAD" String="Завантажити локальну теку модифікації"/>
+    <Translation ID="REFRESHPACK" String="Оновити пакунок"/>
+    <Translation ID="ERROROVERWRITE" String="Переписати підтвердження"/>
+    <Translation ID="ERROROVERWRITEDESCRP" String="Ви впевненні, що хочете переписати існуючий XMLs шаблон файлів?"/>
+    <Translation ID="TESTBUTTON" String="Тест"/>
+    <Translation ID="FEATURESGROUPTITLE" String="Особливості модифікації"/>
+    <Translation ID="PACKCREATOROPTION" String="Показати помічника творця пакунків"/>
+    <Translation ID="MAINBACKGROUNDOPTION" String="Main Button Background"/>
+    <Translation ID="TWEAKSGROUPTITLE" String="Налаштування"/>
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="Show Signal Pole Style Lights on Default Side"/>
+    <Translation ID="RESETGROUPMESSAGE" String="Reset* Icon Position* Button clicked!"/>
+    <Translation ID="OFFSET" String="Зміщення"/>
+    <Translation ID="ANGLE" String="Кут"/>
+    <Translation ID="SCALE" String="Розмір"/>
+  </Translations>
+</Language>
