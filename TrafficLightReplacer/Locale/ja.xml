@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="ja" ReadableName="Japanese" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>
+    <Translation ID="MOD_DESCRIPTION" String="都市の信号機をカスタマイズ"/>
+    <Translation ID="MAINWINDOW_TITLE" String="Traffic Light Replacer"/>
+    <Translation ID="MAINWINDOW_PACKLABEL" String="パック:"/>
+    <Translation ID="NULLDROPDOWN" String="Empty"/>
+    <Translation ID="OPPOSITESIDETOGGLE" String="道路の反対側に配置"/>
+    <Translation ID="OPPOSITESIDETOOLTIP" String="信号機を道路の反対側に配置する(両側に配置)"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXT" String="信号機をカスタマイズ"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="信号機を選択"/>
+    <Translation ID="SMALLROADSDROPDOWNLABEL" String="小さい道路:"/>
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="中くらいの道路:"/>
+    <Translation ID="LARGEROADSDROPDOWNLABEL" String="大きい道路:"/>
+    <Translation ID="TRANSFORMBUTTONTEXT" String="変形の設定"/>
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="信号機のある路肩から位置を変更"/>
+    <Translation ID="PLACEHOLDERXMLERROR" String="The pack * contains placeholder prefab names! Be sure to fill all of the &lt;Prefab&gt; &lt;/Prefab&gt; tags with valid prop prefab names in the template xml file&#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="GENERICXMLERROR" String="The prefab with name * cannot be found in your game&#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="LHDERROR" String="エラー！:  左側通行は現在サポートされていません"/>
+    <Translation ID="COUNTINGERROR" String="Prop Counting Error! Traffic Lights may have incorrect positions and rotations"/>
+    <Translation ID="TSEGIDERROR" String="Error finding segment ids for T-intersections"/>
+    <Translation ID="GENTEMPXML" String="テンプレートパック用のXMLファイルを生成"/>
+    <Translation ID="GENTEMPXMLMESSAGE" String="テンプレート用の XMLファイルを エクスポートしました。&#10;&#10;エクスポート先は、 Pack Creator Helperにある フォルダアイコンを クリックして、 TLRLocalフォルダを 開きます"/>
+    <Translation ID="NETNAMELABEL" String="名前:"/>
+    <Translation ID="NETNAMEFIELD" String="更新ボタンを押して、Prop名を取得"/>
+    <Translation ID="UPDATEBUTTON" String="更新"/>
+    <Translation ID="UPDATEBUTTONTOOLTIP" String="Find It! 2で信号機のPropを選択して、更新をクリックしてください"/>
+    <Translation ID="UPDATEERRORTEXT" String="Null Prefab *Make sure a prop is selected!&#10;"/>
+    <Translation ID="COPYBUTTON" String="コピー"/>
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="ローカルにある、XML設定フォルダを開く"/>
+    <Translation ID="TLRLOCALLOAD" String="TLRLocalフォルダーをロード"/>
+    <Translation ID="REFRESHPACK" String="パックを更新"/>
+    <Translation ID="ERROROVERWRITE" String="上書きの確認"/>
+    <Translation ID="ERROROVERWRITEDESCRP" String="既存のテンプレートで使っている、XMLファイルを上書きしますか?"/>
+    <Translation ID="TESTBUTTON" String="テスト"/>
+    <Translation ID="FEATURESGROUPTITLE" String="MODの機能"/>
+    <Translation ID="PACKCREATOROPTION" String="パック作成ヘルパーを表示"/>
+    <Translation ID="MAINBACKGROUNDOPTION" String="メインボタンの背景"/>
+    <Translation ID="TWEAKSGROUPTITLE" String="Tweaks"/>
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="デフォルトでサイドにポールスタイルの信号機を表示"/>
+    <Translation ID="RESETGROUPMESSAGE" String="アイコンの位置がリセットされました"/>
+    <Translation ID="OFFSET" String="オフセット"/>
+    <Translation ID="ANGLE" String="角度"/>
+    <Translation ID="SCALE" String="スケール"/>
+  </Translations>
+</Language>
