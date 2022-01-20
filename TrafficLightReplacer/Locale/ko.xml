@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language UniqueName="ko" ReadableName="Korean" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2009/XMLSchema/XMLSchema.xsd">
+  <Translations>
+    <Translation ID="MOD_DESCRIPTION" String="도시의 신호등을 커스텀 신호등으로 변경"/>
+    <Translation ID="MAINWINDOW_TITLE" String="신호등 재배치 모드"/>
+    <Translation ID="MAINWINDOW_PACKLABEL" String="패키지:"/>
+    <Translation ID="NULLDROPDOWN" String="비어있음"/>
+    <Translation ID="OPPOSITESIDETOGGLE" String="정지선 반대편에 배치"/>
+    <Translation ID="OPPOSITESIDETOOLTIP" String="정지선 반대편에 신호등을 배치."/>
+    <Translation ID="CUSTOMIZEBUTTONTEXT" String="커스텀 신호"/>
+    <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="신호등을 선택"/>
+    <Translation ID="SMALLROADSDROPDOWNLABEL" String="소형 도로:"/>
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="중형 도로:"/>
+    <Translation ID="LARGEROADSDROPDOWNLABEL" String="대형 도로:"/>
+    <Translation ID="TRANSFORMBUTTONTEXT" String="변환 설정"/>
+    <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="트래픽 프롭의 연석 위치를 변경"/>
+    <Translation ID="PLACEHOLDERXMLERROR" String="패키지의 * 기존 prefab names는 예시입니다! 템플릿 xml 파일 안의 모든 &lt;Prefab&gt; &lt;/Prefab&gt; 태그에 올바른 프롭의 prefab names 을 채우세요. &#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="GENERICXMLERROR" String="해당 이름의 prefab 은 * 게임에서 찾을 수 없습니다.&#10;&#10;Broken XML filepath:&#10;"/>
+    <Translation ID="LHDERROR" String="오류: 좌측주행 모드가 지원되지 않음."/>
+    <Translation ID="COUNTINGERROR" String="프롭 수 측정 오류! 신호등의 위치와 회전이 올바르지 않을 수 있음."/>
+    <Translation ID="TSEGIDERROR" String="T교차로의 세그먼트ID 를 찾는중 오류 발생"/>
+    <Translation ID="GENTEMPXML" String="패키지 템플릿  XMLs 생성"/>
+    <Translation ID="GENTEMPXMLMESSAGE" String="템플릿 XML 파일 내보내기 *템플릿 XML 파일을 *&#10;&#10;으로 내보냈습니다;패키지 생성 도우미 창에서 폴더 아이콘을 클릭하여 TLRLocal 폴더를 엽니다."/>
+    <Translation ID="NETNAMELABEL" String="이름: "/>
+    <Translation ID="NETNAMEFIELD" String="업데이트를 눌러 프롭 이름을 가져옴"/>
+    <Translation ID="UPDATEBUTTON" String="업데이트"/>
+    <Translation ID="UPDATEBUTTONTOOLTIP" String="Find It! 모드를 이용해 프롭을 선택, 그리고 업데이트를 클릭"/>
+    <Translation ID="UPDATEERRORTEXT" String="Null Prefab *프롭이 선택 되었는지 확인하십시오!&#10;"/>
+    <Translation ID="COPYBUTTON" String="복사"/>
+    <Translation ID="XMLFOLDERBUTTONTOOLTIP" String="로컬 XML 설정 폴더 열기"/>
+    <Translation ID="TLRLOCALLOAD" String="TLRLocal 폴더 불러오기"/>
+    <Translation ID="REFRESHPACK" String="패키지 새로고침"/>
+    <Translation ID="ERROROVERWRITE" String="덮어 쓰기 확인"/>
+    <Translation ID="ERROROVERWRITEDESCRP" String="기존 xml 템플릿 파일을 덮어 쓰시겠습니까?"/>
+    <Translation ID="TESTBUTTON" String="테스트"/>
+    <Translation ID="FEATURESGROUPTITLE" String="모드 특징"/>
+    <Translation ID="PACKCREATOROPTION" String="패키지 생성 도우미 보기"/>
+    <Translation ID="MAINBACKGROUNDOPTION" String="메인 버튼 배경"/>
+    <Translation ID="TWEAKSGROUPTITLE" String="수정"/>
+    <Translation ID="DEFAULTSIDESIGNALPOLE" String="단일 기둥 스타일 신호등 기존 위치에 보기"/>
+    <Translation ID="RESETGROUPMESSAGE" String="초기화* 아이콘 위치* 버튼 클릭!"/>
+    <Translation ID="OFFSET" String="편차"/>
+    <Translation ID="ANGLE" String="각도"/>
+    <Translation ID="SCALE" String="비율"/>
+  </Translations>
+</Language>
