@@ -26,6 +26,7 @@ namespace TrafficLightReplacer
         private UIButton searchBoxFieldButton;
         private List<UILabel> roadLabels;
         private List<UIDropDown> roadDropdowns;
+        private UITextField searchBoxField;
 
         public static PerRoadPanel instance
         {
@@ -79,7 +80,7 @@ namespace TrafficLightReplacer
             searchLabel.height = 20f;
             searchLabel.relativePosition = new Vector2(0, 5);
 
-            UITextField searchBoxField = UIUtils.CreateTextField(mainScroll);
+            searchBoxField = UIUtils.CreateTextField(mainScroll);
             searchBoxField.text = "";
             searchBoxField.width = 300f;
             searchBoxField.height = 25f;
@@ -91,41 +92,45 @@ namespace TrafficLightReplacer
             searchBoxFieldButton.relativePosition = new Vector2(470, 0);
             searchBoxFieldButton.width = 60;
 
+            searchBoxField.eventTextChanged += (c, p) =>
+            {
+                GenerateRoadList();
+            };
+
             searchBoxFieldButton.eventClick += (c, p) =>
             {
-                //delete existing ui dropdowns
-                rownum = 0;
-                for (int i = 0; i < roadLabels.Count; i++)
-                {
-                    Destroy(roadLabels[i].gameObject);
-                    Destroy(roadDropdowns[i].gameObject);
-                }
-                roadLabels.Clear();
-                roadDropdowns.Clear();
-
-                foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
-                {
-                    if (prefab.name.ToLower().Contains(searchBoxField.text))
-                    {
-                        if (prefab.m_netAI is RoadAI && !prefab.name.ToLower().Contains("toll"))
-                        {
-                            Debug.Log("added: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data",""));
-                            var roadname = prefab.GetUncheckedLocalizedTitle().Replace("_Data", "");
-                            AddDropDownRow(roadname + ":");
-                        }
-                    }
-                }
-
+                GenerateRoadList();
             };
 
             listPanel = mainScroll.AddUIComponent<UIPanel>();
-            listPanel.relativePosition = new Vector2(0, 35);
+            listPanel.relativePosition = new Vector2(0, 40);
             listPanel.size = new Vector2(545, 785);
+        }
 
+        private void GenerateRoadList()
+        {
+            //delete existing ui dropdowns
+            rownum = 0;
+            for (int i = 0; i < roadLabels.Count; i++)
+            {
+                Destroy(roadLabels[i].gameObject);
+                Destroy(roadDropdowns[i].gameObject);
+            }
+            roadLabels.Clear();
+            roadDropdowns.Clear();
 
-              
-            // AddDropDownRow("Road 2");
-            //AddDropDownRow("Road 4 with Trees and Bike Lanes 2 sfsfd");
+            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            {
+                if (prefab.name.ToLower().Contains(searchBoxField.text))
+                {
+                    if (prefab.m_netAI is RoadAI && !prefab.name.ToLower().Contains("toll"))
+                    {
+                        Debug.Log("added: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data", ""));
+                        var roadname = prefab.GetUncheckedLocalizedTitle().Replace("_Data", "");
+                        AddDropDownRow(roadname + ":");
+                    }
+                }
+            }
         }
 
         private void AddDropDownRow(string netNameText)
@@ -145,21 +150,19 @@ namespace TrafficLightReplacer
             roadLabels[rownum].autoSize = false;
             roadLabels[rownum].width = 325f;
             roadLabels[rownum].height = 20f;
-            roadLabels[rownum].relativePosition = new Vector2(0, 30 + spaceamount);
+            roadLabels[rownum].relativePosition = new Vector2(0, 5 + spaceamount);
 
             roadDropdowns.Add(new UIDropDown());
             roadDropdowns[rownum] = UIUtils.CreateDropDown(listPanel);
             roadDropdowns[rownum].width = 185;
             roadDropdowns[rownum].AddItem("Default");
             roadDropdowns[rownum].selectedIndex = 0;
-            roadDropdowns[rownum].relativePosition = new Vector3(335, 25 + spaceamount);
+            roadDropdowns[rownum].relativePosition = new Vector3(335, 0 + spaceamount);
             roadDropdowns[rownum].tooltip = "";
 
-            Debug.Log("worksbf p");
             TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeSmallOptions);
             TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeMediumOptions);
             TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeLargeOptions);
-            Debug.Log("worksaf p");
 
             rownum++;
         }
