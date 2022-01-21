@@ -49,6 +49,8 @@ namespace TrafficLightReplacer
 
         public int vanillaConfigOffset = 0;
         private bool initLoad = true;
+        private UIButton perRoadButton;
+        private UIButton pickerStartButton;
 
         public static TrafficLightReplacePanel instance
         {
@@ -176,7 +178,7 @@ namespace TrafficLightReplacer
                     {
                         customizePanel.isVisible = true;
                         customizeButtonToggle.backgroundSprite = "PropertyGroupOpen";
-                        dropdownOffset = 120;
+                        dropdownOffset = 160;
 
                         //update ui dropdowns
                         smallRoadsDropdown.selectedIndex = TLRModSettings.instance.SmallLightIndex;
@@ -345,6 +347,44 @@ namespace TrafficLightReplacer
                 mediumRoadsDropdown.relativePosition = new Vector3(160, 40);
                 largeRoadsDropdown.relativePosition = new Vector3(150, 80);
             }
+
+
+
+            perRoadButton = UIUtils.CreateButton(customizePanel);
+            perRoadButton.text = "Customize Per Road";
+            //assign manually?
+            perRoadButton.relativePosition = new Vector2(20, 120);
+            perRoadButton.width = 230;
+
+            perRoadButton.eventClick += (c, p) =>
+            {
+               //modify this to destroy dropdown list (maybe on close of perclosewindow?)
+                /* var ifPanel = UIView.Find("PerRoadPanel");
+                 if (ifPanel != null)
+                 {
+                     UIPanel.DestroyImmediate(ifPanel);
+                     Debug.Log("destroyedold panel!");
+                 }
+                */
+                PerRoadPanel.instance.Show();
+                //add destroy here?
+            };
+
+            pickerStartButton = UIUtils.CreateButtonSpriteImage(customizePanel, m_atlas);
+            pickerStartButton.normalBgSprite = "ButtonMenu";
+            pickerStartButton.hoveredBgSprite = "ButtonMenuHovered";
+            pickerStartButton.pressedBgSprite = "ButtonMenuPressed";
+            pickerStartButton.disabledBgSprite = "ButtonMenuDisabled";
+            pickerStartButton.normalFgSprite = "Picker";
+            pickerStartButton.relativePosition = new Vector2(270, 120);
+            pickerStartButton.height = 25;
+            pickerStartButton.width = 31;
+            pickerStartButton.tooltip = "Pick Network";
+
+            pickerStartButton.eventClick += (c, p) =>
+            {
+                Debug.Log("TODO");
+            };
 
             #endregion
 
@@ -529,7 +569,7 @@ namespace TrafficLightReplacer
             dropdown.items = blank;
         }
 
-        private static void AddItemsToDropdown(UIDropDown a, System.Collections.Generic.List<Asset> b)
+        public static void AddItemsToDropdown(UIDropDown a, System.Collections.Generic.List<Asset> b)
         {
             foreach (var sortedAsset in b)
             {
@@ -646,7 +686,8 @@ namespace TrafficLightReplacer
         {
             string[] spriteNames = new string[]
             {
-                "Folder"
+                "Folder",
+                "Picker"
             };
 
             m_atlas = ResourceLoader.CreateTextureAtlas("TrafficLightReplacer", spriteNames, "TrafficLightReplacer.Icons.");

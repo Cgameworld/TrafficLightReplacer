@@ -2,7 +2,7 @@
 
 using UnityEngine;
 using ColossalFramework.UI;
-
+using ColossalFramework;
 
 namespace TrafficLightReplacer
 {
@@ -210,6 +210,45 @@ namespace TrafficLightReplacer
             };
 
             return slider;
+        }
+
+        public static UIScrollablePanel CreateScrollBox(UIComponent parent, UITextureAtlas atlas_a)
+        {
+            //code from tmpe
+            UIScrollablePanel scrollablePanel = parent.AddUIComponent<UIScrollablePanel>();
+            scrollablePanel.backgroundSprite = string.Empty;
+            scrollablePanel.size = new Vector2(130, 240);
+            scrollablePanel.relativePosition = new Vector3(0, 0);
+            scrollablePanel.clipChildren = true;
+
+            scrollablePanel.FitTo(parent);
+            scrollablePanel.scrollWheelDirection = UIOrientation.Vertical;
+            scrollablePanel.builtinKeyNavigation = true;
+
+            UIScrollbar verticalScroll = parent.AddUIComponent<UIScrollbar>();
+            verticalScroll.stepSize = 1;
+            verticalScroll.relativePosition = new Vector2(parent.width - 15, 0);
+            verticalScroll.orientation = UIOrientation.Vertical;
+            verticalScroll.size = new Vector2(20, parent.size.y);
+            verticalScroll.incrementAmount = 25;
+            verticalScroll.scrollEasingType = EasingType.BackEaseOut;
+
+            scrollablePanel.verticalScrollbar = verticalScroll;
+
+            UISlicedSprite track = verticalScroll.AddUIComponent<UISlicedSprite>();
+            track.spriteName = "ScrollbarTrack";
+            track.relativePosition = Vector3.zero;
+            track.size = new Vector2(16, parent.size.y);
+
+            verticalScroll.trackObject = track;
+
+            UISlicedSprite thumb = track.AddUIComponent<UISlicedSprite>();
+            thumb.spriteName = "ScrollbarThumb";
+            thumb.autoSize = true;
+            thumb.relativePosition = Vector3.zero;
+            verticalScroll.thumbObject = thumb;
+
+            return scrollablePanel;
         }
 
         public static void ResizeIcon(UISprite icon, Vector2 maxSize)

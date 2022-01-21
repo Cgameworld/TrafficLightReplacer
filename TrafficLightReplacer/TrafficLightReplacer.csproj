@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PerRoadWindow.cs" />
     <Compile Include="InitReplace.cs" />
     <Compile Include="CachePropItem.cs" />
     <Compile Include="Configuration.cs" />
@@ -96,6 +97,7 @@
     <EmbeddedResource Include="lib\TMCompatibility.dll" />
     <EmbeddedResource Include="lib\NS2Compatibility.dll" />
     <EmbeddedResource Include="Locale\en.xml" />
+    <EmbeddedResource Include="Icons\Picker.png" />
     <EmbeddedResource Include="Icons\tlr-button-padding.png" />
     <EmbeddedResource Include="Icons\tlr-button.png" />
     <EmbeddedResource Include="Icons\Folder.png" />
