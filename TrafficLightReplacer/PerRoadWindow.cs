@@ -21,12 +21,14 @@ namespace TrafficLightReplacer
         private UIButton openXMLFolderButton;
         private UIScrollablePanel mainScroll;
         int rownum = 0;
+        int maxload = 30;
         private UIPanel mainPanel;
         private UIPanel listPanel;
         private UIButton searchBoxFieldButton;
         private List<UILabel> roadLabels;
         private List<UIDropDown> roadDropdowns;
         private UITextField searchBoxField;
+        private UILabel searchLabel;
 
         public static PerRoadPanel instance
         {
@@ -118,6 +120,7 @@ namespace TrafficLightReplacer
             }
             roadLabels.Clear();
             roadDropdowns.Clear();
+            Destroy(searchLabel);
 
             if (searchBoxField.text != "")
             {
@@ -127,15 +130,35 @@ namespace TrafficLightReplacer
                     {
                         if (prefab.m_netAI is RoadAI && !prefab.name.ToLower().Contains("toll"))
                         {
-                            Debug.Log("added: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data", ""));
+                            //Debug.Log("added: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data", ""));
                             var roadname = prefab.GetUncheckedLocalizedTitle().Replace("_Data", "");
                             AddDropDownRow(roadname + ":");
                         }
                     }
                 }
-                int scrollheight = 40 + (rownum * 40);
-                Debug.Log("scrollheight" + scrollheight);
-                listPanel.size = new Vector2(545, scrollheight);
+                int roadListHeight = 40 + (rownum * 40);
+                listPanel.size = new Vector2(545, roadListHeight+20);
+
+                searchLabel = mainScroll.AddUIComponent<UILabel>();
+                searchLabel.text = rownum + " Roads Loaded";
+                searchLabel.autoSize = false;
+                searchLabel.width = 545f;
+                searchLabel.textAlignment = UIHorizontalAlignment.Center;
+                searchLabel.height = 20f;
+                searchLabel.relativePosition = new Vector2(0, roadListHeight);
+
+                if (rownum >= maxload)
+                {
+                    searchLabel.text = rownum + " Roads Loaded, Refine Search to Load All";
+                }
+                else if (rownum == 1)
+                {
+                    searchLabel.text = rownum + " Road Loaded";
+                }
+                else if (rownum == 0)
+                {
+                    searchLabel.text = "No Roads Found with Name Entered";
+                }
             }
         }
 
@@ -149,28 +172,32 @@ namespace TrafficLightReplacer
 
             int spaceamount = rownum * 40;
 
-            roadLabels.Add(new UILabel());
-            roadLabels[rownum] = listPanel.AddUIComponent<UILabel>();
-            roadLabels[rownum].text = netNameText;
-            roadLabels[rownum].clipChildren = true;
-            roadLabels[rownum].autoSize = false;
-            roadLabels[rownum].width = 325f;
-            roadLabels[rownum].height = 20f;
-            roadLabels[rownum].relativePosition = new Vector2(0, 5 + spaceamount);
+            if (rownum < maxload)
+            {
+                roadLabels.Add(new UILabel());
+                roadLabels[rownum] = listPanel.AddUIComponent<UILabel>();
+                roadLabels[rownum].text = netNameText;
+                roadLabels[rownum].clipChildren = true;
+                roadLabels[rownum].autoSize = false;
+                roadLabels[rownum].width = 325f;
+                roadLabels[rownum].height = 20f;
+                roadLabels[rownum].relativePosition = new Vector2(0, 5 + spaceamount);
 
-            roadDropdowns.Add(new UIDropDown());
-            roadDropdowns[rownum] = UIUtils.CreateDropDown(listPanel);
-            roadDropdowns[rownum].width = 185;
-            roadDropdowns[rownum].AddItem("Default");
-            roadDropdowns[rownum].selectedIndex = 0;
-            roadDropdowns[rownum].relativePosition = new Vector3(335, 0 + spaceamount);
-            roadDropdowns[rownum].tooltip = "";
+                roadDropdowns.Add(new UIDropDown());
+                roadDropdowns[rownum] = UIUtils.CreateDropDown(listPanel);
+                roadDropdowns[rownum].width = 185;
+                roadDropdowns[rownum].AddItem("Default");
+                roadDropdowns[rownum].selectedIndex = 0;
+                roadDropdowns[rownum].relativePosition = new Vector3(335, 0 + spaceamount);
+                roadDropdowns[rownum].tooltip = "";
 
-            TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeSmallOptions);
-            TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeMediumOptions);
-            TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeLargeOptions);
+                TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeSmallOptions);
+                TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeMediumOptions);
+                TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeLargeOptions);
 
-            rownum++;
+                rownum++;
+            }
+
         }
 
         private void LoadResources()
