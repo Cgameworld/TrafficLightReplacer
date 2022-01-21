@@ -68,9 +68,9 @@ namespace TrafficLightReplacer
 
             mainPanel = AddUIComponent<UIPanel>();
             mainPanel.relativePosition = new Vector2(15, 45);
-            mainPanel.size = new Vector2(545, 785);
+            mainPanel.size = new Vector2(545, 755);
             mainScroll = UIUtils.CreateScrollBox(mainPanel, m_atlas);
-            mainScroll.size = new Vector2(545, 775);
+            mainScroll.size = new Vector2(545, 745);
             mainScroll.relativePosition = new Vector2(0, 10);
 
             UILabel searchLabel = mainScroll.AddUIComponent<UILabel>();
@@ -104,7 +104,7 @@ namespace TrafficLightReplacer
 
             listPanel = mainScroll.AddUIComponent<UIPanel>();
             listPanel.relativePosition = new Vector2(0, 40);
-            listPanel.size = new Vector2(545, 785);
+            listPanel.size = new Vector2(545, 500);
         }
 
         private void GenerateRoadList()
@@ -133,6 +133,9 @@ namespace TrafficLightReplacer
                         }
                     }
                 }
+                int scrollheight = 40 + (rownum * 40);
+                Debug.Log("scrollheight" + scrollheight);
+                listPanel.size = new Vector2(545, scrollheight);
             }
         }
 
