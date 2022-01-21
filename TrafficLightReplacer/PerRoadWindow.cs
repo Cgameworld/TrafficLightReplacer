@@ -23,6 +23,8 @@ namespace TrafficLightReplacer
         private UIScrollablePanel mainScroll;
         int rownum = 0;
         private UIPanel mainPanel;
+        private UIPanel listPanel;
+        private UIButton searchBoxFieldButton;
 
         public static PerRoadPanel instance
         {
@@ -66,15 +68,50 @@ namespace TrafficLightReplacer
             mainScroll.size = new Vector2(545, 775);
             mainScroll.relativePosition = new Vector2(0, 10);
 
-            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            UILabel searchLabel = mainScroll.AddUIComponent<UILabel>();
+            searchLabel.text = "Enter Road Name:";
+            searchLabel.autoSize = false;
+            searchLabel.width = 155f;
+            searchLabel.height = 20f;
+            searchLabel.relativePosition = new Vector2(0, 5);
+
+            UITextField searchBoxField = UIUtils.CreateTextField(mainScroll);
+            searchBoxField.text = "";
+            searchBoxField.width = 300f;
+            searchBoxField.height = 25f;
+            searchBoxField.padding = new RectOffset(0, 0, 6, 0);
+            searchBoxField.relativePosition = new Vector3(160, 0);
+
+            searchBoxFieldButton = UIUtils.CreateButton(mainScroll);
+            searchBoxFieldButton.text = "Search";
+            searchBoxFieldButton.relativePosition = new Vector2(480, 0);
+            searchBoxFieldButton.width = 60;
+
+            searchBoxFieldButton.eventClick += (c, p) =>
             {
-                if (prefab.m_netAI is RoadAI && !prefab.name.ToLower().Contains("toll"))
+                Debug.Log("works sbfb");
+
+                //DestroyImmediate(listPanel);
+                foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
                 {
-                    //Debug.Log("PerRoadWIndow: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data",""));
-                    var roadname = prefab.GetUncheckedLocalizedTitle().Replace("_Data", "");
-                    AddDropDownRow(roadname + ":");
+                    if (prefab.name.ToLower().Contains(searchBoxField.text))
+                    {
+                        if (prefab.m_netAI is RoadAI && !prefab.name.ToLower().Contains("toll"))
+                        {
+                            Debug.Log("added: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data",""));
+                            var roadname = prefab.GetUncheckedLocalizedTitle().Replace("_Data", "");
+                            AddDropDownRow(roadname + ":");
+                        }
+                    }
                 }
-            }
+
+            };
+
+            listPanel = mainScroll.AddUIComponent<UIPanel>();
+            listPanel.relativePosition = new Vector2(0, 35);
+            listPanel.size = new Vector2(545, 785);
+
+
               
             // AddDropDownRow("Road 2");
             //AddDropDownRow("Road 4 with Trees and Bike Lanes 2 sfsfd");
@@ -88,19 +125,19 @@ namespace TrafficLightReplacer
             //have it react to different pack changes!!
             int spaceamount = rownum * 40;
 
-            UILabel netNameLabel = mainScroll.AddUIComponent<UILabel>();
+            UILabel netNameLabel = listPanel.AddUIComponent<UILabel>();
             netNameLabel.text = netNameText;
             netNameLabel.clipChildren = true;
             netNameLabel.autoSize = false;
             netNameLabel.width = 325f;
             netNameLabel.height = 20f;
-            netNameLabel.relativePosition = new Vector2(0, 60 + spaceamount);
+            netNameLabel.relativePosition = new Vector2(0, 30 + spaceamount);
 
-            netNameDropdown = UIUtils.CreateDropDown(mainScroll);
+            netNameDropdown = UIUtils.CreateDropDown(listPanel);
             netNameDropdown.width = 185;
             netNameDropdown.AddItem("Default");
             netNameDropdown.selectedIndex = 0;
-            netNameDropdown.relativePosition = new Vector3(335, 55 + spaceamount);
+            netNameDropdown.relativePosition = new Vector3(335, 25 + spaceamount);
             netNameDropdown.tooltip = "";
 
             TrafficLightReplacePanel.AddItemsToDropdown(netNameDropdown, Replacer.typeSmallOptions);
