@@ -119,15 +119,18 @@ namespace TrafficLightReplacer
             roadLabels.Clear();
             roadDropdowns.Clear();
 
-            foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
+            if (searchBoxField.text != "")
             {
-                if (prefab.name.ToLower().Contains(searchBoxField.text))
+                foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
                 {
-                    if (prefab.m_netAI is RoadAI && !prefab.name.ToLower().Contains("toll"))
+                    if (prefab.name.ToLower().Contains(searchBoxField.text.ToLower()))
                     {
-                        Debug.Log("added: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data", ""));
-                        var roadname = prefab.GetUncheckedLocalizedTitle().Replace("_Data", "");
-                        AddDropDownRow(roadname + ":");
+                        if (prefab.m_netAI is RoadAI && !prefab.name.ToLower().Contains("toll"))
+                        {
+                            Debug.Log("added: " + prefab.GetUncheckedLocalizedTitle().Replace("_Data", ""));
+                            var roadname = prefab.GetUncheckedLocalizedTitle().Replace("_Data", "");
+                            AddDropDownRow(roadname + ":");
+                        }
                     }
                 }
             }
