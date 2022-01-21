@@ -19,12 +19,13 @@ namespace TrafficLightReplacer
         private UITextureAtlas m_atlas;
         private UIButton copyButton;
         private UIButton openXMLFolderButton;
-        private UIDropDown netNameDropdown;
         private UIScrollablePanel mainScroll;
         int rownum = 0;
         private UIPanel mainPanel;
         private UIPanel listPanel;
         private UIButton searchBoxFieldButton;
+        private List<UILabel> roadLabels;
+        private List<UIDropDown> roadDropdowns;
 
         public static PerRoadPanel instance
         {
@@ -43,6 +44,9 @@ namespace TrafficLightReplacer
         public override void Start()
         {
             LoadResources();
+
+            roadLabels = new List<UILabel>();
+            roadDropdowns = new List<UIDropDown>();
 
             atlas = UIUtils.GetAtlas("Ingame");
             backgroundSprite = "MenuPanel2";
@@ -84,14 +88,21 @@ namespace TrafficLightReplacer
 
             searchBoxFieldButton = UIUtils.CreateButton(mainScroll);
             searchBoxFieldButton.text = "Search";
-            searchBoxFieldButton.relativePosition = new Vector2(480, 0);
+            searchBoxFieldButton.relativePosition = new Vector2(470, 0);
             searchBoxFieldButton.width = 60;
 
             searchBoxFieldButton.eventClick += (c, p) =>
             {
-                Debug.Log("works sbfb");
+                //delete existing ui dropdowns
+                rownum = 0;
+                for (int i = 0; i < roadLabels.Count; i++)
+                {
+                    Destroy(roadLabels[i].gameObject);
+                    Destroy(roadDropdowns[i].gameObject);
+                }
+                roadLabels.Clear();
+                roadDropdowns.Clear();
 
-                //DestroyImmediate(listPanel);
                 foreach (var prefab in Resources.FindObjectsOfTypeAll<NetInfo>())
                 {
                     if (prefab.name.ToLower().Contains(searchBoxField.text))
@@ -123,26 +134,32 @@ namespace TrafficLightReplacer
             //have default/selected (small med large light option in dropdown)
             //and more connect to logic and save changes
             //have it react to different pack changes!!
+            Debug.Log("rownum: " + rownum);
+
             int spaceamount = rownum * 40;
 
-            UILabel netNameLabel = listPanel.AddUIComponent<UILabel>();
-            netNameLabel.text = netNameText;
-            netNameLabel.clipChildren = true;
-            netNameLabel.autoSize = false;
-            netNameLabel.width = 325f;
-            netNameLabel.height = 20f;
-            netNameLabel.relativePosition = new Vector2(0, 30 + spaceamount);
+            roadLabels.Add(new UILabel());
+            roadLabels[rownum] = listPanel.AddUIComponent<UILabel>();
+            roadLabels[rownum].text = netNameText;
+            roadLabels[rownum].clipChildren = true;
+            roadLabels[rownum].autoSize = false;
+            roadLabels[rownum].width = 325f;
+            roadLabels[rownum].height = 20f;
+            roadLabels[rownum].relativePosition = new Vector2(0, 30 + spaceamount);
 
-            netNameDropdown = UIUtils.CreateDropDown(listPanel);
-            netNameDropdown.width = 185;
-            netNameDropdown.AddItem("Default");
-            netNameDropdown.selectedIndex = 0;
-            netNameDropdown.relativePosition = new Vector3(335, 25 + spaceamount);
-            netNameDropdown.tooltip = "";
+            roadDropdowns.Add(new UIDropDown());
+            roadDropdowns[rownum] = UIUtils.CreateDropDown(listPanel);
+            roadDropdowns[rownum].width = 185;
+            roadDropdowns[rownum].AddItem("Default");
+            roadDropdowns[rownum].selectedIndex = 0;
+            roadDropdowns[rownum].relativePosition = new Vector3(335, 25 + spaceamount);
+            roadDropdowns[rownum].tooltip = "";
 
-            TrafficLightReplacePanel.AddItemsToDropdown(netNameDropdown, Replacer.typeSmallOptions);
-            TrafficLightReplacePanel.AddItemsToDropdown(netNameDropdown, Replacer.typeMediumOptions);
-            TrafficLightReplacePanel.AddItemsToDropdown(netNameDropdown, Replacer.typeLargeOptions);
+            Debug.Log("worksbf p");
+            TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeSmallOptions);
+            TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeMediumOptions);
+            TrafficLightReplacePanel.AddItemsToDropdown(roadDropdowns[rownum], Replacer.typeLargeOptions);
+            Debug.Log("worksaf p");
 
             rownum++;
         }
