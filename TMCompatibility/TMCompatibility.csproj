@@ -46,7 +46,8 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TrafficManager">
+    <Reference Include="TrafficManager, Version=11.6.3.38537, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\255710\1637663252\TrafficManager.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
