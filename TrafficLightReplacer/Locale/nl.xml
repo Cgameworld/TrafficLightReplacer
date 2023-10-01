@@ -10,7 +10,7 @@
     <Translation ID="CUSTOMIZEBUTTONTEXT" String="Lichten aanpassen" />
     <Translation ID="CUSTOMIZEBUTTONTEXTTOOLTIP" String="Selecteer verkeerslicht variaties" />
     <Translation ID="SMALLROADSDROPDOWNLABEL" String="Smalle wegen:" />
-    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Middelgrote wegen:" />
+    <Translation ID="MEDIUMROADSDROPDOWNLABEL" String="Midden wegen:" />
     <Translation ID="LARGEROADSDROPDOWNLABEL" String="Grote wegen:" />
     <Translation ID="TRANSFORMBUTTONTEXT" String="Transform instellingen" />
     <Translation ID="TRANSFORMBUTTONTEXTTOOLTIP" String="Verander de positie van de stoeprand" />
@@ -45,7 +45,7 @@
     <Translation ID="RESETGROUPMESSAGE" String="Reset* Icoon positie* Op knop geklikt!" />
     
      <!--TransformSettingsLabel-->
-    <Translation ID="OFFSET" String="Verschuiving" />
+    <Translation ID="OFFSET" String="Positie" />
     <Translation ID="ANGLE" String="Hoek" />
     <Translation ID="SCALE" String="Schaal" />
   </Translations>
